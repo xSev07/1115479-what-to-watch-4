@@ -14,4 +14,11 @@ const App = (props) => {
   );
 };
 
+App.propTypes = {
+  promoTitle: PropTypes.string.isRequired,
+  promoGenre: PropTypes.string.isRequired,
+  promoYear: PropTypes.number.isRequired,
+  allMovies: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
 export default App;

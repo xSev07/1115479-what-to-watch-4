@@ -17,7 +17,7 @@ const generateMovieCard = (title) => {
       </h3>
     </article>
   );
-}
+};
 
 const Main = (props) => {
   const {title, genre, year, movies} = props;
@@ -135,6 +135,13 @@ const Main = (props) => {
       </div>
   </>
   );
+};
+
+Main.propTypes = {
+  title: PropTypes.string.isRequired,
+  genre: PropTypes.string.isRequired,
+  year: PropTypes.number.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Main;
