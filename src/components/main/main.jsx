@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const getPoster = (title) => {
   return title.toLowerCase().replace(`:`, ``).replace(/ /g, `-`);
@@ -19,7 +20,6 @@ const generateMovieCard = (title) => {
 }
 
 const Main = (props) => {
-  // eslint-disable-next-line react/prop-types
   const {title, genre, year, movies} = props;
   const moviesTemplate = movies.map((it) => generateMovieCard(it));
   return (
