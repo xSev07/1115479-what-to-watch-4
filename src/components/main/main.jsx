@@ -5,10 +5,11 @@ const getPoster = (title) => {
   return title.toLowerCase().replace(`:`, ``).replace(/ /g, `-`);
 };
 
-const generateMovieCard = (title) => {
+const generateMovieCard = (title, index) => {
   const poster = `img/${getPoster(title)}.jpg`;
+  const key = `${title.split(` `)[0]}-${index}`;
   return (
-    <article className="small-movie-card catalog__movies-card">
+    <article key={key} className="small-movie-card catalog__movies-card">
       <div className="small-movie-card__image">
         <img src={poster} alt={title} width="280" height="175"/>
       </div>
@@ -21,7 +22,7 @@ const generateMovieCard = (title) => {
 
 const Main = (props) => {
   const {title, genre, year, movies} = props;
-  const moviesTemplate = movies.map((it) => generateMovieCard(it));
+  const moviesTemplate = movies.map((it, index) => generateMovieCard(it, index));
   return (
     <>
       <section className="movie-card">
