@@ -5,11 +5,15 @@ const getPoster = (title) => {
   return title.toLowerCase().replace(`:`, ``).replace(/ /g, `-`);
 };
 
-const generateMovieCard = (title, index) => {
+const generateMovieCard = (title, index, onTitleClick) => {
   const poster = `img/${getPoster(title)}.jpg`;
   const key = `${title.split(` `)[0]}-${index}`;
   return (
-    <article key={key} className="small-movie-card catalog__movies-card">
+    <article
+      key={key}
+      onClick={onTitleClick}
+      className="small-movie-card catalog__movies-card"
+    >
       <div className="small-movie-card__image">
         <img src={poster} alt={title} width="280" height="175"/>
       </div>
@@ -21,8 +25,8 @@ const generateMovieCard = (title, index) => {
 };
 
 const Main = (props) => {
-  const {title, genre, year, movies} = props;
-  const moviesTemplate = movies.map((it, index) => generateMovieCard(it, index));
+  const {title, genre, year, movies, onTitleClick} = props;
+  const moviesTemplate = movies.map((it, index) => generateMovieCard(it, index, onTitleClick));
   return (
     <>
       <section className="movie-card">
@@ -143,6 +147,7 @@ Main.propTypes = {
   genre: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
   movies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onTitleClick: PropTypes.func.isRequired,
 };
 
 export default Main;

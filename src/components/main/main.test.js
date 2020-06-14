@@ -18,6 +18,7 @@ it(`Should Main render correctly`, () => {
       genre={genre}
       year={year}
       movies={movies}
+      onTitleClick={() => {}}
     />);
 
   expect(tree).toMatchSnapshot();

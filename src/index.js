@@ -31,12 +31,15 @@ const allMovies = [
   `Midnight Special`,
 ];
 
+const onMovieTitleClickHandler = () => {};
+
 ReactDOM.render(
     <App
       promoTitle={PromoFilm.TITLE}
       promoGenre={PromoFilm.GENRE}
       promoYear={PromoFilm.YEAR}
       allMovies={allMovies}
+      onMovieTitleClick={onMovieTitleClickHandler}
     />,
     document.querySelector(`#root`)
 );
