@@ -5,23 +5,33 @@ const getPoster = (title) => {
   return title.toLowerCase().replace(`:`, ``).replace(/ /g, `-`);
 };
 
-const generateMovieCard = (title) => {
+const generateMovieCard = (title, index, onTitleClick) => {
   const poster = `img/${getPoster(title)}.jpg`;
+  const key = `${title.split(` `)[0]}-${index}`;
   return (
-    <article className="small-movie-card catalog__movies-card">
+    <article
+      key={key}
+      className="small-movie-card catalog__movies-card"
+    >
       <div className="small-movie-card__image">
         <img src={poster} alt={title} width="280" height="175"/>
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html">{title}</a>
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+          onClick={onTitleClick}
+        >{title}
+        </a>
       </h3>
     </article>
   );
 };
 
 const Main = (props) => {
-  const {title, genre, year, movies} = props;
-  const moviesTemplate = movies.map((it) => generateMovieCard(it));
+  const {promo, movies, onTitleClick} = props;
+  const {title, genre, year} = promo;
+  const moviesTemplate = movies.map((it, index) => generateMovieCard(it, index, onTitleClick));
   return (
     <>
       <section className="movie-card">
@@ -138,10 +148,13 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
+  promo: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+  }),
   movies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onTitleClick: PropTypes.func.isRequired,
 };
 
 export default Main;
