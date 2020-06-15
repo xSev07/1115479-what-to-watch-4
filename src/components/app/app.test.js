@@ -2,9 +2,12 @@ import React from "react";
 import renderer from "react-test-renderer";
 import App from "./app";
 
-const title = `The Grand Budapest Hotel`;
-const genre = `Drama`;
-const year = 2014;
+const promoMovie = {
+  title: `The Grand Budapest Hotel`,
+  genre: `Drama`,
+  year: 2014
+};
+
 const movies = [
   `Bohemian Rhapsody`,
   `Macbeth`,
@@ -14,9 +17,7 @@ const movies = [
 it(`Should App render correctly`, () => {
   const tree = renderer
     .create(<App
-      promoTitle={title}
-      promoGenre={genre}
-      promoYear={year}
+      promoMovie={promoMovie}
       allMovies={movies}
       onMovieTitleClick={() => {}}
     />);

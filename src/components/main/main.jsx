@@ -29,7 +29,8 @@ const generateMovieCard = (title, index, onTitleClick) => {
 };
 
 const Main = (props) => {
-  const {title, genre, year, movies, onTitleClick} = props;
+  const {promo, movies, onTitleClick} = props;
+  const {title, genre, year} = promo;
   const moviesTemplate = movies.map((it, index) => generateMovieCard(it, index, onTitleClick));
   return (
     <>
@@ -147,9 +148,11 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  title: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
+  promo: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+  }),
   movies: PropTypes.arrayOf(PropTypes.string).isRequired,
   onTitleClick: PropTypes.func.isRequired,
 };

@@ -7,9 +7,12 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const title = `The Grand Budapest Hotel`;
-const genre = `Drama`;
-const year = 2014;
+const promoMovie = {
+  title: `The Grand Budapest Hotel`,
+  genre: `Drama`,
+  year: 2014
+};
+
 const movies = [
   `Bohemian Rhapsody`,
   `Macbeth`,
@@ -22,9 +25,7 @@ describe(`MainComponent`, () => {
 
     const main = shallow(
         <Main
-          title={title}
-          genre={genre}
-          year={year}
+          promo={promoMovie}
           movies={movies}
           onTitleClick={onMovieTitleClick}
         />
