@@ -1,7 +1,11 @@
 import {PosterType} from "../../const";
 
 export const getImageURL = (title, type) => {
-  let transformTitle = title.toLowerCase().replace(`:`, ``).replace(/ /g, `-`);
+  if (title === ``) {
+    return ``;
+  }
+
+  let transformTitle = title.toLowerCase().replace(/:/g, ``).replace(/ /g, `-`);
   switch (type) {
     case PosterType.PREVIEW:
       break;
