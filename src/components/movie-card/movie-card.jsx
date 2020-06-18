@@ -1,13 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-const getPoster = (title) => {
-  return title.toLowerCase().replace(`:`, ``).replace(/ /g, `-`);
-};
+import {PosterType} from "../../const";
+import {getImageURL} from "../../utils";
 
 const MovieCard = (props) => {
   const {title, onTitleClick, onHover} = props;
-  const poster = `img/${getPoster(title)}.jpg`;
+  const previewSrc = getImageURL(title, PosterType.PREVIEW);
   return (
     <article
       className="small-movie-card catalog__movies-card"
@@ -16,7 +14,7 @@ const MovieCard = (props) => {
       }}
     >
       <div className="small-movie-card__image">
-        <img src={poster} alt={title} width="280" height="175"/>
+        <img src={previewSrc} alt={title} width="280" height="175"/>
       </div>
       <h3 className="small-movie-card__title">
         <a
