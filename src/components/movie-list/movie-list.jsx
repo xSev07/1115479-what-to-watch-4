@@ -22,11 +22,11 @@ class MovieList extends PureComponent {
               title={movie.title}
               year={movie.year}
               onTitleClick={onTitleClick}
-              onHover={(evt) => {
-                if (this.state.activeCard === evt.currentTarget) {
+              onHover={(currentCard) => {
+                if (this.state.activeCard === currentCard) {
                   return;
                 }
-                this.setState({activeCard: evt.currentTarget});
+                this.setState({activeCard: currentCard});
               }}
             />
           );
