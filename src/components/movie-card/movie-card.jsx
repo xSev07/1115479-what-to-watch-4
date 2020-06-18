@@ -6,12 +6,10 @@ const getPoster = (title) => {
 };
 
 const MovieCard = (props) => {
-  const {title, year, onTitleClick, onHover} = props;
-  const key = `${title.split(` `)[0]}-${year}`;
+  const {title, onTitleClick, onHover} = props;
   const poster = `img/${getPoster(title)}.jpg`;
   return (
     <article
-      key={key}
       className="small-movie-card catalog__movies-card"
     >
       <div className="small-movie-card__image">
@@ -32,7 +30,6 @@ const MovieCard = (props) => {
 
 MovieCard.propTypes = {
   title: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
   onTitleClick: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired,
 };
