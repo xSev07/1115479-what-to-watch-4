@@ -1,29 +1,18 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Main from "./main";
+import {movies, promoMovie} from "../../tests-data/tests-data";
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const promoMovie = {
-  title: `The Grand Budapest Hotel`,
-  genre: `Drama`,
-  year: 2014
-};
-
-const movies = [
-  `Bohemian Rhapsody`,
-  `Macbeth`,
-  `Aviator`
-];
-
 describe(`MainComponent`, () => {
-  it(`should movie title clicked`, function () {
+  it(`should movie title clicked`, () => {
     const onMovieTitleClick = jest.fn();
 
-    const main = shallow(
+    const main = mount(
         <Main
           promo={promoMovie}
           movies={movies}

@@ -1,12 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main";
-import {movies, promoMovie} from "../../tests-data/tests-data";
+import MovieList from "./movie-list";
+import {movies} from "../../tests-data/tests-data";
 
-it(`Should Main render correctly`, () => {
+it(`Should MovieList render correctly`, () => {
   const tree = renderer
-    .create(<Main
-      promo={promoMovie}
+    .create(<MovieList
       movies={movies}
       onTitleClick={() => {}}
     />);
