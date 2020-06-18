@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {PosterType} from "../../const";
-import {getImageURL} from "../../utils";
+import {getImageURL} from "../../utils/common/common";
 
 const MovieCard = (props) => {
   const {title, onTitleClick, onHover} = props;

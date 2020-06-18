@@ -1,4 +1,4 @@
-import {PosterType} from "./const";
+import {PosterType} from "../../const";
 
 export const getImageURL = (title, type) => {
   let transformTitle = title.toLowerCase().replace(`:`, ``).replace(/ /g, `-`);
