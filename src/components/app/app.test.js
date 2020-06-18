@@ -9,9 +9,45 @@ const promoMovie = {
 };
 
 const movies = [
-  `Bohemian Rhapsody`,
-  `Macbeth`,
-  `Aviator`
+  {
+    actors: [],
+    description: ``,
+    duration: 0,
+    genre: ``,
+    inList: false,
+    producer: ``,
+    rate: ``,
+    reviews: [],
+    title: `Bohemian Rhapsody`,
+    votes: ``,
+    year: 2000,
+  },
+  {
+    actors: [],
+    description: ``,
+    duration: 0,
+    genre: ``,
+    inList: false,
+    producer: ``,
+    rate: ``,
+    reviews: [],
+    title: `Macbeth`,
+    votes: ``,
+    year: 2000,
+  },
+  {
+    actors: [],
+    description: ``,
+    duration: 0,
+    genre: ``,
+    inList: false,
+    producer: ``,
+    rate: ``,
+    reviews: [],
+    title: `Aviator`,
+    votes: ``,
+    year: 2000,
+  }
 ];
 
 it(`Should App render correctly`, () => {
