@@ -10,7 +10,7 @@ export default [
     reviews: [],
     title: `Fantastic Beasts: The Crimes of Grindelwald`,
     votes: ``,
-    year: ``,
+    year: 2000,
   },
   {
     actors: [],
@@ -23,7 +23,7 @@ export default [
     reviews: [],
     title: `Bohemian Rhapsody`,
     votes: ``,
-    year: ``,
+    year: 2000,
   },
   {
     actors: [],
@@ -36,7 +36,7 @@ export default [
     reviews: [],
     title: `Macbeth`,
     votes: ``,
-    year: ``,
+    year: 2000,
   },
   {
     actors: [],
@@ -49,7 +49,7 @@ export default [
     reviews: [],
     title: `Aviator`,
     votes: ``,
-    year: ``,
+    year: 2000,
   },
   {
     actors: [],
@@ -62,7 +62,7 @@ export default [
     reviews: [],
     title: `We need to talk about Kevin`,
     votes: ``,
-    year: ``,
+    year: 2000,
   },
   {
     actors: [],
@@ -75,7 +75,7 @@ export default [
     reviews: [],
     title: `What We Do in the Shadows`,
     votes: ``,
-    year: ``,
+    year: 2000,
   },
   {
     actors: [],
@@ -88,7 +88,7 @@ export default [
     reviews: [],
     title: `Revenant`,
     votes: ``,
-    year: ``,
+    year: 2000,
   },
   {
     actors: [],
@@ -101,6 +101,6 @@ export default [
     reviews: [],
     title: `Johnny English`,
     votes: ``,
-    year: ``,
+    year: 2000,
   },
 ];

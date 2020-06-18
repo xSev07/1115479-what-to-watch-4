@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import MovieCard from "../movie-card/movie-card";
+import MovieCard from "../movie-card/movie-card.jsx";
 
 class MovieList extends PureComponent {
   constructor(props) {
@@ -21,13 +21,16 @@ class MovieList extends PureComponent {
               key={key}
               title={movie.title}
               year={movie.year}
-              onClick={onTitleClick}
+              onTitleClick={onTitleClick}
               onHover={(evt) => {
-                this.setState({activeCard: evt.target});
+                if (this.state.activeCard === evt.currentTarget) {
+                  return;
+                }
+                this.setState({activeCard: evt.currentTarget});
               }}
             />
           );
-        }).join(`/n`)
+        })
         }
       </div>
     );
@@ -43,3 +46,5 @@ MovieList.propTypes = {
   ),
   onTitleClick: PropTypes.func.isRequired,
 };
+
+export default MovieList;

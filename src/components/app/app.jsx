@@ -19,7 +19,12 @@ App.propTypes = {
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
   }),
-  allMovies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  allMovies: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        year: PropTypes.number.isRequired,
+      })
+  ).isRequired,
   onMovieTitleClick: PropTypes.func.isRequired,
 };
 

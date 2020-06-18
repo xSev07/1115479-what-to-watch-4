@@ -11,6 +11,7 @@ const MovieCard = (props) => {
   return (
     <article
       className="small-movie-card catalog__movies-card"
+      onMouseOver={onHover}
     >
       <div className="small-movie-card__image">
         <img src={poster} alt={title} width="280" height="175"/>
@@ -20,7 +21,6 @@ const MovieCard = (props) => {
           className="small-movie-card__link"
           href="movie-page.html"
           onClick={onTitleClick}
-          onMouseOver={onHover}
         >{title}
         </a>
       </h3>
