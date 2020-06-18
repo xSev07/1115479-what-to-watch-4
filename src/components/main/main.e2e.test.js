@@ -9,7 +9,7 @@ Enzyme.configure({
 });
 
 describe(`MainComponent`, () => {
-  it(`should movie title clicked`, function () {
+  it(`should movie title clicked`, () => {
     const onMovieTitleClick = jest.fn();
 
     const main = mount(
