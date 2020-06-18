@@ -1,4 +1,4 @@
-import {PosterType} from "../../const";
+import {ImageType} from "../../const";
 
 export const getImageURL = (title, type) => {
   if (title === ``) {
@@ -7,13 +7,13 @@ export const getImageURL = (title, type) => {
 
   let transformTitle = title.toLowerCase().replace(/:/g, ``).replace(/ /g, `-`);
   switch (type) {
-    case PosterType.PREVIEW:
+    case ImageType.PREVIEW:
       break;
-    case PosterType.POSTER:
-      transformTitle = `${transformTitle}-${PosterType.POSTER}`;
+    case ImageType.POSTER:
+      transformTitle = `${transformTitle}-${ImageType.POSTER}`;
       break;
-    case PosterType.COVER:
-      transformTitle = `${PosterType.COVER}-${transformTitle}`;
+    case ImageType.COVER:
+      transformTitle = `${ImageType.COVER}-${transformTitle}`;
       break;
   }
 

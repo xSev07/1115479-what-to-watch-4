@@ -1,4 +1,4 @@
-export const PosterType = {
+export const ImageType = {
   PREVIEW: ``,
   POSTER: `poster`,
   COVER: `bg`

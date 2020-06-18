@@ -37,11 +37,14 @@ class App extends PureComponent {
   }
 
   _renderMovieScreen() {
+    const {allMovies} = this.props;
     return (
-      <MoviePage/>
+      <MoviePage
+        movie={allMovies[0]}
+      />
     );
   }
-};
+}
 
 App.propTypes = {
   promoMovie: PropTypes.shape({
@@ -52,7 +55,13 @@ App.propTypes = {
   allMovies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
+        genre: PropTypes.string.isRequired,
         year: PropTypes.number.isRequired,
+        rate: PropTypes.number.isRequired,
+        votes: PropTypes.number.isRequired,
+        producer: PropTypes.string.isRequired,
+        actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
       })
   ).isRequired,
   onMovieTitleClick: PropTypes.func.isRequired,
