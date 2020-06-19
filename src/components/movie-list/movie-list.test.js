@@ -5,10 +5,12 @@ import {movies} from "../../tests-data/tests-data";
 
 it(`Should MovieList render correctly`, () => {
   const tree = renderer
-    .create(<MovieList
-      movies={movies}
-      onTitleClick={() => {}}
-    />);
+    .create(
+        <MovieList
+          movies={movies}
+          onTitleClick={() => {}}
+        />
+    );
 
   expect(tree).toMatchSnapshot();
 });
