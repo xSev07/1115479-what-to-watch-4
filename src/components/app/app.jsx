@@ -4,10 +4,12 @@ import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {PureComponent} from "react/cjs/react.production.min";
 import MoviePage from "../movie-page/movie-page.jsx";
+import {ShowedMovies} from "../../const";
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
+    this._showedMovies = ShowedMovies.ON_START;
   }
 
   render() {
@@ -30,7 +32,7 @@ class App extends PureComponent {
     return (
       <Main
         promo={promoMovie}
-        movies={allMovies}
+        movies={allMovies.slice(0, this._showedMovies)}
         onTitleClick={onMovieTitleClick}
       />
     );
@@ -40,7 +42,7 @@ class App extends PureComponent {
     const {allMovies} = this.props;
     return (
       <MoviePage
-        movie={allMovies[0]}
+        movie={allMovies[8]}
       />
     );
   }
