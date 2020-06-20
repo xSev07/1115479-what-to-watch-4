@@ -1,18 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {getImageURL} from "../../utils/common/common";
+import {getImageURL, getRatingTextDescription} from "../../utils/common/common";
 import {ImageType} from "../../const";
 
 const MoviePage = (props) => {
   const {title, genre, year, rating, votes, producer, actors, description} = props.movie;
-  // TODO: реализовать определение рейтинга текстом
-  const textRating = `good`;
+  const textRating = getRatingTextDescription(rating);
 
   const actorsText = `${actors.join(`, `)} and other`;
-  const DescriptionText = {
-    PARAGRAPH_ONE: description[0],
-    PARAGRAPH_TWO: description[1],
-  };
+  const DescriptionText = description.map((it, index) => <p key={index}>{it}</p>);
   const Image = {
     COVER: getImageURL(title, ImageType.COVER),
     POSTER: getImageURL(title, ImageType.POSTER),
@@ -102,9 +98,7 @@ const MoviePage = (props) => {
               </div>
 
               <div className="movie-card__text">
-                <p>{DescriptionText.PARAGRAPH_ONE}</p>
-
-                <p>{DescriptionText.PARAGRAPH_TWO}</p>
+                {DescriptionText}
 
                 <p className="movie-card__director"><strong>Director: {producer}</strong></p>
 
