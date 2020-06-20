@@ -3,6 +3,7 @@
 exports[`Should MovieCard render correctly 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
+  data-id="Test-1234"
   onClick={[Function]}
   onMouseOver={[Function]}
 >

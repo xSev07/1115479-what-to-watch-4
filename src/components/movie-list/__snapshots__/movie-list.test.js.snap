@@ -6,6 +6,7 @@ exports[`Should MovieList render correctly 1`] = `
 >
   <article
     className="small-movie-card catalog__movies-card"
+    data-id="Bohemian-2018"
     onClick={[Function]}
     onMouseOver={[Function]}
   >
@@ -32,6 +33,7 @@ exports[`Should MovieList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    data-id="Macbeth-2015"
     onClick={[Function]}
     onMouseOver={[Function]}
   >
@@ -58,6 +60,7 @@ exports[`Should MovieList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    data-id="Aviator-2005"
     onClick={[Function]}
     onMouseOver={[Function]}
   >
