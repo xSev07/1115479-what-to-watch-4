@@ -8,6 +8,7 @@ it(`Should MovieCard render correctly`, () => {
   const tree = renderer
     .create(
         <MovieCard
+          id={`Test-1234`}
           title={title}
           onClick={() => {}}
           onHover={() => {}}
