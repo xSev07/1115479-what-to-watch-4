@@ -9,7 +9,7 @@ it(`Should Main render correctly`, () => {
         <Main
           promo={promoMovie}
           movies={movies}
-          onTitleClick={() => {}}
+          onMovieCardClick={() => {}}
         />
     );
 

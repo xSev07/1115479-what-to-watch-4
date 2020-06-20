@@ -16,7 +16,7 @@ describe(`MainComponent`, () => {
         <Main
           promo={promoMovie}
           movies={movies}
-          onTitleClick={onMovieTitleClick}
+          onMovieCardClick={onMovieTitleClick}
         />
     );
     const movieTitles = main.find(`a.small-movie-card__link`);

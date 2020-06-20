@@ -4,11 +4,12 @@ import {ImageType} from "../../const";
 import {getImageURL} from "../../utils/common/common";
 
 const MovieCard = (props) => {
-  const {title, onTitleClick, onHover} = props;
+  const {title, onClick, onHover} = props;
   const previewSrc = getImageURL(title, ImageType.PREVIEW);
   return (
     <article
       className="small-movie-card catalog__movies-card"
+      onClick={onClick}
       onMouseOver={(evt) => {
         onHover(evt.currentTarget);
       }}
@@ -20,8 +21,8 @@ const MovieCard = (props) => {
         <a
           className="small-movie-card__link"
           href="movie-page.html"
-          onClick={onTitleClick}
-        >{title}
+        >
+          {title}
         </a>
       </h3>
     </article>
@@ -30,7 +31,7 @@ const MovieCard = (props) => {
 
 MovieCard.propTypes = {
   title: PropTypes.string.isRequired,
-  onTitleClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired,
 };
 

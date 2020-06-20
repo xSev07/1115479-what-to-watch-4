@@ -20,7 +20,9 @@ class App extends PureComponent {
             {this._renderMainScreen()}
           </Route>
           <Route exact path="/dev-movie">
-            {this._renderMovieScreen()}
+            <MoviePage
+              movie={this.props.allMovies[8]}
+            />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -28,23 +30,27 @@ class App extends PureComponent {
   }
 
   _renderMainScreen() {
-    const {promoMovie, allMovies, onMovieTitleClick} = this.props;
+    const {promoMovie, allMovies} = this.props;
     return (
       <Main
         promo={promoMovie}
         movies={allMovies.slice(0, this._showedMovies)}
-        onTitleClick={onMovieTitleClick}
+        onMovieCardClick={this._handleMovieCardClick}
       />
     );
   }
 
-  _renderMovieScreen() {
-    const {allMovies} = this.props;
-    return (
-      <MoviePage
-        movie={allMovies[8]}
-      />
-    );
+  // _renderMovieScreen() {
+  //   const {allMovies} = this.props;
+  //   return (
+  //     <MoviePage
+  //       movie={allMovies[8]}
+  //     />
+  //   );
+  // }
+
+  _handleMovieCardClick() {
+    return true;
   }
 }
 
@@ -66,7 +72,6 @@ App.propTypes = {
         description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
       })
   ).isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired,
 };
 
 export default App;

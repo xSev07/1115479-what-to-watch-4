@@ -8,7 +8,7 @@ it(`Should MovieList render correctly`, () => {
     .create(
         <MovieList
           movies={movies}
-          onTitleClick={() => {}}
+          onMovieCardClick={() => {}}
         />
     );
 

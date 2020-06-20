@@ -9,7 +9,7 @@ it(`Should MovieCard render correctly`, () => {
     .create(
         <MovieCard
           title={title}
-          onTitleClick={() => {}}
+          onClick={() => {}}
           onHover={() => {}}
         />
     );

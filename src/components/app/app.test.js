@@ -9,7 +9,6 @@ it(`Should App render correctly`, () => {
         <App
           promoMovie={promoMovie}
           allMovies={movies}
-          onMovieTitleClick={() => {}}
         />
     );
 
