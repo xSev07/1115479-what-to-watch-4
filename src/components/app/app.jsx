@@ -70,7 +70,7 @@ App.propTypes = {
         title: PropTypes.string.isRequired,
         genre: PropTypes.string.isRequired,
         year: PropTypes.number.isRequired,
-        rate: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
         votes: PropTypes.number.isRequired,
         producer: PropTypes.string.isRequired,
         actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,

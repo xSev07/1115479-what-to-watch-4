@@ -4,9 +4,9 @@ import {getImageURL} from "../../utils/common/common";
 import {ImageType} from "../../const";
 
 const MoviePage = (props) => {
-  const {title, genre, year, rate, votes, producer, actors, description} = props.movie;
+  const {title, genre, year, rating, votes, producer, actors, description} = props.movie;
   // TODO: реализовать определение рейтинга текстом
-  const textRate = `good`;
+  const textRating = `good`;
 
   const actorsText = `${actors.join(`, `)} and other`;
   const DescriptionText = {
@@ -94,9 +94,9 @@ const MoviePage = (props) => {
               </nav>
 
               <div className="movie-rating">
-                <div className="movie-rating__score">{rate}</div>
+                <div className="movie-rating__score">{rating}</div>
                 <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{textRate}</span>
+                  <span className="movie-rating__level">{textRating}</span>
                   <span className="movie-rating__count">{votes} ratings</span>
                 </p>
               </div>
@@ -169,7 +169,7 @@ MoviePage.propTypes = {
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
-    rate: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
     votes: PropTypes.number.isRequired,
     producer: PropTypes.string.isRequired,
     actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
