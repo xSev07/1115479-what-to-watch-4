@@ -11,7 +11,7 @@ export default [
       `But, making good on his threat, Grindelwald escaped custody and has set about gathering followers, most unsuspecting of his true agenda: to raise pure-blood wizards up to rule over all non-magical beings. In an effort to thwart Grindelwald’s plans, Albus Dumbledore (Jude Law) enlists his former student Newt Scamander, who agrees to help, unaware of the dangers that lie ahead. Lines are drawn as love and loyalty are tested, even among the truest friends and family, in an increasingly divided wizarding world.`
     ],
     duration: 134,
-    genre: ``,
+    genre: `Kids & Family`,
     inList: false,
     producer: `David Yates`,
     rating: 6.6,
@@ -31,7 +31,7 @@ export default [
       `The story of the legendary British rock band Queen and lead singer Freddie Mercury, leading up to their famous performance at Музыкальный фестиваль Live Aid (1985)`
     ],
     duration: 134,
-    genre: ``,
+    genre: `Drama`,
     inList: false,
     producer: `Bryan Singer`,
     rating: 8.0,
@@ -51,7 +51,7 @@ export default [
       `From the Academy Award winning producers of The King’s Speech and acclaimed director Justin Kurzel, comes a visceral and visually breath-taking retelling of the classic tale about an ambitious Scottish lord who seizes the throne with the help of his wife. Starring Academy Award nominee Michael Fassbender and Academy Award winner Marion Cotillard, Macbeth is both visually epic and a breathtaking experience.`
     ],
     duration: 113,
-    genre: ``,
+    genre: `Documental`,
     inList: false,
     producer: `Justin Kurzel`,
     rating: 6.6,
@@ -72,7 +72,7 @@ export default [
       `Based on the 1993 non-fiction book Howard Hughes: The Secret Life by Charles Higham, the film depicts the life of Howard Hughes, an aviation pioneer and director of Hell's Angels. The film portrays his life from 1927–1947 during which time Hughes became a successful film producer and an aviation magnate while simultaneously growing more unstable due to severe obsessive–compulsive disorder (OCD).`
     ],
     duration: 170,
-    genre: ``,
+    genre: `Thriller`,
     inList: false,
     producer: `Martin Scorsese`,
     rating: 7.5,
@@ -93,7 +93,7 @@ export default [
       `Tilda Swinton stars as the mother of Kevin, struggling to come to terms with her son and the horrors he has committed. The film premiered at the 2011 Cannes Film Festival and was released in the United Kingdom on 21 October 2011.`
     ],
     duration: 112,
-    genre: ``,
+    genre: `Romance`,
     inList: false,
     producer: `Lynne Ramsay`,
     rating: 7.5,
@@ -114,7 +114,7 @@ export default [
       `What We Do in the Shadows premiered at the Sundance Film Festival in January 2014.[6][7] It was released theatrically on 18 August 2014 by Madman Entertainment, and received critical acclaim. The film earned $6.9 million on a $1.6 million budget.`
     ],
     duration: 85,
-    genre: ``,
+    genre: `Comedy`,
     inList: false,
     producer: `Jemaine Clement`,
     rating: 8.4,
@@ -136,7 +136,7 @@ export default [
       `The Revenant premiered at the TCL Chinese Theatre on December 16, 2015, and had a limited release on December 25, expanding on January 8, 2016. The film was a box office success, grossing $533 million worldwide and received mostly positive reviews, with praise for DiCaprio and Hardy's performances, Iñárritu's direction, and Lubezki's cinematography.[5][6][7][7] It won three Golden Globe Awards and five BAFTA Awards. At the 88th Academy Awards, the film received 12 nominations, including Best Picture and Best Supporting Actor (Hardy), winning Best Director (Iñárritu), Best Actor (DiCaprio), and Best Cinematography (Emmanuel Lubezki). DiCaprio also won the Golden Globe, Screen Actors Guild Award, BAFTA, and Critics' Choice Award for Best Actor.`
     ],
     duration: 156,
-    genre: ``,
+    genre: `Horror`,
     inList: false,
     producer: `Alejandro G. Iñárritu`,
     rating: 8.0,
@@ -157,7 +157,7 @@ export default [
       `Starring Rowan Atkinson in the title role, Natalie Imbruglia, Ben Miller and John Malkovich, it is the first instalment of the Johnny English film series and serves as a parody/homage to the spy genre, mainly the James Bond film series as well as Atkinson's Mr. Bean character. The character is also related to Atkinson's bumbling spy character from a series of adverts in the United Kingdom for Barclaycard in the 1990s.`
     ],
     duration: 88,
-    genre: ``,
+    genre: `Comedy`,
     inList: false,
     producer: `Peter Howitt`,
     rating: 6.5,

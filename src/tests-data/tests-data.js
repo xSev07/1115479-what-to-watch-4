@@ -1,5 +1,22 @@
 export const movies = [
   {
+    id: `Hotel-2000`,
+    actors: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
+    description: [
+      `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
+      `Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.`
+    ],
+    duration: 60,
+    genre: `Drama`,
+    inList: false,
+    producer: `Wes Andreson`,
+    rating: 8.9,
+    reviews: [],
+    title: `The Grand Budapest Hotel`,
+    votes: 240,
+    year: 2000,
+  },
+  {
     id: `Bohemian-2018`,
     actors: [
       `Rami Malek`,
@@ -10,7 +27,7 @@ export const movies = [
       `The story of the legendary British rock band Queen and lead singer Freddie Mercury, leading up to their famous performance at Музыкальный фестиваль Live Aid (1985)`
     ],
     duration: 134,
-    genre: ``,
+    genre: `Drama`,
     inList: false,
     producer: `Bryan Singer`,
     rating: 8.0,
@@ -30,7 +47,7 @@ export const movies = [
       `From the Academy Award winning producers of The King’s Speech and acclaimed director Justin Kurzel, comes a visceral and visually breath-taking retelling of the classic tale about an ambitious Scottish lord who seizes the throne with the help of his wife. Starring Academy Award nominee Michael Fassbender and Academy Award winner Marion Cotillard, Macbeth is both visually epic and a breathtaking experience.`
     ],
     duration: 113,
-    genre: ``,
+    genre: `Documental`,
     inList: false,
     producer: `Justin Kurzel`,
     rating: 6.6,
@@ -51,7 +68,7 @@ export const movies = [
       `Based on the 1993 non-fiction book Howard Hughes: The Secret Life by Charles Higham, the film depicts the life of Howard Hughes, an aviation pioneer and director of Hell's Angels. The film portrays his life from 1927–1947 during which time Hughes became a successful film producer and an aviation magnate while simultaneously growing more unstable due to severe obsessive–compulsive disorder (OCD).`
     ],
     duration: 170,
-    genre: ``,
+    genre: `Thriller`,
     inList: false,
     producer: `Martin Scorsese`,
     rating: 7.5,
@@ -66,22 +83,4 @@ export const promoMovie = {
   title: `The Grand Budapest Hotel`,
   genre: `Drama`,
   year: 2014
-};
-
-export const movieDetail = {
-  id: `Hotel-2000`,
-  actors: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`],
-  description: [
-    `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    `Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.`
-  ],
-  duration: 60,
-  genre: `Drama`,
-  inList: false,
-  producer: `Wes Andreson`,
-  rating: 8.9,
-  reviews: [],
-  title: `The Grand Budapest Hotel`,
-  votes: 240,
-  year: 2000,
 };
