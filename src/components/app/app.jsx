@@ -10,6 +10,11 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
     this._showedMovies = ShowedMovies.ON_START;
+    this.state = {
+      displayedMovie: -1,
+    };
+
+    this._handleMovieCardClick = this._handleMovieCardClick.bind(this);
   }
 
   render() {
@@ -31,26 +36,26 @@ class App extends PureComponent {
 
   _renderMainScreen() {
     const {promoMovie, allMovies} = this.props;
+    const {displayedMovie} = this.state;
+    if (displayedMovie === -1) {
+      return (
+        <Main
+          promo={promoMovie}
+          movies={allMovies.slice(0, this._showedMovies)}
+          onMovieCardClick={this._handleMovieCardClick}
+        />
+      );
+    }
     return (
-      <Main
-        promo={promoMovie}
-        movies={allMovies.slice(0, this._showedMovies)}
-        onMovieCardClick={this._handleMovieCardClick}
+      <MoviePage
+        movie={this.props.allMovies[displayedMovie]}
       />
     );
   }
 
-  // _renderMovieScreen() {
-  //   const {allMovies} = this.props;
-  //   return (
-  //     <MoviePage
-  //       movie={allMovies[8]}
-  //     />
-  //   );
-  // }
-
-  _handleMovieCardClick() {
-    return true;
+  _handleMovieCardClick(movieId) {
+    const movieIndex = this.props.allMovies.findIndex((movie) => movie.id === movieId);
+    this.setState({displayedMovie: movieIndex});
   }
 }
 

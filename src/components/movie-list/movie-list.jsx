@@ -18,6 +18,7 @@ class MovieList extends PureComponent {
           return (
             <MovieCard
               key={movie.id}
+              id={movie.id}
               title={movie.title}
               year={movie.year}
               onClick={onMovieCardClick}
