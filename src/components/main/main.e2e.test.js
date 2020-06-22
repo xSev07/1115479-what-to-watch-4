@@ -10,18 +10,18 @@ Enzyme.configure({
 
 describe(`MainComponent`, () => {
   it(`should movie title clicked`, () => {
-    const onMovieTitleClick = jest.fn();
+    const onMovieCardClick = jest.fn();
 
     const main = mount(
         <Main
           promo={promoMovie}
           movies={movies}
-          onTitleClick={onMovieTitleClick}
+          onMovieCardClick={onMovieCardClick}
         />
     );
     const movieTitles = main.find(`a.small-movie-card__link`);
     movieTitles.forEach((it) => it.simulate(`click`));
 
-    expect(onMovieTitleClick).toHaveBeenCalledTimes(movies.length);
+    expect(onMovieCardClick).toHaveBeenCalledTimes(movies.length);
   });
 });

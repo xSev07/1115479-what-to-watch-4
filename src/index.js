@@ -9,13 +9,10 @@ const promoMovie = {
   year: 2014
 };
 
-const onMovieTitleClickHandler = () => {};
-
 ReactDOM.render(
     <App
       promoMovie={promoMovie}
       allMovies={movies}
-      onMovieTitleClick={onMovieTitleClickHandler}
     />,
     document.querySelector(`#root`)
 );

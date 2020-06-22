@@ -6,6 +6,35 @@ exports[`Should MovieList render correctly 1`] = `
 >
   <article
     className="small-movie-card catalog__movies-card"
+    data-id="Hotel-2000"
+    onClick={[Function]}
+    onMouseOver={[Function]}
+  >
+    <div
+      className="small-movie-card__image"
+    >
+      <img
+        alt="The Grand Budapest Hotel"
+        height="175"
+        src="img/the-grand-budapest-hotel.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+      >
+        The Grand Budapest Hotel
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+    data-id="Bohemian-2018"
+    onClick={[Function]}
     onMouseOver={[Function]}
   >
     <div
@@ -24,7 +53,6 @@ exports[`Should MovieList render correctly 1`] = `
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-        onClick={[Function]}
       >
         Bohemian Rhapsody
       </a>
@@ -32,6 +60,8 @@ exports[`Should MovieList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    data-id="Macbeth-2015"
+    onClick={[Function]}
     onMouseOver={[Function]}
   >
     <div
@@ -50,7 +80,6 @@ exports[`Should MovieList render correctly 1`] = `
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-        onClick={[Function]}
       >
         Macbeth
       </a>
@@ -58,6 +87,8 @@ exports[`Should MovieList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
+    data-id="Aviator-2005"
+    onClick={[Function]}
     onMouseOver={[Function]}
   >
     <div
@@ -76,7 +107,6 @@ exports[`Should MovieList render correctly 1`] = `
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-        onClick={[Function]}
       >
         Aviator
       </a>

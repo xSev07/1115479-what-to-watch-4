@@ -6,10 +6,13 @@ const title = `Test movie`;
 
 it(`Should MovieCard render correctly`, () => {
   const tree = renderer
-    .create(<MovieCard
-      title={title}
-      onTitleClick={() => {}}
-      onHover={() => {}}/>
+    .create(
+        <MovieCard
+          id={`Test-1234`}
+          title={title}
+          onClick={() => {}}
+          onHover={() => {}}
+        />
     );
 
   expect(tree).toMatchSnapshot();

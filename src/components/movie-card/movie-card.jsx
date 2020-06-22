@@ -1,29 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-const getPoster = (title) => {
-  return title.toLowerCase().replace(`:`, ``).replace(/ /g, `-`);
-};
+import {ImageType} from "../../const";
+import {getImageURL} from "../../utils/common/common";
 
 const MovieCard = (props) => {
-  const {title, onTitleClick, onHover} = props;
-  const poster = `img/${getPoster(title)}.jpg`;
+  const {id, title, onClick, onHover} = props;
+  const previewSrc = getImageURL(title, ImageType.PREVIEW);
   return (
     <article
       className="small-movie-card catalog__movies-card"
+      data-id={id}
+      onClick={(evt) => {
+        onClick(evt.currentTarget.dataset.id);
+      }}
       onMouseOver={(evt) => {
         onHover(evt.currentTarget);
       }}
     >
       <div className="small-movie-card__image">
-        <img src={poster} alt={title} width="280" height="175"/>
+        <img src={previewSrc} alt={title} width="280" height="175"/>
       </div>
       <h3 className="small-movie-card__title">
         <a
           className="small-movie-card__link"
           href="movie-page.html"
-          onClick={onTitleClick}
-        >{title}
+        >
+          {title}
         </a>
       </h3>
     </article>
@@ -31,8 +33,9 @@ const MovieCard = (props) => {
 };
 
 MovieCard.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  onTitleClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired,
 };
 

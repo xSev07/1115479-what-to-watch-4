@@ -15,8 +15,9 @@ describe(`MovieCardComponent`, () => {
 
     const movieCard = shallow(
         <MovieCard
+          id={`Test-1234`}
           title={title}
-          onTitleClick={() => {}}
+          onClick={() => {}}
           onHover={onCardHover}
         />
     );

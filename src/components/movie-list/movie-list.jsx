@@ -11,29 +11,31 @@ class MovieList extends PureComponent {
   }
 
   render() {
-    const {movies, onTitleClick} = this.props;
+    const {movies, onMovieCardClick} = this.props;
     return (
       <div className="catalog__movies-list">
         {movies.map((movie) => {
-          const key = `${movie.title.split(` `)[0]}-${movie.year}`;
           return (
             <MovieCard
-              key={key}
+              key={movie.id}
+              id={movie.id}
               title={movie.title}
               year={movie.year}
-              onTitleClick={onTitleClick}
-              onHover={(currentCard) => {
-                if (this.state.activeCard === currentCard) {
-                  return;
-                }
-                this.setState({activeCard: currentCard});
-              }}
+              onClick={onMovieCardClick}
+              onHover={this._handlerCardHover}
             />
           );
         })
         }
       </div>
     );
+  }
+
+  _handlerCardHover(currentCard) {
+    if (this.state.activeCard === currentCard) {
+      return;
+    }
+    this.setState({activeCard: currentCard});
   }
 }
 
@@ -44,7 +46,7 @@ MovieList.propTypes = {
         year: PropTypes.number.isRequired,
       })
   ),
-  onTitleClick: PropTypes.func.isRequired,
+  onMovieCardClick: PropTypes.func.isRequired,
 };
 
 export default MovieList;

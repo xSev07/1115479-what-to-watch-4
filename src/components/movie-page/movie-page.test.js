@@ -1,14 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MovieList from "./movie-list";
+import MoviePage from "./movie-page";
 import {movies} from "../../tests-data/tests-data";
 
-it(`Should MovieList render correctly`, () => {
+it(`Should MoviePage render correctly`, () => {
   const tree = renderer
     .create(
-        <MovieList
-          movies={movies}
-          onMovieCardClick={() => {}}
+        <MoviePage
+          movie={movies[0]}
         />
     );
 

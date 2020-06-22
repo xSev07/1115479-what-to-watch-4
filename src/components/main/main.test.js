@@ -5,11 +5,13 @@ import {movies, promoMovie} from "../../tests-data/tests-data";
 
 it(`Should Main render correctly`, () => {
   const tree = renderer
-    .create(<Main
-      promo={promoMovie}
-      movies={movies}
-      onTitleClick={() => {}}
-    />);
+    .create(
+        <Main
+          promo={promoMovie}
+          movies={movies}
+          onMovieCardClick={() => {}}
+        />
+    );
 
   expect(tree).toMatchSnapshot();
 });
