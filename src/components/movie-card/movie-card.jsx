@@ -9,9 +9,8 @@ const MovieCard = (props) => {
   return (
     <article
       className="small-movie-card catalog__movies-card"
-      data-id={id}
-      onClick={(evt) => {
-        onClick(evt.currentTarget.dataset.id);
+      onClick={() => {
+        onClick(id);
       }}
       onMouseOver={(evt) => {
         onHover(evt.currentTarget);

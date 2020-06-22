@@ -259,7 +259,6 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
-          data-id="Hotel-2000"
           onClick={[Function]}
           onMouseOver={[Function]}
         >
@@ -286,7 +285,6 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          data-id="Bohemian-2018"
           onClick={[Function]}
           onMouseOver={[Function]}
         >
@@ -313,7 +311,6 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          data-id="Macbeth-2015"
           onClick={[Function]}
           onMouseOver={[Function]}
         >
@@ -340,7 +337,6 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          data-id="Aviator-2005"
           onClick={[Function]}
           onMouseOver={[Function]}
         >
