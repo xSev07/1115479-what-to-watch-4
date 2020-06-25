@@ -41,24 +41,15 @@ export default class VideoPlayer extends PureComponent {
     return (
       <video
         ref={this._videoRef}
-        // onMouseOver={() => {
-        //   setTimeout(() => this.setState({isPlaying: true}), 1000);
-        // }
-        // }
-        onMouseOver={() => this.setState({isPlaying: true})}
-        onMouseLeave={() => this.setState({isPlaying: false})}
+        onMouseOver={() => {
+          this._timeoutPlayingID = setTimeout(() => this.setState({isPlaying: true}), 1000);
+        }}
+        onMouseLeave={() => {
+          clearTimeout(this._timeoutPlayingID);
+          this.setState({isPlaying: false});
+        }}
       >
       </video>
-      // {/*<video*/}
-      // {/*  width="280"*/}
-      // {/*  height="175"*/}
-      // {/*  muted*/}
-      // {/*  poster={poster}*/}
-      // {/*  onMouseOver={() => }*/}
-      // {/*>*/}
-      // {/*  <source src={videoPreview}/>*/}
-      // {/*   Sorry, your browser doesnt support embedded videos.*/}
-      // {/*</video>*/}
     );
   }
 }
