@@ -8,6 +8,7 @@ class MovieList extends PureComponent {
     this.state = {
       activeCard: null,
     };
+    this._handlerCardHover = this._handlerCardHover.bind(this);
   }
 
   render() {
@@ -21,6 +22,7 @@ class MovieList extends PureComponent {
               id={movie.id}
               title={movie.title}
               year={movie.year}
+              videoPreview={movie.videoPreview}
               onClick={onMovieCardClick}
               onHover={this._handlerCardHover}
             />

@@ -1,8 +1,7 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import Main from "../main/main.jsx";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
-import {PureComponent} from "react/cjs/react.production.min";
 import MoviePage from "../movie-page/movie-page.jsx";
 import {ShowedMovies} from "../../const";
 
