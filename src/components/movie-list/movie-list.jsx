@@ -1,6 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import MovieCard from "../movie-card/movie-card.jsx";
+import {getImageURL} from "../../utils/common/common";
+import {ImageType} from "../../const";
 
 class MovieList extends PureComponent {
   constructor(props) {
@@ -23,6 +25,8 @@ class MovieList extends PureComponent {
               title={movie.title}
               year={movie.year}
               videoPreview={movie.videoPreview}
+              poster={getImageURL(movie.title, ImageType.PREVIEW)}
+              isMuted={true}
               onClick={onMovieCardClick}
               onHover={this._handlerCardHover}
             />
