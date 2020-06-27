@@ -56,3 +56,10 @@ export default class VideoPlayer extends PureComponent {
     );
   }
 }
+
+VideoPlayer.propTypes = {
+  poster: PropTypes.string.isRequired,
+  videoPreview: PropTypes.string.isRequired,
+  isMuted: PropTypes.bool,
+  isPlaying: PropTypes.bool,
+};

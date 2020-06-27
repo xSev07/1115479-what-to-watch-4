@@ -59,6 +59,7 @@ export default class MovieCard extends PureComponent {
 MovieCard.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  videoPreview: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired,
 };
