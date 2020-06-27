@@ -9,13 +9,14 @@ export default class MovieCard extends PureComponent {
   constructor(props) {
     super(props);
 
-    // this.state = {
-    //   isPlaying: false,
-    // };
+    this.state = {
+      isPlaying: false,
+    };
   }
 
   render() {
     const {id, title, videoPreview, onClick, onHover} = this.props;
+    const {isPlaying} = this.state;
     const previewSrc = getImageURL(title, ImageType.PREVIEW);
     return (
       <article
@@ -25,31 +26,23 @@ export default class MovieCard extends PureComponent {
         }}
         onMouseOver={(evt) => {
           onHover(evt.currentTarget);
-          // this._timeoutPlayingID = setTimeout(() => {
-          //   this.setState({isPlaying: true});
-          // }, 1000);
+          this._timeoutPlayingID = setTimeout(() => {
+            this.setState({isPlaying: true});
+          }, 1000);
         }}
-        // onMouseLeave={() => {
-        //   clearTimeout(this._timeoutPlayingID);
-        //   this.setState({isPlaying: false});
-        // }}
+        onMouseLeave={() => {
+          clearTimeout(this._timeoutPlayingID);
+          this.setState({isPlaying: false});
+        }}
       >
-        {/* <div className="small-movie-card__image">*/}
-        <VideoPlayer
-          poster={previewSrc}
-          videoPreview={videoPreview}
-          muted={true}
-          // onMouseOver={() => {
-          //   this._timeoutPlayingID = setTimeout(() => {
-          //     this.setState({isPlaying: true});
-          //   }, 1000);
-          // }}
-          // onMouseLeave={() => {
-          //   clearTimeout(this._timeoutPlayingID);
-          //   this.setState({isPlaying: false});
-          // }}
-        />
-        {/* </div>*/}
+        <div className="small-movie-card__image">
+          <VideoPlayer
+            poster={previewSrc}
+            videoPreview={videoPreview}
+            isMuted={true}
+            isPlaying={isPlaying}
+          />
+        </div>
         <h3 className="small-movie-card__title">
           <a
             className="small-movie-card__link"

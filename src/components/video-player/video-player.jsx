@@ -5,19 +5,20 @@ export default class VideoPlayer extends PureComponent {
   constructor(props) {
     super(props);
 
-    const {muted} = props;
-
     this._videoRef = createRef();
 
-    this.state = {
-      isPlaying: false,
-      isMuted: muted,
-    };
+    // const {isPlaying, isMuted} = props;
+
+    // this.state = {
+    //   isPlaying,
+    //   isMuted,
+    //   isLoading: true,
+    // };
   }
 
   componentDidMount() {
-    const {poster, videoPreview} = this.props;
-    const {isMuted} = this.state;
+    const {poster, videoPreview, isMuted} = this.props;
+    // const {isMuted} = this.state;
     const video = this._videoRef.current;
     video.poster = poster;
     video.src = videoPreview;
@@ -25,6 +26,7 @@ export default class VideoPlayer extends PureComponent {
     video.height = 175;
     video.muted = isMuted;
 
+    // video.oncanplaythrough = () => this.setState({isLoading: false})
     // video.onplay = () => this.setState({isPlaying: true});
     // video.onpause = () => this.setState({isPlaying: false});
   }
@@ -37,7 +39,8 @@ export default class VideoPlayer extends PureComponent {
 
   componentDidUpdate() {
     const video = this._videoRef.current;
-    if (this.state.isPlaying) {
+    const {isPlaying} = this.props;
+    if (isPlaying) {
       video.play();
     } else {
       video.load();
@@ -45,26 +48,9 @@ export default class VideoPlayer extends PureComponent {
   }
 
   render() {
-    // const {onMouseOver, onMouseLeave} = this.props;
-
     return (
       <video
         ref={this._videoRef}
-        // onMouseOver={() => {
-        //   // this.setState({isPlaying: true});
-        //   onMouseOver();
-        // }}
-        // onMouseLeave={() => {
-        //   // this.setState({isPlaying: false});
-        //   onMouseLeave();
-        // }}
-        onMouseOver={() => {
-          this._timeoutPlayingID = setTimeout(() => this.setState({isPlaying: true}), 1000);
-        }}
-        onMouseLeave={() => {
-          clearTimeout(this._timeoutPlayingID);
-          this.setState({isPlaying: false});
-        }}
       >
       </video>
     );
