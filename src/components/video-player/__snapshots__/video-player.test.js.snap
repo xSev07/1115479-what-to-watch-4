@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should VideoPlayer render correctly should render basic video player 1`] = `<video />`;
+
+exports[`Should VideoPlayer render correctly should render preview video player 1`] = `<video />`;
