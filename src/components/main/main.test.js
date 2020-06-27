@@ -10,7 +10,11 @@ it(`Should Main render correctly`, () => {
           promo={promoMovie}
           movies={movies}
           onMovieCardClick={() => {}}
-        />
+        />, {
+          createNodeMock: () => {
+            return {};
+          }
+        }
     );
 
   expect(tree).toMatchSnapshot();

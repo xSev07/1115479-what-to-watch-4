@@ -2,12 +2,13 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import MovieCard from "./movie-card";
+import {movies} from "../../tests-data/tests-data";
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const title = `Test movie`;
+const movie = movies[0];
 
 describe(`MovieCardComponent`, () => {
   it(`should check hover on the card`, () => {
@@ -15,8 +16,10 @@ describe(`MovieCardComponent`, () => {
 
     const movieCard = shallow(
         <MovieCard
-          id={`Test-1234`}
-          title={title}
+          id={movie.id}
+          title={movie.title}
+          year={movie.year}
+          videoPreview={movie.videoPreview}
           onClick={() => {}}
           onHover={onCardHover}
         />

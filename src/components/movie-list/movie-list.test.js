@@ -9,7 +9,11 @@ it(`Should MovieList render correctly`, () => {
         <MovieList
           movies={movies}
           onMovieCardClick={() => {}}
-        />
+        />, {
+          createNodeMock: () => {
+            return {};
+          }
+        }
     );
 
   expect(tree).toMatchSnapshot();
