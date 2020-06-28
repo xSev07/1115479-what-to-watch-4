@@ -14,7 +14,7 @@ it(`Should App render correctly`, () => {
             return {};
           }
         }
-    );
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

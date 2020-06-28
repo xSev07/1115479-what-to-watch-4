@@ -11,7 +11,7 @@ describe(`Should VideoPlayer render correctly`, () => {
             return {};
           }
         }
-    );
+    ).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

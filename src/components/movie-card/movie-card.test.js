@@ -25,7 +25,7 @@ it(`Should MovieCard render correctly`, () => {
             return {};
           }
         }
-    );
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

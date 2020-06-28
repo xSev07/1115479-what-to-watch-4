@@ -14,7 +14,7 @@ it(`Should MovieList render correctly`, () => {
             return {};
           }
         }
-    );
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
