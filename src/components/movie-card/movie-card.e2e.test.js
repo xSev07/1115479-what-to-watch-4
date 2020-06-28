@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import MovieCard from "./movie-card";
+import {MovieCard} from "./movie-card";
 import {movies} from "../../tests-data/tests-data";
 
 Enzyme.configure({
@@ -9,6 +9,7 @@ Enzyme.configure({
 });
 
 const movie = movies[0];
+const children = <></>;
 
 describe(`MovieCardComponent`, () => {
   it(`should check hover on the card`, () => {
@@ -18,11 +19,15 @@ describe(`MovieCardComponent`, () => {
         <MovieCard
           id={movie.id}
           title={movie.title}
-          year={movie.year}
           videoPreview={movie.videoPreview}
+          poster={`img/${movie.title}.jpg`}
           onClick={() => {}}
           onHover={onCardHover}
-        />
+          onPlay={() => {}}
+          onPause={() => {}}
+        >
+          {children}
+        </MovieCard>
     );
     const card = movieCard.find(`article.small-movie-card`);
 

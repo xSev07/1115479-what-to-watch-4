@@ -38,6 +38,9 @@ MovieCard.propTypes = {
   videoPreview: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired,
+  onPlay: PropTypes.func.isRequired,
+  onPause: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export {MovieCard};

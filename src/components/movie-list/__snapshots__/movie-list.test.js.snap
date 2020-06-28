@@ -13,7 +13,10 @@ exports[`Should MovieList render correctly 1`] = `
     <div
       className="small-movie-card__image"
     >
-      <video />
+      <video
+        height="175"
+        width="280"
+      />
     </div>
     <h3
       className="small-movie-card__title"
@@ -35,7 +38,10 @@ exports[`Should MovieList render correctly 1`] = `
     <div
       className="small-movie-card__image"
     >
-      <video />
+      <video
+        height="175"
+        width="280"
+      />
     </div>
     <h3
       className="small-movie-card__title"
@@ -57,7 +63,10 @@ exports[`Should MovieList render correctly 1`] = `
     <div
       className="small-movie-card__image"
     >
-      <video />
+      <video
+        height="175"
+        width="280"
+      />
     </div>
     <h3
       className="small-movie-card__title"
@@ -79,7 +88,10 @@ exports[`Should MovieList render correctly 1`] = `
     <div
       className="small-movie-card__image"
     >
-      <video />
+      <video
+        height="175"
+        width="280"
+      />
     </div>
     <h3
       className="small-movie-card__title"

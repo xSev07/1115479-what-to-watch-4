@@ -15,6 +15,7 @@ class MovieList extends PureComponent {
 
   render() {
     const {movies, onMovieCardClick} = this.props;
+
     return (
       <div className="catalog__movies-list">
         {movies.map((movie) => {
@@ -23,7 +24,6 @@ class MovieList extends PureComponent {
               key={movie.id}
               id={movie.id}
               title={movie.title}
-              year={movie.year}
               videoPreview={movie.videoPreview}
               poster={getImageURL(movie.title, ImageType.PREVIEW)}
               isMuted={true}

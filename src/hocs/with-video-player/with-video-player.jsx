@@ -70,6 +70,13 @@ const withVideoPlayer = (Component) => {
     }
   }
 
+  VideoPlayerHoc.propTypes = {
+    poster: PropTypes.string.isRequired,
+    videoPreview: PropTypes.string.isRequired,
+    isMuted: PropTypes.bool,
+    isPlaying: PropTypes.bool,
+  };
+
   return VideoPlayerHoc;
 };
 
