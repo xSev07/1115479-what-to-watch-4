@@ -12,8 +12,11 @@ const movie = movies[0];
 const children = <></>;
 
 describe(`MovieCardComponent`, () => {
-  it(`should check hover on the card`, () => {
+  it(`should check actions on the card`, () => {
     const onCardHover = jest.fn();
+    const onCardClick = jest.fn();
+    const onMouseEnter = jest.fn();
+    const onMouseLeave = jest.fn();
 
     const movieCard = shallow(
         <MovieCard
@@ -21,10 +24,10 @@ describe(`MovieCardComponent`, () => {
           title={movie.title}
           videoPreview={movie.videoPreview}
           poster={`img/${movie.title}.jpg`}
-          onClick={() => {}}
+          onClick={onCardClick}
           onHover={onCardHover}
-          onPlay={() => {}}
-          onPause={() => {}}
+          onPlay={onMouseEnter}
+          onPause={onMouseLeave}
         >
           {children}
         </MovieCard>
@@ -36,8 +39,14 @@ describe(`MovieCardComponent`, () => {
     };
 
     card.simulate(`mouseover`, mockEvent);
-
+    expect(onMouseEnter).toHaveBeenCalledTimes(1);
     expect(onCardHover).toHaveBeenCalledTimes(1);
     expect(onCardHover.mock.calls[0][0]).toMatch(`card`);
+
+    card.simulate(`mouseenter`);
+    expect(onMouseEnter).toHaveBeenCalledTimes(1);
+
+    card.simulate(`click`);
+    expect(onCardClick).toHaveBeenCalledTimes(1);
   });
 });
