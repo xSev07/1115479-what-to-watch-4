@@ -4,6 +4,7 @@ import withVideoPlayer from "./with-video-player";
 import {movies} from "../../tests-data/tests-data";
 
 const Component = (props) => {
+  // eslint-disable-next-line
   const {children} = props;
 
   return (
