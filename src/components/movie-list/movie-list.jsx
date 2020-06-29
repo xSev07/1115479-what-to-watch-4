@@ -7,10 +7,6 @@ import {ImageType} from "../../const";
 class MovieList extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      activeCard: null,
-    };
-    this._handlerCardHover = this._handlerCardHover.bind(this);
   }
 
   render() {
@@ -28,20 +24,12 @@ class MovieList extends PureComponent {
               poster={getImageURL(movie.title, ImageType.PREVIEW)}
               isMuted={true}
               onClick={onMovieCardClick}
-              onHover={this._handlerCardHover}
             />
           );
         })
         }
       </div>
     );
-  }
-
-  _handlerCardHover(currentCard) {
-    if (this.state.activeCard === currentCard) {
-      return;
-    }
-    this.setState({activeCard: currentCard});
   }
 }
 

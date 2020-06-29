@@ -1,6 +1,5 @@
 import React, {PureComponent, createRef} from 'react';
 import PropTypes from 'prop-types';
-import VideoPlayer from "../../components/video-player/video-player.jsx";
 
 const withVideoPlayer = (Component) => {
   class VideoPlayerHoc extends PureComponent {
@@ -27,8 +26,10 @@ const withVideoPlayer = (Component) => {
           onPause={this._handleVideoPause}
           {...this.props}
         >
-          <VideoPlayer
+          <video
             ref={this._videoRef}
+            width="280"
+            height="175"
           />
         </Component>
       );

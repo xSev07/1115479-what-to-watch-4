@@ -15,7 +15,6 @@ it(`Should MovieCard render correctly`, () => {
           videoPreview={movie.videoPreview}
           poster={`img/${movie.title}.jpg`}
           onClick={() => {}}
-          onHover={() => {}}
           onPlay={() => {}}
           onPause={() => {}}
         >
