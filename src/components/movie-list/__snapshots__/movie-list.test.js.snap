@@ -6,17 +6,15 @@ exports[`Should MovieList render correctly 1`] = `
 >
   <article
     className="small-movie-card catalog__movies-card"
-    data-id="Hotel-2000"
     onClick={[Function]}
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
     >
-      <img
-        alt="The Grand Budapest Hotel"
+      <video
         height="175"
-        src="img/the-grand-budapest-hotel.jpg"
         width="280"
       />
     </div>
@@ -33,17 +31,15 @@ exports[`Should MovieList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    data-id="Bohemian-2018"
     onClick={[Function]}
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
     >
-      <img
-        alt="Bohemian Rhapsody"
+      <video
         height="175"
-        src="img/bohemian-rhapsody.jpg"
         width="280"
       />
     </div>
@@ -60,17 +56,15 @@ exports[`Should MovieList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    data-id="Macbeth-2015"
     onClick={[Function]}
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
     >
-      <img
-        alt="Macbeth"
+      <video
         height="175"
-        src="img/macbeth.jpg"
         width="280"
       />
     </div>
@@ -87,17 +81,15 @@ exports[`Should MovieList render correctly 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    data-id="Aviator-2005"
     onClick={[Function]}
-    onMouseOver={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="small-movie-card__image"
     >
-      <img
-        alt="Aviator"
+      <video
         height="175"
-        src="img/aviator.jpg"
         width="280"
       />
     </div>

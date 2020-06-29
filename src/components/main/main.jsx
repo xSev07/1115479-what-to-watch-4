@@ -5,6 +5,8 @@ import MovieList from "../movie-list/movie-list.jsx";
 const Main = (props) => {
   const {promo, movies, onMovieCardClick} = props;
   const {title, genre, year} = promo;
+  // TODO: Вынести шапку и подвал в отдельный компонент.
+  //  NOTE: шапка различается на страницах
   return (
     <>
       <section className="movie-card">
@@ -106,7 +108,7 @@ const Main = (props) => {
 
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light">
+            <a href="main.html" className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>

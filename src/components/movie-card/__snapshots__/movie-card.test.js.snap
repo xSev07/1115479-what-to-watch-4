@@ -3,20 +3,13 @@
 exports[`Should MovieCard render correctly 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
-  data-id="Test-1234"
   onClick={[Function]}
-  onMouseOver={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
   <div
     className="small-movie-card__image"
-  >
-    <img
-      alt="Test movie"
-      height="175"
-      src="img/test-movie.jpg"
-      width="280"
-    />
-  </div>
+  />
   <h3
     className="small-movie-card__title"
   >
@@ -24,7 +17,7 @@ exports[`Should MovieCard render correctly 1`] = `
       className="small-movie-card__link"
       href="movie-page.html"
     >
-      Test movie
+      The Grand Budapest Hotel
     </a>
   </h3>
 </article>

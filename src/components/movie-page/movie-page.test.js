@@ -9,7 +9,7 @@ it(`Should MoviePage render correctly`, () => {
         <MoviePage
           movie={movies[0]}
         />
-    );
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

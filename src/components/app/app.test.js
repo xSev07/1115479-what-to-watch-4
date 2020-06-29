@@ -9,8 +9,12 @@ it(`Should App render correctly`, () => {
         <App
           promoMovie={promoMovie}
           allMovies={movies}
-        />
-    );
+        />, {
+          createNodeMock: () => {
+            return {};
+          }
+        }
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
