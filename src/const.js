@@ -16,3 +16,7 @@ export const TextRating = {
   AWESOME: `Awesome`,
   NOT_FOUND: `Impossible`,
 };
+
+export const extendObject = (a, b) => {
+  return Object.assign({}, a, b);
+};
