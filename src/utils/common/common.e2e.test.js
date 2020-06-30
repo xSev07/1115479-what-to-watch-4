@@ -1,4 +1,4 @@
-import {getImageURL, getRatingTextDescription} from "./common";
+import {getImageURL, getRatingTextDescription, transformToFirstCapitalSymbol} from "./common";
 import {ImageType, TextRating} from "../../const";
 
 describe(`Valid image url`, () => {
@@ -46,5 +46,23 @@ describe(`Check the rating is correct`, () => {
 
   it(`should return correct rating witch empty value`, () => {
     expect(getRatingTextDescription()).toBe(TextRating.NOT_FOUND);
+  });
+});
+
+describe(`Check the string transform is correct`, () => {
+  it(`should return correct string with one letter`, () => {
+    expect(transformToFirstCapitalSymbol(`test`)).toBe(`Test`);
+  });
+
+  it(`should return correct string with two letters`, () => {
+    expect(transformToFirstCapitalSymbol(`test string`)).toBe(`Test string`);
+  });
+
+  it(`should return correct string with empty string`, () => {
+    expect(transformToFirstCapitalSymbol(``)).toBe(``);
+  });
+
+  it(`should return correct string with uppercase string`, () => {
+    expect(transformToFirstCapitalSymbol(`TEST`)).toBe(`Test`);
   });
 });

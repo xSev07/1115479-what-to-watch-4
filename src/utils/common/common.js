@@ -36,5 +36,9 @@ export const getRatingTextDescription = (rating) => {
 };
 
 export const transformToFirstCapitalSymbol = (str) => {
-  return `${str[0].toUpperCase()}${str.slice(1)}`;
+  if (str) {
+    const lowerStr = str.toLowerCase();
+    return `${lowerStr[0].toUpperCase()}${lowerStr.slice(1)}`;
+  }
+  return ``;
 };
