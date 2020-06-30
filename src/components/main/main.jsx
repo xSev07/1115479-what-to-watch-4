@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MovieList from "../movie-list/movie-list.jsx";
+import {transformToFirstCapitalSymbol} from "../../utils/common/common";
 
 const Main = (props) => {
   const {promo, movies, onMovieCardClick} = props;
   const {title, genre, year} = promo;
+  const mainGenre = transformToFirstCapitalSymbol(genre);
   // TODO: Вынести шапку и подвал в отдельный компонент.
   //  NOTE: шапка различается на страницах
   return (
@@ -37,7 +39,7 @@ const Main = (props) => {
             <div className="movie-card__desc">
               <h2 className="movie-card__title">{title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__genre">{mainGenre}</span>
                 <span className="movie-card__year">{year}</span>
               </p>
               <div className="movie-card__buttons">

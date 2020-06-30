@@ -34,3 +34,7 @@ export const getRatingTextDescription = (rating) => {
   }
   return TextRating.NOT_FOUND;
 };
+
+export const transformToFirstCapitalSymbol = (str) => {
+  return `${str[0].toUpperCase()}${str.slice(1)}`;
+};
