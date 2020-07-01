@@ -1,24 +1,36 @@
 import {extendObject} from "./const";
+import movies from "./mocks/movies";
 
 const initialState = {
   genre: `all`,
-  movies: [],
+  movies,
 };
 
 const ActionType = {
-  CHANGE_FILTER_GENRE: `CHANGE_FILTER_GENRE`,
-  GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`,
+  SET_FILTER_GENRE: `CHANGE_FILTER_GENRE`,
+  GET_MOVIES_WITH_GENRE: `GET_MOVIES_WITH_GENRE`,
 };
+
+const ActionCreator = {
+  setFilterByGenre: (genre) => ({
+    type: ActionType.SET_FILTER_GENRE,
+    payload: genre || `all`,
+  }),
+};
+
+// const filterByGenre = (movies, genre) => {
+//   return movies.filter((movie) => movie.genre.includes(genre));
+// };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_FILTER_GENRE:
-      return extendObject(state, state);
-    case ActionType.GET_MOVIES_BY_GENRE:
-      return extendObject(state, state);
+    case ActionType.SET_FILTER_GENRE:
+      return extendObject(state, {genre: action.payload});
+    // case ActionType.GET_MOVIES_WITH_GENRE:
+    //   return state;
   }
 
   return state;
 };
 
-export {reducer, ActionType};
+export {reducer, ActionType, ActionCreator};
