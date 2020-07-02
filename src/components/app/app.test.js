@@ -8,7 +8,10 @@ import configureStore from "redux-mock-store";
 const mockStore = configureStore([]);
 
 it(`Should App render correctly`, () => {
-  const store = mockStore({});
+  const store = mockStore({
+    movies,
+    genre: `all genres`,
+  });
 
   const tree = renderer
     .create(

@@ -124,6 +124,8 @@ Main.propTypes = {
         description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
       })
   ).isRequired,
+  activeGenre: PropTypes.string.isRequired,
+  onGenreClick: PropTypes.func.isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
 };
 

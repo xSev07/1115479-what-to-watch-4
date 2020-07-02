@@ -16,6 +16,8 @@ describe(`MainComponent`, () => {
         <Main
           promo={promoMovie}
           movies={movies}
+          activeGenre={`all genres`}
+          onGenreClick={() => {}}
           onMovieCardClick={onMovieCardClick}
         />
     );
