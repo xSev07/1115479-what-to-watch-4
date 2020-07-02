@@ -1,12 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MovieList from "../movie-list/movie-list.jsx";
-import {transformToFirstCapitalSymbol} from "../../utils/common/common";
+import {filterMoviesByGenre, getGenres, transformToFirstCapitalSymbol} from "../../utils/common/common";
+import GenreList from "../genre-list/genre-list.jsx";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer";
+import {ShowedMovies} from "../../const";
 
 const Main = (props) => {
-  const {promo, movies, onMovieCardClick} = props;
+  const {promo, movies, activeGenre, onMovieCardClick, onGenreClick} = props;
   const {title, genre, year} = promo;
   const mainGenre = transformToFirstCapitalSymbol(genre);
+  const genres = getGenres(movies);
+  const displayedMovies = filterMoviesByGenre(movies, activeGenre).slice(0, ShowedMovies.ON_START);
+
   // TODO: Вынести шапку и подвал в отдельный компонент.
   //  NOTE: шапка различается на страницах
   return (
@@ -65,41 +72,14 @@ const Main = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
+          <GenreList
+            genres={genres}
+            activeGenre={activeGenre}
+            onClick={onGenreClick}
+          />
 
           <MovieList
-            movies={movies}
+            movies={displayedMovies}
             onMovieCardClick={onMovieCardClick}
           />
 
@@ -135,10 +115,28 @@ Main.propTypes = {
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
+        genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
         year: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        votes: PropTypes.number.isRequired,
+        producer: PropTypes.string.isRequired,
+        actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
       })
   ).isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
 };
 
-export default Main;
+const mapStateToProps = (state) => ({
+  movies: state.movies,
+  activeGenre: state.genre,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onGenreClick(genre) {
+    dispatch(ActionCreator.setFilterByGenre(genre));
+  },
+});
+
+export {Main};
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

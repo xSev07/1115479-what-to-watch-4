@@ -1,4 +1,4 @@
-import {ImageType, TextRating} from "../../const";
+import {ALL_GENRES_NAME, ImageType, MAX_GENRES, TextRating} from "../../const";
 
 export const getImageURL = (title, type) => {
   if (title === ``) {
@@ -41,4 +41,22 @@ export const transformToFirstCapitalSymbol = (str) => {
     return `${lowerStr[0].toUpperCase()}${lowerStr.slice(1)}`;
   }
   return ``;
+};
+
+export const getGenres = (movies) => {
+  // const genres = Array.from(movies.reduce((acc, movie) => acc.add(movie.genre), new Set()));
+  const uniqGenres = new Set();
+  movies.forEach((movie) => movie.genre.forEach((it) => uniqGenres.add(it)));
+  const genres = Array.from(uniqGenres);
+  genres.sort().splice(MAX_GENRES);
+  genres.unshift(ALL_GENRES_NAME);
+
+  return genres;
+};
+
+export const filterMoviesByGenre = (movies, genre) => {
+  if (genre === ALL_GENRES_NAME) {
+    return movies;
+  }
+  return movies.filter((movie) => movie.genre.includes(genre));
 };

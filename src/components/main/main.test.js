@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main";
+import {Main} from "./main";
 import {movies, promoMovie} from "../../tests-data/tests-data";
 
 it(`Should Main render correctly`, () => {

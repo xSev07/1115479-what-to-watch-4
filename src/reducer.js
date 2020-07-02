@@ -2,7 +2,7 @@ import {extendObject} from "./const";
 import movies from "./mocks/movies";
 
 const initialState = {
-  genre: `all`,
+  genre: `all genres`,
   movies,
 };
 
@@ -17,10 +17,6 @@ const ActionCreator = {
     payload: genre || `all`,
   }),
 };
-
-// const filterByGenre = (movies, genre) => {
-//   return movies.filter((movie) => movie.genre.includes(genre));
-// };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
