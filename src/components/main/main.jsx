@@ -1,18 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MovieList from "../movie-list/movie-list.jsx";
-import {filterMoviesByGenre, getGenres, transformToFirstCapitalSymbol} from "../../utils/common/common";
+import {filterMoviesByGenre, getGenres} from "../../utils/common/common";
 import GenreList from "../genre-list/genre-list.jsx";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer";
 import {ShowedMovies} from "../../const";
 
 const Main = (props) => {
-  const {promo, movies, activeGenre, onMovieCardClick, onGenreClick} = props;
+  const {promo, movies, genres, activeGenre, onMovieCardClick, onGenreClick} = props;
   const {title, genre, year} = promo;
-  const mainGenre = transformToFirstCapitalSymbol(genre);
-  const genres = getGenres(movies);
-  const displayedMovies = filterMoviesByGenre(movies, activeGenre).slice(0, ShowedMovies.ON_START);
 
   // TODO: Вынести шапку и подвал в отдельный компонент.
   //  NOTE: шапка различается на страницах
@@ -46,7 +43,7 @@ const Main = (props) => {
             <div className="movie-card__desc">
               <h2 className="movie-card__title">{title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{mainGenre}</span>
+                <span className="movie-card__genre">{genre}</span>
                 <span className="movie-card__year">{year}</span>
               </p>
               <div className="movie-card__buttons">
@@ -79,7 +76,7 @@ const Main = (props) => {
           />
 
           <MovieList
-            movies={displayedMovies}
+            movies={movies}
             onMovieCardClick={onMovieCardClick}
           />
 
@@ -124,14 +121,16 @@ Main.propTypes = {
         description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
       })
   ).isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   activeGenre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  movies: state.movies,
+  movies: filterMoviesByGenre(state.movies, state.genre).slice(0, ShowedMovies.ON_START),
   activeGenre: state.genre,
+  genres: getGenres(state.movies),
 });
 
 const mapDispatchToProps = (dispatch) => ({

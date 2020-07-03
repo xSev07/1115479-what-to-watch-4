@@ -85,6 +85,13 @@ export const movies = [
 
 export const promoMovie = {
   title: `The Grand Budapest Hotel`,
-  genre: `drama`,
+  genre: `Drama`,
   year: 2014
 };
+
+export const genres = [
+  `all genres`,
+  `documental`,
+  `drama`,
+  `thriller`,
+];

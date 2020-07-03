@@ -2,7 +2,7 @@ import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {Main} from "./main";
-import {movies, promoMovie} from "../../tests-data/tests-data";
+import {genres, movies, promoMovie} from "../../tests-data/tests-data";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -17,6 +17,7 @@ describe(`MainComponent`, () => {
         <Main
           promo={promoMovie}
           movies={movies}
+          genres={genres}
           activeGenre={`all genres`}
           onGenreClick={onGenreClick}
           onMovieCardClick={onMovieCardClick}
