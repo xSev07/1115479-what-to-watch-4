@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {getImageURL, getRatingTextDescription} from "../../utils/common/common";
+import {getImageURL, getRatingTextDescription, transformToFirstCapitalSymbol} from "../../utils/common/common";
 import {ImageType} from "../../const";
 
 const MoviePage = (props) => {
   const {title, genre, year, rating, votes, producer, actors, description} = props.movie;
   const textRating = getRatingTextDescription(rating);
+  const mainGenre = transformToFirstCapitalSymbol(genre[0]);
 
   const actorsText = `${actors.join(`, `)} and other`;
   const DescriptionText = description.map((it, index) => <p key={index}>{it}</p>);
@@ -45,7 +46,7 @@ const MoviePage = (props) => {
             <div className="movie-card__desc">
               <h2 className="movie-card__title">{title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__genre">{mainGenre}</span>
                 <span className="movie-card__year">{year}</span>
               </p>
 
@@ -176,7 +177,7 @@ const MoviePage = (props) => {
 MoviePage.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
+    genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     year: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
     votes: PropTypes.number.isRequired,

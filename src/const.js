@@ -16,3 +16,11 @@ export const TextRating = {
   AWESOME: `Awesome`,
   NOT_FOUND: `Impossible`,
 };
+
+export const extendObject = (a, b) => {
+  return Object.assign({}, a, b);
+};
+
+export const MAX_GENRES = 8;
+
+export const ALL_GENRES_NAME = `all genres`;

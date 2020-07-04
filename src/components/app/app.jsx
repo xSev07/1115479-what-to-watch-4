@@ -3,12 +3,10 @@ import Main from "../main/main.jsx";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import MoviePage from "../movie-page/movie-page.jsx";
-import {ShowedMovies} from "../../const";
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    this._showedMovies = ShowedMovies.ON_START;
     this.state = {
       displayedMovie: -1,
     };
@@ -34,13 +32,12 @@ class App extends PureComponent {
   }
 
   _renderMainScreen() {
-    const {promoMovie, allMovies} = this.props;
+    const {promoMovie} = this.props;
     const {displayedMovie} = this.state;
     if (displayedMovie === -1) {
       return (
         <Main
           promo={promoMovie}
-          movies={allMovies.slice(0, this._showedMovies)}
           onMovieCardClick={this._handleMovieCardClick}
         />
       );
@@ -67,7 +64,7 @@ App.propTypes = {
   allMovies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
-        genre: PropTypes.string.isRequired,
+        genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
         year: PropTypes.number.isRequired,
         rating: PropTypes.number.isRequired,
         votes: PropTypes.number.isRequired,

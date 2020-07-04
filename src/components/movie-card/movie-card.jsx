@@ -11,8 +11,8 @@ const MovieCard = (props) => {
       onClick={() => {
         onClick(id);
       }}
-      onMouseEnter={() => onPlay()}
-      onMouseLeave={() => onPause()}
+      onMouseEnter={onPlay}
+      onMouseLeave={onPause}
     >
       <div className="small-movie-card__image">
         {props.children}
