@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {getImageURL, getRatingTextDescription, transformToFirstCapitalSymbol} from "../../utils/common/common";
 import {ImageType} from "../../const";
 import Header from "../header/header.jsx";
+import Footer from "../footer/footer";
 
 const MoviePage = (props) => {
   const {title, genre, year, rating, votes, producer, actors, description} = props.movie;
@@ -141,19 +142,7 @@ const MoviePage = (props) => {
           </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer/>
       </div>
     </>
   );
