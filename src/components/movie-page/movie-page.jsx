@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {getImageURL, getRatingTextDescription, transformToFirstCapitalSymbol} from "../../utils/common/common";
 import {ImageType} from "../../const";
 import Header from "../header/header.jsx";
-import Footer from "../footer/footer";
+import Footer from "../footer/footer.jsx";
 
 const MoviePage = (props) => {
   const {title, genre, year, rating, votes, producer, actors, description} = props.movie;

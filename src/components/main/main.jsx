@@ -1,16 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import MovieList from "../movie-list/movie-list.jsx";
-import {filterMoviesByGenre, getGenres} from "../../utils/common/common";
-import GenreList from "../genre-list/genre-list.jsx";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer";
-import {ShowedMovies} from "../../const";
 import Header from "../header/header.jsx";
-import Footer from "../footer/footer";
+import Footer from "../footer/footer.jsx";
+import Catalog from "../catalog/catalog.jsx";
 
 const Main = (props) => {
-  const {promo, movies, genres, activeGenre, onMovieCardClick, onGenreClick} = props;
+  const {promo} = props;
   const {title, genre, year} = promo;
 
   return (
@@ -58,24 +53,7 @@ const Main = (props) => {
       </section>
 
       <div className="page-content">
-        <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <GenreList
-            genres={genres}
-            activeGenre={activeGenre}
-            onClick={onGenreClick}
-          />
-
-          <MovieList
-            movies={movies}
-            onMovieCardClick={onMovieCardClick}
-          />
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
-        </section>
+        <Catalog/>
 
         <Footer/>
       </div>
@@ -89,35 +67,6 @@ Main.propTypes = {
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
   }),
-  movies: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        year: PropTypes.number.isRequired,
-        rating: PropTypes.number.isRequired,
-        votes: PropTypes.number.isRequired,
-        producer: PropTypes.string.isRequired,
-        actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-      })
-  ).isRequired,
-  genres: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  activeGenre: PropTypes.string.isRequired,
-  onGenreClick: PropTypes.func.isRequired,
-  onMovieCardClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  movies: filterMoviesByGenre(state.movies, state.genre).slice(0, ShowedMovies.ON_START),
-  activeGenre: state.genre,
-  genres: getGenres(state.movies),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onGenreClick(genre) {
-    dispatch(ActionCreator.setFilterByGenre(genre));
-  },
-});
-
-export {Main};
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default Main;
