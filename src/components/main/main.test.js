@@ -1,19 +1,25 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Main} from "./main";
-import {genres, movies, promoMovie} from "../../tests-data/tests-data";
+import Main from "./main";
+import {movies, promoMovie} from "../../tests-data/tests-data";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
+
+const mockStore = configureStore([]);
+
+const store = mockStore({
+  movies,
+  genre: `all genres`
+});
 
 it(`Should Main render correctly`, () => {
   const tree = renderer
     .create(
-        <Main
-          promo={promoMovie}
-          movies={movies}
-          genres={genres}
-          activeGenre={`all genres`}
-          onGenreClick={() => {}}
-          onMovieCardClick={() => {}}
-        />, {
+        <Provider store={store}>
+          <Main
+            promo={promoMovie}
+          />
+        </Provider>, {
           createNodeMock: () => {
             return {};
           }

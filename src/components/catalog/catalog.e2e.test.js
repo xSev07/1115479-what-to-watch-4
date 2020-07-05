@@ -1,21 +1,29 @@
 import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import {Main} from "./main";
-import {genres, movies, promoMovie} from "../../tests-data/tests-data";
+import {genres, movies} from "../../tests-data/tests-data";
+import {Catalog} from "./catalog";
+import configureStore from "redux-mock-store";
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
 
-describe(`MainComponent`, () => {
-  it(`should check click actions in the main component`, () => {
+const mockStore = configureStore([]);
+
+const store = mockStore({
+  movies,
+  genre: `all genres`
+});
+
+describe(`CatalogComponent`, () => {
+  it(`should check click actions in the catalog component`, () => {
     const onMovieCardClick = jest.fn();
     const onGenreClick = jest.fn();
 
-    const main = mount(
-        <Main
-          promo={promoMovie}
+    const catalog = mount(
+        <Catalog
+          store={store}
           movies={movies}
           genres={genres}
           activeGenre={`all genres`}
@@ -23,10 +31,10 @@ describe(`MainComponent`, () => {
           onMovieCardClick={onMovieCardClick}
         />
     );
-    const movieTitles = main.find(`a.small-movie-card__link`);
+    const movieTitles = catalog.find(`a.small-movie-card__link`);
     movieTitles.forEach((it) => it.simulate(`click`));
 
-    const genreLinks = main.find(`a.catalog__genres-link`);
+    const genreLinks = catalog.find(`a.catalog__genres-link`);
     genreLinks.first().simulate(`click`);
 
     expect(onMovieCardClick).toHaveBeenCalledTimes(movies.length);

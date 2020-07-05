@@ -15,7 +15,7 @@ it(`Should App render correctly`, () => {
 
   const tree = renderer
     .create(
-        <Provider store={store}>
+        <Provider store={store} >
           <App
             promoMovie={promoMovie}
             allMovies={movies}
