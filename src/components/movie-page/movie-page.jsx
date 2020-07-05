@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {getImageURL, getRatingTextDescription, transformToFirstCapitalSymbol} from "../../utils/common/common";
 import {ImageType} from "../../const";
+import Header from "../header/header.jsx";
 
 const MoviePage = (props) => {
   const {title, genre, year, rating, votes, producer, actors, description} = props.movie;
@@ -14,33 +15,17 @@ const MoviePage = (props) => {
     COVER: getImageURL(title, ImageType.COVER),
     POSTER: getImageURL(title, ImageType.POSTER),
   };
-  // TODO: Вынести шапку и подвал в отдельный компонент.
-  //  NOTE: шапка различается на страницах
+
   return (
     <>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
+          <h1 className="visually-hidden">WTW</h1>
+          <Header/>
+
           <div className="movie-card__bg">
             <img src={Image.COVER} alt={title}/>
           </div>
-
-          <h1 className="visually-hidden">WTW</h1>
-
-          <header className="page-header movie-card__head">
-            <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
-            </div>
-          </header>
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
