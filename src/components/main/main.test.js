@@ -18,6 +18,7 @@ it(`Should Main render correctly`, () => {
         <Provider store={store}>
           <Main
             promo={promoMovie}
+            onMovieCardClick={()=>{}}
           />
         </Provider>, {
           createNodeMock: () => {

@@ -5,7 +5,7 @@ import Footer from "../footer/footer.jsx";
 import Catalog from "../catalog/catalog.jsx";
 
 const Main = (props) => {
-  const {promo} = props;
+  const {promo, onMovieCardClick} = props;
   const {title, genre, year} = promo;
 
   return (
@@ -53,7 +53,9 @@ const Main = (props) => {
       </section>
 
       <div className="page-content">
-        <Catalog/>
+        <Catalog
+          onMovieCardClick={onMovieCardClick}
+        />
 
         <Footer/>
       </div>
@@ -67,6 +69,7 @@ Main.propTypes = {
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
   }),
+  onMovieCardClick: PropTypes.func.isRequired,
 };
 
 export default Main;

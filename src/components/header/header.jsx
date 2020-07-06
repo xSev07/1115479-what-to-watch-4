@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 
 const Header = (props) => {
   const {isMainPage = false} = props;
-  const mainLink = isMainPage ? `` : `main.html`;
+  const mainLink = isMainPage ? `` : `/`;
+  // TODO: Заменить a на Link
   return (
     <header className="page-header movie-card__head">
       <div className="logo">

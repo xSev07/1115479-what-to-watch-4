@@ -12,10 +12,8 @@ const MoviePage = (props) => {
 
   const actorsText = `${actors.join(`, `)} and other`;
   const DescriptionText = description.map((it, index) => <p key={index}>{it}</p>);
-  const Image = {
-    COVER: getImageURL(title, ImageType.COVER),
-    POSTER: getImageURL(title, ImageType.POSTER),
-  };
+  const cover = getImageURL(title, ImageType.COVER);
+  const poster = getImageURL(title, ImageType.POSTER);
 
   return (
     <>
@@ -25,7 +23,7 @@ const MoviePage = (props) => {
           <Header/>
 
           <div className="movie-card__bg">
-            <img src={Image.COVER} alt={title}/>
+            <img src={cover} alt={title}/>
           </div>
 
           <div className="movie-card__wrap">
@@ -58,7 +56,7 @@ const MoviePage = (props) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={Image.POSTER} alt={`${title} poster`} width="218"
+              <img src={poster} alt={`${title} poster`} width="218"
                 height="327"/>
             </div>
 
