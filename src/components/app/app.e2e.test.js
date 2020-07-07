@@ -1,11 +1,20 @@
 import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import {genres, movies, promoMovie} from "../../tests-data/tests-data";
-import {Main} from "../main/main";
+import {movies, promoMovie} from "../../tests-data/tests-data";
+import Main from "../main/main";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
 
 Enzyme.configure({
   adapter: new Adapter(),
+});
+
+const mockStore = configureStore([]);
+
+const store = mockStore({
+  movies,
+  genre: `all genres`
 });
 
 describe(`Checks interaction with movie cards`, () => {
@@ -13,14 +22,12 @@ describe(`Checks interaction with movie cards`, () => {
     const onClick = jest.fn();
 
     const movieList = mount(
-        <Main
-          promo={promoMovie}
-          movies={movies}
-          genres={genres}
-          activeGenre={`all genres`}
-          onGenreClick={() => {}}
-          onMovieCardClick={onClick}
-        />
+        <Provider store={store}>
+          <Main
+            promo={promoMovie}
+            onMovieCardClick={onClick}
+          />
+        </Provider>
     );
 
     const movieCards = movieList.find(`article.small-movie-card`);

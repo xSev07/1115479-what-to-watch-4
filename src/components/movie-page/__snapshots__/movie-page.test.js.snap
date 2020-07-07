@@ -8,14 +8,6 @@ Array [
     <div
       className="movie-card__hero"
     >
-      <div
-        className="movie-card__bg"
-      >
-        <img
-          alt="The Grand Budapest Hotel"
-          src="img/bg-the-grand-budapest-hotel.jpg"
-        />
-      </div>
       <h1
         className="visually-hidden"
       >
@@ -29,7 +21,7 @@ Array [
         >
           <a
             className="logo__link"
-            href="main.html"
+            href="/"
           >
             <span
               className="logo__letter logo__letter--1"
@@ -63,6 +55,14 @@ Array [
           </div>
         </div>
       </header>
+      <div
+        className="movie-card__bg"
+      >
+        <img
+          alt="The Grand Budapest Hotel"
+          src="img/bg-the-grand-budapest-hotel.jpg"
+        />
+      </div>
       <div
         className="movie-card__wrap"
       >

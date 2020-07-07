@@ -1,0 +1,175 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should Catalog render correctly 1`] = `
+<section
+  className="catalog"
+>
+  <h2
+    className="catalog__title visually-hidden"
+  >
+    Catalog
+  </h2>
+  <ul
+    className="catalog__genres-list"
+  >
+    <li
+      className="catalog__genres-item catalog__genres-item--active"
+    >
+      <a
+        className="catalog__genres-link"
+        href="#"
+        onClick={[Function]}
+      >
+        All genres
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        href="#"
+        onClick={[Function]}
+      >
+        Documental
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        href="#"
+        onClick={[Function]}
+      >
+        Drama
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        href="#"
+        onClick={[Function]}
+      >
+        Thriller
+      </a>
+    </li>
+  </ul>
+  <div
+    className="catalog__movies-list"
+  >
+    <article
+      className="small-movie-card catalog__movies-card"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          height="175"
+          width="280"
+        />
+      </div>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+        >
+          The Grand Budapest Hotel
+        </a>
+      </h3>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          height="175"
+          width="280"
+        />
+      </div>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+        >
+          Bohemian Rhapsody
+        </a>
+      </h3>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          height="175"
+          width="280"
+        />
+      </div>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+        >
+          Macbeth
+        </a>
+      </h3>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="small-movie-card__image"
+      >
+        <video
+          height="175"
+          width="280"
+        />
+      </div>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="movie-page.html"
+        >
+          Aviator
+        </a>
+      </h3>
+    </article>
+  </div>
+  <div
+    className="catalog__more"
+  >
+    <button
+      className="catalog__button"
+      type="button"
+    >
+      Show more
+    </button>
+  </div>
+</section>
+`;

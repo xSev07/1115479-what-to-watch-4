@@ -22,8 +22,6 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.SET_FILTER_GENRE:
       return extendObject(state, {genre: action.payload});
-    // case ActionType.GET_MOVIES_WITH_GENRE:
-    //   return state;
   }
 
   return state;

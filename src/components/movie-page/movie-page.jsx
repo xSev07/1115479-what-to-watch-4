@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import {getImageURL, getRatingTextDescription, transformToFirstCapitalSymbol} from "../../utils/common/common";
 import {ImageType} from "../../const";
+import Header from "../header/header.jsx";
+import Footer from "../footer/footer.jsx";
 
 const MoviePage = (props) => {
   const {title, genre, year, rating, votes, producer, actors, description} = props.movie;
@@ -10,37 +12,19 @@ const MoviePage = (props) => {
 
   const actorsText = `${actors.join(`, `)} and other`;
   const DescriptionText = description.map((it, index) => <p key={index}>{it}</p>);
-  const Image = {
-    COVER: getImageURL(title, ImageType.COVER),
-    POSTER: getImageURL(title, ImageType.POSTER),
-  };
-  // TODO: Вынести шапку и подвал в отдельный компонент.
-  //  NOTE: шапка различается на страницах
+  const cover = getImageURL(title, ImageType.COVER);
+  const poster = getImageURL(title, ImageType.POSTER);
+
   return (
     <>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
-          <div className="movie-card__bg">
-            <img src={Image.COVER} alt={title}/>
-          </div>
-
           <h1 className="visually-hidden">WTW</h1>
+          <Header/>
 
-          <header className="page-header movie-card__head">
-            <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
-            </div>
-          </header>
+          <div className="movie-card__bg">
+            <img src={cover} alt={title}/>
+          </div>
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
@@ -72,7 +56,7 @@ const MoviePage = (props) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={Image.POSTER} alt={`${title} poster`} width="218"
+              <img src={poster} alt={`${title} poster`} width="218"
                 height="327"/>
             </div>
 
@@ -156,19 +140,7 @@ const MoviePage = (props) => {
           </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer/>
       </div>
     </>
   );
