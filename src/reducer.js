@@ -1,5 +1,4 @@
 import {extendObject} from "./const";
-import movies from "./mocks/movies";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -8,7 +7,7 @@ const AuthorizationStatus = {
 
 const initialState = {
   genre: `all genres`,
-  movies,
+  movies: [],
   authorizationStatus: AuthorizationStatus.NO_AUTH,
 };
 
