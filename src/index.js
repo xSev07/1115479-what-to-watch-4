@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
 import {applyMiddleware, createStore} from "redux";
-import {ActionCreator, AuthorizationStatus, reducer} from "./reducer";
+import {ActionCreator, AuthorizationStatus, Operation, reducer} from "./reducer";
 import {Provider} from "react-redux";
 import {createAPI} from "./api";
 import {composeWithDevTools} from "redux-devtools-extension";
@@ -21,6 +21,14 @@ const store = createStore(
     )
 );
 
+store.dispatch(Operation.loadMovies());
+
+// TODO:
+//  1. Подключить App к store и получить весь список фильмов
+//  2. Заменить генерацию ссылок картинок на реальные данные (появились в адаптере)
+//  3. Получить промо фильм с сервера
+//  4. Подумать, что делать, пока загружаются фильмы
+
 const promoMovie = {
   title: `The Grand Budapest Hotel`,
   genre: `Drama`,
@@ -31,7 +39,6 @@ ReactDOM.render(
     <Provider store={store}>
       <App
         promoMovie={promoMovie}
-        allMovies={movies}
       />
     </Provider>,
     document.querySelector(`#root`)
