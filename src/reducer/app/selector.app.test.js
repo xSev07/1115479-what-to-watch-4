@@ -26,9 +26,13 @@ const movies = [
   }
 ];
 
-const state = {};
-state[NameSpace.DATA] = {
-  movies,
+const state = {
+  [NameSpace.DATA]: {
+    movies,
+  },
+  [NameSpace.APP]: {
+    genre: ALL_GENRES_NAME,
+  }
 };
 
 describe(`Check app selector work correctly`, () => {
