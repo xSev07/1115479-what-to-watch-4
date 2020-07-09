@@ -1,18 +1,17 @@
-import {extendObject} from "../../const";
+import {ALL_GENRES_NAME, extendObject} from "../../const";
 
 const initialState = {
-  genre: `all genres`,
+  genre: ALL_GENRES_NAME,
 };
 
 const ActionType = {
   SET_FILTER_GENRE: `CHANGE_FILTER_GENRE`,
-  GET_MOVIES_WITH_GENRE: `GET_MOVIES_WITH_GENRE`,
 };
 
 const ActionCreator = {
   setFilterByGenre: (genre) => ({
     type: ActionType.SET_FILTER_GENRE,
-    payload: genre || `all`,
+    payload: genre || ALL_GENRES_NAME,
   }),
 };
 

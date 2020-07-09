@@ -1,4 +1,5 @@
 import {reducer, ActionCreator, ActionType} from "./app";
+import {ALL_GENRES_NAME} from "../../const";
 
 const movies = [
   {
@@ -27,14 +28,14 @@ const movies = [
 describe(`Check app reducer work correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
-      genre: `all genres`
+      genre: ALL_GENRES_NAME
     });
   });
 
   describe(`Check correct set genre`, () => {
     it(`should return correct genre`, () => {
       expect(reducer({
-        genre: `all`,
+        genre: ALL_GENRES_NAME,
         movies
       }, {
         type: ActionType.SET_FILTER_GENRE,
@@ -51,9 +52,9 @@ describe(`Check app reducer work correctly`, () => {
         movies
       }, {
         type: ActionType.SET_FILTER_GENRE,
-        payload: `all`,
+        payload: ALL_GENRES_NAME,
       })).toEqual({
-        genre: `all`,
+        genre: ALL_GENRES_NAME,
         movies
       });
     });
@@ -70,7 +71,7 @@ describe(`Check app reducer work correctly`, () => {
     it(`Action creator for set genre returns correct action with empty genre`, () => {
       expect(ActionCreator.setFilterByGenre()).toEqual({
         type: ActionType.SET_FILTER_GENRE,
-        payload: `all`,
+        payload: ALL_GENRES_NAME,
       });
     });
   });
