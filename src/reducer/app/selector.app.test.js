@@ -1,6 +1,5 @@
 import {ALL_GENRES_NAME} from "../../const";
-import NameSpace from "../name-space";
-import {getFilteredMovies, getGenres} from "./selectors";
+import {_getFilteredMovies, _getGenres} from "./selectors";
 
 const movies = [
   {
@@ -26,22 +25,10 @@ const movies = [
   }
 ];
 
-const state = {
-  [NameSpace.DATA]: {
-    movies,
-  },
-  [NameSpace.APP]: {
-    genre: ALL_GENRES_NAME,
-  }
-};
-
 describe(`Check app selector work correctly`, () => {
   describe(`Check the filtered movies is correct`, () => {
     it(`should return movies with unique genre`, () => {
-      state[NameSpace.APP] = {
-        genre: `genre4`,
-      };
-      expect(getFilteredMovies(state))
+      expect(_getFilteredMovies(movies, `genre4`))
         .toEqual([
           {
             genre: [`genre4`]
@@ -50,10 +37,7 @@ describe(`Check app selector work correctly`, () => {
     });
 
     it(`should return movies with not unique genre`, () => {
-      state[NameSpace.APP] = {
-        genre: `genre1`,
-      };
-      expect(getFilteredMovies(state))
+      expect(_getFilteredMovies(movies, `genre1`))
         .toEqual([
           {
             genre: [`genre1`]
@@ -68,10 +52,7 @@ describe(`Check app selector work correctly`, () => {
     });
 
     it(`should return movies with same genre`, () => {
-      state[NameSpace.APP] = {
-        genre: `genre5`,
-      };
-      expect(getFilteredMovies(state))
+      expect(_getFilteredMovies(movies, `genre5`))
         .toEqual([
           {
             genre: [`genre5`]
@@ -83,32 +64,23 @@ describe(`Check app selector work correctly`, () => {
     });
 
     it(`should return no movies with nonexistent genre`, () => {
-      state[NameSpace.APP] = {
-        genre: `nonexistent genre`,
-      };
-      expect(getFilteredMovies(state))
+      expect(_getFilteredMovies(movies, `nonexistent genre`))
         .toEqual([]);
     });
 
     it(`should return all movies with all genres`, () => {
-      state[NameSpace.APP] = {
-        genre: ALL_GENRES_NAME,
-      };
-      expect(getFilteredMovies(state))
+      expect(_getFilteredMovies(movies, ALL_GENRES_NAME))
         .toEqual(movies);
     });
   });
 
   describe(`Check creating a list of genres`, () => {
     it(`should return correct genres list`, () => {
-      expect(getGenres(state)).toEqual([ALL_GENRES_NAME, `genre1`, `genre2`, `genre3`, `genre4`, `genre5`]);
+      expect(_getGenres(movies)).toEqual([ALL_GENRES_NAME, `genre1`, `genre2`, `genre3`, `genre4`, `genre5`]);
     });
 
     it(`should return correct genres list with empty movies`, () => {
-      state[NameSpace.DATA] = {
-        movies: [],
-      };
-      expect(getGenres(state)).toEqual([ALL_GENRES_NAME]);
+      expect(_getGenres([])).toEqual([ALL_GENRES_NAME]);
     });
   });
 });
