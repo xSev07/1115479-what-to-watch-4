@@ -24,4 +24,4 @@ const parseMovies = (data) => {
   return data.map((movie) => parseMovie(movie));
 };
 
-export {parseMovies};
+export {parseMovies, parseMovie};

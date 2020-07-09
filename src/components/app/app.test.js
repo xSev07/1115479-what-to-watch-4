@@ -10,16 +10,14 @@ const mockStore = configureStore([]);
 it(`Should App render correctly`, () => {
   const store = mockStore({
     movies,
+    promo: promoMovie,
     genre: `all genres`,
   });
 
   const tree = renderer
     .create(
         <Provider store={store} >
-          <App
-            promoMovie={promoMovie}
-            allMovies={movies}
-          />
+          <App/>
         </Provider>, {
           createNodeMock: () => {
             return {};

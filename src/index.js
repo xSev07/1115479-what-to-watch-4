@@ -21,23 +21,16 @@ const store = createStore(
     )
 );
 
+store.dispatch(Operation.loadPromo());
 store.dispatch(Operation.loadMovies());
 
 // TODO:
 //  Получить промо фильм с сервера
 //  Разбить редьюсер на несколько редьюсеров
 
-const promoMovie = {
-  title: `The Grand Budapest Hotel`,
-  genre: `Drama`,
-  year: 2014
-};
-
 ReactDOM.render(
     <Provider store={store}>
-      <App
-        promoMovie={promoMovie}
-      />
+      <App/>
     </Provider>,
     document.querySelector(`#root`)
 );
