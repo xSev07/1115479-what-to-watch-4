@@ -1,29 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {getImageURL, getRatingTextDescription, transformToFirstCapitalSymbol} from "../../utils/common/common";
-import {ImageType} from "../../const";
+import {getRatingTextDescription, transformToFirstCapitalSymbol} from "../../utils/common/common";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 
 const MoviePage = (props) => {
-  const {title, genre, year, rating, votes, producer, actors, description} = props.movie;
+  const {title, genre, year, rating, votes, producer, actors, description, poster, background, backgroundColor} = props.movie;
   const textRating = getRatingTextDescription(rating);
   const mainGenre = transformToFirstCapitalSymbol(genre[0]);
 
   const actorsText = `${actors.join(`, `)} and other`;
   const DescriptionText = description.map((it, index) => <p key={index}>{it}</p>);
-  const cover = getImageURL(title, ImageType.COVER);
-  const poster = getImageURL(title, ImageType.POSTER);
 
   return (
     <>
-      <section className="movie-card movie-card--full">
+      <section className="movie-card movie-card--full" style={{background: backgroundColor}}>
         <div className="movie-card__hero">
           <h1 className="visually-hidden">WTW</h1>
           <Header/>
 
           <div className="movie-card__bg">
-            <img src={cover} alt={title}/>
+            <img src={background} alt={title}/>
           </div>
 
           <div className="movie-card__wrap">
@@ -156,6 +153,9 @@ MoviePage.propTypes = {
     producer: PropTypes.string.isRequired,
     actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    poster: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
   })
 };
 

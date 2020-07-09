@@ -3,6 +3,7 @@ import Main from "../main/main.jsx";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import MoviePage from "../movie-page/movie-page.jsx";
+import {connect} from "react-redux";
 
 class App extends PureComponent {
   constructor(props) {
@@ -75,4 +76,9 @@ App.propTypes = {
   ).isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  allMovies: state.movies,
+});
+
+export {App};
+export default connect(mapStateToProps)(App);

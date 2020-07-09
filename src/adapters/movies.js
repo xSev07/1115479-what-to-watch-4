@@ -1,6 +1,6 @@
 const parseMovie = (movie) => {
   return {
-    id: movie[`id`],
+    id: movie[`id`].toString(),
     actors: movie[`starring`],
     description: [movie[`description`]],
     duration: movie[`run_time`],
@@ -16,7 +16,7 @@ const parseMovie = (movie) => {
     poster: movie[`poster_image`],
     preview: movie[`preview_image`],
     background: movie[`background_image`],
-    bacgroundColor: movie[`background_color`],
+    backgroundColor: movie[`background_color`],
   };
 };
 
