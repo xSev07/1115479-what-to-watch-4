@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import {movies, promoMovie} from "../../tests-data/tests-data";
+import {movies, promoMovie, storeData} from "../../tests-data/tests-data";
 import Main from "../main/main";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
@@ -12,10 +12,7 @@ Enzyme.configure({
 
 const mockStore = configureStore([]);
 
-const store = mockStore({
-  movies,
-  genre: `all genres`
-});
+const store = mockStore(storeData);
 
 describe(`Checks interaction with movie cards`, () => {
   it(`Should check click on the title or image in movie card`, () => {

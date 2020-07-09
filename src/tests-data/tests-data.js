@@ -1,3 +1,5 @@
+import NameSpace from "../reducer/name-space";
+
 export const movies = [
   {
     id: `Hotel-2000`,
@@ -97,7 +99,7 @@ export const movies = [
 
 export const promoMovie = {
   title: `The Grand Budapest Hotel`,
-  genre: `Drama`,
+  genre: [`Drama`],
   year: 2014,
   poster: `img/the-grand-budapest-hotel-poster.jpg`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -109,3 +111,13 @@ export const genres = [
   `drama`,
   `thriller`,
 ];
+
+export const storeData = {
+  [NameSpace.DATA]: {
+    movies,
+    promo: promoMovie,
+  },
+  [NameSpace.APP]: {
+    genre: `all genres`,
+  }
+};
