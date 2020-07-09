@@ -1,4 +1,4 @@
-import {ActionCreator, ActionType, reducer} from "./reducer";
+import {ActionCreator, ActionType, reducer} from "./reducer/reducer";
 
 const movies = [
   {

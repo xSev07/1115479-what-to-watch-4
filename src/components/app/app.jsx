@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import MoviePage from "../movie-page/movie-page.jsx";
 import {connect} from "react-redux";
+import {getAllMovies, getPromoMovie} from "../../reducer/data/selectors";
 
 class App extends PureComponent {
   constructor(props) {
@@ -24,7 +25,7 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-movie">
             <MoviePage
-              movie={this.props.allMovies[8]}
+              movie={this.props.allMovies[0]}
             />
           </Route>
         </Switch>
@@ -77,8 +78,8 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  allMovies: state.movies,
-  promoMovie: state.promo,
+  allMovies: getAllMovies(state),
+  promoMovie: getPromoMovie(state),
 });
 
 export {App};

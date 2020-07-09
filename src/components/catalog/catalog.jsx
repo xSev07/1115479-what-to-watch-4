@@ -1,11 +1,11 @@
 import GenreList from "../genre-list/genre-list.jsx";
 import MovieList from "../movie-list/movie-list.jsx";
 import React from "react";
-import {filterMoviesByGenre, getGenres} from "../../utils/common/common";
 import {ShowedMovies} from "../../const";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer";
+import {ActionCreator} from "../../reducer/app/app";
 import PropTypes from "prop-types";
+import {getActiveGenre, getFilteredMovies, getGenres} from "../../reducer/app/selectors";
 
 const Catalog = (props) => {
   const {movies, genres, activeGenre, onGenreClick, onMovieCardClick} = props;
@@ -32,9 +32,9 @@ const Catalog = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  movies: filterMoviesByGenre(state.movies, state.genre).slice(0, ShowedMovies.ON_START),
-  activeGenre: state.genre,
-  genres: getGenres(state.movies),
+  movies: getFilteredMovies(state).slice(0, ShowedMovies.ON_START),
+  activeGenre: getActiveGenre(state),
+  genres: getGenres(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -2,11 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
 import {applyMiddleware, createStore} from "redux";
-import {ActionCreator, AuthorizationStatus, Operation, reducer} from "./reducer";
+import reducer from "./reducer/reducer";
 import {Provider} from "react-redux";
 import {createAPI} from "./api";
 import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from "redux-thunk";
+import {ActionCreator, AuthorizationStatus} from "./reducer/user/user";
+import {Operation as DataOperation} from "./reducer/data/data";
 
 const onUnauthorized = () => {
   store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
@@ -21,12 +23,8 @@ const store = createStore(
     )
 );
 
-store.dispatch(Operation.loadPromo());
-store.dispatch(Operation.loadMovies());
-
-// TODO:
-//  Получить промо фильм с сервера
-//  Разбить редьюсер на несколько редьюсеров
+store.dispatch(DataOperation.loadPromo());
+store.dispatch(DataOperation.loadMovies());
 
 ReactDOM.render(
     <Provider store={store}>
