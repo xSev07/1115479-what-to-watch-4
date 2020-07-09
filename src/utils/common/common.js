@@ -1,24 +1,4 @@
-import {ALL_GENRES_NAME, ImageType, MAX_GENRES, TextRating} from "../../const";
-
-export const getImageURL = (title, type) => {
-  if (title === ``) {
-    return ``;
-  }
-
-  let transformTitle = title.toLowerCase().replace(/:/g, ``).replace(/ /g, `-`);
-  switch (type) {
-    case ImageType.PREVIEW:
-      break;
-    case ImageType.POSTER:
-      transformTitle = `${transformTitle}-${ImageType.POSTER}`;
-      break;
-    case ImageType.COVER:
-      transformTitle = `${ImageType.COVER}-${transformTitle}`;
-      break;
-  }
-
-  return `img/${transformTitle}.jpg`;
-};
+import {ALL_GENRES_NAME, MAX_GENRES, TextRating} from "../../const";
 
 export const getRatingTextDescription = (rating) => {
   if (rating >= 0 && rating < 3) {
