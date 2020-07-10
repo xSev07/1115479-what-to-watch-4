@@ -6,7 +6,13 @@ import Catalog from "../catalog/catalog.jsx";
 
 const Main = (props) => {
   const {promo, onMovieCardClick} = props;
-  const {title, genre, year} = promo;
+  // TODO: Сделать нормальную заглушку
+  if (!promo) {
+    return (<h1>Данные загружаются</h1>);
+  }
+  const {title, genre, year, poster, background} = promo;
+  // TODO:
+  //  Подумать можно ли вынести эту промо карточку и карточку со страницы детальной информации в 1 компонент
 
   return (
     <>
@@ -18,13 +24,13 @@ const Main = (props) => {
         </Header>
 
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+          <img src={background} alt={title}/>
         </div>
 
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218"
+              <img src={poster} alt={`${title} poster`} width="218"
                 height="327"/>
             </div>
             <div className="movie-card__desc">
@@ -66,8 +72,10 @@ const Main = (props) => {
 Main.propTypes = {
   promo: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
+    genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     year: PropTypes.number.isRequired,
+    poster: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
   }),
   onMovieCardClick: PropTypes.func.isRequired,
 };

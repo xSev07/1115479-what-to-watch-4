@@ -1,16 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Catalog from "./catalog";
-import {genres, movies} from "../../tests-data/tests-data";
+import {genres, movies, storeData} from "../../tests-data/tests-data";
 import configureStore from "redux-mock-store";
 
 const mockStore = configureStore([]);
 
 it(`Should Catalog render correctly`, () => {
-  const store = mockStore({
-    movies,
-    genre: `all genres`
-  });
+  const store = mockStore(storeData);
 
   const tree = renderer
     .create(

@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MovieCard from "../movie-card/movie-card.jsx";
-import {getImageURL} from "../../utils/common/common";
-import {ImageType} from "../../const";
 
 const MovieList = (props) => {
   const {movies, onMovieCardClick} = props;
@@ -16,7 +14,7 @@ const MovieList = (props) => {
             id={movie.id}
             title={movie.title}
             videoPreview={movie.videoPreview}
-            poster={getImageURL(movie.title, ImageType.PREVIEW)}
+            poster={movie.preview}
             isMuted={true}
             onClick={onMovieCardClick}
           />

@@ -37,7 +37,9 @@ const withVideoPlayer = (Component) => {
 
     _handleVideoPlay() {
       this._timeoutPlayingID = setTimeout(() => {
-        this.setState({isPlaying: true});
+        if (this._isMounted) {
+          this.setState({isPlaying: true});
+        }
       }, 1000);
     }
 
@@ -47,6 +49,7 @@ const withVideoPlayer = (Component) => {
     }
 
     componentDidMount() {
+      this._isMounted = true;
       const {poster, videoPreview, isMuted} = this.props;
       const video = this._videoRef.current;
       video.poster = poster;
@@ -55,6 +58,7 @@ const withVideoPlayer = (Component) => {
     }
 
     componentWillUnmount() {
+      this._isMounted = false;
       const video = this._videoRef.current;
       video.src = null;
       video.poster = null;

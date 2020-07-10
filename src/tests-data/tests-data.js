@@ -1,3 +1,5 @@
+import NameSpace from "../reducer/name-space";
+
 export const movies = [
   {
     id: `Hotel-2000`,
@@ -11,11 +13,14 @@ export const movies = [
     inList: false,
     producer: `Wes Andreson`,
     rating: 8.9,
-    reviews: [],
     title: `The Grand Budapest Hotel`,
     videoPreview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     votes: 240,
     year: 2000,
+    poster: `img/the-grand-budapest-hotel-poster.jpg`,
+    preview: `img/the-grand-budapest-hotel.jpg`,
+    background: `img/bg-the-grand-budapest-hotel.jpg`,
+    backgroundColor: `#e1b0b2`,
   },
   {
     id: `Bohemian-2018`,
@@ -32,11 +37,14 @@ export const movies = [
     inList: false,
     producer: `Bryan Singer`,
     rating: 8.0,
-    reviews: [],
     title: `Bohemian Rhapsody`,
     videoPreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     votes: 220,
     year: 2018,
+    poster: `img/bohemian-rhapsody-poster.jpg`,
+    preview: `img/bohemian-rhapsody.jpg`,
+    background: `img/bg-bohemian-rhapsody.jpg`,
+    backgroundColor: `rgb(146, 159, 165)`,
   },
   {
     id: `Macbeth-2015`,
@@ -53,11 +61,14 @@ export const movies = [
     inList: false,
     producer: `Justin Kurzel`,
     rating: 6.6,
-    reviews: [],
     title: `Macbeth`,
     videoPreview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     votes: 220,
     year: 2015,
+    poster: `img/macbeth-poster.jpg`,
+    preview: `img/macbeth.jpg`,
+    background: `img/bg-macbeth.jpg`,
+    backgroundColor: `rgb(241, 233, 206)`,
   },
   {
     id: `Aviator-2005`,
@@ -75,18 +86,23 @@ export const movies = [
     inList: false,
     producer: `Martin Scorsese`,
     rating: 7.5,
-    reviews: [],
     title: `Aviator`,
     videoPreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     votes: 220,
     year: 2005,
+    poster: `img/aviator-poster.jpg`,
+    preview: `img/aviator.jpg`,
+    background: `img/bg-aviator.jpg`,
+    backgroundColor: `rgb(214, 205, 175)`,
   },
 ];
 
 export const promoMovie = {
   title: `The Grand Budapest Hotel`,
-  genre: `Drama`,
-  year: 2014
+  genre: [`Drama`],
+  year: 2014,
+  poster: `img/the-grand-budapest-hotel-poster.jpg`,
+  background: `img/bg-the-grand-budapest-hotel.jpg`,
 };
 
 export const genres = [
@@ -95,3 +111,13 @@ export const genres = [
   `drama`,
   `thriller`,
 ];
+
+export const storeData = {
+  [NameSpace.DATA]: {
+    movies,
+    promo: promoMovie,
+  },
+  [NameSpace.APP]: {
+    genre: `all genres`,
+  }
+};
