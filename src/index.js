@@ -23,6 +23,7 @@ const store = createStore(
     )
 );
 
+// TODO: Вынести загрузку данных в didMount App
 store.dispatch(DataOperation.loadPromo());
 store.dispatch(DataOperation.loadMovies());
 
