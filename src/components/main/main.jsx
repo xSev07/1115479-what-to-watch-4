@@ -6,21 +6,13 @@ import Catalog from "../catalog/catalog.jsx";
 
 const Main = (props) => {
   const {promo, onMovieCardClick} = props;
+  // TODO: Сделать нормальную заглушку
+  if (!promo) {
+    return (<h1>Данные загружаются</h1>);
+  }
+  const {title, genre, year, poster, background} = promo;
   // TODO:
   //  Подумать можно ли вынести эту промо карточку и карточку со страницы детальной информации в 1 компонент
-
-  let title;
-  let genre;
-  let year;
-  let poster;
-  let background;
-  if (promo) {
-    title = promo.title;
-    genre = promo.genre;
-    year = promo.year;
-    poster = promo.poster;
-    background = promo.background;
-  }
 
   return (
     <>
