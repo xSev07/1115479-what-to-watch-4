@@ -5,6 +5,7 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import MoviePage from "../movie-page/movie-page.jsx";
 import {connect} from "react-redux";
 import {getAllMovies, getPromoMovie} from "../../reducer/data/selectors";
+import {Operation as DataOperation} from "../../reducer/data/data";
 
 class App extends PureComponent {
   constructor(props) {
@@ -55,7 +56,26 @@ class App extends PureComponent {
     const movieIndex = this.props.allMovies.findIndex((movie) => movie.id === movieId);
     this.setState({displayedMovie: movieIndex});
   }
+
+  componentDidMount() {
+    this.props.loadPromo();
+    this.props.loadMovies();
+  }
 }
+
+const mapStateToProps = (state) => ({
+  allMovies: getAllMovies(state),
+  promoMovie: getPromoMovie(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadMovies() {
+    dispatch(DataOperation.loadMovies());
+  },
+  loadPromo() {
+    dispatch(DataOperation.loadPromo());
+  },
+});
 
 App.propTypes = {
   promoMovie: PropTypes.shape({
@@ -75,12 +95,9 @@ App.propTypes = {
         description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
       })
   ).isRequired,
+  loadPromo: PropTypes.func.isRequired,
+  loadMovies: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  allMovies: getAllMovies(state),
-  promoMovie: getPromoMovie(state),
-});
-
 export {App};
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

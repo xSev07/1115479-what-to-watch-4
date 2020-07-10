@@ -8,7 +8,6 @@ import {createAPI} from "./api";
 import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import {ActionCreator, AuthorizationStatus} from "./reducer/user/user";
-import {Operation as DataOperation} from "./reducer/data/data";
 
 const onUnauthorized = () => {
   store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
@@ -22,10 +21,6 @@ const store = createStore(
         applyMiddleware(thunk.withExtraArgument(api))
     )
 );
-
-// TODO: Вынести загрузку данных в didMount App
-store.dispatch(DataOperation.loadPromo());
-store.dispatch(DataOperation.loadMovies());
 
 ReactDOM.render(
     <Provider store={store}>
