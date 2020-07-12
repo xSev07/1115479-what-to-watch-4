@@ -1,6 +1,6 @@
 import MovieNav from "../components/movie-nav/movie-nav.jsx";
 import React from "react";
-import {getRatingTextDescription} from "../utils/common/common";
+import MovieOverview from "../components/movie-overview/movie-overview.jsx";
 
 const MovieTab = {
   OVERVIEW: `Overview`,
@@ -20,10 +20,6 @@ class MovieDescription extends React.PureComponent {
   }
 
   render() {
-    const {votes, producer, rating, actors, description} = this.props;
-    const textRating = getRatingTextDescription(rating);
-    const actorsText = `${actors.join(`, `)} and other`;
-    const DescriptionText = description.map((it, index) => <p key={index}>{it}</p>);
     const tabs = Object.values(MovieTab);
 
     return (
@@ -34,21 +30,9 @@ class MovieDescription extends React.PureComponent {
           onClick={this._tabClickHandler}
         />
 
-        <div className="movie-rating">
-          <div className="movie-rating__score">{rating}</div>
-          <p className="movie-rating__meta">
-            <span className="movie-rating__level">{textRating}</span>
-            <span className="movie-rating__count">{votes} ratings</span>
-          </p>
-        </div>
-
-        <div className="movie-card__text">
-          {DescriptionText}
-
-          <p className="movie-card__director"><strong>Director: {producer}</strong></p>
-
-          <p className="movie-card__starring"><strong>Starring: {actorsText}</strong></p>
-        </div>
+        <MovieOverview
+          {...this.props}
+        />
       </div>
     );
   }

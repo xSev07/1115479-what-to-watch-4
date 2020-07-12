@@ -7,7 +7,10 @@ const createItem = (name, isActive, onClick) => {
       <a
         href="#"
         className="movie-nav__link"
-        onClick={() => onClick(name)}
+        onClick={(evt) => {
+          evt.preventDefault();
+          onClick(name);
+        }}
       >{name}</a>
     </li>
   );
