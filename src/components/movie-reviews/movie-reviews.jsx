@@ -20,9 +20,9 @@ const getCommentTemplate = (comment) => {
 
 const MovieReview = (props) => {
   const {comments} = props;
-  // const {commentId, userId, author, rating, text, date} = comments;
+
   if (!comments) {
-    return null;
+    return undefined;
   }
   const commentsList = Object.values(comments);
 

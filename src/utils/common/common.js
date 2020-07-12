@@ -22,3 +22,21 @@ export const transformToFirstCapitalSymbol = (str) => {
   }
   return ``;
 };
+
+export const transformRuntime = (time) => {
+  const hoursRaw = Math.trunc(time / 60);
+  const minutesRaw = time - hoursRaw * 60;
+  const space = (hoursRaw > 0 && minutesRaw > 0) ? ` ` : ``;
+  const hours = hoursRaw === 0 ? `` : `${hoursRaw}h`;
+
+  let minutes;
+  if (minutesRaw === 0) {
+    minutes = ``;
+  } else if (minutesRaw < 10) {
+    minutes = `0${minutesRaw}m`;
+  } else {
+    minutes = `${minutesRaw}m`;
+  }
+
+  return `${hours}${space}${minutes}`;
+};

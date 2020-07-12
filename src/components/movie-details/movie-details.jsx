@@ -1,9 +1,9 @@
 import React from "react";
+import {transformRuntime} from "../../utils/common/common";
 
 const MovieDetails = (props) => {
   const {producer, actors, duration, genre, year} = props;
-
-  // TODO: Преобразовать продолжительность
+  const runtime = transformRuntime(duration);
   return (
     <div className="movie-card__text movie-card__row">
       <div className="movie-card__text-col">
@@ -22,7 +22,7 @@ const MovieDetails = (props) => {
       <div className="movie-card__text-col">
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Run Time</strong>
-          <span className="movie-card__details-value">{duration}</span>
+          <span className="movie-card__details-value">{runtime}</span>
         </p>
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Genre</strong>
