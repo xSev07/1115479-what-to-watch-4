@@ -25,7 +25,6 @@ class MovieDescription extends React.PureComponent {
   }
 
   render() {
-    const {comments} = this.props;
     const tabs = Object.values(MovieTab);
 
     return (
@@ -35,18 +34,34 @@ class MovieDescription extends React.PureComponent {
           activeTab={this.state.activeTab}
           onClick={this._tabClickHandler}
         />
-
-        {/*<MovieOverview*/}
-        {/*  {...this.props}*/}
-        {/*/>*/}
-        {/*<MovieDetails*/}
-        {/*  {...this.props}*/}
-        {/*/>*/}
-        <MovieReview
-          comments={comments}
-        />
+        {this._createTabContentTemplate()}
       </div>
     );
+  }
+
+  _createTabContentTemplate() {
+    const {comments} = this.props;
+    switch (this.state.activeTab) {
+      case MovieTab.OVERVIEW:
+        return (
+          <MovieOverview
+            {...this.props}
+          />
+        );
+      case MovieTab.DETAILS:
+        return (
+          <MovieDetails
+            {...this.props}
+          />
+        );
+      case MovieTab.REVIEWS:
+        return (
+          <MovieReview
+            comments={comments}
+          />
+        );
+    }
+    return undefined;
   }
 
   _tabClickHandler(tab) {
