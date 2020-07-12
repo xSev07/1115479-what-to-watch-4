@@ -1,6 +1,7 @@
 import MovieNav from "../components/movie-nav/movie-nav.jsx";
 import React from "react";
 import MovieOverview from "../components/movie-overview/movie-overview.jsx";
+import MovieDetails from "../components/movie-details/movie-details.jsx";
 
 const MovieTab = {
   OVERVIEW: `Overview`,
@@ -30,7 +31,10 @@ class MovieDescription extends React.PureComponent {
           onClick={this._tabClickHandler}
         />
 
-        <MovieOverview
+        {/*<MovieOverview*/}
+        {/*  {...this.props}*/}
+        {/*/>*/}
+        <MovieDetails
           {...this.props}
         />
       </div>
