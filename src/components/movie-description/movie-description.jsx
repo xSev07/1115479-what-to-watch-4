@@ -5,6 +5,7 @@ import MovieDetails from "../movie-details/movie-details.jsx";
 import {connect} from "react-redux";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import MovieReview from "../movie-reviews/movie-reviews.jsx";
+import {getCommentsByMovie} from "../../reducer/data/selectors";
 
 const MovieTab = {
   OVERVIEW: `Overview`,
@@ -24,8 +25,8 @@ class MovieDescription extends React.PureComponent {
   }
 
   render() {
-    const tabs = Object.values(MovieTab);
     const {comments} = this.props;
+    const tabs = Object.values(MovieTab);
 
     return (
       <div className="movie-card__desc">
@@ -58,13 +59,13 @@ class MovieDescription extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  // TODO: сделать селектор и получение комментариев к конкретному фильму
-  comments: state.DATA.comments,
+  // TODO: сделать получение комментариев к конкретному фильму
+  comments: getCommentsByMovie(state, {filmId: 1}),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   loadComments(filmId) {
-    // TODO: Сделать проверку на уже загруженные комментарии
+    // TODO: Сделать проверку на уже загруженные комментарии, если она вообще нужна
     dispatch(DataOperation.loadComments(filmId));
   }
 });

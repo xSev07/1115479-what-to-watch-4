@@ -21,10 +21,10 @@ const getCommentTemplate = (comment) => {
 const MovieReview = (props) => {
   const {comments} = props;
   // const {commentId, userId, author, rating, text, date} = comments;
-  const commentsList = Object.values(comments);
-  if (commentsList.length === 0) {
+  if (!comments) {
     return null;
   }
+  const commentsList = Object.values(comments);
 
   return (
     <div className="movie-card__reviews movie-card__row">
