@@ -1,16 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {getRatingTextDescription, transformToFirstCapitalSymbol} from "../../utils/common/common";
+import {transformToFirstCapitalSymbol} from "../../utils/common/common";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
+import MovieDescription from "../../movie-description/movie-description.jsx";
 
 const MoviePage = (props) => {
-  const {title, genre, year, rating, votes, producer, actors, description, poster, background, backgroundColor} = props.movie;
-  const textRating = getRatingTextDescription(rating);
+  const {title, genre, year, poster, background, backgroundColor} = props.movie;
   const mainGenre = transformToFirstCapitalSymbol(genre[0]);
-
-  const actorsText = `${actors.join(`, `)} and other`;
-  const DescriptionText = description.map((it, index) => <p key={index}>{it}</p>);
 
   return (
     <>
@@ -57,37 +54,9 @@ const MoviePage = (props) => {
                 height="327"/>
             </div>
 
-            <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="movie-rating">
-                <div className="movie-rating__score">{rating}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{textRating}</span>
-                  <span className="movie-rating__count">{votes} ratings</span>
-                </p>
-              </div>
-
-              <div className="movie-card__text">
-                {DescriptionText}
-
-                <p className="movie-card__director"><strong>Director: {producer}</strong></p>
-
-                <p className="movie-card__starring"><strong>Starring: {actorsText}</strong></p>
-              </div>
-            </div>
+            <MovieDescription
+              {...props.movie}
+            />
           </div>
         </div>
       </section>
