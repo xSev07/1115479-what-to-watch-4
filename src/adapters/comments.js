@@ -1,9 +1,9 @@
 const parseComment = (comment) => {
   const userData = comment[`user`];
   return {
-    id: comment[`id`],
+    commentId: comment[`id`],
     userId: userData[`id`],
-    userName: userData[`name`],
+    author: userData[`name`],
     rating: comment[`rating`],
     text: comment[`comment`],
     date: comment[`date`],

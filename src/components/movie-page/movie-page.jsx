@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {transformToFirstCapitalSymbol} from "../../utils/common/common";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
-import MovieDescription from "../../movie-description/movie-description.jsx";
+import MovieDescription from "../movie-description/movie-description.jsx";
 
 const MoviePage = (props) => {
   const {title, genre, year, poster, background, backgroundColor} = props.movie;
