@@ -52,7 +52,7 @@ MovieReview.propTypes = {
     author: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
-    date: PropTypes.date.isRequired,
+    date: PropTypes.instanceOf(Date).isRequired,
   })).isRequired,
 };
 
