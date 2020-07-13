@@ -1,5 +1,8 @@
 import {TextRating} from "../../const";
 import moment from "moment";
+import momentDurationFormatSetup from "moment-duration-format";
+
+momentDurationFormatSetup(moment);
 
 export const getRatingTextDescription = (rating) => {
   if (rating >= 0 && rating < 3) {

@@ -8,10 +8,6 @@ import {createAPI} from "./api";
 import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import {ActionCreator, AuthorizationStatus} from "./reducer/user/user";
-import moment from "moment";
-import momentDurationFormatSetup from "moment-duration-format";
-
-momentDurationFormatSetup(moment);
 
 const onUnauthorized = () => {
   store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
