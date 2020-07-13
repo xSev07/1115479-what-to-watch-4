@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import MovieReview from "../movie-reviews/movie-reviews.jsx";
 import {getCommentsByMovie} from "../../reducer/data/selectors";
+import PropTypes from "prop-types";
 
 const MovieTab = {
   OVERVIEW: `Overview`,
@@ -84,6 +85,19 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataOperation.loadComments(filmId));
   }
 });
+
+MovieDescription.propTypes = {
+  id: PropTypes.string.isRequired,
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    commentId: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    date: PropTypes.date.isRequired,
+  })).isRequired,
+  loadComments: PropTypes.func.isRequired,
+};
 
 export {MovieDescription};
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDescription);

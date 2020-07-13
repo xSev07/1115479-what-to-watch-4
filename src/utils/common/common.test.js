@@ -1,7 +1,5 @@
 import {
-  getRatingTextDescription, splitArrayInHalf, transformRuntime,
-  transformToFirstCapitalSymbol
-} from "./common";
+  getRatingTextDescription, splitArrayInHalf, transformToFirstCapitalSymbol} from "./common";
 import {TextRating} from "../../const";
 
 describe(`Check the rating is correct`, () => {

@@ -1,5 +1,6 @@
 import React from "react";
 import {transformRuntime} from "../../utils/common/common";
+import PropTypes from "prop-types";
 
 const MovieDetails = (props) => {
   const {producer, actors, duration, genre, year} = props;
@@ -35,6 +36,14 @@ const MovieDetails = (props) => {
       </div>
     </div>
   );
+};
+
+MovieDetails.propTypes = {
+  producer: PropTypes.string.isRequired,
+  actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  duration: PropTypes.number.isRequired,
+  genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  year: PropTypes.number.isRequired,
 };
 
 export default MovieDetails;

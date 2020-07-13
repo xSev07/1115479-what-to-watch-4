@@ -1,5 +1,6 @@
 import React from "react";
 import {getRatingTextDescription} from "../../utils/common/common";
+import PropTypes from "prop-types";
 
 const MovieOverview = (props) => {
   const {votes, producer, rating, actors, description} = props;
@@ -25,6 +26,14 @@ const MovieOverview = (props) => {
       </div>
     </>
   );
+};
+
+MovieOverview.propTypes = {
+  votes: PropTypes.number.isRequired,
+  producer: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 export default MovieOverview;

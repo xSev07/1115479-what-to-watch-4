@@ -1,5 +1,6 @@
 import React from "react";
 import {splitArrayInHalf, transformDate} from "../../utils/common/common";
+import PropTypes from "prop-types";
 
 const getCommentTemplate = (comment) => {
   const {commentId, author, text, date, rating} = comment;
@@ -42,6 +43,17 @@ const MovieReview = (props) => {
       </div>
     </div>
   );
+};
+
+MovieReview.propTypes = {
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    commentId: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    date: PropTypes.date.isRequired,
+  })).isRequired,
 };
 
 export default MovieReview;

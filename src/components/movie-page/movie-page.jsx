@@ -6,9 +6,11 @@ import Footer from "../footer/footer.jsx";
 import MovieDescription from "../movie-description/movie-description.jsx";
 
 const MoviePage = (props) => {
+  // TODO: Убрать movie из пропсов и получать его по адресной строке после 8го модуля
   const {title, genre, year, poster, background, backgroundColor} = props.movie;
   const mainGenre = transformToFirstCapitalSymbol(genre[0]);
 
+  // TODO: Добавить вывод похожих фильмов после 8го модуля
   return (
     <>
       <section className="movie-card movie-card--full" style={{background: backgroundColor}}>

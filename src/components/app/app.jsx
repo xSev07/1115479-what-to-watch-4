@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import Main from "../main/main.jsx";
 import PropTypes from "prop-types";
-import {Switch, Route, BrowserRouter, Link} from "react-router-dom";
+import {Switch, Route, BrowserRouter} from "react-router-dom";
 import MoviePage from "../movie-page/movie-page.jsx";
 import {connect} from "react-redux";
 import {getAllMovies, getPromoMovie} from "../../reducer/data/selectors";

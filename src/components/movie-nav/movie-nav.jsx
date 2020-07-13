@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const createItem = (name, isActive, onClick) => {
   const className = `movie-nav__item ${isActive ? `movie-nav__item--active` : ``}`;
@@ -25,6 +26,12 @@ const MovieNav = (props) => {
       </ul>
     </nav>
   );
+};
+
+MovieNav.propTypes = {
+  tabs: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  activeTab: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default MovieNav;
