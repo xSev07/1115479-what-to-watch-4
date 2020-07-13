@@ -1,4 +1,5 @@
 import {TextRating} from "../../const";
+import moment from "moment";
 
 export const getRatingTextDescription = (rating) => {
   if (rating >= 0 && rating < 3) {
@@ -24,19 +25,9 @@ export const transformToFirstCapitalSymbol = (str) => {
 };
 
 export const transformRuntime = (time) => {
-  const hoursRaw = Math.trunc(time / 60);
-  const minutesRaw = time - hoursRaw * 60;
-  const space = (hoursRaw > 0 && minutesRaw > 0) ? ` ` : ``;
-  const hours = hoursRaw === 0 ? `` : `${hoursRaw}h`;
+  return moment.duration(time, `m`).format(`h[h] mm[m]`);
+};
 
-  let minutes;
-  if (minutesRaw === 0) {
-    minutes = ``;
-  } else if (minutesRaw < 10) {
-    minutes = `0${minutesRaw}m`;
-  } else {
-    minutes = `${minutesRaw}m`;
-  }
-
-  return `${hours}${space}${minutes}`;
+export const transformDate = (date) => {
+  return moment(date).format(`MMMM DD, YYYY`);
 };

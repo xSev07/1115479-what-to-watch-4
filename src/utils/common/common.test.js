@@ -43,29 +43,3 @@ describe(`Check the string transform is correct`, () => {
     expect(transformToFirstCapitalSymbol(`TEST`)).toBe(`Test`);
   });
 });
-
-describe(`Check the runtime transform is correct`, () => {
-  it(`should return correct time with 99 minutes`, () => {
-    expect(transformRuntime(99)).toBe(`1h 39m`);
-  });
-
-  it(`should return correct time with 90 minutes`, () => {
-    expect(transformRuntime(90)).toBe(`1h 30m`);
-  });
-
-  it(`should return correct time with 61 minutes`, () => {
-    expect(transformRuntime(61)).toBe(`1h 01m`);
-  });
-
-  it(`should return correct time with 60 minutes`, () => {
-    expect(transformRuntime(60)).toBe(`1h`);
-  });
-
-  it(`should return correct time with 59 minutes`, () => {
-    expect(transformRuntime(59)).toBe(`59m`);
-  });
-
-  it(`should return correct time with 5 minutes`, () => {
-    expect(transformRuntime(5)).toBe(`05m`);
-  });
-});

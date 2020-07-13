@@ -1,7 +1,9 @@
 import React from "react";
+import {transformDate} from "../../utils/common/common";
 
 const getCommentTemplate = (comment) => {
   const {author, text, date, rating} = comment;
+  const formatedDate = transformDate(date);
   return (
     <div className="review">
       <blockquote className="review__quote">
@@ -9,7 +11,7 @@ const getCommentTemplate = (comment) => {
 
         <footer className="review__details">
           <cite className="review__author">{author}</cite>
-          <time className="review__date" dateTime={date}>{date}</time>
+          <time className="review__date" dateTime={date}>{formatedDate}</time>
         </footer>
       </blockquote>
 
