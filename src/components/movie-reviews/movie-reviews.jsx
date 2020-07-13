@@ -22,7 +22,7 @@ const getCommentTemplate = (comment) => {
   );
 };
 
-const MovieReview = (props) => {
+const MovieReviews = (props) => {
   const {comments} = props;
 
   if (!comments) {
@@ -45,7 +45,7 @@ const MovieReview = (props) => {
   );
 };
 
-MovieReview.propTypes = {
+MovieReviews.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.shape({
     commentId: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
@@ -56,4 +56,4 @@ MovieReview.propTypes = {
   })).isRequired,
 };
 
-export default MovieReview;
+export default MovieReviews;

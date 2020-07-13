@@ -4,7 +4,7 @@ import MovieOverview from "../movie-overview/movie-overview.jsx";
 import MovieDetails from "../movie-details/movie-details.jsx";
 import {connect} from "react-redux";
 import {Operation as DataOperation} from "../../reducer/data/data";
-import MovieReview from "../movie-reviews/movie-reviews.jsx";
+import MovieReviews from "../movie-reviews/movie-reviews.jsx";
 import {getCommentsByMovie} from "../../reducer/data/selectors";
 import PropTypes from "prop-types";
 
@@ -57,7 +57,7 @@ class MovieDescription extends React.PureComponent {
         );
       case MovieTab.REVIEWS:
         return (
-          <MovieReview
+          <MovieReviews
             comments={comments}
           />
         );
