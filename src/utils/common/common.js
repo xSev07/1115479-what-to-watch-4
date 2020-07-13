@@ -31,3 +31,9 @@ export const transformRuntime = (time) => {
 export const transformDate = (date) => {
   return moment(date).format(`MMMM DD, YYYY`);
 };
+
+export const splitArrayInHalf = (arr = []) => {
+  const firstHalf = arr.splice(0, Math.ceil(arr.length / 2));
+  const secondHalf = arr;
+  return {firstHalf, secondHalf};
+};

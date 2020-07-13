@@ -1,11 +1,12 @@
 import React from "react";
-import {transformDate} from "../../utils/common/common";
+import {splitArrayInHalf, transformDate} from "../../utils/common/common";
 
 const getCommentTemplate = (comment) => {
-  const {author, text, date, rating} = comment;
+  const {commentId, author, text, date, rating} = comment;
   const formatedDate = transformDate(date);
+
   return (
-    <div className="review">
+    <div key={commentId} className="review">
       <blockquote className="review__quote">
         <p className="review__text">{text}</p>
 
@@ -26,15 +27,18 @@ const MovieReview = (props) => {
   if (!comments) {
     return undefined;
   }
-  const commentsList = Object.values(comments);
+
+  const halfsComments = splitArrayInHalf(comments);
+  const firstCommentsColumn = halfsComments.firstHalf.map((it) => getCommentTemplate(it));
+  const secondCommentsColumn = halfsComments.secondHalf.map((it) => getCommentTemplate(it));
 
   return (
     <div className="movie-card__reviews movie-card__row">
       <div className="movie-card__reviews-col">
-        {commentsList.map((it) => getCommentTemplate(it))}
+        {firstCommentsColumn}
       </div>
       <div className="movie-card__reviews-col">
-
+        {secondCommentsColumn}
       </div>
     </div>
   );
