@@ -1,20 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import MovieReviews from "./movie-reviews";
+import {comments} from "../../tests-data/tests-data";
 
 describe(`Should MovieReview render correctly`, () => {
   it(`should render correctly with 1 comment`, () => {
     const tree = renderer
       .create(
           <MovieReviews
-            comments={[{
-              commentId: `1`,
-              userId: `10`,
-              author: `Test`,
-              rating: 5.2,
-              text: `Test string`,
-              date: new Date(`1995-12-17T03:24:00`),
-            }]}
+            comments={[comments[0]]}
           />
       ).toJSON();
 
@@ -25,23 +19,7 @@ describe(`Should MovieReview render correctly`, () => {
     const tree = renderer
       .create(
           <MovieReviews
-            comments={[{
-              commentId: `1`,
-              userId: `10`,
-              author: `Test`,
-              rating: 5.2,
-              text: `Test string`,
-              date: new Date(`1995-12-17T03:24:00`),
-            },
-            {
-              commentId: `2`,
-              userId: `12`,
-              author: `Test2`,
-              rating: 8,
-              text: `Test string 2`,
-              date: new Date(`1997-11-10T13:24:00`),
-            }
-            ]}
+            comments={comments}
           />
       ).toJSON();
 

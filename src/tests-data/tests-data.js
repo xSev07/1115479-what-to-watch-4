@@ -112,10 +112,29 @@ export const genres = [
   `thriller`,
 ];
 
+export const comments = [{
+  commentId: `1`,
+  userId: `10`,
+  author: `Test`,
+  rating: 5.2,
+  text: `Test string`,
+  date: new Date(`1995-12-17T03:24:00`),
+},
+{
+  commentId: `2`,
+  userId: `12`,
+  author: `Test2`,
+  rating: 8,
+  text: `Test string 2`,
+  date: new Date(`1997-11-10T13:24:00`),
+}
+];
+
 export const storeData = {
   [NameSpace.DATA]: {
     movies,
     promo: promoMovie,
+    comments,
   },
   [NameSpace.APP]: {
     genre: `all genres`,
