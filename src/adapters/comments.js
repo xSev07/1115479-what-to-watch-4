@@ -6,7 +6,7 @@ const parseComment = (comment) => {
     author: userData[`name`],
     rating: comment[`rating`],
     text: comment[`comment`],
-    date: comment[`date`],
+    date: new Date(comment[`date`]),
   };
 };
 
