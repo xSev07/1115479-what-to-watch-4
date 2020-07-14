@@ -2,10 +2,7 @@ import MovieNav from "../movie-nav/movie-nav.jsx";
 import React from "react";
 import MovieOverview from "../movie-overview/movie-overview.jsx";
 import MovieDetails from "../movie-details/movie-details.jsx";
-import {connect} from "react-redux";
-import {Operation as DataOperation} from "../../reducer/data/data";
 import MovieReviews from "../movie-reviews/movie-reviews.jsx";
-import {getCommentsByMovie} from "../../reducer/data/selectors";
 import PropTypes from "prop-types";
 
 const MovieTab = {
@@ -41,18 +38,18 @@ class MovieDescription extends React.PureComponent {
   }
 
   _createTabContentTemplate() {
-    const {comments} = this.props;
+    const {movie, comments} = this.props;
     switch (this.state.activeTab) {
       case MovieTab.OVERVIEW:
         return (
           <MovieOverview
-            {...this.props}
+            {...movie}
           />
         );
       case MovieTab.DETAILS:
         return (
           <MovieDetails
-            {...this.props}
+            {...movie}
           />
         );
       case MovieTab.REVIEWS:
@@ -68,26 +65,23 @@ class MovieDescription extends React.PureComponent {
   _tabClickHandler(tab) {
     this.setState({activeTab: tab});
   }
-
-  componentDidMount() {
-    this.props.loadComments(this.props.id);
-  }
 }
 
-const mapStateToProps = (state) => ({
-  // TODO: сделать получение комментариев к конкретному фильму
-  comments: getCommentsByMovie(state, {filmId: 1}),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  loadComments(filmId) {
-    // TODO: Сделать проверку на уже загруженные комментарии, если она вообще нужна
-    dispatch(DataOperation.loadComments(filmId));
-  }
-});
-
 MovieDescription.propTypes = {
-  id: PropTypes.string.isRequired,
+  movie: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    year: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
+    producer: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    poster: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+  }),
   comments: PropTypes.arrayOf(PropTypes.shape({
     commentId: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
@@ -96,8 +90,6 @@ MovieDescription.propTypes = {
     text: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
   })).isRequired,
-  loadComments: PropTypes.func.isRequired,
 };
 
-export {MovieDescription};
-export default connect(mapStateToProps, mapDispatchToProps)(MovieDescription);
+export default MovieDescription;

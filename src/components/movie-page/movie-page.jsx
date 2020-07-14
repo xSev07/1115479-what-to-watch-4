@@ -4,14 +4,22 @@ import {transformToFirstCapitalSymbol} from "../../utils/common/common";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import MovieDescription from "../movie-description/movie-description.jsx";
+import {getCommentsByMovie} from "../../reducer/data/selectors";
+import {Operation as DataOperation} from "../../reducer/data/data";
+import {connect} from "react-redux";
 
-const MoviePage = (props) => {
-  // TODO: Убрать movie из пропсов и получать его по адресной строке после 8го модуля
-  const {title, genre, year, poster, background, backgroundColor} = props.movie;
-  const mainGenre = transformToFirstCapitalSymbol(genre[0]);
+class MoviePage extends React.PureComponent {
+  constructor(props) {
+    super(props);
+  }
 
-  // TODO: Добавить вывод похожих фильмов после 8го модуля
-  return (
+  render() {
+    // TODO: Убрать movie из пропсов и получать его по адресной строке после 8го модуля
+    const {title, genre, year, poster, background, backgroundColor} = this.props.movie;
+    const mainGenre = transformToFirstCapitalSymbol(genre[0]);
+
+    // TODO: Добавить вывод похожих фильмов после 8го модуля
+    return (
     <>
       <section className="movie-card movie-card--full" style={{background: backgroundColor}}>
         <div className="movie-card__hero">
@@ -57,7 +65,8 @@ const MoviePage = (props) => {
             </div>
 
             <MovieDescription
-              {...props.movie}
+              movie={this.props.movie}
+              comments={this.props.comments}
             />
           </div>
         </div>
@@ -111,11 +120,29 @@ const MoviePage = (props) => {
         <Footer/>
       </div>
     </>
-  );
-};
+    );
+  }
+
+  componentDidMount() {
+    this.props.loadComments(this.props.movie.id);
+  }
+}
+
+const mapStateToProps = (state) => ({
+  // TODO: сделать получение комментариев к конкретному фильму
+  comments: getCommentsByMovie(state, {filmId: 1}),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadComments(filmId) {
+    // TODO: Сделать проверку на уже загруженные комментарии, если она вообще нужна
+    dispatch(DataOperation.loadComments(filmId));
+  }
+});
 
 MoviePage.propTypes = {
   movie: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     year: PropTypes.number.isRequired,
@@ -127,7 +154,17 @@ MoviePage.propTypes = {
     poster: PropTypes.string.isRequired,
     background: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
-  })
+  }),
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    commentId: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    date: PropTypes.instanceOf(Date).isRequired,
+  })).isRequired,
+  loadComments: PropTypes.func.isRequired,
 };
 
-export default MoviePage;
+export {MoviePage};
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

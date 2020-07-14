@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const createItem = (name, isActive, onClick) => {
-  const className = `movie-nav__item ${isActive ? `movie-nav__item--active` : ``}`;
+  const className = `movie-nav__item${isActive ? ` movie-nav__item--active` : ``}`;
   return (
     <li key={name} className={className}>
       <a

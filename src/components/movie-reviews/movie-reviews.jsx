@@ -24,7 +24,6 @@ const getCommentTemplate = (comment) => {
 
 const MovieReviews = (props) => {
   const {comments} = props;
-
   if (!comments) {
     return undefined;
   }
