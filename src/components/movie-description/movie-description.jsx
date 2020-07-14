@@ -4,42 +4,15 @@ import MovieOverview from "../movie-overview/movie-overview.jsx";
 import MovieDetails from "../movie-details/movie-details.jsx";
 import MovieReviews from "../movie-reviews/movie-reviews.jsx";
 import PropTypes from "prop-types";
+import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
+import {MovieTab} from "../../const";
 
-const MovieTab = {
-  OVERVIEW: `Overview`,
-  DETAILS: `Details`,
-  REVIEWS: `Reviews`,
-};
+const MovieDescription = (props) => {
 
-class MovieDescription extends React.PureComponent {
-  constructor(props) {
-    super(props);
+  const {movie, comments, elements, activeElement, onElementClick} = props;
 
-    this.state = {
-      activeTab: MovieTab.OVERVIEW,
-    };
-
-    this._tabClickHandler = this._tabClickHandler.bind(this);
-  }
-
-  render() {
-    const tabs = Object.values(MovieTab);
-
-    return (
-      <div className="movie-card__desc">
-        <MovieNav
-          tabs={tabs}
-          activeTab={this.state.activeTab}
-          onClick={this._tabClickHandler}
-        />
-        {this._createTabContentTemplate()}
-      </div>
-    );
-  }
-
-  _createTabContentTemplate() {
-    const {movie, comments} = this.props;
-    switch (this.state.activeTab) {
+  const createTabContentTemplate = () => {
+    switch (activeElement) {
       case MovieTab.OVERVIEW:
         return (
           <MovieOverview
@@ -60,12 +33,19 @@ class MovieDescription extends React.PureComponent {
         );
     }
     return undefined;
-  }
+  };
 
-  _tabClickHandler(tab) {
-    this.setState({activeTab: tab});
-  }
-}
+  return (
+    <div className="movie-card__desc">
+      <MovieNav
+        tabs={elements}
+        activeTab={activeElement}
+        onClick={onElementClick}
+      />
+      {createTabContentTemplate(movie, comments, activeElement)}
+    </div>
+  );
+};
 
 MovieDescription.propTypes = {
   movie: PropTypes.shape({
@@ -90,6 +70,10 @@ MovieDescription.propTypes = {
     text: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
   })).isRequired,
+  elements: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  activeElement: PropTypes.string.isRequired,
+  onElementClick: PropTypes.func.isRequired,
 };
 
-export default MovieDescription;
+export {MovieDescription};
+export default withActiveElement(MovieDescription);

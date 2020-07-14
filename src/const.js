@@ -18,3 +18,9 @@ export const extendObject = (a, b) => {
 export const MAX_GENRES = 8;
 
 export const ALL_GENRES_NAME = `all genres`;
+
+export const MovieTab = {
+  OVERVIEW: `Overview`,
+  DETAILS: `Details`,
+  REVIEWS: `Reviews`,
+};

@@ -7,10 +7,13 @@ import MovieDescription from "../movie-description/movie-description.jsx";
 import {getCommentsByMovie} from "../../reducer/data/selectors";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {connect} from "react-redux";
+import {MovieTab} from "../../const";
 
 class MoviePage extends React.PureComponent {
   constructor(props) {
     super(props);
+
+    this._tabs = Object.values(MovieTab);
   }
 
   render() {
@@ -67,6 +70,7 @@ class MoviePage extends React.PureComponent {
             <MovieDescription
               movie={this.props.movie}
               comments={this.props.comments}
+              elements={this._tabs}
             />
           </div>
         </div>
