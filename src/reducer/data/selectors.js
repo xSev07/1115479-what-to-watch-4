@@ -19,7 +19,7 @@ export const getCommentsByMovie = createSelector(
     getAllComments,
     (state, ownProps) => ownProps,
     (allComments, ownProps) => {
-      const {filmId} = ownProps;
-      return allComments[filmId];
+      const {movieId} = ownProps;
+      return allComments[movieId];
     }
 );

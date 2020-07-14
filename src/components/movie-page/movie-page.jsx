@@ -101,9 +101,9 @@ class MoviePage extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  movies: getFilteredMovies(state, {filmId: `1`}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
+  movies: getFilteredMovies(state, {movieId: `1`}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
   // TODO: сделать получение комментариев к конкретному фильму
-  comments: getCommentsByMovie(state, {filmId: `1`}),
+  comments: getCommentsByMovie(state, {movieId: `1`}),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -117,7 +117,7 @@ MoviePage.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
     votes: PropTypes.number.isRequired,
@@ -131,7 +131,7 @@ MoviePage.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
     votes: PropTypes.number.isRequired,

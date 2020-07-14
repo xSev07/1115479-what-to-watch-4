@@ -51,7 +51,7 @@ MovieDescription.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
     votes: PropTypes.number.isRequired,

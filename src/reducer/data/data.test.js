@@ -80,7 +80,7 @@ describe(`Operation in data reducer work correctly`, () => {
     actors: [``, ``, ``],
     description: [``],
     duration: 0,
-    genre: [``],
+    genre: ``,
     inList: false,
     producer: ``,
     rating: 0,

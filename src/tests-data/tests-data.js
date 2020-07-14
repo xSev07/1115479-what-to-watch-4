@@ -9,7 +9,7 @@ export const movies = [
       `Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.`
     ],
     duration: 60,
-    genre: [`drama`],
+    genre: `drama`,
     inList: false,
     producer: `Wes Andreson`,
     rating: 8.9,
@@ -33,7 +33,7 @@ export const movies = [
       `The story of the legendary British rock band Queen and lead singer Freddie Mercury, leading up to their famous performance at Музыкальный фестиваль Live Aid (1985)`
     ],
     duration: 134,
-    genre: [`drama`],
+    genre: `drama`,
     inList: false,
     producer: `Bryan Singer`,
     rating: 8.0,
@@ -82,7 +82,7 @@ export const movies = [
       `Based on the 1993 non-fiction book Howard Hughes: The Secret Life by Charles Higham, the film depicts the life of Howard Hughes, an aviation pioneer and director of Hell's Angels. The film portrays his life from 1927–1947 during which time Hughes became a successful film producer and an aviation magnate while simultaneously growing more unstable due to severe obsessive–compulsive disorder (OCD).`
     ],
     duration: 170,
-    genre: [`thriller`],
+    genre: `thriller`,
     inList: false,
     producer: `Martin Scorsese`,
     rating: 7.5,
@@ -99,7 +99,7 @@ export const movies = [
 
 export const promoMovie = {
   title: `The Grand Budapest Hotel`,
-  genre: [`Drama`],
+  genre: `Drama`,
   year: 2014,
   poster: `img/the-grand-budapest-hotel-poster.jpg`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,

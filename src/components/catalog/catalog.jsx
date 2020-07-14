@@ -47,7 +47,7 @@ Catalog.propTypes = {
   movies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
-        genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        genre: PropTypes.string.isRequired,
         year: PropTypes.number.isRequired,
         rating: PropTypes.number.isRequired,
         votes: PropTypes.number.isRequired,

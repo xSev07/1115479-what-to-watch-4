@@ -4,7 +4,7 @@ const parseMovie = (movie) => {
     actors: movie[`starring`],
     description: [movie[`description`]],
     duration: movie[`run_time`],
-    genre: [movie[`genre`]],
+    genre: movie[`genre`],
     inList: movie[`is_favorite`],
     producer: movie[`director`],
     rating: movie[`rating`],
