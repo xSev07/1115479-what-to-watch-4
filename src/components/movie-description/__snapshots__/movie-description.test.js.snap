@@ -22,7 +22,7 @@ exports[`Should MovieDescription render correctly 1`] = `
         </a>
       </li>
       <li
-        className="movie-nav__item "
+        className="movie-nav__item"
       >
         <a
           className="movie-nav__link"
@@ -33,7 +33,7 @@ exports[`Should MovieDescription render correctly 1`] = `
         </a>
       </li>
       <li
-        className="movie-nav__item "
+        className="movie-nav__item"
       >
         <a
           className="movie-nav__link"

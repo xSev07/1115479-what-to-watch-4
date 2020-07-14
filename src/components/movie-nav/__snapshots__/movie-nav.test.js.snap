@@ -8,7 +8,7 @@ exports[`Should MovieNav render correctly 1`] = `
     className="movie-nav__list"
   >
     <li
-      className="movie-nav__item "
+      className="movie-nav__item"
     >
       <a
         className="movie-nav__link"
@@ -30,7 +30,7 @@ exports[`Should MovieNav render correctly 1`] = `
       </a>
     </li>
     <li
-      className="movie-nav__item "
+      className="movie-nav__item"
     >
       <a
         className="movie-nav__link"
