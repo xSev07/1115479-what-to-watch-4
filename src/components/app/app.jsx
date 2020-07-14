@@ -53,6 +53,7 @@ class App extends PureComponent {
     return (
       <MoviePage
         movie={this.props.allMovies[displayedMovie]}
+        onMovieCardClick={this._handleMovieCardClick}
       />
     );
   }

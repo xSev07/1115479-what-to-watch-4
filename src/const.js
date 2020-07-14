@@ -1,5 +1,6 @@
 export const ShowedMovies = {
   ON_START: 8,
+  ON_MOVIE_PAGE: 4,
 };
 
 export const TextRating = {

@@ -7,7 +7,9 @@ import MovieDescription from "../movie-description/movie-description.jsx";
 import {getCommentsByMovie} from "../../reducer/data/selectors";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {connect} from "react-redux";
-import {MovieTab} from "../../const";
+import {MovieTab, ShowedMovies} from "../../const";
+import MovieList from "../movie-list/movie-list.jsx";
+import {getFilteredMovies} from "../../reducer/app/selectors";
 
 class MoviePage extends React.PureComponent {
   constructor(props) {
@@ -17,8 +19,9 @@ class MoviePage extends React.PureComponent {
   }
 
   render() {
+    const {movies, movie, onMovieCardClick} = this.props;
     // TODO: Убрать movie из пропсов и получать его по адресной строке после 8го модуля
-    const {title, genre, year, poster, background, backgroundColor} = this.props.movie;
+    const {title, genre, year, poster, background, backgroundColor} = movie;
     const mainGenre = transformToFirstCapitalSymbol(genre[0]);
 
     // TODO: Добавить вывод похожих фильмов после 8го модуля
@@ -80,45 +83,10 @@ class MoviePage extends React.PureComponent {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <div className="catalog__movies-list">
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                  alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of
-                  Grindelwald</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-              </h3>
-            </article>
-          </div>
+          <MovieList
+            movies={movies}
+            onMovieCardClick={onMovieCardClick}
+          />
         </section>
 
         <Footer/>
@@ -133,8 +101,9 @@ class MoviePage extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
+  movies: getFilteredMovies(state, {filmId: `1`}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
   // TODO: сделать получение комментариев к конкретному фильму
-  comments: getCommentsByMovie(state, {filmId: 1}),
+  comments: getCommentsByMovie(state, {filmId: `1`}),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -145,6 +114,20 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 MoviePage.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    year: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
+    producer: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    poster: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
   movie: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -168,6 +151,7 @@ MoviePage.propTypes = {
     date: PropTypes.instanceOf(Date).isRequired,
   })).isRequired,
   loadComments: PropTypes.func.isRequired,
+  onMovieCardClick: PropTypes.func.isRequired,
 };
 
 export {MoviePage};
