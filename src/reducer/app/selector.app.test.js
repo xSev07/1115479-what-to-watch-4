@@ -4,49 +4,34 @@ import {getFilteredMovies, getGenres} from "./selectors";
 
 const movies = [
   {
-    genre: [`genre1`]
+    id: `1`,
+    genre: `genre1`
   },
   {
-    genre: [`genre1`, `genre2`]
+    id: `2`,
+    genre: `genre2`
   },
   {
-    genre: [`genre1`, `genre2`, `genre3`]
+    id: `3`,
+    genre: `genre3`
   },
   {
-    genre: [`genre3`]
+    id: `4`,
+    genre: `genre4`
   },
   {
-    genre: [`genre4`]
+    id: `5`,
+    genre: `genre4`
   },
   {
-    genre: [`genre5`]
-  },
-  {
-    genre: [`genre5`]
+    id: `6`,
+    genre: `genre4`
   }
 ];
 
 describe(`Check app selector work correctly`, () => {
-  describe(`Check the filtered movies is correct`, () => {
+  describe(`Check filtered movies by state is correct`, () => {
     it(`should return movies with unique genre`, () => {
-      const state = {
-        [NameSpace.DATA]: {
-          movies,
-        },
-        [NameSpace.APP]: {
-          genre: `genre4`,
-        }
-      };
-
-      expect(getFilteredMovies(state))
-        .toEqual([
-          {
-            genre: [`genre4`]
-          }
-        ]);
-    });
-
-    it(`should return movies with not unique genre`, () => {
       const state = {
         [NameSpace.DATA]: {
           movies,
@@ -59,13 +44,8 @@ describe(`Check app selector work correctly`, () => {
       expect(getFilteredMovies(state))
         .toEqual([
           {
-            genre: [`genre1`]
-          },
-          {
-            genre: [`genre1`, `genre2`]
-          },
-          {
-            genre: [`genre1`, `genre2`, `genre3`]
+            id: `1`,
+            genre: `genre1`
           }
         ]);
     });
@@ -76,17 +56,23 @@ describe(`Check app selector work correctly`, () => {
           movies,
         },
         [NameSpace.APP]: {
-          genre: `genre5`,
+          genre: `genre4`,
         }
       };
 
       expect(getFilteredMovies(state))
         .toEqual([
           {
-            genre: [`genre5`]
+            id: `4`,
+            genre: `genre4`
           },
           {
-            genre: [`genre5`]
+            id: `5`,
+            genre: `genre4`
+          },
+          {
+            id: `6`,
+            genre: `genre4`
           }
         ]);
     });
@@ -120,6 +106,42 @@ describe(`Check app selector work correctly`, () => {
     });
   });
 
+  describe(`Check filtered movies by movie id is correct`, () => {
+    const state = {
+      [NameSpace.DATA]: {
+        movies,
+      },
+    };
+
+    it(`should return movies with unique genre`, () => {
+      expect(getFilteredMovies(state, {movieId: `1`}))
+        .toEqual([
+          {
+            id: `1`,
+            genre: `genre1`
+          }
+        ]);
+    });
+
+    it(`should return movies with same genre`, () => {
+      expect(getFilteredMovies(state, {movieId: `5`}))
+        .toEqual([
+          {
+            id: `4`,
+            genre: `genre4`
+          },
+          {
+            id: `5`,
+            genre: `genre4`
+          },
+          {
+            id: `6`,
+            genre: `genre4`
+          }
+        ]);
+    });
+  });
+
   describe(`Check creating a list of genres`, () => {
     it(`should return correct genres list`, () => {
       const state = {
@@ -130,7 +152,7 @@ describe(`Check app selector work correctly`, () => {
           genre: ALL_GENRES_NAME,
         }
       };
-      expect(getGenres(state)).toEqual([ALL_GENRES_NAME, `genre1`, `genre2`, `genre3`, `genre4`, `genre5`]);
+      expect(getGenres(state)).toEqual([ALL_GENRES_NAME, `genre1`, `genre2`, `genre3`, `genre4`]);
     });
 
     it(`should return correct genres list with empty movies`, () => {
