@@ -57,7 +57,7 @@ export const movies = [
       `From the Academy Award winning producers of The King’s Speech and acclaimed director Justin Kurzel, comes a visceral and visually breath-taking retelling of the classic tale about an ambitious Scottish lord who seizes the throne with the help of his wife. Starring Academy Award nominee Michael Fassbender and Academy Award winner Marion Cotillard, Macbeth is both visually epic and a breathtaking experience.`
     ],
     duration: 113,
-    genre: [`documental`],
+    genre: `documental`,
     inList: false,
     producer: `Justin Kurzel`,
     rating: 6.6,

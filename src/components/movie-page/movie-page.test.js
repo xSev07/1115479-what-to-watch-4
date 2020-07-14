@@ -13,11 +13,17 @@ it(`Should MoviePage render correctly`, () => {
       .create(
           <Provider store={store}>
             <MoviePage
+              movies={movies}
               movie={movies[0]}
               comments={comments}
               loadComments={() => {}}
+              onMovieCardClick={() => {}}
             />
-          </Provider>
+          </Provider>, {
+            createNodeMock: () => {
+              return {};
+            }
+          }
       ).toJSON();
 
   expect(tree).toMatchSnapshot();
