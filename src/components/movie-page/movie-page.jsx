@@ -114,8 +114,9 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   loadComments(filmId) {
-    // TODO: Сделать проверку на уже загруженные комментарии, если она вообще нужна
-    dispatch(DataOperation.loadComments(filmId));
+    if (!this.comments) {
+      dispatch(DataOperation.loadComments(filmId));
+    }
   }
 });
 
