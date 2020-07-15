@@ -1,15 +1,30 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MoviePage from "./movie-page";
-import {movies} from "../../tests-data/tests-data";
+import {MoviePage} from "./movie-page";
+import {comments, movies, storeData} from "../../tests-data/tests-data";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
+
+const mockStore = configureStore([]);
 
 it(`Should MoviePage render correctly`, () => {
+  const store = mockStore(storeData);
   const tree = renderer
-    .create(
-        <MoviePage
-          movie={movies[0]}
-        />
-    ).toJSON();
+      .create(
+          <Provider store={store}>
+            <MoviePage
+              movies={movies}
+              movie={movies[0]}
+              comments={comments}
+              loadComments={() => {}}
+              onMovieCardClick={() => {}}
+            />
+          </Provider>, {
+            createNodeMock: () => {
+              return {};
+            }
+          }
+      ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

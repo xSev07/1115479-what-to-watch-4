@@ -1,4 +1,8 @@
 import {TextRating} from "../../const";
+import moment from "moment";
+import momentDurationFormatSetup from "moment-duration-format";
+
+momentDurationFormatSetup(moment);
 
 export const getRatingTextDescription = (rating) => {
   if (rating >= 0 && rating < 3) {
@@ -21,4 +25,18 @@ export const transformToFirstCapitalSymbol = (str) => {
     return `${lowerStr[0].toUpperCase()}${lowerStr.slice(1)}`;
   }
   return ``;
+};
+
+export const transformRuntime = (time) => {
+  return moment.duration(time, `m`).format(`h[h] mm[m]`);
+};
+
+export const transformDate = (date) => {
+  return moment(date).format(`MMMM DD, YYYY`);
+};
+
+export const splitArrayInHalf = (arr = []) => {
+  const firstHalf = arr.slice(0, Math.ceil(arr.length / 2));
+  const secondHalf = arr.slice(Math.ceil(arr.length / 2));
+  return {firstHalf, secondHalf};
 };

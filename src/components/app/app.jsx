@@ -18,6 +18,11 @@ class App extends PureComponent {
   }
 
   render() {
+    const movies = this.props.allMovies;
+    // TODO: Сделать нормальную заглушку
+    if (movies.length === 0) {
+      return (<h1>Данные загружаются</h1>);
+    }
     return (
       <BrowserRouter>
         <Switch>
@@ -26,7 +31,7 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-movie">
             <MoviePage
-              movie={this.props.allMovies[0]}
+              movie={movies[0]}
             />
           </Route>
         </Switch>
@@ -48,6 +53,7 @@ class App extends PureComponent {
     return (
       <MoviePage
         movie={this.props.allMovies[displayedMovie]}
+        onMovieCardClick={this._handleMovieCardClick}
       />
     );
   }
@@ -80,13 +86,13 @@ const mapDispatchToProps = (dispatch) => ({
 App.propTypes = {
   promoMovie: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
   }),
   allMovies: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
-        genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        genre: PropTypes.string.isRequired,
         year: PropTypes.number.isRequired,
         rating: PropTypes.number.isRequired,
         votes: PropTypes.number.isRequired,

@@ -1,18 +1,32 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {getRatingTextDescription, transformToFirstCapitalSymbol} from "../../utils/common/common";
+import {transformToFirstCapitalSymbol} from "../../utils/common/common";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
+import MovieDescription from "../movie-description/movie-description.jsx";
+import {getCommentsByMovie} from "../../reducer/data/selectors";
+import {Operation as DataOperation} from "../../reducer/data/data";
+import {connect} from "react-redux";
+import {MovieTab, ShowedMovies} from "../../const";
+import MovieList from "../movie-list/movie-list.jsx";
+import {getFilteredMovies} from "../../reducer/app/selectors";
 
-const MoviePage = (props) => {
-  const {title, genre, year, rating, votes, producer, actors, description, poster, background, backgroundColor} = props.movie;
-  const textRating = getRatingTextDescription(rating);
-  const mainGenre = transformToFirstCapitalSymbol(genre[0]);
+const tabs = Object.values(MovieTab);
 
-  const actorsText = `${actors.join(`, `)} and other`;
-  const DescriptionText = description.map((it, index) => <p key={index}>{it}</p>);
+class MoviePage extends React.PureComponent {
+  constructor(props) {
+    super(props);
 
-  return (
+    this._tabs = tabs;
+  }
+
+  render() {
+    const {movies, movie, onMovieCardClick} = this.props;
+    // TODO: Убрать movie из пропсов и получать его по адресной строке после 8го модуля
+    const {title, genre, year, poster, background, backgroundColor} = movie;
+    const mainGenre = transformToFirstCapitalSymbol(genre[0]);
+
+    return (
     <>
       <section className="movie-card movie-card--full" style={{background: backgroundColor}}>
         <div className="movie-card__hero">
@@ -57,37 +71,11 @@ const MoviePage = (props) => {
                 height="327"/>
             </div>
 
-            <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="movie-rating">
-                <div className="movie-rating__score">{rating}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{textRating}</span>
-                  <span className="movie-rating__count">{votes} ratings</span>
-                </p>
-              </div>
-
-              <div className="movie-card__text">
-                {DescriptionText}
-
-                <p className="movie-card__director"><strong>Director: {producer}</strong></p>
-
-                <p className="movie-card__starring"><strong>Starring: {actorsText}</strong></p>
-              </div>
-            </div>
+            <MovieDescription
+              movie={this.props.movie}
+              comments={this.props.comments}
+              elements={this._tabs}
+            />
           </div>
         </div>
       </section>
@@ -96,57 +84,46 @@ const MoviePage = (props) => {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <div className="catalog__movies-list">
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                  alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of
-                  Grindelwald</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175"/>
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-              </h3>
-            </article>
-          </div>
+          <MovieList
+            movies={movies}
+            onMovieCardClick={onMovieCardClick}
+          />
         </section>
 
         <Footer/>
       </div>
     </>
-  );
-};
+    );
+  }
+
+  componentDidMount() {
+    this.props.loadComments(this.props.movie.id);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.movie.id !== this.props.movie.id) {
+      this.props.loadComments(this.props.movie.id);
+    }
+  }
+}
+
+const mapStateToProps = (state, props) => ({
+  movies: getFilteredMovies(state, {movieId: props.movie.id}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
+  comments: getCommentsByMovie(state, {movieId: props.movie.id}),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadComments(filmId) {
+    // TODO: Сделать проверку на уже загруженные комментарии, если она вообще нужна
+    dispatch(DataOperation.loadComments(filmId));
+  }
+});
 
 MoviePage.propTypes = {
-  movie: PropTypes.shape({
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    genre: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
     votes: PropTypes.number.isRequired,
@@ -156,7 +133,32 @@ MoviePage.propTypes = {
     poster: PropTypes.string.isRequired,
     background: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
-  })
+  }).isRequired).isRequired,
+  movie: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
+    producer: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    poster: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+  }),
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    commentId: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    date: PropTypes.instanceOf(Date).isRequired,
+  })),
+  loadComments: PropTypes.func.isRequired,
+  onMovieCardClick: PropTypes.func.isRequired,
 };
 
-export default MoviePage;
+export {MoviePage};
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

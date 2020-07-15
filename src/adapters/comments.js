@@ -1,7 +1,13 @@
-// TODO: Реализовать парсинг комментариев
-
 const parseComment = (comment) => {
-  return comment;
+  const userData = comment.user;
+  return {
+    commentId: comment.id.toString(),
+    userId: userData.id.toString(),
+    author: userData.name,
+    rating: comment.rating,
+    text: comment.comment,
+    date: new Date(comment.date),
+  };
 };
 
 const parseComments = (data) => {
