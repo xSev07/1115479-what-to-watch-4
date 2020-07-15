@@ -100,10 +100,10 @@ class MoviePage extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state) => ({
-  movies: getFilteredMovies(state, {movieId: `1`}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
+const mapStateToProps = (state, props) => ({
+  movies: getFilteredMovies(state, {movieId: props.movie.id}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
   // TODO: сделать получение комментариев к конкретному фильму
-  comments: getCommentsByMovie(state, {movieId: `1`}),
+  comments: getCommentsByMovie(state, {movieId: props.movie.id}),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -149,7 +149,7 @@ MoviePage.propTypes = {
     rating: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
-  })).isRequired,
+  })),
   loadComments: PropTypes.func.isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
 };

@@ -69,7 +69,7 @@ MovieDescription.propTypes = {
     rating: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
-  })).isRequired,
+  })),
   elements: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   activeElement: PropTypes.string.isRequired,
   onElementClick: PropTypes.func.isRequired,
