@@ -28,9 +28,9 @@ exports[`Should MovieReview render correctly should render correctly with 1 comm
           </cite>
           <time
             className="review__date"
-            dateTime={1995-12-16T22:24:00.000Z}
+            dateTime={2020-06-21T10:54:44.818Z}
           >
-            December 17, 1995
+            June 21, 2020
           </time>
         </footer>
       </blockquote>
@@ -75,9 +75,9 @@ exports[`Should MovieReview render correctly should render correctly with 2 comm
           </cite>
           <time
             className="review__date"
-            dateTime={1995-12-16T22:24:00.000Z}
+            dateTime={2020-06-21T10:54:44.818Z}
           >
-            December 17, 1995
+            June 21, 2020
           </time>
         </footer>
       </blockquote>
@@ -112,9 +112,9 @@ exports[`Should MovieReview render correctly should render correctly with 2 comm
           </cite>
           <time
             className="review__date"
-            dateTime={1997-11-10T08:24:00.000Z}
+            dateTime={2020-05-11T10:54:44.818Z}
           >
-            November 10, 1997
+            May 11, 2020
           </time>
         </footer>
       </blockquote>

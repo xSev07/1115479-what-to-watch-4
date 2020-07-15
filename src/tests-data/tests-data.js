@@ -118,7 +118,7 @@ export const comments = [{
   author: `Test`,
   rating: 5.2,
   text: `Test string`,
-  date: new Date(`1995-12-17T03:24:00`),
+  date: new Date(`2020-06-21T10:54:44.818Z`),
 },
 {
   commentId: `2`,
@@ -126,7 +126,7 @@ export const comments = [{
   author: `Test2`,
   rating: 8,
   text: `Test string 2`,
-  date: new Date(`1997-11-10T13:24:00`),
+  date: new Date(`2020-05-11T10:54:44.818Z`),
 }
 ];
 
