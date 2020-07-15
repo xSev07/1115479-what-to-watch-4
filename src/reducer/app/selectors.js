@@ -29,9 +29,8 @@ export const getFilteredMovies = createSelector(
     (state, ownProps) => {
       if (!ownProps) {
         return getGenreFromState(state);
-      } else {
-        return getGenreFromMovie(state, ownProps.movieId);
       }
+      return getGenreFromMovie(state, ownProps.movieId);
     },
     (allMovies, currentGenre) => {
       if (currentGenre === ALL_GENRES_NAME) {

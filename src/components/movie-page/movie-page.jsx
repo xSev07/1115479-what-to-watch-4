@@ -11,11 +11,13 @@ import {MovieTab, ShowedMovies} from "../../const";
 import MovieList from "../movie-list/movie-list.jsx";
 import {getFilteredMovies} from "../../reducer/app/selectors";
 
+const tabs = Object.values(MovieTab);
+
 class MoviePage extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this._tabs = Object.values(MovieTab);
+    this._tabs = tabs;
   }
 
   render() {

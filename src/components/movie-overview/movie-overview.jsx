@@ -6,7 +6,7 @@ const MovieOverview = (props) => {
   const {votes, producer, rating, actors, description} = props;
   const textRating = getRatingTextDescription(rating);
   const actorsText = `${actors.join(`, `)} and other`;
-  const DescriptionText = description.map((it, index) => <p key={index}>{it}</p>);
+  const descriptionText = description.map((it, index) => <p key={index}>{it}</p>);
   return (
     <>
       <div className="movie-rating">
@@ -18,7 +18,7 @@ const MovieOverview = (props) => {
       </div>
 
       <div className="movie-card__text">
-        {DescriptionText}
+        {descriptionText}
 
         <p className="movie-card__director"><strong>Director: {producer}</strong></p>
 

@@ -11,30 +11,6 @@ const MovieDescription = (props) => {
 
   const {movie, comments, elements, activeElement, onElementClick} = props;
 
-  const createTabContentTemplate = () => {
-    switch (activeElement) {
-      case MovieTab.OVERVIEW:
-        return (
-          <MovieOverview
-            {...movie}
-          />
-        );
-      case MovieTab.DETAILS:
-        return (
-          <MovieDetails
-            {...movie}
-          />
-        );
-      case MovieTab.REVIEWS:
-        return (
-          <MovieReviews
-            comments={comments}
-          />
-        );
-    }
-    return undefined;
-  };
-
   return (
     <div className="movie-card__desc">
       <MovieNav
@@ -42,7 +18,15 @@ const MovieDescription = (props) => {
         activeTab={activeElement}
         onClick={onElementClick}
       />
-      {createTabContentTemplate(movie, comments, activeElement)}
+      {activeElement === MovieTab.OVERVIEW && (
+        <MovieOverview {...movie}/>
+      )}
+      {activeElement === MovieTab.DETAILS && (
+        <MovieDetails {...movie}/>
+      )}
+      {activeElement === MovieTab.REVIEWS && (
+        <MovieReviews comments={comments}/>
+      )}
     </div>
   );
 };
