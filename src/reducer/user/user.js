@@ -21,7 +21,18 @@ const ActionCreator = {
 };
 
 const Operation = {
-  
+  checkAuth: () => (dispatch, getState, api) => {
+    return api.get(`/login`)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+        }
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
