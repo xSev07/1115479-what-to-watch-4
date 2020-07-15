@@ -1,12 +1,12 @@
 const parseComment = (comment) => {
-  const userData = comment[`user`];
+  const userData = comment.user;
   return {
-    commentId: comment[`id`].toString(),
-    userId: userData[`id`].toString(),
-    author: userData[`name`],
-    rating: comment[`rating`],
-    text: comment[`comment`],
-    date: new Date(comment[`date`]),
+    commentId: comment.id.toString(),
+    userId: userData.id.toString(),
+    author: userData.name,
+    rating: comment.rating,
+    text: comment.comment,
+    date: new Date(comment.date),
   };
 };
 
