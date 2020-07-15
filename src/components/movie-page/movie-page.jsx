@@ -26,7 +26,6 @@ class MoviePage extends React.PureComponent {
     const {title, genre, year, poster, background, backgroundColor} = movie;
     const mainGenre = transformToFirstCapitalSymbol(genre[0]);
 
-    // TODO: Добавить вывод похожих фильмов после 8го модуля
     return (
     <>
       <section className="movie-card movie-card--full" style={{background: backgroundColor}}>
@@ -100,11 +99,16 @@ class MoviePage extends React.PureComponent {
   componentDidMount() {
     this.props.loadComments(this.props.movie.id);
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.movie.id !== this.props.movie.id) {
+      this.props.loadComments(this.props.movie.id);
+    }
+  }
 }
 
 const mapStateToProps = (state, props) => ({
   movies: getFilteredMovies(state, {movieId: props.movie.id}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
-  // TODO: сделать получение комментариев к конкретному фильму
   comments: getCommentsByMovie(state, {movieId: props.movie.id}),
 });
 
