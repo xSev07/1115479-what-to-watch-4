@@ -20,6 +20,10 @@ const ActionCreator = {
   }),
 };
 
+const Operation = {
+  
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.REQUIRED_AUTHORIZATION:
@@ -29,4 +33,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, ActionType, ActionCreator, AuthorizationStatus};
+export {reducer, ActionType, ActionCreator, AuthorizationStatus, Operation};

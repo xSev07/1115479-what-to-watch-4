@@ -6,6 +6,7 @@ import MoviePage from "../movie-page/movie-page.jsx";
 import {connect} from "react-redux";
 import {getAllMovies, getPromoMovie} from "../../reducer/data/selectors";
 import {Operation as DataOperation} from "../../reducer/data/data";
+import SignIn from "../sign-in/sign-in.jsx";
 
 class App extends PureComponent {
   constructor(props) {
@@ -33,6 +34,9 @@ class App extends PureComponent {
             <MoviePage
               movie={movies[0]}
             />
+          </Route>
+          <Route exact path="/dev-login">
+            <SignIn/>
           </Route>
         </Switch>
       </BrowserRouter>
