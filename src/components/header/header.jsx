@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {getUserAvatar} from "../../reducer/user/selectors";
 
 const createUserBlockTemplate = (avatar) => {
   return (
@@ -35,9 +37,14 @@ const Header = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  avatar: getUserAvatar(state),
+});
+
 Header.propTypes = {
   isMainPage: PropTypes.bool,
   avatar: PropTypes.string.isRequired,
 };
 
-export default Header;
+export {Header};
+export default connect(mapStateToProps)(Header);
