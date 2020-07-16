@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {getAllMovies, getPromoMovie} from "../../reducer/data/selectors";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import SignIn from "../sign-in/sign-in.jsx";
+import {Operation as UserOperation} from "../../reducer/user/user";
 
 class App extends PureComponent {
   constructor(props) {
@@ -70,6 +71,7 @@ class App extends PureComponent {
   componentDidMount() {
     this.props.loadPromo();
     this.props.loadMovies();
+    this.props.checkAuth();
   }
 }
 
@@ -85,6 +87,9 @@ const mapDispatchToProps = (dispatch) => ({
   loadPromo() {
     dispatch(DataOperation.loadPromo());
   },
+  checkAuth() {
+    dispatch(UserOperation.checkAuth());
+  }
 });
 
 App.propTypes = {
@@ -107,6 +112,7 @@ App.propTypes = {
   ).isRequired,
   loadPromo: PropTypes.func.isRequired,
   loadMovies: PropTypes.func.isRequired,
+  checkAuth: PropTypes.func.isRequired,
 };
 
 export {App};
