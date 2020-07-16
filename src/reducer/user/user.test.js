@@ -108,7 +108,10 @@ describe(`Operation in user reducer work correctly`, () => {
   it(`should make a correct API call to /login POST`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const authChecking = Operation.checkAuth();
+    const logining = Operation.login({
+      login: `Oliver.conner@gmail.com`,
+      password: `123ItIsABadPassword`,
+    });
 
     apiMock
       .onPost(`/login`, {
@@ -117,7 +120,7 @@ describe(`Operation in user reducer work correctly`, () => {
       })
       .reply(200, userData);
 
-    return authChecking(dispatch, () => {}, api)
+    return logining(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
