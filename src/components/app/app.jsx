@@ -8,7 +8,7 @@ import {getAllMovies, getPromoMovie} from "../../reducer/data/selectors";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import SignIn from "../sign-in/sign-in.jsx";
 import {Operation as UserOperation} from "../../reducer/user/user";
-import {getUserAvatar, userIsAuthorized} from "../../reducer/user/selectors";
+import {getUserAvatar} from "../../reducer/user/selectors";
 
 class App extends PureComponent {
   constructor(props) {
@@ -82,7 +82,6 @@ class App extends PureComponent {
 const mapStateToProps = (state) => ({
   allMovies: getAllMovies(state),
   promoMovie: getPromoMovie(state),
-  // userIsAuthorized: userIsAuthorized(state),
   userAvatar: getUserAvatar(state),
 });
 
@@ -119,9 +118,11 @@ App.propTypes = {
         description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
       })
   ).isRequired,
+  userAvatar: PropTypes.string.isRequired,
   loadPromo: PropTypes.func.isRequired,
   loadMovies: PropTypes.func.isRequired,
   checkAuth: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 export {App};

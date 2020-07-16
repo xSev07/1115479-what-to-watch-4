@@ -77,6 +77,7 @@ Main.propTypes = {
     poster: PropTypes.string.isRequired,
     background: PropTypes.string.isRequired,
   }),
+  userAvatar: PropTypes.string.isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
 };
 

@@ -37,6 +37,7 @@ const Header = (props) => {
 
 Header.propTypes = {
   isMainPage: PropTypes.bool,
+  avatar: PropTypes.string.isRequired,
 };
 
 export default Header;

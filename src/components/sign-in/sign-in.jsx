@@ -66,4 +66,8 @@ const SignIn = (props) => {
   );
 };
 
+SignIn.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
+
 export default SignIn;
