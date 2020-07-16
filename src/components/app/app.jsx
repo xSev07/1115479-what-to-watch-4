@@ -21,7 +21,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const movies = this.props.allMovies;
+    const {allMovies: movies, login} = this.props;
     // TODO: Сделать нормальную заглушку
     if (movies.length === 0) {
       return (<h1>Данные загружаются</h1>);
@@ -38,7 +38,9 @@ class App extends PureComponent {
             />
           </Route>
           <Route exact path="/dev-login">
-            <SignIn/>
+            <SignIn
+              onSubmit={login}
+            />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -71,9 +73,9 @@ class App extends PureComponent {
   }
 
   componentDidMount() {
+    this.props.checkAuth();
     this.props.loadPromo();
     this.props.loadMovies();
-    this.props.checkAuth();
   }
 }
 
@@ -92,7 +94,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   checkAuth() {
     dispatch(UserOperation.checkAuth());
-  }
+  },
+  login(authData) {
+    dispatch(UserOperation.login(authData));
+  },
 });
 
 App.propTypes = {
