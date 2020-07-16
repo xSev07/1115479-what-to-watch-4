@@ -1,4 +1,8 @@
-import {ActionCreator, ActionType, AuthorizationStatus, reducer} from "./user";
+import {ActionCreator, ActionType, AuthorizationStatus, Operation, reducer} from "./user";
+import {BASE_SERVER_URL, createAPI} from "../../api";
+import MockAdapter from "axios-mock-adapter";
+
+const api = createAPI(() => {});
 
 describe(`Check user reducer work correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
@@ -44,5 +48,86 @@ describe(`Check user reducer work correctly`, () => {
         payload: `url`,
       });
     });
+  });
+});
+
+describe(`Operation in user reducer work correctly`, () => {
+  const userData = {
+    id: 1,
+    email: `Oliver.conner@gmail.com`,
+    name: `Oliver.conner`,
+    [`avatar_url`]: `/img/1.png`
+  };
+
+  it(`should make a correct API call to /login`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const authChecking = Operation.checkAuth();
+
+    apiMock
+      .onGet(`/login`)
+      .reply(200, userData);
+
+    return authChecking(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.ADD_AVATAR,
+          payload: `${BASE_SERVER_URL}/img/1.png`,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.REQUIRED_AUTHORIZATION,
+          payload: AuthorizationStatus.AUTH,
+        });
+      });
+  });
+
+  it(`should make a correct API call to /login GET`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const authChecking = Operation.checkAuth();
+
+    apiMock
+      .onGet(`/login`)
+      .reply(200, userData);
+
+    return authChecking(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.ADD_AVATAR,
+          payload: `${BASE_SERVER_URL}/img/1.png`,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.REQUIRED_AUTHORIZATION,
+          payload: AuthorizationStatus.AUTH,
+        });
+      });
+  });
+
+  it(`should make a correct API call to /login POST`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const authChecking = Operation.checkAuth();
+
+    apiMock
+      .onPost(`/login`, {
+        email: `Oliver.conner@gmail.com`,
+        password: `123ItIsABadPassword`
+      })
+      .reply(200, userData);
+
+    return authChecking(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.ADD_AVATAR,
+          payload: `${BASE_SERVER_URL}/img/1.png`,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.REQUIRED_AUTHORIZATION,
+          payload: AuthorizationStatus.AUTH,
+        });
+      });
   });
 });

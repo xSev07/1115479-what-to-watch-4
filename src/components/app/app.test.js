@@ -16,6 +16,8 @@ it(`Should App render correctly`, () => {
           <App
             loadPromo={() => {}}
             loadMovies={() => {}}
+            checkAuth={() => {}}
+            login={() => {}}
             allMovies={movies}
             promoMovie={promoMovie}
           />

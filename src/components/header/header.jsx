@@ -20,7 +20,11 @@ const createSignInTemplate = () => {
 const Header = (props) => {
   const {isMainPage = false, avatar} = props;
   const mainLink = isMainPage ? `` : `/`;
-  // TODO: Заменить a на Link
+  // TODO:
+  //  Заменить a на Link
+  //  Сделать класс с помощью миксинов(вроде так называется)
+  //  Добавить children(передавать заголовок)
+  //  UserBlock вынести в отдельный компонент или так же добавлять миксинами
   return (
     <header className="page-header movie-card__head">
       <div className="logo">

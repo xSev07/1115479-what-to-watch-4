@@ -10,7 +10,6 @@ import {connect} from "react-redux";
 import {MovieTab, ShowedMovies} from "../../const";
 import MovieList from "../movie-list/movie-list.jsx";
 import {getFilteredMovies} from "../../reducer/app/selectors";
-import {userIsAuthorized} from "../../reducer/user/selectors";
 
 const tabs = Object.values(MovieTab);
 

@@ -1,4 +1,5 @@
 import NameSpace from "../reducer/name-space";
+import {AuthorizationStatus} from "../reducer/user/user";
 
 export const movies = [
   {
@@ -138,5 +139,9 @@ export const storeData = {
   },
   [NameSpace.APP]: {
     genre: `all genres`,
+  },
+  [NameSpace.USER]: {
+    authorizationStatus: AuthorizationStatus.AUTH,
+    avatar: `img/avatar.jpg`,
   }
 };
