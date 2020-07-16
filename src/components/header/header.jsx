@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const createUserBlockTemplate = () => {
+const createUserBlockTemplate = (avatar) => {
   return (
     <div className="user-block__avatar">
-      <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+      <img src={avatar} alt="User avatar" width="63" height="63"/>
     </div>
   );
 };
@@ -16,7 +16,7 @@ const createSignInTemplate = () => {
 };
 
 const Header = (props) => {
-  const {isMainPage = false, isAuthorized, children} = props;
+  const {isMainPage = false, avatar} = props;
   const mainLink = isMainPage ? `` : `/`;
   // TODO: Заменить a на Link
   return (
@@ -28,9 +28,8 @@ const Header = (props) => {
           <span className="logo__letter logo__letter--3">W</span>
         </a>
       </div>
-      {children}
       <div className="user-block">
-        {isAuthorized ? createUserBlockTemplate() : createSignInTemplate()}
+        {avatar ? createUserBlockTemplate(avatar) : createSignInTemplate()}
       </div>
     </header>
   );

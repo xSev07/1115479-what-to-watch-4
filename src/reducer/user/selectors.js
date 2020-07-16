@@ -6,3 +6,7 @@ const NAME_SPACE = NameSpace.USER;
 export const userIsAuthorized = (state) => {
   return state[NAME_SPACE].authorizationStatus === AuthorizationStatus.AUTH;
 };
+
+export const getUserAvatar = (state) => {
+  return state[NAME_SPACE].avatar;
+};

@@ -5,7 +5,7 @@ import Footer from "../footer/footer.jsx";
 import Catalog from "../catalog/catalog.jsx";
 
 const Main = (props) => {
-  const {promo, userAuthorized, onMovieCardClick} = props;
+  const {promo, userAvatar, onMovieCardClick} = props;
   // TODO: Сделать нормальную заглушку
   if (!promo) {
     return (<h1>Данные загружаются</h1>);
@@ -20,7 +20,7 @@ const Main = (props) => {
         <h1 className="visually-hidden">WTW</h1>
         <Header
           isMainPage={true}
-          isAuthorized={userAuthorized}
+          avatar={userAvatar}
         />
 
         <div className="movie-card__bg">

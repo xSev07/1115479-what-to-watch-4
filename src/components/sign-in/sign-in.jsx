@@ -1,5 +1,6 @@
 import React, {createRef} from "react";
 import PropTypes from "prop-types";
+import Footer from "../footer/footer.jsx";
 
 const SignIn = (props) => {
   const {onSubmit} = props;
@@ -8,6 +9,7 @@ const SignIn = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    // TODO: Здесь можно проверить валидность email адреса
     onSubmit({
       login: loginRef.current.value,
       password: passwordRef.current.value,
@@ -38,6 +40,11 @@ const SignIn = (props) => {
           className="sign-in__form"
           onSubmit={handleSubmit}
         >
+          {/* {authError && (*/}
+          {/*  <div className="sign-in__message">*/}
+          {/*    <p>We can’t recognize this email <br/> and password combination. Please try again.</p>*/}
+          {/*  </div>*/}
+          {/* )}*/}
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" ref={loginRef}/>
@@ -54,19 +61,7 @@ const SignIn = (props) => {
         </form>
       </div>
 
-      <footer className="page-footer">
-        <div className="logo">
-          <a href="main.html" className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   );
 };
