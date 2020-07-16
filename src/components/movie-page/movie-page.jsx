@@ -10,6 +10,7 @@ import {connect} from "react-redux";
 import {MovieTab, ShowedMovies} from "../../const";
 import MovieList from "../movie-list/movie-list.jsx";
 import {getFilteredMovies} from "../../reducer/app/selectors";
+import {userIsAuthorized} from "../../reducer/user/selectors";
 
 const tabs = Object.values(MovieTab);
 
@@ -21,7 +22,7 @@ class MoviePage extends React.PureComponent {
   }
 
   render() {
-    const {movies, movie, onMovieCardClick} = this.props;
+    const {movies, movie, userIsAuthorized, onMovieCardClick} = this.props;
     // TODO: Убрать movie из пропсов и получать его по адресной строке после 8го модуля
     const {title, genre, year, poster, background, backgroundColor} = movie;
     const mainGenre = transformToFirstCapitalSymbol(genre[0]);
@@ -31,7 +32,9 @@ class MoviePage extends React.PureComponent {
       <section className="movie-card movie-card--full" style={{background: backgroundColor}}>
         <div className="movie-card__hero">
           <h1 className="visually-hidden">WTW</h1>
-          <Header/>
+          <Header
+            isAuthorized={userIsAuthorized}
+          />
 
           <div className="movie-card__bg">
             <img src={background} alt={title}/>
@@ -110,6 +113,7 @@ class MoviePage extends React.PureComponent {
 const mapStateToProps = (state, props) => ({
   movies: getFilteredMovies(state, {movieId: props.movie.id}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
   comments: getCommentsByMovie(state, {movieId: props.movie.id}),
+  userIsAuthorized: userIsAuthorized(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

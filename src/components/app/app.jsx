@@ -8,6 +8,7 @@ import {getAllMovies, getPromoMovie} from "../../reducer/data/selectors";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import SignIn from "../sign-in/sign-in.jsx";
 import {Operation as UserOperation} from "../../reducer/user/user";
+import {userIsAuthorized} from "../../reducer/user/selectors";
 
 class App extends PureComponent {
   constructor(props) {
@@ -45,12 +46,13 @@ class App extends PureComponent {
   }
 
   _renderMainScreen() {
-    const {promoMovie} = this.props;
+    const {promoMovie, userIsAuthorized} = this.props;
     const {displayedMovie} = this.state;
     if (displayedMovie === -1) {
       return (
         <Main
           promo={promoMovie}
+          userAuthorized={userIsAuthorized}
           onMovieCardClick={this._handleMovieCardClick}
         />
       );
@@ -78,6 +80,7 @@ class App extends PureComponent {
 const mapStateToProps = (state) => ({
   allMovies: getAllMovies(state),
   promoMovie: getPromoMovie(state),
+  userIsAuthorized: userIsAuthorized(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
