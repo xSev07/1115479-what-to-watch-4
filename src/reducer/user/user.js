@@ -38,6 +38,9 @@ const Operation = {
     return api.get(`/login`)
       .then((response) => {
         writeUserInfo(response.data, dispatch);
+      })
+      .catch(() => {
+
       });
   },
   login: (authData) => (dispatch, getState, api) => {
