@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {getLoginErrorStatus} from "../../reducer/user/selectors";
 import {Operation as UserOperation} from "../../reducer/user/user";
 import Header from "../header/header.jsx";
+import {isValidEmail} from "../../utils/common/common";
 
 class SignIn extends PureComponent {
   constructor(props) {
@@ -48,7 +49,7 @@ class SignIn extends PureComponent {
     const {login} = this.props;
     const {loginValue, passwordValue} = formData;
 
-    const emailValid = loginValue.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+    const emailValid = isValidEmail(loginValue);
     if (emailValid) {
       this.setState({
         incorrectEmail: false,
