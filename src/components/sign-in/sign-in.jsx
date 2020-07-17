@@ -1,20 +1,11 @@
 import React, {createRef} from "react";
 import PropTypes from "prop-types";
 import Footer from "../footer/footer.jsx";
+import LoginForm from "../login-form/login-form.jsx";
 
 const SignIn = (props) => {
   const {authError, incorrectEmail, onSubmit} = props;
-  const loginRef = createRef();
-  const passwordRef = createRef();
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    const formData = {
-      loginValue: loginRef.current.value,
-      passwordValue: passwordRef.current.value,
-    };
-    onSubmit(formData);
-  };
 
   // TODO:
   //  Вынести header в компонент(отличаются классы у header)
@@ -34,38 +25,11 @@ const SignIn = (props) => {
       </header>
 
       <div className="sign-in user-page__content">
-        <form
-          action="#"
-          className="sign-in__form"
-        >
-          {authError && (
-            <div className="sign-in__message">
-              <p>We can’t recognize this email <br/> and password combination. Please try again.</p>
-            </div>
-          )}
-          {incorrectEmail && (
-            <div className="sign-in__message">
-              <p>Please enter a valid email address</p>
-            </div>
-          )}
-          <div className="sign-in__fields">
-            <div className="sign-in__field">
-              <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" ref={loginRef}/>
-              <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
-            </div>
-            <div className="sign-in__field">
-              <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" ref={passwordRef}/>
-              <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
-            </div>
-          </div>
-          <div className="sign-in__submit">
-            <button
-              className="sign-in__btn"
-              type="submit"
-              onClick={handleSubmit}
-            >Sign in</button>
-          </div>
-        </form>
+        <LoginForm
+          authError={authError}
+          incorrectEmail={incorrectEmail}
+          onSubmit={onSubmit}
+        />
       </div>
 
       <Footer/>
