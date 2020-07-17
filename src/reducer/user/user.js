@@ -9,11 +9,13 @@ const AuthorizationStatus = {
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   avatar: ``,
+  loginError: false,
 };
 
 const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   ADD_AVATAR: `ADD_AVATAR`,
+  SET_LOGIN_ERROR_STATUS: `SET_LOGIN_ERROR_STATUS`,
 };
 
 const ActionCreator = {
@@ -24,6 +26,10 @@ const ActionCreator = {
   addAvatar: (url) => ({
     type: ActionType.ADD_AVATAR,
     payload: url,
+  }),
+  setLoginErrorStatus: (status) => ({
+    type: ActionType.SET_LOGIN_ERROR_STATUS,
+    payload: status,
   }),
 };
 
@@ -39,9 +45,7 @@ const Operation = {
       .then((response) => {
         writeUserInfo(response.data, dispatch);
       })
-      .catch(() => {
-
-      });
+      .catch(() => {});
   },
   login: (authData) => (dispatch, getState, api) => {
     return api.post(`/login`, {
@@ -49,8 +53,10 @@ const Operation = {
       password: authData.password,
     })
       .then((response) => {
+        dispatch(ActionCreator.setLoginErrorStatus(false));
         writeUserInfo(response.data, dispatch);
-      });
+      })
+      .catch(() => {});
   }
 };
 
@@ -60,6 +66,8 @@ const reducer = (state = initialState, action) => {
       return extendObject(state, {authorizationStatus: action.payload});
     case ActionType.ADD_AVATAR:
       return extendObject(state, {avatar: action.payload});
+    case ActionType.SET_LOGIN_ERROR_STATUS:
+      return extendObject(state, {loginError: action.payload});
   }
 
   return state;

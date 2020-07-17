@@ -8,6 +8,7 @@ import {getAllMovies, getPromoMovie} from "../../reducer/data/selectors";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import SignIn from "../sign-in/sign-in.jsx";
 import {Operation as UserOperation} from "../../reducer/user/user";
+import {getLoginErrorStatus} from "../../reducer/user/selectors";
 
 class App extends PureComponent {
   constructor(props) {
@@ -20,7 +21,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {allMovies: movies, login} = this.props;
+    const {allMovies: movies, login, authError} = this.props;
     // TODO: Сделать нормальную заглушку
     if (movies.length === 0) {
       return (<h1>Данные загружаются</h1>);
@@ -38,6 +39,7 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/login">
             <SignIn
+              authError={authError}
               onSubmit={login}
             />
           </Route>
@@ -80,6 +82,7 @@ class App extends PureComponent {
 const mapStateToProps = (state) => ({
   allMovies: getAllMovies(state),
   promoMovie: getPromoMovie(state),
+  authError: getLoginErrorStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -115,6 +118,7 @@ App.propTypes = {
         description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
       })
   ).isRequired,
+  authError: PropTypes.bool.isRequired,
   loadPromo: PropTypes.func.isRequired,
   loadMovies: PropTypes.func.isRequired,
   checkAuth: PropTypes.func.isRequired,

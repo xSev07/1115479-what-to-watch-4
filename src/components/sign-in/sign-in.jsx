@@ -3,23 +3,29 @@ import PropTypes from "prop-types";
 import Footer from "../footer/footer.jsx";
 
 const SignIn = (props) => {
-  const {onSubmit} = props;
+  const {authError, onSubmit} = props;
   const loginRef = createRef();
   const passwordRef = createRef();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // TODO: Здесь можно проверить валидность email адреса
-    onSubmit({
-      login: loginRef.current.value,
-      password: passwordRef.current.value,
-    });
+    const loginValue = loginRef.current.value;
+
+    // TODO:
+    //  Сделать отображение сообщения об ошибке
+    //  Вынести форму в отдельный компонент и перерисовывать только её при ошибке
+    const emailValid = loginValue.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+    if (emailValid) {
+      onSubmit({
+        login: loginValue,
+        password: passwordRef.current.value,
+      });
+    }
   };
 
   // TODO:
   //  Вынести header в компонент(отличаются классы у header)
   //  Сделать перенаправление на главную страницу, если авторизация успешна
-  //  Сделать вывод ошибок, если авторзиация не успешна
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -38,13 +44,12 @@ const SignIn = (props) => {
         <form
           action="#"
           className="sign-in__form"
-          onSubmit={handleSubmit}
         >
-          {/* {authError && (*/}
-          {/*  <div className="sign-in__message">*/}
-          {/*    <p>We can’t recognize this email <br/> and password combination. Please try again.</p>*/}
-          {/*  </div>*/}
-          {/* )}*/}
+          {authError && (
+            <div className="sign-in__message">
+              <p>We can’t recognize this email <br/> and password combination. Please try again.</p>
+            </div>
+          )}
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" ref={loginRef}/>
@@ -56,7 +61,11 @@ const SignIn = (props) => {
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" type="submit">Sign in</button>
+            <button
+              className="sign-in__btn"
+              type="submit"
+              onClick={handleSubmit}
+            >Sign in</button>
           </div>
         </form>
       </div>
@@ -67,6 +76,7 @@ const SignIn = (props) => {
 };
 
 SignIn.propTypes = {
+  authError: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 
