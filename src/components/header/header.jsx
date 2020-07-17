@@ -2,31 +2,30 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserAvatar} from "../../reducer/user/selectors";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 const Header = (props) => {
-  const {isMainPage = false, avatar} = props;
-  const mainLink = isMainPage ? `` : `/`;
+  const {className, avatar, children} = props;
+
   // TODO:
-  //  Сделать класс с помощью миксинов(вроде так называется)
-  //  Добавить children(передавать заголовок)
-  //  UserBlock вынести в отдельный компонент или так же добавлять миксинами
+  //  Сделать проверку url. Если это страница логина - не выводить user-block
   return (
-    <header className="page-header movie-card__head">
+    <header className={`page-header ${className}`}>
       <div className="logo">
-        <Link to={mainLink} className="logo__link">
+        <NavLink to="/" className="logo__link">
           <span className="logo__letter logo__letter--1">W</span>
           <span className="logo__letter logo__letter--2">T</span>
           <span className="logo__letter logo__letter--3">W</span>
-        </Link>
+        </NavLink>
       </div>
+      {children}
       <div className="user-block">
         {avatar ? (
           <div className="user-block__avatar">
             <img src={avatar} alt="User avatar" width="63" height="63"/>
           </div>
         ) : (
-          <Link to="/login" className="user-block__link">Sign in</Link>
+          <NavLink to="/login" className="user-block__link">Sign in</NavLink>
         )}
       </div>
     </header>
@@ -38,8 +37,13 @@ const mapStateToProps = (state) => ({
 });
 
 Header.propTypes = {
-  isMainPage: PropTypes.bool,
+  className: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
+  children: PropTypes.element,
+};
+
+Header.defaultProps = {
+  className: `movie-card__head`,
 };
 
 export {Header};
