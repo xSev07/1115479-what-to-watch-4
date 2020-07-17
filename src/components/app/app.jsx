@@ -94,12 +94,6 @@ class App extends PureComponent {
       });
     }
   }
-
-  componentDidMount() {
-    this.props.checkAuth();
-    this.props.loadPromo();
-    this.props.loadMovies();
-  }
 }
 
 const mapStateToProps = (state) => ({
@@ -109,15 +103,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadMovies() {
-    dispatch(DataOperation.loadMovies());
-  },
-  loadPromo() {
-    dispatch(DataOperation.loadPromo());
-  },
-  checkAuth() {
-    dispatch(UserOperation.checkAuth());
-  },
   login(authData) {
     dispatch(UserOperation.login(authData));
   },
@@ -142,9 +127,6 @@ App.propTypes = {
       })
   ).isRequired,
   authError: PropTypes.bool.isRequired,
-  loadPromo: PropTypes.func.isRequired,
-  loadMovies: PropTypes.func.isRequired,
-  checkAuth: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
 };
 
