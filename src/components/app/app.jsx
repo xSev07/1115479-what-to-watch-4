@@ -13,16 +13,18 @@ import {getLoginErrorStatus} from "../../reducer/user/selectors";
 class App extends PureComponent {
   constructor(props) {
     super(props);
+    // TODO: Возможно стоит вынести incorrectEmail в Redux
     this.state = {
       displayedMovie: -1,
+      incorrectEmail: false,
     };
 
     this._handleMovieCardClick = this._handleMovieCardClick.bind(this);
+    this._handleFormSubmit = this._handleFormSubmit.bind(this);
   }
 
   render() {
-    const {allMovies: movies, login, authError} = this.props;
-    // TODO: Сделать нормальную заглушку
+    const {allMovies: movies, authError} = this.props;
     if (movies.length === 0) {
       return (<h1>Данные загружаются</h1>);
     }
@@ -40,7 +42,8 @@ class App extends PureComponent {
           <Route exact path="/login">
             <SignIn
               authError={authError}
-              onSubmit={login}
+              incorrectEmail={this.state.incorrectEmail}
+              onSubmit={this._handleFormSubmit}
             />
           </Route>
         </Switch>
@@ -70,6 +73,26 @@ class App extends PureComponent {
   _handleMovieCardClick(movieId) {
     const movieIndex = this.props.allMovies.findIndex((movie) => movie.id === movieId);
     this.setState({displayedMovie: movieIndex});
+  }
+
+  _handleFormSubmit(formData) {
+    const {login} = this.props;
+    const {loginValue, passwordValue} = formData;
+
+    const emailValid = loginValue.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+    if (emailValid) {
+      this.setState({
+        incorrectEmail: false,
+      });
+      login({
+        login: loginValue,
+        password: passwordValue,
+      });
+    } else {
+      this.setState({
+        incorrectEmail: true,
+      });
+    }
   }
 
   componentDidMount() {

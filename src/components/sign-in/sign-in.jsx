@@ -3,24 +3,17 @@ import PropTypes from "prop-types";
 import Footer from "../footer/footer.jsx";
 
 const SignIn = (props) => {
-  const {authError, onSubmit} = props;
+  const {authError, incorrectEmail, onSubmit} = props;
   const loginRef = createRef();
   const passwordRef = createRef();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const loginValue = loginRef.current.value;
-
-    // TODO:
-    //  Сделать отображение сообщения об ошибке
-    //  Вынести форму в отдельный компонент и перерисовывать только её при ошибке
-    const emailValid = loginValue.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-    if (emailValid) {
-      onSubmit({
-        login: loginValue,
-        password: passwordRef.current.value,
-      });
-    }
+    const formData = {
+      loginValue: loginRef.current.value,
+      passwordValue: passwordRef.current.value,
+    };
+    onSubmit(formData);
   };
 
   // TODO:
@@ -48,6 +41,11 @@ const SignIn = (props) => {
           {authError && (
             <div className="sign-in__message">
               <p>We can’t recognize this email <br/> and password combination. Please try again.</p>
+            </div>
+          )}
+          {incorrectEmail && (
+            <div className="sign-in__message">
+              <p>Please enter a valid email address</p>
             </div>
           )}
           <div className="sign-in__fields">
