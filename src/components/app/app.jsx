@@ -5,11 +5,12 @@ import {Switch, Route, BrowserRouter} from "react-router-dom";
 import MoviePage from "../movie-page/movie-page.jsx";
 import {connect} from "react-redux";
 import {getAllMovies, getPromoMovie} from "../../reducer/data/selectors";
-import {Operation as DataOperation} from "../../reducer/data/data";
+import SignIn from "../sign-in/sign-in.jsx";
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
+
     this.state = {
       displayedMovie: -1,
     };
@@ -18,8 +19,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const movies = this.props.allMovies;
-    // TODO: Сделать нормальную заглушку
+    const {allMovies: movies} = this.props;
     if (movies.length === 0) {
       return (<h1>Данные загружаются</h1>);
     }
@@ -33,6 +33,9 @@ class App extends PureComponent {
             <MoviePage
               movie={movies[0]}
             />
+          </Route>
+          <Route exact path="/login">
+            <SignIn/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -62,25 +65,11 @@ class App extends PureComponent {
     const movieIndex = this.props.allMovies.findIndex((movie) => movie.id === movieId);
     this.setState({displayedMovie: movieIndex});
   }
-
-  componentDidMount() {
-    this.props.loadPromo();
-    this.props.loadMovies();
-  }
 }
 
 const mapStateToProps = (state) => ({
   allMovies: getAllMovies(state),
   promoMovie: getPromoMovie(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  loadMovies() {
-    dispatch(DataOperation.loadMovies());
-  },
-  loadPromo() {
-    dispatch(DataOperation.loadPromo());
-  },
 });
 
 App.propTypes = {
@@ -101,9 +90,7 @@ App.propTypes = {
         description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
       })
   ).isRequired,
-  loadPromo: PropTypes.func.isRequired,
-  loadMovies: PropTypes.func.isRequired,
 };
 
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

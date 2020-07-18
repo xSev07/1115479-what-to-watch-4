@@ -1,15 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should Header render correctly should render Header with empty link 1`] = `
+exports[`Should Header render correctly should render Header with children and className 1`] = `
 <header
-  className="page-header movie-card__head"
+  className="page-header test"
 >
   <div
     className="logo"
   >
     <a
       className="logo__link"
-      href=""
+      href="/"
+      onClick={[Function]}
     >
       <span
         className="logo__letter logo__letter--1"
@@ -28,6 +29,9 @@ exports[`Should Header render correctly should render Header with empty link 1`]
       </span>
     </a>
   </div>
+  <h1>
+    Test Title
+  </h1>
   <div
     className="user-block"
   >
@@ -45,7 +49,7 @@ exports[`Should Header render correctly should render Header with empty link 1`]
 </header>
 `;
 
-exports[`Should Header render correctly should render Header with main link 1`] = `
+exports[`Should Header render correctly should render basic Header 1`] = `
 <header
   className="page-header movie-card__head"
 >
@@ -55,6 +59,7 @@ exports[`Should Header render correctly should render Header with main link 1`] 
     <a
       className="logo__link"
       href="/"
+      onClick={[Function]}
     >
       <span
         className="logo__letter logo__letter--1"

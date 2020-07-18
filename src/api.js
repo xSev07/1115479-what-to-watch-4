@@ -1,12 +1,15 @@
 import axios from "axios";
 
 const Error = {
-  UNAUTHORIZED: 401
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
 };
 
-export const createAPI = (onUnauthorized) => {
+export const BASE_SERVER_URL = `https://4.react.pages.academy`;
+
+export const createAPI = (onUnauthorized, onAuthError) => {
   const api = axios.create({
-    baseURL: `https://4.react.pages.academy/wtw`,
+    baseURL: `${BASE_SERVER_URL}/wtw`,
     timeout: 5000,
     withCredentials: true,
   });
@@ -18,12 +21,17 @@ export const createAPI = (onUnauthorized) => {
   const onFail = (err) => {
     const {response} = err;
 
-    if (response.status === Error.UNAUTHORIZED) {
-      onUnauthorized();
+    switch (response.status) {
+      case Error.BAD_REQUEST:
+        onAuthError();
+        break;
+      case Error.UNAUTHORIZED:
+        onUnauthorized();
 
-      // Бросаем ошибку, потому что нам важно прервать цепочку промисов после запроса авторизации.
-      // Запрос авторизации - это особый случай и важно дать понять приложению, что запрос был неудачным.
-      throw err;
+        // Бросаем ошибку, потому что нам важно прервать цепочку промисов после запроса авторизации.
+        // Запрос авторизации - это особый случай и важно дать понять приложению, что запрос был неудачным.
+        throw err;
+        // case
     }
 
     throw err;

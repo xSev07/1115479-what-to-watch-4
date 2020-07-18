@@ -1,30 +1,50 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {getUserAvatar} from "../../reducer/user/selectors";
+import {Link} from "react-router-dom";
 
 const Header = (props) => {
-  const {isMainPage = false} = props;
-  const mainLink = isMainPage ? `` : `/`;
-  // TODO: Заменить a на Link
+  const {className, avatar, children} = props;
+
+  // TODO:
+  //  Сделать проверку url. Если это страница логина - не выводить user-block
   return (
-    <header className="page-header movie-card__head">
+    <header className={`page-header ${className}`}>
       <div className="logo">
-        <a href={mainLink} className="logo__link">
+        <Link to="/" className="logo__link">
           <span className="logo__letter logo__letter--1">W</span>
           <span className="logo__letter logo__letter--2">T</span>
           <span className="logo__letter logo__letter--3">W</span>
-        </a>
+        </Link>
       </div>
+      {children}
       <div className="user-block">
-        <div className="user-block__avatar">
-          <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-        </div>
+        {avatar ? (
+          <div className="user-block__avatar">
+            <img src={avatar} alt="User avatar" width="63" height="63"/>
+          </div>
+        ) : (
+          <Link to="/login" className="user-block__link">Sign in</Link>
+        )}
       </div>
     </header>
   );
 };
 
+const mapStateToProps = (state) => ({
+  avatar: getUserAvatar(state),
+});
+
 Header.propTypes = {
-  isMainPage: PropTypes.bool,
+  className: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
+  children: PropTypes.element,
 };
 
-export default Header;
+Header.defaultProps = {
+  className: `movie-card__head`,
+};
+
+export {Header};
+export default connect(mapStateToProps)(Header);

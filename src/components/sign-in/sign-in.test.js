@@ -1,8 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main";
-import {promoMovie, storeData} from "../../tests-data/tests-data";
+import {SignIn} from "./sign-in";
 import configureStore from "redux-mock-store";
+import {storeData} from "../../tests-data/tests-data";
 import {Provider} from "react-redux";
 import {StaticRouter} from "react-router-dom";
 
@@ -10,20 +10,18 @@ const mockStore = configureStore([]);
 
 const store = mockStore(storeData);
 
-it(`Should Main render correctly`, () => {
+it(`Should SignIn render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
           <StaticRouter>
-            <Main
-              promo={promoMovie}
-              onMovieCardClick={()=>{}}
+            <SignIn
+              authError={false}
+              login={() => {}}
             />
           </StaticRouter>
         </Provider>, {
-          createNodeMock: () => {
-            return {};
-          }
+          createNodeMock: () => {}
         }
     ).toJSON();
 

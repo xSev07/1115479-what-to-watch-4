@@ -40,3 +40,7 @@ export const splitArrayInHalf = (arr = []) => {
   const secondHalf = arr.slice(Math.ceil(arr.length / 2));
   return {firstHalf, secondHalf};
 };
+
+export const isValidEmail = (email) => {
+  return email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+};
