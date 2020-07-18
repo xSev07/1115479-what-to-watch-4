@@ -23,6 +23,7 @@ class App extends PureComponent {
 
   render() {
     const {allMovies: movies} = this.props;
+    // TODO: Вынести ожидание загрузки фильмов в Main
     if (movies.length === 0) {
       return (<h1>Данные загружаются</h1>);
     }
