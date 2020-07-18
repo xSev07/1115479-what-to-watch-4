@@ -9,3 +9,7 @@ export const getUserAvatar = (state) => {
 export const getLoginErrorStatus = (state) => {
   return state[NAME_SPACE].loginError;
 };
+
+export const getAuthorizationStatus = (state) => {
+  return state[NAME_SPACE].authorizationStatus;
+};

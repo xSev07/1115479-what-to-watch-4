@@ -25,3 +25,10 @@ export const MovieTab = {
   DETAILS: `Details`,
   REVIEWS: `Reviews`,
 };
+
+export const AppRoute = {
+  LOGIN: `/login`,
+  ROOT: `/`,
+  MOVIE: `/films/`,
+  IN_LIST: `/my-list`,
+};

@@ -6,6 +6,9 @@ import MoviePage from "../movie-page/movie-page.jsx";
 import {connect} from "react-redux";
 import {getAllMovies, getPromoMovie} from "../../reducer/data/selectors";
 import SignIn from "../sign-in/sign-in.jsx";
+import {AppRoute} from "../../const";
+import PrivateRoute from "../private-route/private-route.jsx";
+import MyList from "../my-list/my-list.jsx";
 
 class App extends PureComponent {
   constructor(props) {
@@ -26,17 +29,17 @@ class App extends PureComponent {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/">
-            {this._renderMainScreen()}
-          </Route>
-          <Route exact path="/dev-movie">
-            <MoviePage
-              movie={movies[0]}
-            />
-          </Route>
-          <Route exact path="/login">
-            <SignIn/>
-          </Route>
+          <Route exact path={AppRoute.ROOT} render={() => this._renderMainScreen()}/>
+          <Route exact path={AppRoute.LOGIN} component={SignIn}/>
+          <PrivateRoute
+            exact
+            path={AppRoute.IN_LIST}
+            render={() => {
+              return (
+                <MyList/>
+              );
+            }}
+          />
         </Switch>
       </BrowserRouter>
     );
