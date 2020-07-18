@@ -2,7 +2,6 @@ import {ALL_GENRES_NAME, extendObject} from "../../const";
 
 const initialState = {
   genre: ALL_GENRES_NAME,
-  loginStatus: false,
 };
 
 const ActionType = {
