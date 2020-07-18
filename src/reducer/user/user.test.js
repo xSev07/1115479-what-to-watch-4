@@ -8,7 +8,8 @@ describe(`Check user reducer work correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
       authorizationStatus: AuthorizationStatus.NO_AUTH,
-      avatar: ``
+      avatar: ``,
+      loginError: false,
     });
   });
 
@@ -122,12 +123,16 @@ describe(`Operation in user reducer work correctly`, () => {
 
     return logining(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_LOGIN_ERROR_STATUS,
+          payload: false,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.ADD_AVATAR,
           payload: `${BASE_SERVER_URL}/img/1.png`,
         });
-        expect(dispatch).toHaveBeenNthCalledWith(2, {
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.REQUIRED_AUTHORIZATION,
           payload: AuthorizationStatus.AUTH,
         });

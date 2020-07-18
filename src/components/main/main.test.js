@@ -4,6 +4,7 @@ import Main from "./main";
 import {promoMovie, storeData} from "../../tests-data/tests-data";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import {StaticRouter} from "react-router-dom";
 
 const mockStore = configureStore([]);
 
@@ -13,10 +14,12 @@ it(`Should Main render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Main
-            promo={promoMovie}
-            onMovieCardClick={()=>{}}
-          />
+          <StaticRouter>
+            <Main
+              promo={promoMovie}
+              onMovieCardClick={()=>{}}
+            />
+          </StaticRouter>
         </Provider>, {
           createNodeMock: () => {
             return {};

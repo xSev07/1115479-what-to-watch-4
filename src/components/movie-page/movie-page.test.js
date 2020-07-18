@@ -4,6 +4,7 @@ import {MoviePage} from "./movie-page";
 import {comments, movies, storeData} from "../../tests-data/tests-data";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import {StaticRouter} from "react-router-dom";
 
 const mockStore = configureStore([]);
 
@@ -12,13 +13,15 @@ it(`Should MoviePage render correctly`, () => {
   const tree = renderer
       .create(
           <Provider store={store}>
-            <MoviePage
-              movies={movies}
-              movie={movies[0]}
-              comments={comments}
-              loadComments={() => {}}
-              onMovieCardClick={() => {}}
-            />
+            <StaticRouter>
+              <MoviePage
+                movies={movies}
+                movie={movies[0]}
+                comments={comments}
+                loadComments={() => {}}
+                onMovieCardClick={() => {}}
+              />
+            </StaticRouter>
           </Provider>, {
             createNodeMock: () => {
               return {};

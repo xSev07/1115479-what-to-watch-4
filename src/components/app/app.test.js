@@ -14,10 +14,6 @@ it(`Should App render correctly`, () => {
     .create(
         <Provider store={store} >
           <App
-            loadPromo={() => {}}
-            loadMovies={() => {}}
-            checkAuth={() => {}}
-            login={() => {}}
             allMovies={movies}
             promoMovie={promoMovie}
           />

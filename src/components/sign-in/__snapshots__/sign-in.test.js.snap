@@ -13,6 +13,7 @@ exports[`Should SignIn render correctly 1`] = `
       <a
         className="logo__link"
         href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -36,6 +37,20 @@ exports[`Should SignIn render correctly 1`] = `
     >
       Sign in
     </h1>
+    <div
+      className="user-block"
+    >
+      <div
+        className="user-block__avatar"
+      >
+        <img
+          alt="User avatar"
+          height="63"
+          src="img/avatar.jpg"
+          width="63"
+        />
+      </div>
+    </div>
   </header>
   <div
     className="sign-in user-page__content"
@@ -43,7 +58,6 @@ exports[`Should SignIn render correctly 1`] = `
     <form
       action="#"
       className="sign-in__form"
-      onSubmit={[Function]}
     >
       <div
         className="sign-in__fields"
@@ -88,6 +102,7 @@ exports[`Should SignIn render correctly 1`] = `
       >
         <button
           className="sign-in__btn"
+          onClick={[Function]}
           type="submit"
         >
           Sign in

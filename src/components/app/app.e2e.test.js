@@ -5,6 +5,7 @@ import {movies, promoMovie, storeData} from "../../tests-data/tests-data";
 import Main from "../main/main";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import {StaticRouter} from "react-router-dom";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -20,10 +21,12 @@ describe(`Checks interaction with movie cards`, () => {
 
     const movieList = mount(
         <Provider store={store}>
-          <Main
-            promo={promoMovie}
-            onMovieCardClick={onClick}
-          />
+          <StaticRouter>
+            <Main
+              promo={promoMovie}
+              onMovieCardClick={onClick}
+            />
+          </StaticRouter>
         </Provider>
     );
 

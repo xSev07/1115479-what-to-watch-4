@@ -143,5 +143,6 @@ export const storeData = {
   [NameSpace.USER]: {
     authorizationStatus: AuthorizationStatus.AUTH,
     avatar: `img/avatar.jpg`,
+    loginError: false,
   }
 };
