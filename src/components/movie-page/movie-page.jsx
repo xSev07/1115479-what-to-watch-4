@@ -4,7 +4,7 @@ import {transformToFirstCapitalSymbol} from "../../utils/common/common";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import MovieDescription from "../movie-description/movie-description.jsx";
-import {getCommentsByMovie} from "../../reducer/data/selectors";
+import {getCommentsByMovie, getMovieByID} from "../../reducer/data/selectors";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {connect} from "react-redux";
 import {MovieTab, ShowedMovies} from "../../const";
@@ -108,8 +108,9 @@ class MoviePage extends React.PureComponent {
 }
 
 const mapStateToProps = (state, props) => ({
-  movies: getFilteredMovies(state, {movieId: props.movie.id}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
-  comments: getCommentsByMovie(state, {movieId: props.movie.id}),
+  movie: getMovieByID(state, {movieId: props.match.params.id}),
+  movies: getFilteredMovies(state, {movieId: props.match.params.id}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
+  comments: getCommentsByMovie(state, {movieId: props.match.params.id}),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -157,7 +158,6 @@ MoviePage.propTypes = {
     date: PropTypes.instanceOf(Date).isRequired,
   })),
   loadComments: PropTypes.func.isRequired,
-  onMovieCardClick: PropTypes.func.isRequired,
 };
 
 export {MoviePage};

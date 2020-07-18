@@ -15,6 +15,15 @@ export const getAllComments = (state) => {
   return state[NAME_SPACE].comments;
 };
 
+export const getMovieByID = createSelector(
+    getAllMovies,
+    (state, ownProps) => ownProps,
+    (allMovies, ownProps) => {
+      const {movieId} = ownProps;
+      return allMovies.find((movie) => movie.id === movieId);
+    }
+);
+
 export const getCommentsByMovie = createSelector(
     getAllComments,
     (state, ownProps) => ownProps,

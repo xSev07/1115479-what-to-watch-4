@@ -29,6 +29,6 @@ export const MovieTab = {
 export const AppRoute = {
   LOGIN: `/login`,
   ROOT: `/`,
-  MOVIE: `/films/`,
+  MOVIE: `/films/:id`,
   IN_LIST: `/my-list`,
 };

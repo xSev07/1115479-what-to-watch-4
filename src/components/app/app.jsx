@@ -41,6 +41,7 @@ class App extends PureComponent {
               );
             }}
           />
+          <Route path={AppRoute.MOVIE} component={MoviePage}/>
         </Switch>
       </BrowserRouter>
     );
@@ -53,14 +54,12 @@ class App extends PureComponent {
       return (
         <Main
           promo={promoMovie}
-          onMovieCardClick={this._handleMovieCardClick}
         />
       );
     }
     return (
       <MoviePage
         movie={this.props.allMovies[displayedMovie]}
-        onMovieCardClick={this._handleMovieCardClick}
       />
     );
   }

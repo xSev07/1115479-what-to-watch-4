@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import MovieCard from "../movie-card/movie-card.jsx";
 
 const MovieList = (props) => {
-  const {movies, onMovieCardClick} = props;
+  const {movies} = props;
 
   return (
     <div className="catalog__movies-list">
@@ -16,7 +16,6 @@ const MovieList = (props) => {
             videoPreview={movie.videoPreview}
             poster={movie.preview}
             isMuted={true}
-            onClick={onMovieCardClick}
           />
         );
       })
@@ -32,7 +31,6 @@ MovieList.propTypes = {
         year: PropTypes.number.isRequired,
       })
   ),
-  onMovieCardClick: PropTypes.func.isRequired,
 };
 
 export default MovieList;
