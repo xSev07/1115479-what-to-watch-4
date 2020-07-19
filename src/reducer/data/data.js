@@ -51,6 +51,13 @@ const Operation = {
         dispatch(ActionCreator.loadComments(comments));
       });
   },
+  changeFavoriteStatus: (filmId, status) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${parseInt(filmId, 10)}/${status ? 1 : 0}`)
+      .then((response) => {
+        debugger
+        const actualMovie = parseMovie(response.data);
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {

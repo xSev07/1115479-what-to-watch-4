@@ -10,6 +10,7 @@ import {connect} from "react-redux";
 import {MovieTab, ShowedMovies} from "../../const";
 import MovieList from "../movie-list/movie-list.jsx";
 import {getFilteredMovies} from "../../reducer/app/selectors";
+import store from "../../reducer/store";
 
 const tabs = Object.values(MovieTab);
 
@@ -18,12 +19,20 @@ class MoviePage extends React.PureComponent {
     super(props);
 
     this._tabs = tabs;
+
+    this.handlerButtonListClick = this.handlerButtonListClick.bind(this);
   }
 
+  handlerButtonListClick() {
+    const {id, inList} = this.props.movie;
+
+    store.dispatch(DataOperation.changeFavoriteStatus(id, !inList));
+  };
+
   render() {
-    const {movies, movie, onMovieCardClick} = this.props;
+    const {movies, movie} = this.props;
     // TODO: Убрать movie из пропсов и получать его по адресной строке после 8го модуля
-    const {title, genre, year, poster, background, backgroundColor} = movie;
+    const {title, genre, year, poster, background, backgroundColor, inList} = movie;
     const mainGenre = transformToFirstCapitalSymbol(genre[0]);
 
     return (
@@ -52,9 +61,9 @@ class MoviePage extends React.PureComponent {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
+                <button className="btn btn--list movie-card__button" type="button" onClick={this.handlerButtonListClick}>
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
+                    <use xlinkHref={inList ? `#in-list` : `#add`}></use>
                   </svg>
                   <span>My list</span>
                 </button>
@@ -86,7 +95,6 @@ class MoviePage extends React.PureComponent {
 
           <MovieList
             movies={movies}
-            onMovieCardClick={onMovieCardClick}
           />
         </section>
 
@@ -148,6 +156,7 @@ MoviePage.propTypes = {
     poster: PropTypes.string.isRequired,
     background: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
+    inList: PropTypes.bool.isRequired,
   }),
   comments: PropTypes.arrayOf(PropTypes.shape({
     commentId: PropTypes.string.isRequired,

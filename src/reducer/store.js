@@ -5,9 +5,14 @@ import reducer from "./reducer";
 import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import {Operation as DataOperation} from "./data/data";
+import {AppRoute} from "../const";
 
-const onUnauthorized = () => {
+const onUnauthorized = (needRedirectToLogin) => {
   store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+
+  if (needRedirectToLogin) {
+    window.location.href = AppRoute.LOGIN;
+  }
 };
 
 const onAuthError = () => {

@@ -26,7 +26,8 @@ export const createAPI = (onUnauthorized, onAuthError) => {
         onAuthError();
         break;
       case Error.UNAUTHORIZED:
-        onUnauthorized();
+        const isCheckLogin = err.config.url === `/login` && err.config.method === `get`;
+        onUnauthorized(!isCheckLogin);
 
         // Бросаем ошибку, потому что нам важно прервать цепочку промисов после запроса авторизации.
         // Запрос авторизации - это особый случай и важно дать понять приложению, что запрос был неудачным.

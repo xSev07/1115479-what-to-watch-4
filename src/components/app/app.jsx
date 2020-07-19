@@ -22,7 +22,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {allMovies: movies} = this.props;
+    const {allMovies: movies, promoMovie} = this.props;
     // TODO: Вынести ожидание загрузки фильмов в Main
     if (movies.length === 0) {
       return (<h1>Данные загружаются</h1>);
@@ -30,7 +30,11 @@ class App extends PureComponent {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path={AppRoute.ROOT} render={() => this._renderMainScreen()}/>
+          <Route exact path={AppRoute.ROOT}>
+            <Main
+              promo={promoMovie}
+            />
+          </Route>
           <Route exact path={AppRoute.LOGIN} component={SignIn}/>
           <PrivateRoute
             exact
