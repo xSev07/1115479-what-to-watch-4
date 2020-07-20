@@ -19,7 +19,7 @@ class MoviePage extends React.PureComponent {
 
     this._tabs = tabs;
 
-    this.handlerButtonListClick = this.handlerButtonListClick.bind(this);
+    this._handlerButtonListClick = this._handlerButtonListClick.bind(this);
   }
 
   _handlerButtonListClick() {
@@ -82,7 +82,9 @@ class MoviePage extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.props.loadComments(this.props.movie.id);
+    if (!this.props.comments) {
+      this.props.loadComments(this.props.movie.id);
+    }
   }
 
   componentDidUpdate(prevProps) {
