@@ -1,6 +1,7 @@
 import React from "react";
 import {splitArrayInHalf, transformDate} from "../../utils/common/common";
 import PropTypes from "prop-types";
+import {Spinner} from "../svg/svg.jsx";
 
 const getCommentTemplate = (comment) => {
   const {commentId, author, text, date, rating} = comment;
@@ -25,7 +26,11 @@ const getCommentTemplate = (comment) => {
 const MovieReviews = (props) => {
   const {comments} = props;
   if (!comments) {
-    return <div>Комментарии загружаются</div>;
+    return (
+      <div style={{marginTop: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center`}}>
+        <Spinner/>
+      </div>
+    );
   }
 
   const halfsComments = splitArrayInHalf(comments);
