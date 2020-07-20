@@ -1,4 +1,4 @@
-import {extendObject} from "../../const";
+import {AppRoute, extendObject} from "../../const";
 import {BASE_SERVER_URL, ServerURL} from "../../api";
 
 const AuthorizationStatus = {
@@ -55,6 +55,7 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.setLoginErrorStatus(false));
         writeUserInfo(response.data, dispatch);
+        window.location.href = AppRoute.ROOT;
       })
       .catch(() => {});
   }
