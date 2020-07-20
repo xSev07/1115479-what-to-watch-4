@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import Catalog from "../catalog/catalog.jsx";
+import {connect} from "react-redux";
+import {getPromoMovie} from "../../reducer/data/selectors";
 
 const Main = (props) => {
   const {promo} = props;
@@ -64,6 +66,10 @@ const Main = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  promo: getPromoMovie(state),
+});
+
 Main.propTypes = {
   promo: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -74,4 +80,5 @@ Main.propTypes = {
   }),
 };
 
-export default Main;
+export {Main};
+export default connect(mapStateToProps)(Main);

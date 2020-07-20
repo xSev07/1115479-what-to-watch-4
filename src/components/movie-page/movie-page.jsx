@@ -4,7 +4,7 @@ import {transformToFirstCapitalSymbol} from "../../utils/common/common";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import MovieDescription from "../movie-description/movie-description.jsx";
-import {getCommentsByMovie, getMovieByID} from "../../reducer/data/selectors";
+import {getCommentsByMovie, getMovieByID, getPromoMovie} from "../../reducer/data/selectors";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {connect} from "react-redux";
 import {MovieTab, ShowedMovies} from "../../const";
@@ -31,7 +31,6 @@ class MoviePage extends React.PureComponent {
 
   render() {
     const {movies, movie} = this.props;
-    // TODO: Убрать movie из пропсов и получать его по адресной строке после 8го модуля
     const {title, genre, year, poster, background, backgroundColor, inList} = movie;
     const mainGenre = transformToFirstCapitalSymbol(genre);
 
