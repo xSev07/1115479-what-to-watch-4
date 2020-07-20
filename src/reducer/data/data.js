@@ -2,6 +2,7 @@ import {parseMovie, parseMovies} from "../../adapters/movies";
 import {extendObject} from "../../const";
 import {parseComments} from "../../adapters/comments";
 import {ServerURL} from "../../api";
+import {getPromoMovie} from "./selectors";
 
 const initialState = {
   movies: [],
@@ -61,6 +62,10 @@ const Operation = {
     return api.post(`${ServerURL.FAVORITE}${parseInt(filmId, 10)}/${status ? 1 : 0}`)
       .then((response) => {
         dispatch(ActionCreator.updateMovie(parseMovie(response.data)));
+        const promo = getPromoMovie(getState());
+        if (filmId === promo.id) {
+          dispatch(Operation.loadPromo());
+        }
       });
   },
 };
