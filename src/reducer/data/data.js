@@ -1,6 +1,7 @@
 import {parseMovie, parseMovies} from "../../adapters/movies";
 import {extendObject} from "../../const";
 import {parseComments} from "../../adapters/comments";
+import {ServerURL} from "../../api";
 
 const initialState = {
   movies: [],
@@ -36,19 +37,19 @@ const ActionCreator = {
 
 const Operation = {
   loadMovies: () => (dispatch, getState, api) => {
-    return api.get(`/films`)
+    return api.get(ServerURL.MOVIES)
       .then((response) => {
         dispatch(ActionCreator.loadMovies(parseMovies(response.data)));
       });
   },
   loadPromo: () => (dispatch, getState, api) => {
-    return api.get(`/films/promo`)
+    return api.get(ServerURL.PROMO_MOVIE)
       .then((response) => {
         dispatch(ActionCreator.loadPromo(parseMovie(response.data)));
       });
   },
   loadComments: (filmId) => (dispatch, getState, api) => {
-    return api.get(`/comments/${filmId}`)
+    return api.get(`${ServerURL.COMMENTS}${filmId}`)
       .then((response) => {
         const comments = {
           [filmId]: parseComments(response.data),
@@ -57,7 +58,7 @@ const Operation = {
       });
   },
   changeFavoriteStatus: (filmId, status) => (dispatch, getState, api) => {
-    return api.post(`/favorite/${parseInt(filmId, 10)}/${status ? 1 : 0}`)
+    return api.post(`${ServerURL.FAVORITE}${parseInt(filmId, 10)}/${status ? 1 : 0}`)
       .then((response) => {
         dispatch(ActionCreator.updateMovie(parseMovie(response.data)));
       });

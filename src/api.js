@@ -7,6 +7,14 @@ const Error = {
 
 export const BASE_SERVER_URL = `https://4.react.pages.academy`;
 
+export const ServerURL = {
+  LOGIN: `/login`,
+  MOVIES: `/films`,
+  PROMO_MOVIE: `/films/promo`,
+  COMMENTS: `/comments/`,
+  FAVORITE: `/favorite/`,
+};
+
 export const createAPI = (onUnauthorized, onAuthError) => {
   const api = axios.create({
     baseURL: `${BASE_SERVER_URL}/wtw`,
@@ -26,7 +34,7 @@ export const createAPI = (onUnauthorized, onAuthError) => {
         onAuthError();
         break;
       case Error.UNAUTHORIZED:
-        const isCheckLogin = err.config.url === `/login` && err.config.method === `get`;
+        const isCheckLogin = err.config.url === ServerURL.LOGIN && err.config.method === `get`;
         onUnauthorized(!isCheckLogin);
 
         // Бросаем ошибку, потому что нам важно прервать цепочку промисов после запроса авторизации.

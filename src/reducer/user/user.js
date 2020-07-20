@@ -1,5 +1,5 @@
 import {extendObject} from "../../const";
-import {BASE_SERVER_URL} from "../../api";
+import {BASE_SERVER_URL, ServerURL} from "../../api";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -41,14 +41,14 @@ const writeUserInfo = (data, dispatch) => {
 
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
-    return api.get(`/login`)
+    return api.get(ServerURL.LOGIN)
       .then((response) => {
         writeUserInfo(response.data, dispatch);
       })
       .catch(() => {});
   },
   login: (authData) => (dispatch, getState, api) => {
-    return api.post(`/login`, {
+    return api.post(ServerURL.LOGIN, {
       email: authData.login,
       password: authData.password,
     })

@@ -4,7 +4,7 @@ import {transformToFirstCapitalSymbol} from "../../utils/common/common";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import MovieDescription from "../movie-description/movie-description.jsx";
-import {getCommentsByMovie, getMovieByID, getPromoMovie} from "../../reducer/data/selectors";
+import {getCommentsByMovie, getMovieByID} from "../../reducer/data/selectors";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {connect} from "react-redux";
 import {MovieTab, ShowedMovies} from "../../const";
