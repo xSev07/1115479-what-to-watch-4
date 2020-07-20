@@ -7,9 +7,8 @@ import {AppRoute} from "../../const";
 
 const Header = (props) => {
   const {className, avatar, children} = props;
+  const isLoginPage = window.location.pathname === AppRoute.LOGIN;
 
-  // TODO:
-  //  Сделать проверку url. Если это страница логина - не выводить user-block
   return (
     <header className={`page-header ${className}`}>
       <div className="logo">
@@ -20,7 +19,7 @@ const Header = (props) => {
         </Link>
       </div>
       {children}
-      <div className="user-block">
+      {!isLoginPage && <div className="user-block">
         {avatar ? (
           <div className="user-block__avatar">
             <Link to={AppRoute.IN_LIST}>
@@ -30,7 +29,7 @@ const Header = (props) => {
         ) : (
           <Link to={AppRoute.LOGIN} className="user-block__link">Sign in</Link>
         )}
-      </div>
+      </div>}
     </header>
   );
 };
