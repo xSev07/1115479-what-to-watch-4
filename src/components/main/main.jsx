@@ -4,15 +4,26 @@ import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import Catalog from "../catalog/catalog.jsx";
 import {connect} from "react-redux";
-import {getPromoMovie} from "../../reducer/data/selectors";
+import {
+  getLoadingError,
+  getMoviesLoadingStatus,
+  getPromoLoadingStatus,
+  getPromoMovie
+} from "../../reducer/data/selectors";
 import MovieHeader from "../movie-header/movie-header.jsx";
 import {Operation as DataOperation} from "../../reducer/data/data";
+import Loader from "../loader/loader.jsx";
+import LoadingError from "../loading-error/loading-error.jsx";
 
 const Main = (props) => {
-  const {promo, changeFavoriteStatus} = props;
+  const {promo, loadingMovies, loadingPromo, loadingError, changeFavoriteStatus} = props;
 
-  if (!promo) {
-    return (<h1>Данные загружаются</h1>);
+  if (loadingError) {
+    return <LoadingError/>;
+  }
+
+  if (loadingMovies || loadingPromo) {
+    return <Loader/>;
   }
   const {title, poster, background} = promo;
 
@@ -56,6 +67,9 @@ const Main = (props) => {
 
 const mapStateToProps = (state) => ({
   promo: getPromoMovie(state),
+  loadingMovies: getMoviesLoadingStatus(state),
+  loadingPromo: getPromoLoadingStatus(state),
+  loadingError: getLoadingError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

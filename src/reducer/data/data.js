@@ -2,12 +2,14 @@ import {parseMovie, parseMovies} from "../../adapters/movies";
 import {extendObject} from "../../const";
 import {parseComments} from "../../adapters/comments";
 import {ServerURL} from "../../api";
-import {getPromoMovie} from "./selectors";
 
 const initialState = {
   movies: [],
   promo: undefined,
   comments: {},
+  loadingMovies: true,
+  loadingPromo: true,
+  loadingError: false,
 };
 
 const ActionType = {
@@ -15,6 +17,7 @@ const ActionType = {
   LOAD_PROMO: `LOAD_PROMO`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   UPDATE_MOVIE: `UPDATE_MOVIE`,
+  LOADING_ERROR: `LOADING_ERROR`,
 };
 
 const ActionCreator = {
@@ -34,6 +37,10 @@ const ActionCreator = {
     type: ActionType.UPDATE_MOVIE,
     payload: movie,
   }),
+  loadingError: () => ({
+    type: ActionType.LOADING_ERROR,
+    payload: true,
+  }),
 };
 
 const Operation = {
@@ -41,12 +48,18 @@ const Operation = {
     return api.get(ServerURL.MOVIES)
       .then((response) => {
         dispatch(ActionCreator.loadMovies(parseMovies(response.data)));
+      })
+      .catch(() => {
+        dispatch(ActionCreator.loadingError());
       });
   },
   loadPromo: () => (dispatch, getState, api) => {
     return api.get(ServerURL.PROMO_MOVIE)
       .then((response) => {
         dispatch(ActionCreator.loadPromo(parseMovie(response.data, true)));
+      })
+      .catch(() => {
+        dispatch(ActionCreator.loadingError());
       });
   },
   loadComments: (filmId) => (dispatch, getState, api) => {
@@ -73,9 +86,15 @@ const Operation = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_MOVIES:
-      return extendObject(state, {movies: action.payload});
+      return extendObject(state, {
+        movies: action.payload,
+        loadingMovies: false,
+      });
     case ActionType.LOAD_PROMO:
-      return extendObject(state, {promo: action.payload});
+      return extendObject(state, {
+        promo: action.payload,
+        loadingPromo: false,
+      });
     case ActionType.LOAD_COMMENTS:
       const comments = extendObject(state.comments, action.payload);
       return extendObject(state, {comments});

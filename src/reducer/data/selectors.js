@@ -32,3 +32,15 @@ export const getCommentsByMovie = createSelector(
       return allComments[movieId];
     }
 );
+
+export const getMoviesLoadingStatus = (state) => {
+  return state[NAME_SPACE].loadingMovies;
+};
+
+export const getPromoLoadingStatus = (state) => {
+  return state[NAME_SPACE].loadingPromo;
+};
+
+export const getLoadingError = (state) => {
+  return state[NAME_SPACE].loadingError;
+}
