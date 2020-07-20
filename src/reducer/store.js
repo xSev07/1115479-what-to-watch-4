@@ -11,6 +11,7 @@ const onUnauthorized = (needRedirectToLogin) => {
   store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
 
   if (needRedirectToLogin) {
+    // В таком варианте заново загружает данные (с replace тоже)
     window.location.href = AppRoute.LOGIN;
   }
 };

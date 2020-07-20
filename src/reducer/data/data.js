@@ -12,6 +12,7 @@ const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
   LOAD_PROMO: `LOAD_PROMO`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
+  UPDATE_MOVIE: `UPDATE_MOVIE`,
 };
 
 const ActionCreator = {
@@ -26,6 +27,10 @@ const ActionCreator = {
   loadComments: (comments) => ({
     type: ActionType.LOAD_COMMENTS,
     payload: comments,
+  }),
+  updateMovie: (movie) => ({
+    type: ActionType.UPDATE_MOVIE,
+    payload: movie,
   }),
 };
 
@@ -54,8 +59,7 @@ const Operation = {
   changeFavoriteStatus: (filmId, status) => (dispatch, getState, api) => {
     return api.post(`/favorite/${parseInt(filmId, 10)}/${status ? 1 : 0}`)
       .then((response) => {
-        debugger
-        const actualMovie = parseMovie(response.data);
+        dispatch(ActionCreator.updateMovie(parseMovie(response.data)));
       });
   },
 };
@@ -69,6 +73,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_COMMENTS:
       const comments = extendObject(state.comments, action.payload);
       return extendObject(state, {comments});
+    case ActionType.UPDATE_MOVIE:
+      const newMovie = action.payload;
+      const oldMovieIndex = state.movies.findIndex((it) => it.id === newMovie.id);
+      const newMovies = [...state.movies.slice(0, oldMovieIndex), newMovie, ...state.movies.slice(oldMovieIndex + 1)];
+      return extendObject(state, {movies: newMovies});
   }
 
   return state;

@@ -27,13 +27,13 @@ class MoviePage extends React.PureComponent {
     const {id, inList} = this.props.movie;
 
     store.dispatch(DataOperation.changeFavoriteStatus(id, !inList));
-  };
+  }
 
   render() {
     const {movies, movie} = this.props;
     // TODO: Убрать movie из пропсов и получать его по адресной строке после 8го модуля
     const {title, genre, year, poster, background, backgroundColor, inList} = movie;
-    const mainGenre = transformToFirstCapitalSymbol(genre[0]);
+    const mainGenre = transformToFirstCapitalSymbol(genre);
 
     return (
     <>
