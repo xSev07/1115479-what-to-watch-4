@@ -1,78 +1,70 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Footer from "../footer/footer.jsx";
 import LoginForm from "../login-form/login-form.jsx";
 import {connect} from "react-redux";
-import {getLoginErrorStatus} from "../../reducer/user/selectors";
-import {Operation as UserOperation} from "../../reducer/user/user";
+import {getIncorrectEmailStatus, getIncorrectPasswordStatus, getLoginErrorStatus} from "../../reducer/user/selectors";
+import {ActionCreator, Operation as UserOperation} from "../../reducer/user/user";
 import Header from "../header/header.jsx";
-import {isValidEmail} from "../../utils/common/common";
+import {isValidEmail, isValidPassword} from "../../utils/common/common";
 
-class SignIn extends PureComponent {
-  constructor(props) {
-    super(props);
+const SignIn = (props) => {
+  const {authError, incorrectEmail, incorrectPassword} = props;
 
-    // TODO: Возможно стоит вынести incorrectEmail в Redux
-    this.state = {
-      incorrectEmail: false,
-    };
-
-    this._handleFormSubmit = this._handleFormSubmit.bind(this);
-  }
-
-  render() {
-    const {authError} = this.props;
-    const {incorrectEmail} = this.state;
-
-    return (
-      <div className="user-page">
-        <Header
-          className={`user-page__head`}
-        >
-          <h1 className="page-title user-page__title">Sign in</h1>
-        </Header>
-
-        <div className="sign-in user-page__content">
-          <LoginForm
-            authError={authError}
-            incorrectEmail={incorrectEmail}
-            onSubmit={this._handleFormSubmit}
-          />
-        </div>
-
-        <Footer/>
-      </div>
-    );
-  }
-
-  _handleFormSubmit(formData) {
-    const {login} = this.props;
+  const _handleFormSubmit = (formData) => {
+    const {login, setIncorrectEmail, setIncorrectPassword} = props;
     const {loginValue, passwordValue} = formData;
 
     const emailValid = isValidEmail(loginValue);
-    if (emailValid) {
-      this.setState({
-        incorrectEmail: false,
-      });
+    const passwordValid = isValidPassword(passwordValue);
+
+    if (emailValid && passwordValid) {
       login({
         login: loginValue,
         password: passwordValue,
       });
-    } else {
-      this.setState({
-        incorrectEmail: true,
-      });
     }
-  }
-}
+    setIncorrectEmail(!emailValid);
+    setIncorrectPassword(!passwordValid);
+  };
+
+  return (
+    <div className="user-page">
+      <Header
+        className={`user-page__head`}
+      >
+        <h1 className="page-title user-page__title">Sign in</h1>
+      </Header>
+
+      <div className="sign-in user-page__content">
+        <LoginForm
+          authError={authError}
+          incorrectEmail={incorrectEmail}
+          incorrectPassword={incorrectPassword}
+          onSubmit={_handleFormSubmit}
+        />
+      </div>
+
+      <Footer/>
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => ({
   authError: getLoginErrorStatus(state),
+  incorrectEmail: getIncorrectEmailStatus(state),
+  incorrectPassword: getIncorrectPasswordStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   login(authData) {
     dispatch(UserOperation.login(authData));
+  },
+  setIncorrectEmail(status) {
+    dispatch(ActionCreator.setIncorrectEmail(status));
+  },
+  setIncorrectPassword(status) {
+    dispatch(ActionCreator.setIncorrectPassword(status));
   },
 });
 

@@ -2,7 +2,7 @@ import React, {createRef} from "react";
 import PropTypes from "prop-types";
 
 const LoginForm = (props) => {
-  const {authError, incorrectEmail, onSubmit} = props;
+  const {authError, incorrectEmail, incorrectPassword, onSubmit} = props;
   const loginRef = createRef();
   const passwordRef = createRef();
 
@@ -25,9 +25,9 @@ const LoginForm = (props) => {
           <p>We can’t recognize this email <br/> and password combination. Please try again.</p>
         </div>
       )}
-      {incorrectEmail && (
+      {(incorrectEmail || incorrectPassword) && (
         <div className="sign-in__message">
-          <p>Please enter a valid email address</p>
+          <p>Please enter a valid user data</p>
         </div>
       )}
       <div className="sign-in__fields">
@@ -35,7 +35,7 @@ const LoginForm = (props) => {
           <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" ref={loginRef}/>
           <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
         </div>
-        <div className="sign-in__field">
+        <div className={`sign-in__field${incorrectPassword ? ` sign-in__field--error` : ``}`}>
           <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" ref={passwordRef}/>
           <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
         </div>
