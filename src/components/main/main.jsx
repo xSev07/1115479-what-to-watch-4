@@ -6,21 +6,18 @@ import Catalog from "../catalog/catalog.jsx";
 import {connect} from "react-redux";
 import {getPromoMovie} from "../../reducer/data/selectors";
 import MovieHeader from "../movie-header/movie-header.jsx";
-import store from "../../reducer/store";
 import {Operation as DataOperation} from "../../reducer/data/data";
 
 const Main = (props) => {
-  const {promo} = props;
+  const {promo, changeFavoriteStatus} = props;
 
   if (!promo) {
     return (<h1>Данные загружаются</h1>);
   }
   const {title, poster, background} = promo;
 
-  const handlerButtonListClick = () => {
-    const {id, inList} = promo;
-
-    store.dispatch(DataOperation.changeFavoriteStatus(id, !inList));
+  const _handlerButtonListClick = () => {
+    changeFavoriteStatus(promo);
   };
 
   return (
@@ -42,7 +39,7 @@ const Main = (props) => {
             <MovieHeader
               movie={promo}
               needAddReviewButton={false}
-              onInListButtonClick={handlerButtonListClick}
+              onInListButtonClick={_handlerButtonListClick}
             />
           </div>
         </div>
@@ -61,6 +58,12 @@ const mapStateToProps = (state) => ({
   promo: getPromoMovie(state),
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  changeFavoriteStatus(movie) {
+    dispatch(DataOperation.changeFavoriteStatus(movie));
+  },
+});
+
 Main.propTypes = {
   promo: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -72,4 +75,4 @@ Main.propTypes = {
 };
 
 export {Main};
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

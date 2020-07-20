@@ -9,7 +9,6 @@ import {connect} from "react-redux";
 import {MovieTab, ShowedMovies} from "../../const";
 import MovieList from "../movie-list/movie-list.jsx";
 import {getFilteredMovies} from "../../reducer/app/selectors";
-import store from "../../reducer/store";
 import MovieHeader from "../movie-header/movie-header.jsx";
 
 const tabs = Object.values(MovieTab);
@@ -23,10 +22,8 @@ class MoviePage extends React.PureComponent {
     this.handlerButtonListClick = this.handlerButtonListClick.bind(this);
   }
 
-  handlerButtonListClick() {
-    const {id, inList} = this.props.movie;
-
-    store.dispatch(DataOperation.changeFavoriteStatus(id, !inList));
+  _handlerButtonListClick() {
+    this.props.changeFavoriteStatus(this.props.movie);
   }
 
   render() {
@@ -48,7 +45,7 @@ class MoviePage extends React.PureComponent {
             <MovieHeader
               movie={movie}
               needAddReviewButton={true}
-              onInListButtonClick={this.handlerButtonListClick}
+              onInListButtonClick={this._handlerButtonListClick}
             />
           </div>
         </div>
@@ -105,7 +102,10 @@ const mapDispatchToProps = (dispatch) => ({
   loadComments(filmId) {
     // TODO: Сделать проверку на уже загруженные комментарии, если она вообще нужна
     dispatch(DataOperation.loadComments(filmId));
-  }
+  },
+  changeFavoriteStatus(movie) {
+    dispatch(DataOperation.changeFavoriteStatus(movie));
+  },
 });
 
 MoviePage.propTypes = {

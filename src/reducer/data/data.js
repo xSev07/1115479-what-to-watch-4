@@ -46,7 +46,7 @@ const Operation = {
   loadPromo: () => (dispatch, getState, api) => {
     return api.get(ServerURL.PROMO_MOVIE)
       .then((response) => {
-        dispatch(ActionCreator.loadPromo(parseMovie(response.data)));
+        dispatch(ActionCreator.loadPromo(parseMovie(response.data, true)));
       });
   },
   loadComments: (filmId) => (dispatch, getState, api) => {
@@ -58,12 +58,12 @@ const Operation = {
         dispatch(ActionCreator.loadComments(comments));
       });
   },
-  changeFavoriteStatus: (filmId, status) => (dispatch, getState, api) => {
-    return api.post(`${ServerURL.FAVORITE}${parseInt(filmId, 10)}/${status ? 1 : 0}`)
+  changeFavoriteStatus: (movie) => (dispatch, getState, api) => {
+    const {id, inList} = movie;
+    return api.post(`${ServerURL.FAVORITE}${parseInt(id, 10)}/${inList ? 0 : 1}`)
       .then((response) => {
         dispatch(ActionCreator.updateMovie(parseMovie(response.data)));
-        const promo = getPromoMovie(getState());
-        if (filmId === promo.id) {
+        if (movie.isPromo) {
           dispatch(Operation.loadPromo());
         }
       });
