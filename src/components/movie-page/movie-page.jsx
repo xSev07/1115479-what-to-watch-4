@@ -3,12 +3,7 @@ import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import MovieDescription from "../movie-description/movie-description.jsx";
-import {
-  getCommentsByMovie, getLoadingError,
-  getMovieByID,
-  getMoviesLoadingStatus,
-  getPromoLoadingStatus
-} from "../../reducer/data/selectors";
+import {getCommentsByMovie, getMovieByID} from "../../reducer/data/selectors";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {connect} from "react-redux";
 import {MovieTab, ShowedMovies} from "../../const";
@@ -111,20 +106,11 @@ class MoviePage extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state, props) => {
-  const loadingMovies = getMoviesLoadingStatus(state);
-  const loadingError = getLoadingError(state);
-  const movieId = props.match.params.id;
-  const isLoaded = !(loadingMovies || loadingError);
-
-  return {
-    movie: isLoaded ? getMovieByID(state, {movieId}) : {},
-    movies: isLoaded ? getFilteredMovies(state, {movieId}).slice(0, ShowedMovies.ON_MOVIE_PAGE) : [],
-    comments: isLoaded ? getCommentsByMovie(state, {movieId}) : [],
-    loadingMovies,
-    loadingError,
-  };
-};
+const mapStateToProps = (state, props) => ({
+  movie: getMovieByID(state, {movieId: props.movieId}),
+  movies: getFilteredMovies(state, {movieId: props.movieId}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
+  comments: getCommentsByMovie(state, {movieId: props.movieId}),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   loadComments(filmId) {
@@ -150,26 +136,21 @@ MoviePage.propTypes = {
     background: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
   }).isRequired),
-  movie: PropTypes.oneOfType(
-      [
-        PropTypes.shape({
-          id: PropTypes.string.isRequired,
-          title: PropTypes.string.isRequired,
-          genre: PropTypes.string.isRequired,
-          year: PropTypes.number.isRequired,
-          rating: PropTypes.number.isRequired,
-          votes: PropTypes.number.isRequired,
-          producer: PropTypes.string.isRequired,
-          actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-          description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-          poster: PropTypes.string.isRequired,
-          background: PropTypes.string.isRequired,
-          backgroundColor: PropTypes.string.isRequired,
-          inList: PropTypes.bool.isRequired,
-        }).isRequired,
-        PropTypes.object.isRequired
-      ]
-  ).isRequired,
+  movie: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
+    producer: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    poster: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    inList: PropTypes.bool.isRequired,
+  }).isRequired,
   comments: PropTypes.arrayOf(PropTypes.shape({
     commentId: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
