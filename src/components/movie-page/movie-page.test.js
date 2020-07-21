@@ -18,8 +18,10 @@ it(`Should MoviePage render correctly`, () => {
                 movies={movies}
                 movie={movies[0]}
                 comments={comments}
+                canAddMovieInList={true}
                 loadComments={() => {}}
                 onMovieCardClick={() => {}}
+                changeFavoriteStatus={() => {}}
               />
             </StaticRouter>
           </Provider>, {

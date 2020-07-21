@@ -43,4 +43,4 @@ export const getPromoLoadingStatus = (state) => {
 
 export const getLoadingError = (state) => {
   return state[NAME_SPACE].loadingError;
-}
+};

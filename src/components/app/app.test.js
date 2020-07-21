@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {App} from "./app";
+import App from "./app";
 import {movies, promoMovie, storeData} from "../../tests-data/tests-data";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";

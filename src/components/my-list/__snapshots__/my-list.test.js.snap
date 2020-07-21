@@ -43,12 +43,17 @@ exports[`Should MyList render correctly 1`] = `
       <div
         className="user-block__avatar"
       >
-        <img
-          alt="User avatar"
-          height="63"
-          src="img/avatar.jpg"
-          width="63"
-        />
+        <a
+          href="/my-list"
+          onClick={[Function]}
+        >
+          <img
+            alt="User avatar"
+            height="63"
+            src="img/avatar.jpg"
+            width="63"
+          />
+        </a>
       </div>
     </div>
   </header>

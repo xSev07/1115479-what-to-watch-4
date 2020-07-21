@@ -54,6 +54,7 @@ const LoginForm = (props) => {
 LoginForm.propTypes = {
   authError: PropTypes.bool.isRequired,
   incorrectEmail: PropTypes.bool.isRequired,
+  incorrectPassword: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 

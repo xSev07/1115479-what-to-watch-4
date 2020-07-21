@@ -38,4 +38,16 @@ const MovieHeader = (props) => {
   );
 };
 
+MovieHeader.propTypes = {
+  movie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    inList: PropTypes.bool.isRequired,
+  }).isRequired,
+  needAddReviewButton: PropTypes.bool.isRequired,
+  disableAddInList: PropTypes.bool.isRequired,
+  onInListButtonClick: PropTypes.func.isRequired,
+};
+
 export default MovieHeader;

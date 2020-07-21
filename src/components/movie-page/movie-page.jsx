@@ -149,7 +149,9 @@ MoviePage.propTypes = {
     text: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
   })),
+  canAddMovieInList: PropTypes.bool.isRequired,
   loadComments: PropTypes.func.isRequired,
+  changeFavoriteStatus: PropTypes.func.isRequired,
 };
 
 export {MoviePage};

@@ -1,31 +1,22 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main";
-import {promoMovie, storeData} from "../../tests-data/tests-data";
+import Loader from "./loader.jsx";
 import configureStore from "redux-mock-store";
+import {storeData} from "../../tests-data/tests-data";
 import {Provider} from "react-redux";
 import {StaticRouter} from "react-router-dom";
 
 const mockStore = configureStore([]);
-
 const store = mockStore(storeData);
 
-it(`Should Main render correctly`, () => {
+it(`Should Loader render correctly`, () => {
   const tree = renderer
     .create(
-        <Provider store={store}>
+        <Provider store={store} >
           <StaticRouter>
-            <Main
-              promo={promoMovie}
-              canAddMovieInList={true}
-              changeFavoriteStatus={()=>{}}
-            />
+            <Loader/>
           </StaticRouter>
-        </Provider>, {
-          createNodeMock: () => {
-            return {};
-          }
-        }
+        </Provider>
     ).toJSON();
 
   expect(tree).toMatchSnapshot();

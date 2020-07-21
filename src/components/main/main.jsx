@@ -72,6 +72,8 @@ Main.propTypes = {
     poster: PropTypes.string.isRequired,
     background: PropTypes.string.isRequired,
   }),
+  canAddMovieInList: PropTypes.bool.isRequired,
+  changeFavoriteStatus: PropTypes.func.isRequired,
 };
 
 export {Main};

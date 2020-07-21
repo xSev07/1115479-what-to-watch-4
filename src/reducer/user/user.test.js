@@ -10,6 +10,8 @@ describe(`Check user reducer work correctly`, () => {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
       avatar: ``,
       loginError: false,
+      incorrectEmail: false,
+      incorrectPassword: false,
     });
   });
 

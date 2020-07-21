@@ -4,6 +4,7 @@ import Adapter from "enzyme-adapter-react-16";
 import {genres, movies} from "../../tests-data/tests-data";
 import {Catalog} from "./catalog";
 import configureStore from "redux-mock-store";
+import {StaticRouter} from "react-router-dom";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -18,18 +19,18 @@ const store = mockStore({
 
 describe(`CatalogComponent`, () => {
   it(`should check click actions in the catalog component`, () => {
-    const onMovieCardClick = jest.fn();
     const onGenreClick = jest.fn();
 
     const catalog = mount(
-        <Catalog
-          store={store}
-          movies={movies}
-          genres={genres}
-          activeGenre={`all genres`}
-          onGenreClick={onGenreClick}
-          onMovieCardClick={onMovieCardClick}
-        />
+        <StaticRouter>
+          <Catalog
+            store={store}
+            movies={movies}
+            genres={genres}
+            activeGenre={`all genres`}
+            onGenreClick={onGenreClick}
+          />
+        </StaticRouter>
     );
     const movieTitles = catalog.find(`a.small-movie-card__link`);
     movieTitles.forEach((it) => it.simulate(`click`));
@@ -37,7 +38,6 @@ describe(`CatalogComponent`, () => {
     const genreLinks = catalog.find(`a.catalog__genres-link`);
     genreLinks.first().simulate(`click`);
 
-    expect(onMovieCardClick).toHaveBeenCalledTimes(movies.length);
     expect(onGenreClick).toHaveBeenCalledTimes(1);
   });
 });

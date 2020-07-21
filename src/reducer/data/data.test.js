@@ -12,6 +12,9 @@ describe(`Check data reducer work correctly`, () => {
       movies: [],
       promo: undefined,
       comments: {},
+      loadingMovies: true,
+      loadingPromo: true,
+      loadingError: false,
     });
   });
 
@@ -23,6 +26,7 @@ describe(`Check data reducer work correctly`, () => {
       payload: movies,
     })).toEqual({
       movies,
+      loadingMovies: false,
     });
   });
 
@@ -34,6 +38,7 @@ describe(`Check data reducer work correctly`, () => {
       payload: promoMovie,
     })).toEqual({
       promo: promoMovie,
+      loadingPromo: false,
     });
   });
 
@@ -72,30 +77,32 @@ describe(`Operation in data reducer work correctly`, () => {
     [`run_time`]: 0,
     [`scores_count`]: 0,
     [`starring`]: [``, ``, ``],
-    [`video_link`]: ``
-  };
-
-  const convertedMovie = {
-    id: `0`,
-    actors: [``, ``, ``],
-    description: [``],
-    duration: 0,
-    genre: ``,
-    inList: false,
-    producer: ``,
-    rating: 0,
-    title: ``,
-    video: ``,
-    videoPreview: ``,
-    votes: 0,
-    year: 0,
-    poster: ``,
-    preview: ``,
-    background: ``,
-    backgroundColor: ``,
+    [`video_link`]: ``,
+    [`isPromo`]: false,
   };
 
   it(`should make a correct API call to /films`, () => {
+    const convertedMovie = {
+      id: `0`,
+      actors: [``, ``, ``],
+      description: [``],
+      duration: 0,
+      genre: ``,
+      inList: false,
+      producer: ``,
+      rating: 0,
+      title: ``,
+      video: ``,
+      videoPreview: ``,
+      votes: 0,
+      year: 0,
+      poster: ``,
+      preview: ``,
+      background: ``,
+      backgroundColor: ``,
+      isPromo: false,
+    };
+
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const moviesLoader = Operation.loadMovies();
@@ -115,6 +122,27 @@ describe(`Operation in data reducer work correctly`, () => {
   });
 
   it(`should make a correct API call to /films/promo`, () => {
+    const convertedMovie = {
+      id: `0`,
+      actors: [``, ``, ``],
+      description: [``],
+      duration: 0,
+      genre: ``,
+      inList: false,
+      producer: ``,
+      rating: 0,
+      title: ``,
+      video: ``,
+      videoPreview: ``,
+      votes: 0,
+      year: 0,
+      poster: ``,
+      preview: ``,
+      background: ``,
+      backgroundColor: ``,
+      isPromo: true,
+    };
+
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const moviesLoader = Operation.loadPromo();
