@@ -17,7 +17,7 @@ const store = mockStore({
   genre: `all genres`
 });
 
-describe(`CatalogComponent`, () => {
+describe(`Catalog component`, () => {
   it(`should check click actions in the catalog component`, () => {
     const onGenreClick = jest.fn();
 
