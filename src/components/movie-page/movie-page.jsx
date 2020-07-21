@@ -3,13 +3,20 @@ import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import MovieDescription from "../movie-description/movie-description.jsx";
-import {getCommentsByMovie, getMovieByID} from "../../reducer/data/selectors";
+import {
+  getCommentsByMovie, getLoadingError,
+  getMovieByID,
+  getMoviesLoadingStatus,
+  getPromoLoadingStatus
+} from "../../reducer/data/selectors";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {connect} from "react-redux";
 import {MovieTab, ShowedMovies} from "../../const";
 import MovieList from "../movie-list/movie-list.jsx";
 import {getFilteredMovies} from "../../reducer/app/selectors";
 import MovieHeader from "../movie-header/movie-header.jsx";
+import LoadingError from "../loading-error/loading-error.jsx";
+import Loader from "../loader/loader.jsx";
 
 const tabs = Object.values(MovieTab);
 
@@ -27,6 +34,16 @@ class MoviePage extends React.PureComponent {
   }
 
   render() {
+    const {loadingMovies, loadingError} = this.props;
+
+    if (loadingError) {
+      return <LoadingError/>;
+    }
+
+    if (loadingMovies) {
+      return <Loader/>;
+    }
+
     const {movies, movie} = this.props;
     const {title, poster, background, backgroundColor} = movie;
 
@@ -94,11 +111,20 @@ class MoviePage extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  movie: getMovieByID(state, {movieId: props.match.params.id}),
-  movies: getFilteredMovies(state, {movieId: props.match.params.id}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
-  comments: getCommentsByMovie(state, {movieId: props.match.params.id}),
-});
+const mapStateToProps = (state, props) => {
+  const loadingMovies = getMoviesLoadingStatus(state);
+  const loadingError = getLoadingError(state);
+  const movieId = props.match.params.id;
+  const isLoaded = !(loadingMovies || loadingError);
+
+  return {
+    movie: isLoaded ? getMovieByID(state, {movieId}) : {},
+    movies: isLoaded ? getFilteredMovies(state, {movieId}).slice(0, ShowedMovies.ON_MOVIE_PAGE) : [],
+    comments: isLoaded ? getCommentsByMovie(state, {movieId}) : [],
+    loadingMovies,
+    loadingError,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   loadComments(filmId) {
@@ -123,22 +149,27 @@ MoviePage.propTypes = {
     poster: PropTypes.string.isRequired,
     background: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
-  movie: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    votes: PropTypes.number.isRequired,
-    producer: PropTypes.string.isRequired,
-    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    poster: PropTypes.string.isRequired,
-    background: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-    inList: PropTypes.bool.isRequired,
-  }),
+  }).isRequired),
+  movie: PropTypes.oneOfType(
+      [
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+          title: PropTypes.string.isRequired,
+          genre: PropTypes.string.isRequired,
+          year: PropTypes.number.isRequired,
+          rating: PropTypes.number.isRequired,
+          votes: PropTypes.number.isRequired,
+          producer: PropTypes.string.isRequired,
+          actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+          description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+          poster: PropTypes.string.isRequired,
+          background: PropTypes.string.isRequired,
+          backgroundColor: PropTypes.string.isRequired,
+          inList: PropTypes.bool.isRequired,
+        }).isRequired,
+        PropTypes.object.isRequired
+      ]
+  ).isRequired,
   comments: PropTypes.arrayOf(PropTypes.shape({
     commentId: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
