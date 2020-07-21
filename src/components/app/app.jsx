@@ -6,54 +6,30 @@ import SignIn from "../sign-in/sign-in.jsx";
 import {AppRoute} from "../../const";
 import PrivateRoute from "../private-route/private-route.jsx";
 import MyList from "../my-list/my-list.jsx";
-import {
-  getLoadingError,
-  getMoviesLoadingStatus,
-  getPromoLoadingStatus,
-} from "../../reducer/data/selectors";
-import {connect} from "react-redux";
-import Loader from "../loader/loader.jsx";
-import LoadingError from "../loading-error/loading-error.jsx";
+import CheckLoadRoute from "../check-load-route/check-load-route.jsx";
 
-const App = (props) => {
-  const {loadingMovies, loadingPromo, loadingError} = props;
-
+const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route
+        <CheckLoadRoute
           exact
           path={AppRoute.ROOT}
-          render={() => {
-            if (loadingError) {
-              return <LoadingError/>;
-            }
-            if (loadingMovies || loadingPromo) {
-              return <Loader/>;
-            }
-            return <Main/>;
-          }}
+          render={() => <Main/>}
         />
         <Route exact path={AppRoute.LOGIN} component={SignIn}/>
         <PrivateRoute
           exact
           path={AppRoute.IN_LIST}
           render={() => {
-            return (
-              <MyList/>
-            );
+            return <MyList/>;
           }}
         />
-        <Route
+        <CheckLoadRoute
+          exact
           path={AppRoute.MOVIE}
-          render={(props) => {
-            const movieId = props.match.params.id;
-            if (loadingError) {
-              return <LoadingError/>;
-            }
-            if (loadingMovies) {
-              return <Loader/>;
-            }
+          render={(renderProps) => {
+            const movieId = renderProps.computedMatch.params.id;
             return <MoviePage movieId={movieId}/>;
           }}
         />
@@ -62,11 +38,4 @@ const App = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  loadingMovies: getMoviesLoadingStatus(state),
-  loadingPromo: getPromoLoadingStatus(state),
-  loadingError: getLoadingError(state),
-});
-
-export {App};
-export default connect(mapStateToProps)(App);
+export default App;

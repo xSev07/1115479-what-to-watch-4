@@ -10,8 +10,6 @@ import {MovieTab, ShowedMovies} from "../../const";
 import MovieList from "../movie-list/movie-list.jsx";
 import {getFilteredMovies} from "../../reducer/app/selectors";
 import MovieHeader from "../movie-header/movie-header.jsx";
-import LoadingError from "../loading-error/loading-error.jsx";
-import Loader from "../loader/loader.jsx";
 
 const tabs = Object.values(MovieTab);
 
@@ -29,16 +27,6 @@ class MoviePage extends React.PureComponent {
   }
 
   render() {
-    const {loadingMovies, loadingError} = this.props;
-
-    if (loadingError) {
-      return <LoadingError/>;
-    }
-
-    if (loadingMovies) {
-      return <Loader/>;
-    }
-
     const {movies, movie} = this.props;
     const {title, poster, background, backgroundColor} = movie;
 
