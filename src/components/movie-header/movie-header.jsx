@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {transformToFirstCapitalSymbol} from "../../utils/common/common";
 
 const MovieHeader = (props) => {
-  const {movie, needAddReviewButton, onInListButtonClick} = props;
+  const {movie, needAddReviewButton, disableAddInList, onInListButtonClick} = props;
   const {title, genre, year, inList} = movie;
   const mainGenre = transformToFirstCapitalSymbol(genre);
 
@@ -23,6 +23,7 @@ const MovieHeader = (props) => {
           <span>Play</span>
         </button>
         <button
+          disabled={disableAddInList}
           className="btn btn--list movie-card__button"
           type="button"
           onClick={onInListButtonClick}>

@@ -7,9 +7,10 @@ import {connect} from "react-redux";
 import {getPromoMovie} from "../../reducer/data/selectors";
 import MovieHeader from "../movie-header/movie-header.jsx";
 import {Operation as DataOperation} from "../../reducer/data/data";
+import {getAddMovieInListStatus} from "../../reducer/app/selectors";
 
 const Main = (props) => {
-  const {promo, changeFavoriteStatus} = props;
+  const {promo, canAddMovieInList, changeFavoriteStatus} = props;
 
   const {title, poster, background} = promo;
 
@@ -36,6 +37,7 @@ const Main = (props) => {
             <MovieHeader
               movie={promo}
               needAddReviewButton={false}
+              disableAddInList={!canAddMovieInList}
               onInListButtonClick={_handlerButtonListClick}
             />
           </div>
@@ -53,6 +55,7 @@ const Main = (props) => {
 
 const mapStateToProps = (state) => ({
   promo: getPromoMovie(state),
+  canAddMovieInList: getAddMovieInListStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

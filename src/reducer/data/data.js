@@ -2,6 +2,7 @@ import {parseMovie, parseMovies} from "../../adapters/movies";
 import {extendObject} from "../../const";
 import {parseComments} from "../../adapters/comments";
 import {ServerURL} from "../../api";
+import {ActionCreator as AppActionCreator} from "../app/app";
 
 const initialState = {
   movies: [],
@@ -72,13 +73,18 @@ const Operation = {
       });
   },
   changeFavoriteStatus: (movie) => (dispatch, getState, api) => {
+    dispatch(AppActionCreator.changeAddMovieInListStatus(false));
     const {id, inList} = movie;
     return api.post(`${ServerURL.FAVORITE}${parseInt(id, 10)}/${inList ? 0 : 1}`)
       .then((response) => {
         dispatch(ActionCreator.updateMovie(parseMovie(response.data)));
+        dispatch(AppActionCreator.changeAddMovieInListStatus(true));
         if (movie.isPromo) {
           dispatch(Operation.loadPromo());
         }
+      })
+      .catch(() => {
+        dispatch(AppActionCreator.changeAddMovieInListStatus(true));
       });
   },
 };

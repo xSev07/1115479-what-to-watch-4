@@ -8,7 +8,7 @@ import {Operation as DataOperation} from "../../reducer/data/data";
 import {connect} from "react-redux";
 import {MovieTab, ShowedMovies} from "../../const";
 import MovieList from "../movie-list/movie-list.jsx";
-import {getFilteredMovies} from "../../reducer/app/selectors";
+import {getAddMovieInListStatus, getFilteredMovies} from "../../reducer/app/selectors";
 import MovieHeader from "../movie-header/movie-header.jsx";
 
 const tabs = Object.values(MovieTab);
@@ -27,7 +27,7 @@ class MoviePage extends React.PureComponent {
   }
 
   render() {
-    const {movies, movie} = this.props;
+    const {movies, movie, canAddMovieInList} = this.props;
     const {title, poster, background, backgroundColor} = movie;
 
     return (
@@ -45,6 +45,7 @@ class MoviePage extends React.PureComponent {
             <MovieHeader
               movie={movie}
               needAddReviewButton={true}
+              disableAddInList={!canAddMovieInList}
               onInListButtonClick={this._handlerButtonListClick}
             />
           </div>
@@ -98,6 +99,7 @@ const mapStateToProps = (state, props) => ({
   movie: getMovieByID(state, {movieId: props.movieId}),
   movies: getFilteredMovies(state, {movieId: props.movieId}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
   comments: getCommentsByMovie(state, {movieId: props.movieId}),
+  canAddMovieInList: getAddMovieInListStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
