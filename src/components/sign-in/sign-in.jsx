@@ -9,24 +9,7 @@ import Header from "../header/header.jsx";
 import {isValidEmail, isValidPassword} from "../../utils/common/common";
 
 const SignIn = (props) => {
-  const {authError, incorrectEmail, incorrectPassword} = props;
-
-  const _handleFormSubmit = (formData) => {
-    const {login, setIncorrectEmail, setIncorrectPassword} = props;
-    const {loginValue, passwordValue} = formData;
-
-    const emailValid = isValidEmail(loginValue);
-    const passwordValid = isValidPassword(passwordValue);
-
-    if (emailValid && passwordValid) {
-      login({
-        login: loginValue,
-        password: passwordValue,
-      });
-    }
-    setIncorrectEmail(!emailValid);
-    setIncorrectPassword(!passwordValid);
-  };
+  const {authError, incorrectEmail, incorrectPassword, handleFormSubmit} = props;
 
   return (
     <div className="user-page">
@@ -41,7 +24,7 @@ const SignIn = (props) => {
           authError={authError}
           incorrectEmail={incorrectEmail}
           incorrectPassword={incorrectPassword}
-          onSubmit={_handleFormSubmit}
+          onSubmit={handleFormSubmit}
         />
       </div>
 
@@ -68,10 +51,37 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
+const mergeProps = (stateProps, dispatchProps) => {
+  return Object.assign(
+      {},
+      stateProps,
+      {
+        handleFormSubmit(formData) {
+          const {login, setIncorrectEmail, setIncorrectPassword} = dispatchProps;
+          const {loginValue, passwordValue} = formData;
+
+          const emailValid = isValidEmail(loginValue);
+          const passwordValid = isValidPassword(passwordValue);
+
+          if (emailValid && passwordValid) {
+            login({
+              login: loginValue,
+              password: passwordValue,
+            });
+          }
+          setIncorrectEmail(!emailValid);
+          setIncorrectPassword(!passwordValid);
+        }
+      }
+  );
+};
+
 SignIn.propTypes = {
   authError: PropTypes.bool.isRequired,
-  login: PropTypes.func.isRequired,
+  incorrectEmail: PropTypes.bool.isRequired,
+  incorrectPassword: PropTypes.bool.isRequired,
+  handleFormSubmit: PropTypes.func.isRequired,
 };
 
 export {SignIn};
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(SignIn);
