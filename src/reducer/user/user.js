@@ -1,4 +1,4 @@
-import {AppRoute, extendObject} from "../../const";
+import {extendObject} from "../../const";
 import {BASE_SERVER_URL, ServerURL} from "../../api";
 
 const AuthorizationStatus = {
