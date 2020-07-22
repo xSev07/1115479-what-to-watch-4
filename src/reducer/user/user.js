@@ -67,7 +67,6 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.setLoginErrorStatus(false));
         writeUserInfo(response.data, dispatch);
-        window.location.href = AppRoute.ROOT;
       })
       .catch(() => {});
   }
