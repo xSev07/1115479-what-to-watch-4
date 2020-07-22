@@ -10,6 +10,8 @@ import {MovieTab, ShowedMovies} from "../../const";
 import MovieList from "../movie-list/movie-list.jsx";
 import {getAddMovieInListStatus, getFilteredMovies} from "../../reducer/app/selectors";
 import MovieHeader from "../movie-header/movie-header.jsx";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {AuthorizationStatus} from "../../reducer/user/user";
 
 const tabs = Object.values(MovieTab);
 
@@ -27,7 +29,7 @@ class MoviePage extends React.PureComponent {
   }
 
   render() {
-    const {movies, movie, canAddMovieInList} = this.props;
+    const {movies, movie, userAuthorized, canAddMovieInList} = this.props;
     const {title, poster, background, backgroundColor} = movie;
 
     return (
@@ -44,6 +46,7 @@ class MoviePage extends React.PureComponent {
           <div className="movie-card__wrap">
             <MovieHeader
               movie={movie}
+              userAuthorized={userAuthorized}
               needAddReviewButton={true}
               disableAddInList={!canAddMovieInList}
               onInListButtonClick={this._handlerButtonListClick}
@@ -100,6 +103,7 @@ const mapStateToProps = (state, props) => ({
   movies: getFilteredMovies(state, {movieId: props.movieId}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
   comments: getCommentsByMovie(state, {movieId: props.movieId}),
   canAddMovieInList: getAddMovieInListStatus(state),
+  userAuthorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -149,6 +153,7 @@ MoviePage.propTypes = {
     text: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
   })),
+  userAuthorized: PropTypes.bool.isRequired,
   canAddMovieInList: PropTypes.bool.isRequired,
   loadComments: PropTypes.func.isRequired,
   changeFavoriteStatus: PropTypes.func.isRequired,

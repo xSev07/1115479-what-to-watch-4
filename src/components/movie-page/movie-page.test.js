@@ -18,6 +18,7 @@ it(`Should MoviePage render correctly`, () => {
                 movies={movies}
                 movie={movies[0]}
                 comments={comments}
+                userAuthorized={true}
                 canAddMovieInList={true}
                 loadComments={() => {}}
                 onMovieCardClick={() => {}}

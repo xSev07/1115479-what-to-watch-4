@@ -8,9 +8,11 @@ import {getPromoMovie} from "../../reducer/data/selectors";
 import MovieHeader from "../movie-header/movie-header.jsx";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {getAddMovieInListStatus} from "../../reducer/app/selectors";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {AuthorizationStatus} from "../../reducer/user/user";
 
 const Main = (props) => {
-  const {promo, canAddMovieInList, changeFavoriteStatus} = props;
+  const {promo, canAddMovieInList, userAuthorized, changeFavoriteStatus} = props;
 
   const {title, poster, background} = promo;
 
@@ -36,6 +38,7 @@ const Main = (props) => {
             </div>
             <MovieHeader
               movie={promo}
+              userAuthorized={userAuthorized}
               needAddReviewButton={false}
               disableAddInList={!canAddMovieInList}
               onInListButtonClick={_handlerButtonListClick}
@@ -56,6 +59,7 @@ const Main = (props) => {
 const mapStateToProps = (state) => ({
   promo: getPromoMovie(state),
   canAddMovieInList: getAddMovieInListStatus(state),
+  userAuthorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -73,6 +77,7 @@ Main.propTypes = {
     background: PropTypes.string.isRequired,
   }),
   canAddMovieInList: PropTypes.bool.isRequired,
+  userAuthorized: PropTypes.bool.isRequired,
   changeFavoriteStatus: PropTypes.func.isRequired,
 };
 

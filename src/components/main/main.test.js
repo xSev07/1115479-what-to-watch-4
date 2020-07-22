@@ -17,6 +17,7 @@ it(`Should Main render correctly`, () => {
           <StaticRouter>
             <Main
               promo={promoMovie}
+              userAuthorized={true}
               canAddMovieInList={true}
               changeFavoriteStatus={()=>{}}
             />
