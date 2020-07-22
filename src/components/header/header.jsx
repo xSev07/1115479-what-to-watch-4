@@ -6,8 +6,7 @@ import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
 
 const Header = (props) => {
-  const {className, avatar, children} = props;
-  const isLoginPage = window.location.pathname === AppRoute.LOGIN;
+  const {className, avatar, needUserBlock = true, children} = props;
 
   return (
     <header className={`page-header ${className}`}>
@@ -19,7 +18,7 @@ const Header = (props) => {
         </Link>
       </div>
       {children}
-      {!isLoginPage && <div className="user-block">
+      {needUserBlock && <div className="user-block">
         {avatar ? (
           <div className="user-block__avatar">
             <Link to={AppRoute.IN_LIST}>
@@ -41,6 +40,7 @@ const mapStateToProps = (state) => ({
 Header.propTypes = {
   className: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
+  needUserBlock: PropTypes.bool,
   children: PropTypes.element,
 };
 

@@ -15,6 +15,7 @@ const SignIn = (props) => {
     <div className="user-page">
       <Header
         className={`user-page__head`}
+        needUserBlock={false}
       >
         <h1 className="page-title user-page__title">Sign in</h1>
       </Header>
