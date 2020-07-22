@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {AppRoute} from "../../const";
 
-const PrivateRoute = (props) => {
+const PublicRoute = (props) => {
   const {exact, path, render, authStatus} = props;
   return (
     <Route
@@ -14,16 +14,16 @@ const PrivateRoute = (props) => {
       exact={exact}
       render={() => {
         return (
-          authStatus === AuthorizationStatus.AUTH
+          authStatus === AuthorizationStatus.NO_AUTH
             ? render()
-            : <Redirect to={AppRoute.LOGIN}/>
+            : <Redirect to={AppRoute.ROOT}/>
         );
       }}
     />
   );
 };
 
-PrivateRoute.propTypes = {
+PublicRoute.propTypes = {
   authStatus: PropTypes.string.isRequired,
   exact: PropTypes.bool.isRequired,
   path: PropTypes.string.isRequired,
@@ -34,5 +34,5 @@ const mapStateToProps = (state) => ({
   authStatus: getAuthorizationStatus(state),
 });
 
-export {PrivateRoute};
-export default connect(mapStateToProps)(PrivateRoute);
+export {PublicRoute};
+export default connect(mapStateToProps)(PublicRoute);
