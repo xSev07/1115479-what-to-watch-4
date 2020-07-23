@@ -18,9 +18,6 @@ describe(`Should App render correctly`, () => {
             <App
               allMovies={movies}
               promoMovie={promoMovie}
-              // loadingMovies={false}
-              // loadingPromo={false}
-              // loadingError={false}
             />
           </Provider>, {
             createNodeMock: () => {
@@ -49,9 +46,6 @@ describe(`Should App render correctly`, () => {
             <App
               allMovies={movies}
               promoMovie={promoMovie}
-              // loadingMovies={true}
-              // loadingPromo={false}
-              // loadingError={false}
             />
           </Provider>, {
             createNodeMock: () => {
@@ -80,9 +74,6 @@ describe(`Should App render correctly`, () => {
             <App
               allMovies={movies}
               promoMovie={promoMovie}
-              // loadingMovies={false}
-              // loadingPromo={true}
-              // loadingError={false}
             />
           </Provider>, {
             createNodeMock: () => {
@@ -111,9 +102,6 @@ describe(`Should App render correctly`, () => {
             <App
               allMovies={movies}
               promoMovie={promoMovie}
-              // loadingMovies={false}
-              // loadingPromo={false}
-              // loadingError={true}
             />
           </Provider>, {
             createNodeMock: () => {
