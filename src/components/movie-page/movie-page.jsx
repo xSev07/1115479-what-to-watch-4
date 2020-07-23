@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import MovieDescription from "../movie-description/movie-description.jsx";
-import {getCommentsByMovie, getMovieByID} from "../../reducer/data/selectors";
+import {getCommentsByMovie, getLoadingCommentsError, getMovieByID} from "../../reducer/data/selectors";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {connect} from "react-redux";
 import {MovieTab, ShowedMovies} from "../../const";
@@ -29,7 +29,7 @@ class MoviePage extends React.PureComponent {
   }
 
   render() {
-    const {movies, movie, userAuthorized, canAddMovieInList} = this.props;
+    const {movies, movie, userAuthorized, canAddMovieInList, loadingCommentsError} = this.props;
     const {title, poster, background, backgroundColor} = movie;
 
     return (
@@ -65,6 +65,7 @@ class MoviePage extends React.PureComponent {
               movie={this.props.movie}
               comments={this.props.comments}
               elements={this._tabs}
+              loadingCommentsError={loadingCommentsError}
             />
           </div>
         </div>
@@ -104,6 +105,7 @@ const mapStateToProps = (state, props) => ({
   comments: getCommentsByMovie(state, {movieId: props.movieId}),
   canAddMovieInList: getAddMovieInListStatus(state),
   userAuthorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
+  loadingCommentsError: getLoadingCommentsError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

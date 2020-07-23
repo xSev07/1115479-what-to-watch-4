@@ -9,7 +9,7 @@ import {MovieTab} from "../../const";
 
 const MovieDescription = (props) => {
 
-  const {movie, comments, elements, activeElement, onElementClick} = props;
+  const {movie, comments, elements, activeElement, loadingCommentsError, onElementClick} = props;
 
   return (
     <div className="movie-card__desc">
@@ -25,7 +25,7 @@ const MovieDescription = (props) => {
         <MovieDetails {...movie}/>
       )}
       {activeElement === MovieTab.REVIEWS && (
-        <MovieReviews comments={comments}/>
+        <MovieReviews comments={comments} loadingError={loadingCommentsError}/>
       )}
     </div>
   );

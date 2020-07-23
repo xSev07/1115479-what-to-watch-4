@@ -11,6 +11,7 @@ const initialState = {
   loadingMovies: true,
   loadingPromo: true,
   loadingError: false,
+  loadingCommentsError: false,
 };
 
 const ActionType = {
@@ -19,6 +20,7 @@ const ActionType = {
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   UPDATE_MOVIE: `UPDATE_MOVIE`,
   LOADING_ERROR: `LOADING_ERROR`,
+  LOADING_COMMENTS_ERROR: `LOADING_COMMENTS_ERROR`,
 };
 
 const ActionCreator = {
@@ -42,6 +44,10 @@ const ActionCreator = {
     type: ActionType.LOADING_ERROR,
     payload: true,
   }),
+  loadingCommentsError: (status) => ({
+    type: ActionType.LOADING_COMMENTS_ERROR,
+    payload: status,
+  }),
 };
 
 const Operation = {
@@ -64,12 +70,16 @@ const Operation = {
       });
   },
   loadComments: (filmId) => (dispatch, getState, api) => {
+    dispatch(ActionCreator.loadingCommentsError(false));
     return api.get(`${ServerURL.COMMENTS}${filmId}`)
       .then((response) => {
         const comments = {
           [filmId]: parseComments(response.data),
         };
         dispatch(ActionCreator.loadComments(comments));
+      })
+      .catch(() => {
+        dispatch(ActionCreator.loadingCommentsError(true));
       });
   },
   changeFavoriteStatus: (movie) => (dispatch, getState, api) => {
@@ -109,6 +119,10 @@ const reducer = (state = initialState, action) => {
       const oldMovieIndex = state.movies.findIndex((it) => it.id === newMovie.id);
       const newMovies = [...state.movies.slice(0, oldMovieIndex), newMovie, ...state.movies.slice(oldMovieIndex + 1)];
       return extendObject(state, {movies: newMovies});
+    case ActionType.LOADING_ERROR:
+      return extendObject(state, {loadingError: action.payload});
+    case ActionType.LOADING_COMMENTS_ERROR:
+      return extendObject(state, {loadingCommentsError: action.payload});
   }
 
   return state;
