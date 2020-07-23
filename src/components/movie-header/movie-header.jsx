@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {transformToFirstCapitalSymbol} from "../../utils/common/common";
-import {Link} from "react-router-dom";
-import {AppRoute} from "../../const";
+import PrivateLink from "../private-link/private-link.jsx";
 
 const MovieHeader = (props) => {
-  const {movie, userAuthorized, needAddReviewButton, disableAddInList, onInListButtonClick} = props;
+  const {movie, needAddReviewButton, disableAddInList, onInListButtonClick} = props;
   const {title, genre, year, inList} = movie;
   const mainGenre = transformToFirstCapitalSymbol(genre);
 
@@ -24,28 +23,17 @@ const MovieHeader = (props) => {
           </svg>
           <span>Play</span>
         </button>
-        {userAuthorized ?
-          <button
-            disabled={disableAddInList}
-            className="btn btn--list movie-card__button"
-            type="button"
-            onClick={onInListButtonClick}>
-            <svg viewBox="0 0 19 20" width="19" height="20">
-              <use xlinkHref={inList ? `#in-list` : `#add`}></use>
-            </svg>
-            <span>My list</span>
-          </button>
-          :
-          <Link
-            to={AppRoute.LOGIN}
-            className="btn btn--list movie-card__button"
-          >
-            <svg viewBox="0 0 19 20" width="19" height="20">
-              <use xlinkHref={inList ? `#in-list` : `#add`}></use>
-            </svg>
-            <span>My list</span>
-          </Link>
-        }
+        <PrivateLink
+          disabled={disableAddInList}
+          className="btn btn--list movie-card__button"
+          type="button"
+          onClick={onInListButtonClick}
+        >
+          <svg viewBox="0 0 19 20" width="19" height="20">
+            <use xlinkHref={inList ? `#in-list` : `#add`}></use>
+          </svg>
+          <span>My list</span>
+        </PrivateLink>
         {needAddReviewButton && <a href="add-review.html" className="btn movie-card__button">Add review</a>}
       </div>
     </div>
@@ -59,7 +47,6 @@ MovieHeader.propTypes = {
     year: PropTypes.number.isRequired,
     inList: PropTypes.bool.isRequired,
   }).isRequired,
-  userAuthorized: PropTypes.bool.isRequired,
   needAddReviewButton: PropTypes.bool.isRequired,
   disableAddInList: PropTypes.bool.isRequired,
   onInListButtonClick: PropTypes.func.isRequired,

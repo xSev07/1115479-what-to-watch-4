@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should PrivateLink render correctly should render button 1`] = `
+<button
+  className="test"
+>
+  <span>
+    Button
+  </span>
+</button>
+`;
+
+exports[`Should PrivateLink render correctly should render link 1`] = `
+<a
+  className="test"
+  href="/login"
+  onClick={[Function]}
+>
+  <span>
+    Link
+  </span>
+</a>
+`;
