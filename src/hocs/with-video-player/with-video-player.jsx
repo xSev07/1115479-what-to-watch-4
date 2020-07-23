@@ -50,10 +50,9 @@ const withVideoPlayer = (Component) => {
 
     componentDidMount() {
       this._isMounted = true;
-      const {poster, videoPreview, isMuted} = this.props;
+      const {poster, isMuted} = this.props;
       const video = this._videoRef.current;
       video.poster = poster;
-      video.src = videoPreview;
       video.muted = isMuted;
     }
 
@@ -66,10 +65,13 @@ const withVideoPlayer = (Component) => {
     }
 
     componentDidUpdate() {
+      const {videoPreview} = this.props;
       const video = this._videoRef.current;
       if (this.state.isPlaying) {
+        video.src = videoPreview;
         video.play();
       } else {
+        video.src = null;
         video.load();
       }
     }
