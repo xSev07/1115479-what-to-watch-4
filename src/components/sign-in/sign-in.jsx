@@ -1,85 +1,88 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Footer from "../footer/footer.jsx";
 import LoginForm from "../login-form/login-form.jsx";
 import {connect} from "react-redux";
-import {getLoginErrorStatus} from "../../reducer/user/selectors";
-import {Operation as UserOperation} from "../../reducer/user/user";
+import {getIncorrectEmailStatus, getIncorrectPasswordStatus, getLoginErrorStatus} from "../../reducer/user/selectors";
+import {ActionCreator, Operation as UserOperation} from "../../reducer/user/user";
 import Header from "../header/header.jsx";
-import {isValidEmail} from "../../utils/common/common";
+import {isValidEmail, isValidPassword} from "../../utils/common/common";
 
-class SignIn extends PureComponent {
-  constructor(props) {
-    super(props);
+const SignIn = (props) => {
+  const {authError, incorrectEmail, incorrectPassword, handleFormSubmit} = props;
 
-    // TODO: Возможно стоит вынести incorrectEmail в Redux
-    this.state = {
-      incorrectEmail: false,
-    };
+  return (
+    <div className="user-page">
+      <Header
+        className={`user-page__head`}
+        needUserBlock={false}
+      >
+        <h1 className="page-title user-page__title">Sign in</h1>
+      </Header>
 
-    this._handleFormSubmit = this._handleFormSubmit.bind(this);
-  }
-
-  render() {
-    const {authError} = this.props;
-    const {incorrectEmail} = this.state;
-
-    return (
-      <div className="user-page">
-        <Header
-          className={`user-page__head`}
-        >
-          <h1 className="page-title user-page__title">Sign in</h1>
-        </Header>
-
-        <div className="sign-in user-page__content">
-          <LoginForm
-            authError={authError}
-            incorrectEmail={incorrectEmail}
-            onSubmit={this._handleFormSubmit}
-          />
-        </div>
-
-        <Footer/>
+      <div className="sign-in user-page__content">
+        <LoginForm
+          authError={authError}
+          incorrectEmail={incorrectEmail}
+          incorrectPassword={incorrectPassword}
+          onSubmit={handleFormSubmit}
+        />
       </div>
-    );
-  }
 
-  _handleFormSubmit(formData) {
-    const {login} = this.props;
-    const {loginValue, passwordValue} = formData;
-
-    const emailValid = isValidEmail(loginValue);
-    if (emailValid) {
-      this.setState({
-        incorrectEmail: false,
-      });
-      login({
-        login: loginValue,
-        password: passwordValue,
-      });
-    } else {
-      this.setState({
-        incorrectEmail: true,
-      });
-    }
-  }
-}
+      <Footer/>
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => ({
   authError: getLoginErrorStatus(state),
+  incorrectEmail: getIncorrectEmailStatus(state),
+  incorrectPassword: getIncorrectPasswordStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   login(authData) {
     dispatch(UserOperation.login(authData));
   },
+  setIncorrectEmail(status) {
+    dispatch(ActionCreator.setIncorrectEmail(status));
+  },
+  setIncorrectPassword(status) {
+    dispatch(ActionCreator.setIncorrectPassword(status));
+  },
 });
+
+const mergeProps = (stateProps, dispatchProps) => {
+  return Object.assign(
+      {},
+      stateProps,
+      {
+        handleFormSubmit(formData) {
+          const {login, setIncorrectEmail, setIncorrectPassword} = dispatchProps;
+          const {loginValue, passwordValue} = formData;
+
+          const emailValid = isValidEmail(loginValue);
+          const passwordValid = isValidPassword(passwordValue);
+
+          if (emailValid && passwordValid) {
+            login({
+              login: loginValue,
+              password: passwordValue,
+            });
+          }
+          setIncorrectEmail(!emailValid);
+          setIncorrectPassword(!passwordValid);
+        }
+      }
+  );
+};
 
 SignIn.propTypes = {
   authError: PropTypes.bool.isRequired,
-  login: PropTypes.func.isRequired,
+  incorrectEmail: PropTypes.bool.isRequired,
+  incorrectPassword: PropTypes.bool.isRequired,
+  handleFormSubmit: PropTypes.func.isRequired,
 };
 
 export {SignIn};
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(SignIn);

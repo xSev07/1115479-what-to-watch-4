@@ -1,30 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
+import {Link} from "react-router-dom";
 
 const MovieCard = (props) => {
-  const {id, title, onClick, onPlay, onPause} = props;
+  const {id, title, onPlay, onPause} = props;
+  const url = `/films/${id}`;
 
   return (
     <article
       className="small-movie-card catalog__movies-card"
-      onClick={() => {
-        onClick(id);
-      }}
       onMouseEnter={onPlay}
       onMouseLeave={onPause}
     >
-      <div className="small-movie-card__image">
-        {props.children}
-      </div>
-      <h3 className="small-movie-card__title">
-        <a
-          className="small-movie-card__link"
-          href="movie-page.html"
-        >
+      <Link
+        className="small-movie-card__link"
+        to={url}
+      >
+        <div className="small-movie-card__image">
+          {props.children}
+        </div>
+        <h3 className="small-movie-card__title">
           {title}
-        </a>
-      </h3>
+        </h3>
+      </Link>
     </article>
   );
 };
@@ -33,7 +32,6 @@ MovieCard.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   videoPreview: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
   onPlay: PropTypes.func.isRequired,
   onPause: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,

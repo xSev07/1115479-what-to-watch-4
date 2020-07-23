@@ -1,15 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {transformToFirstCapitalSymbol} from "../../utils/common/common";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import MovieDescription from "../movie-description/movie-description.jsx";
-import {getCommentsByMovie} from "../../reducer/data/selectors";
+import {getCommentsByMovie, getLoadingCommentsError, getMovieByID} from "../../reducer/data/selectors";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {connect} from "react-redux";
 import {MovieTab, ShowedMovies} from "../../const";
 import MovieList from "../movie-list/movie-list.jsx";
-import {getFilteredMovies} from "../../reducer/app/selectors";
+import {getAddMovieInListStatus, getFilteredMovies} from "../../reducer/app/selectors";
+import MovieHeader from "../movie-header/movie-header.jsx";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {AuthorizationStatus} from "../../reducer/user/user";
 
 const tabs = Object.values(MovieTab);
 
@@ -18,13 +20,17 @@ class MoviePage extends React.PureComponent {
     super(props);
 
     this._tabs = tabs;
+
+    this._handlerButtonListClick = this._handlerButtonListClick.bind(this);
+  }
+
+  _handlerButtonListClick() {
+    this.props.changeFavoriteStatus(this.props.movie);
   }
 
   render() {
-    const {movies, movie, onMovieCardClick} = this.props;
-    // TODO: Убрать movie из пропсов и получать его по адресной строке после 8го модуля
-    const {title, genre, year, poster, background, backgroundColor} = movie;
-    const mainGenre = transformToFirstCapitalSymbol(genre[0]);
+    const {movies, movie, userAuthorized, canAddMovieInList, loadingCommentsError} = this.props;
+    const {title, poster, background, backgroundColor} = movie;
 
     return (
     <>
@@ -38,29 +44,13 @@ class MoviePage extends React.PureComponent {
           </div>
 
           <div className="movie-card__wrap">
-            <div className="movie-card__desc">
-              <h2 className="movie-card__title">{title}</h2>
-              <p className="movie-card__meta">
-                <span className="movie-card__genre">{mainGenre}</span>
-                <span className="movie-card__year">{year}</span>
-              </p>
-
-              <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
-              </div>
-            </div>
+            <MovieHeader
+              movie={movie}
+              userAuthorized={userAuthorized}
+              needAddReviewButton={true}
+              disableAddInList={!canAddMovieInList}
+              onInListButtonClick={this._handlerButtonListClick}
+            />
           </div>
         </div>
 
@@ -75,6 +65,7 @@ class MoviePage extends React.PureComponent {
               movie={this.props.movie}
               comments={this.props.comments}
               elements={this._tabs}
+              loadingCommentsError={loadingCommentsError}
             />
           </div>
         </div>
@@ -86,7 +77,6 @@ class MoviePage extends React.PureComponent {
 
           <MovieList
             movies={movies}
-            onMovieCardClick={onMovieCardClick}
           />
         </section>
 
@@ -97,7 +87,9 @@ class MoviePage extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.props.loadComments(this.props.movie.id);
+    if (!this.props.comments) {
+      this.props.loadComments(this.props.movie.id);
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -108,15 +100,21 @@ class MoviePage extends React.PureComponent {
 }
 
 const mapStateToProps = (state, props) => ({
-  movies: getFilteredMovies(state, {movieId: props.movie.id}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
-  comments: getCommentsByMovie(state, {movieId: props.movie.id}),
+  movie: getMovieByID(state, {movieId: props.movieId}),
+  movies: getFilteredMovies(state, {movieId: props.movieId}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
+  comments: getCommentsByMovie(state, {movieId: props.movieId}),
+  canAddMovieInList: getAddMovieInListStatus(state),
+  userAuthorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
+  loadingCommentsError: getLoadingCommentsError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   loadComments(filmId) {
-    // TODO: Сделать проверку на уже загруженные комментарии, если она вообще нужна
     dispatch(DataOperation.loadComments(filmId));
-  }
+  },
+  changeFavoriteStatus(movie) {
+    dispatch(DataOperation.changeFavoriteStatus(movie));
+  },
 });
 
 MoviePage.propTypes = {
@@ -133,7 +131,7 @@ MoviePage.propTypes = {
     poster: PropTypes.string.isRequired,
     background: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
+  }).isRequired),
   movie: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -147,7 +145,8 @@ MoviePage.propTypes = {
     poster: PropTypes.string.isRequired,
     background: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
-  }),
+    inList: PropTypes.bool.isRequired,
+  }).isRequired,
   comments: PropTypes.arrayOf(PropTypes.shape({
     commentId: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
@@ -156,8 +155,11 @@ MoviePage.propTypes = {
     text: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
   })),
+  userAuthorized: PropTypes.bool.isRequired,
+  canAddMovieInList: PropTypes.bool.isRequired,
+  loadingCommentsError: PropTypes.bool.isRequired,
   loadComments: PropTypes.func.isRequired,
-  onMovieCardClick: PropTypes.func.isRequired,
+  changeFavoriteStatus: PropTypes.func.isRequired,
 };
 
 export {MoviePage};

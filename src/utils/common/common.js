@@ -44,3 +44,10 @@ export const splitArrayInHalf = (arr = []) => {
 export const isValidEmail = (email) => {
   return email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
 };
+
+export const isValidPassword = (password) => {
+  return password.length > 2;
+};
+export const extendObject = (a, b) => {
+  return Object.assign({}, a, b);
+};

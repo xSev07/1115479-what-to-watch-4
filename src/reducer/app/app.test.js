@@ -29,7 +29,7 @@ describe(`Check app reducer work correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
       genre: ALL_GENRES_NAME,
-      loginStatus: false,
+      canAddMovieInList: true,
     });
   });
 

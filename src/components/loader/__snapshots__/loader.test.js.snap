@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should Loader render correctly 1`] = `
+<div
+  style={
+    Object {
+      "background": "linear-gradient(-180deg,#180202 0%,#000 100%)",
+    }
+  }
+>
+  <header
+    className="page-header movie-card__head"
+  >
+    <div
+      className="logo"
+    >
+      <a
+        className="logo__link"
+        href="/"
+        onClick={[Function]}
+      >
+        <span
+          className="logo__letter logo__letter--1"
+        >
+          W
+        </span>
+        <span
+          className="logo__letter logo__letter--2"
+        >
+          T
+        </span>
+        <span
+          className="logo__letter logo__letter--3"
+        >
+          W
+        </span>
+      </a>
+    </div>
+    <h1
+      className="visually-hidden"
+    >
+      WTW
+    </h1>
+    <div
+      className="user-block"
+    >
+      <div
+        className="user-block__avatar"
+      >
+        <a
+          href="/my-list"
+          onClick={[Function]}
+        >
+          <img
+            alt="User avatar"
+            height="63"
+            src="img/avatar.jpg"
+            width="63"
+          />
+        </a>
+      </div>
+    </div>
+  </header>
+  <div
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "height": "calc(100vh - 94px - 138px)",
+        "justifyContent": "center",
+        "width": "100vw",
+      }
+    }
+  >
+    <svg
+      display="block"
+      height="200"
+      preserveAspectRatio="xMidYMid"
+      style={
+        Object {
+          "margin": "auto",
+        }
+      }
+      viewBox="0 0 100 100"
+      width="200"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M85.141 70.133a40 40 0 00-71.194-36.487A42 40-62.865 0185.14 70.133"
+        fill="#d9cd8d"
+      >
+        <animateTransform
+          attributeName="transform"
+          dur="1s"
+          keyTimes="0;1"
+          repeatCount="indefinite"
+          type="rotate"
+          values="0 50 51;360 50 51"
+        />
+      </path>
+    </svg>
+  </div>
+  <footer
+    className="page-footer"
+  >
+    <div
+      className="logo"
+    >
+      <a
+        className="logo__link logo__link--light"
+        href="main.html"
+      >
+        <span
+          className="logo__letter logo__letter--1"
+        >
+          W
+        </span>
+        <span
+          className="logo__letter logo__letter--2"
+        >
+          T
+        </span>
+        <span
+          className="logo__letter logo__letter--3"
+        >
+          W
+        </span>
+      </a>
+    </div>
+    <div
+      className="copyright"
+    >
+      <p>
+        © 2019 What to watch Ltd.
+      </p>
+    </div>
+  </footer>
+</div>
+`;

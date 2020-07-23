@@ -38,13 +38,50 @@ exports[`Should Header render correctly should render Header with children and c
     <div
       className="user-block__avatar"
     >
-      <img
-        alt="User avatar"
-        height="63"
-        src="img/avatar.jpg"
-        width="63"
-      />
+      <a
+        href="/my-list"
+        onClick={[Function]}
+      >
+        <img
+          alt="User avatar"
+          height="63"
+          src="img/avatar.jpg"
+          width="63"
+        />
+      </a>
     </div>
+  </div>
+</header>
+`;
+
+exports[`Should Header render correctly should render Header without user block 1`] = `
+<header
+  className="page-header movie-card__head"
+>
+  <div
+    className="logo"
+  >
+    <a
+      className="logo__link"
+      href="/"
+      onClick={[Function]}
+    >
+      <span
+        className="logo__letter logo__letter--1"
+      >
+        W
+      </span>
+      <span
+        className="logo__letter logo__letter--2"
+      >
+        T
+      </span>
+      <span
+        className="logo__letter logo__letter--3"
+      >
+        W
+      </span>
+    </a>
   </div>
 </header>
 `;
@@ -84,12 +121,17 @@ exports[`Should Header render correctly should render basic Header 1`] = `
     <div
       className="user-block__avatar"
     >
-      <img
-        alt="User avatar"
-        height="63"
-        src="img/avatar.jpg"
-        width="63"
-      />
+      <a
+        href="/my-list"
+        onClick={[Function]}
+      >
+        <img
+          alt="User avatar"
+          height="63"
+          src="img/avatar.jpg"
+          width="63"
+        />
+      </a>
     </div>
   </div>
 </header>

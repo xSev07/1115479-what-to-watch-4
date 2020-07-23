@@ -1,5 +1,5 @@
-import {extendObject} from "../../const";
-import {BASE_SERVER_URL} from "../../api";
+import {BASE_SERVER_URL, ServerURL} from "../../api";
+import {extendObject} from "../../utils/common/common";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -10,12 +10,16 @@ const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   avatar: ``,
   loginError: false,
+  incorrectEmail: false,
+  incorrectPassword: false,
 };
 
 const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   ADD_AVATAR: `ADD_AVATAR`,
   SET_LOGIN_ERROR_STATUS: `SET_LOGIN_ERROR_STATUS`,
+  SET_INCORRECT_EMAIL: `SET_INCORRECT_EMAIL`,
+  SET_INCORRECT_PASSWORD: `SET_INCORRECT_PASSWORD`,
 };
 
 const ActionCreator = {
@@ -31,6 +35,14 @@ const ActionCreator = {
     type: ActionType.SET_LOGIN_ERROR_STATUS,
     payload: status,
   }),
+  setIncorrectEmail: (status) => ({
+    type: ActionType.SET_INCORRECT_EMAIL,
+    payload: status,
+  }),
+  setIncorrectPassword: (status) => ({
+    type: ActionType.SET_INCORRECT_PASSWORD,
+    payload: status,
+  }),
 };
 
 const writeUserInfo = (data, dispatch) => {
@@ -41,14 +53,14 @@ const writeUserInfo = (data, dispatch) => {
 
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
-    return api.get(`/login`)
+    return api.get(ServerURL.LOGIN)
       .then((response) => {
         writeUserInfo(response.data, dispatch);
       })
       .catch(() => {});
   },
   login: (authData) => (dispatch, getState, api) => {
-    return api.post(`/login`, {
+    return api.post(ServerURL.LOGIN, {
       email: authData.login,
       password: authData.password,
     })
@@ -68,6 +80,10 @@ const reducer = (state = initialState, action) => {
       return extendObject(state, {avatar: action.payload});
     case ActionType.SET_LOGIN_ERROR_STATUS:
       return extendObject(state, {loginError: action.payload});
+    case ActionType.SET_INCORRECT_EMAIL:
+      return extendObject(state, {incorrectEmail: action.payload});
+    case ActionType.SET_INCORRECT_PASSWORD:
+      return extendObject(state, {incorrectPassword: action.payload});
   }
 
   return state;

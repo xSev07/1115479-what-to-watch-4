@@ -12,10 +12,6 @@ export const TextRating = {
   NOT_FOUND: `Impossible`,
 };
 
-export const extendObject = (a, b) => {
-  return Object.assign({}, a, b);
-};
-
 export const MAX_GENRES = 8;
 
 export const ALL_GENRES_NAME = `all genres`;
@@ -24,4 +20,11 @@ export const MovieTab = {
   OVERVIEW: `Overview`,
   DETAILS: `Details`,
   REVIEWS: `Reviews`,
+};
+
+export const AppRoute = {
+  LOGIN: `/login`,
+  ROOT: `/`,
+  MOVIE: `/films/:id`,
+  IN_LIST: `/my-list`,
 };

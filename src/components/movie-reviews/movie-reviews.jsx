@@ -24,9 +24,6 @@ const getCommentTemplate = (comment) => {
 
 const MovieReviews = (props) => {
   const {comments} = props;
-  if (!comments) {
-    return <div>Комментарии загружаются</div>;
-  }
 
   const halfsComments = splitArrayInHalf(comments);
   const firstCommentsColumn = halfsComments.firstHalf.map((it) => getCommentTemplate(it));

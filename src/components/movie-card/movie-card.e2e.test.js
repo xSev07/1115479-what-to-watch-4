@@ -13,7 +13,6 @@ const children = <></>;
 
 describe(`MovieCardComponent`, () => {
   it(`should check actions on the card`, () => {
-    const onCardClick = jest.fn();
     const onMouseEnter = jest.fn();
     const onMouseLeave = jest.fn();
 
@@ -23,7 +22,6 @@ describe(`MovieCardComponent`, () => {
           title={movie.title}
           videoPreview={movie.videoPreview}
           poster={`img/${movie.title}.jpg`}
-          onClick={onCardClick}
           onPlay={onMouseEnter}
           onPause={onMouseLeave}
         >
@@ -37,8 +35,5 @@ describe(`MovieCardComponent`, () => {
 
     card.simulate(`mouseleave`);
     expect(onMouseLeave).toHaveBeenCalledTimes(1);
-
-    card.simulate(`click`);
-    expect(onCardClick).toHaveBeenCalledTimes(1);
   });
 });

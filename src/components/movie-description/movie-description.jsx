@@ -6,10 +6,29 @@ import MovieReviews from "../movie-reviews/movie-reviews.jsx";
 import PropTypes from "prop-types";
 import withActiveElement from "../../hocs/with-active-element/with-active-element.jsx";
 import {MovieTab} from "../../const";
+import {LoadError, Spinner} from "../svg/svg.jsx";
+
+const getMovieReviewsTemplate = (loadingError, comments) => {
+  if (loadingError) {
+    return (
+      <div style={{marginTop: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center`}}>
+        <h2 style={{color: `#d9cd8d`}}>Извините, у нашего сервера лапки. Попробуйте позднее</h2>
+        <LoadError/>
+      </div>
+    );
+  }
+  if (!comments) {
+    return (
+      <div style={{marginTop: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center`}}>
+        <Spinner/>
+      </div>
+    );
+  }
+  return <MovieReviews comments={comments}/>;
+};
 
 const MovieDescription = (props) => {
-
-  const {movie, comments, elements, activeElement, onElementClick} = props;
+  const {movie, comments, elements, activeElement, loadingCommentsError, onElementClick} = props;
 
   return (
     <div className="movie-card__desc">
@@ -25,7 +44,7 @@ const MovieDescription = (props) => {
         <MovieDetails {...movie}/>
       )}
       {activeElement === MovieTab.REVIEWS && (
-        <MovieReviews comments={comments}/>
+        getMovieReviewsTemplate(loadingCommentsError, comments)
       )}
     </div>
   );
@@ -56,6 +75,7 @@ MovieDescription.propTypes = {
   })),
   elements: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   activeElement: PropTypes.string.isRequired,
+  loadingCommentsError: PropTypes.bool.isRequired,
   onElementClick: PropTypes.func.isRequired,
 };
 

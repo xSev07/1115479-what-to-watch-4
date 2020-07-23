@@ -3,12 +3,11 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserAvatar} from "../../reducer/user/selectors";
 import {Link} from "react-router-dom";
+import {AppRoute} from "../../const";
 
 const Header = (props) => {
-  const {className, avatar, children} = props;
+  const {className, avatar, needUserBlock = true, children} = props;
 
-  // TODO:
-  //  Сделать проверку url. Если это страница логина - не выводить user-block
   return (
     <header className={`page-header ${className}`}>
       <div className="logo">
@@ -19,15 +18,17 @@ const Header = (props) => {
         </Link>
       </div>
       {children}
-      <div className="user-block">
+      {needUserBlock && <div className="user-block">
         {avatar ? (
           <div className="user-block__avatar">
-            <img src={avatar} alt="User avatar" width="63" height="63"/>
+            <Link to={AppRoute.IN_LIST}>
+              <img src={avatar} alt="User avatar" width="63" height="63"/>
+            </Link>
           </div>
         ) : (
-          <Link to="/login" className="user-block__link">Sign in</Link>
+          <Link to={AppRoute.LOGIN} className="user-block__link">Sign in</Link>
         )}
-      </div>
+      </div>}
     </header>
   );
 };
@@ -39,6 +40,7 @@ const mapStateToProps = (state) => ({
 Header.propTypes = {
   className: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
+  needUserBlock: PropTypes.bool,
   children: PropTypes.element,
 };
 

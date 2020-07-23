@@ -3,16 +3,22 @@ import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import Catalog from "../catalog/catalog.jsx";
+import {connect} from "react-redux";
+import {getPromoMovie} from "../../reducer/data/selectors";
+import MovieHeader from "../movie-header/movie-header.jsx";
+import {Operation as DataOperation} from "../../reducer/data/data";
+import {getAddMovieInListStatus} from "../../reducer/app/selectors";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {AuthorizationStatus} from "../../reducer/user/user";
 
 const Main = (props) => {
-  const {promo, onMovieCardClick} = props;
+  const {promo, canAddMovieInList, userAuthorized, changeFavoriteStatus} = props;
 
-  if (!promo) {
-    return (<h1>Данные загружаются</h1>);
-  }
-  const {title, genre, year, poster, background} = promo;
-  // TODO:
-  //  Подумать можно ли вынести эту промо карточку и карточку со страницы детальной информации в 1 компонент
+  const {title, poster, background} = promo;
+
+  const _handlerButtonListClick = () => {
+    changeFavoriteStatus(promo);
+  };
 
   return (
     <>
@@ -30,41 +36,37 @@ const Main = (props) => {
               <img src={poster} alt={`${title} poster`} width="218"
                 height="327"/>
             </div>
-            <div className="movie-card__desc">
-              <h2 className="movie-card__title">{title}</h2>
-              <p className="movie-card__meta">
-                <span className="movie-card__genre">{genre}</span>
-                <span className="movie-card__year">{year}</span>
-              </p>
-              <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
-              </div>
-            </div>
+            <MovieHeader
+              movie={promo}
+              userAuthorized={userAuthorized}
+              needAddReviewButton={false}
+              disableAddInList={!canAddMovieInList}
+              onInListButtonClick={_handlerButtonListClick}
+            />
           </div>
         </div>
       </section>
 
       <div className="page-content">
-        <Catalog
-          onMovieCardClick={onMovieCardClick}
-        />
+        <Catalog/>
 
         <Footer/>
       </div>
     </>
   );
 };
+
+const mapStateToProps = (state) => ({
+  promo: getPromoMovie(state),
+  canAddMovieInList: getAddMovieInListStatus(state),
+  userAuthorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeFavoriteStatus(movie) {
+    dispatch(DataOperation.changeFavoriteStatus(movie));
+  },
+});
 
 Main.propTypes = {
   promo: PropTypes.shape({
@@ -74,7 +76,10 @@ Main.propTypes = {
     poster: PropTypes.string.isRequired,
     background: PropTypes.string.isRequired,
   }),
-  onMovieCardClick: PropTypes.func.isRequired,
+  canAddMovieInList: PropTypes.bool.isRequired,
+  userAuthorized: PropTypes.bool.isRequired,
+  changeFavoriteStatus: PropTypes.func.isRequired,
 };
 
-export default Main;
+export {Main};
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

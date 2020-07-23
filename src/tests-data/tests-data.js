@@ -101,6 +101,7 @@ export const movies = [
 export const promoMovie = {
   title: `The Grand Budapest Hotel`,
   genre: `Drama`,
+  inList: false,
   year: 2014,
   poster: `img/the-grand-budapest-hotel-poster.jpg`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
@@ -136,9 +137,14 @@ export const storeData = {
     movies,
     promo: promoMovie,
     comments,
+    loadingMovies: false,
+    loadingPromo: false,
+    loadingError: false,
+    loadingCommentsError: false,
   },
   [NameSpace.APP]: {
     genre: `all genres`,
+    canAddMovieInList: true,
   },
   [NameSpace.USER]: {
     authorizationStatus: AuthorizationStatus.AUTH,

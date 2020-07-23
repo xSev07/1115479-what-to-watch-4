@@ -23,6 +23,21 @@ describe(`Should Header render correctly`, () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it(`should render Header without user block`, () => {
+    const tree = renderer
+      .create(
+          <Provider store={store} >
+            <StaticRouter>
+              <Header
+                needUserBlock={false}
+              />
+            </StaticRouter>
+          </Provider>
+      ).toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
   it(`should render Header with children and className`, () => {
     const tree = renderer
       .create(

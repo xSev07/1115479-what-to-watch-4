@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 import {getActiveGenre, getFilteredMovies, getGenres} from "../../reducer/app/selectors";
 
 const Catalog = (props) => {
-  const {movies, genres, activeGenre, onGenreClick, onMovieCardClick} = props;
+  const {movies, genres, activeGenre, onGenreClick} = props;
   return (
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
@@ -21,7 +21,6 @@ const Catalog = (props) => {
 
       <MovieList
         movies={movies}
-        onMovieCardClick={onMovieCardClick}
       />
 
       <div className="catalog__more">
@@ -59,7 +58,6 @@ Catalog.propTypes = {
   genres: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   activeGenre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
-  onMovieCardClick: PropTypes.func.isRequired,
 };
 
 export {Catalog};

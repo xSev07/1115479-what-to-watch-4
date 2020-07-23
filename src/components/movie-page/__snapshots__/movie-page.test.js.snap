@@ -52,12 +52,17 @@ Array [
           <div
             className="user-block__avatar"
           >
-            <img
-              alt="User avatar"
-              height="63"
-              src="img/avatar.jpg"
-              width="63"
-            />
+            <a
+              href="/my-list"
+              onClick={[Function]}
+            >
+              <img
+                alt="User avatar"
+                height="63"
+                src="img/avatar.jpg"
+                width="63"
+              />
+            </a>
           </div>
         </div>
       </header>
@@ -86,7 +91,7 @@ Array [
             <span
               className="movie-card__genre"
             >
-              D
+              Drama
             </span>
             <span
               className="movie-card__year"
@@ -116,6 +121,8 @@ Array [
             </button>
             <button
               className="btn btn--list movie-card__button"
+              disabled={false}
+              onClick={[Function]}
               type="button"
             >
               <svg
@@ -271,103 +278,103 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            className="small-movie-card__link"
+            href="/films/Hotel-2000"
+            onClick={[Function]}
           >
-            <video
-              height="175"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                height="175"
+                width="280"
+              />
+            </div>
+            <h3
+              className="small-movie-card__title"
             >
               The Grand Budapest Hotel
-            </a>
-          </h3>
+            </h3>
+          </a>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            className="small-movie-card__link"
+            href="/films/Bohemian-2018"
+            onClick={[Function]}
           >
-            <video
-              height="175"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                height="175"
+                width="280"
+              />
+            </div>
+            <h3
+              className="small-movie-card__title"
             >
               Bohemian Rhapsody
-            </a>
-          </h3>
+            </h3>
+          </a>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            className="small-movie-card__link"
+            href="/films/Macbeth-2015"
+            onClick={[Function]}
           >
-            <video
-              height="175"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                height="175"
+                width="280"
+              />
+            </div>
+            <h3
+              className="small-movie-card__title"
             >
               Macbeth
-            </a>
-          </h3>
+            </h3>
+          </a>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            className="small-movie-card__link"
+            href="/films/Aviator-2005"
+            onClick={[Function]}
           >
-            <video
-              height="175"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
+            <div
+              className="small-movie-card__image"
+            >
+              <video
+                height="175"
+                width="280"
+              />
+            </div>
+            <h3
+              className="small-movie-card__title"
             >
               Aviator
-            </a>
-          </h3>
+            </h3>
+          </a>
         </article>
       </div>
     </section>

@@ -1,4 +1,4 @@
-const parseMovie = (movie) => {
+const parseMovie = (movie, isPromo = false) => {
   return {
     id: movie.id.toString(),
     actors: movie.starring,
@@ -17,6 +17,7 @@ const parseMovie = (movie) => {
     preview: movie.preview_image,
     background: movie.background_image,
     backgroundColor: movie.background_color,
+    isPromo,
   };
 };
 

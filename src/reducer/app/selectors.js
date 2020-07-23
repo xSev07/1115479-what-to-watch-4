@@ -54,3 +54,7 @@ export const getGenres = createSelector(
 export const getActiveGenre = (state) => {
   return state[NAME_SPACE].genre;
 };
+
+export const getAddMovieInListStatus = (state) => {
+  return state[NAME_SPACE].canAddMovieInList;
+};

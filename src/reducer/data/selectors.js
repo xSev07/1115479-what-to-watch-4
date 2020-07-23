@@ -15,6 +15,15 @@ export const getAllComments = (state) => {
   return state[NAME_SPACE].comments;
 };
 
+export const getMovieByID = createSelector(
+    getAllMovies,
+    (state, ownProps) => ownProps,
+    (allMovies, ownProps) => {
+      const {movieId} = ownProps;
+      return allMovies.find((movie) => movie.id === movieId);
+    }
+);
+
 export const getCommentsByMovie = createSelector(
     getAllComments,
     (state, ownProps) => ownProps,
@@ -23,3 +32,19 @@ export const getCommentsByMovie = createSelector(
       return allComments[movieId];
     }
 );
+
+export const getMoviesLoadingStatus = (state) => {
+  return state[NAME_SPACE].loadingMovies;
+};
+
+export const getPromoLoadingStatus = (state) => {
+  return state[NAME_SPACE].loadingPromo;
+};
+
+export const getLoadingError = (state) => {
+  return state[NAME_SPACE].loadingError;
+};
+
+export const getLoadingCommentsError = (state) => {
+  return state[NAME_SPACE].loadingCommentsError;
+};

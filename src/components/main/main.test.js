@@ -17,7 +17,9 @@ it(`Should Main render correctly`, () => {
           <StaticRouter>
             <Main
               promo={promoMovie}
-              onMovieCardClick={()=>{}}
+              userAuthorized={true}
+              canAddMovieInList={true}
+              changeFavoriteStatus={()=>{}}
             />
           </StaticRouter>
         </Provider>, {

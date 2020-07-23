@@ -37,20 +37,6 @@ exports[`Should SignIn render correctly 1`] = `
     >
       Sign in
     </h1>
-    <div
-      className="user-block"
-    >
-      <div
-        className="user-block__avatar"
-      >
-        <img
-          alt="User avatar"
-          height="63"
-          src="img/avatar.jpg"
-          width="63"
-        />
-      </div>
-    </div>
   </header>
   <div
     className="sign-in user-page__content"
