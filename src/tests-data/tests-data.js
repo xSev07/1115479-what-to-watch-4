@@ -144,6 +144,7 @@ export const storeData = {
   },
   [NameSpace.APP]: {
     genre: `all genres`,
+    showedMoviesCount: 8,
     canAddMovieInList: true,
   },
   [NameSpace.USER]: {

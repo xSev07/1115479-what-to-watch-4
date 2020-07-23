@@ -1,25 +1,45 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Catalog from "./catalog";
-import {genres, movies, storeData} from "../../tests-data/tests-data";
-import configureStore from "redux-mock-store";
+import {Catalog} from "./catalog";
+import {genres, movies} from "../../tests-data/tests-data";
 import {StaticRouter} from "react-router-dom";
 
-const mockStore = configureStore([]);
+describe(`Should Catalog render correctly`, () => {
+  it(`Should render with show more button`, () => {
+    const tree = renderer
+      .create(
+          <StaticRouter>
+            <Catalog
+              // store={store}
+              movies={movies}
+              genres={genres}
+              activeGenre={`all genres`}
+              showedMoviesCount={2}
+              onGenreClick={() => {}}
+              onShowMoreClick={() => {}}
+            />
+          </StaticRouter>, {
+            createNodeMock: () => {
+              return {};
+            }
+          }
+      ).toJSON();
 
-it(`Should Catalog render correctly`, () => {
-  const store = mockStore(storeData);
+    expect(tree).toMatchSnapshot();
+  });
 
-  const tree = renderer
+  it(`Should render without show more button`, () => {
+    const tree = renderer
     .create(
         <StaticRouter>
           <Catalog
-            store={store}
+            // store={store}
             movies={movies}
             genres={genres}
             activeGenre={`all genres`}
+            showedMoviesCount={8}
             onGenreClick={() => {}}
-            onMovieCardClick={() => {}}
+            onShowMoreClick={() => {}}
           />
         </StaticRouter>, {
           createNodeMock: () => {
@@ -28,5 +48,6 @@ it(`Should Catalog render correctly`, () => {
         }
     ).toJSON();
 
-  expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
+  });
 });
