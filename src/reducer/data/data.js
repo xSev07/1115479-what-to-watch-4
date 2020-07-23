@@ -1,8 +1,8 @@
 import {parseMovie, parseMovies} from "../../adapters/movies";
-import {extendObject} from "../../const";
 import {parseComments} from "../../adapters/comments";
 import {ServerURL} from "../../api";
 import {ActionCreator as AppActionCreator} from "../app/app";
+import {extendObject} from "../../utils/common/common";
 
 const initialState = {
   movies: [],

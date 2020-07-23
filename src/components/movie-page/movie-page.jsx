@@ -157,6 +157,7 @@ MoviePage.propTypes = {
   })),
   userAuthorized: PropTypes.bool.isRequired,
   canAddMovieInList: PropTypes.bool.isRequired,
+  loadingCommentsError: PropTypes.bool.isRequired,
   loadComments: PropTypes.func.isRequired,
   changeFavoriteStatus: PropTypes.func.isRequired,
 };

@@ -1,7 +1,6 @@
 import React from "react";
 import {splitArrayInHalf, transformDate} from "../../utils/common/common";
 import PropTypes from "prop-types";
-import {Spinner, LoadError} from "../svg/svg.jsx";
 
 const getCommentTemplate = (comment) => {
   const {commentId, author, text, date, rating} = comment;
@@ -24,22 +23,7 @@ const getCommentTemplate = (comment) => {
 };
 
 const MovieReviews = (props) => {
-  const {comments, loadingError} = props;
-  if (loadingError) {
-    return (
-      <div style={{marginTop: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center`}}>
-        <h2 style={{color: `#d9cd8d`}}>Извините, у нашего сервера лапки. Попробуйте позднее</h2>
-        <LoadError/>
-      </div>
-    );
-  }
-  if (!comments) {
-    return (
-      <div style={{marginTop: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center`}}>
-        <Spinner/>
-      </div>
-    );
-  }
+  const {comments} = props;
 
   const halfsComments = splitArrayInHalf(comments);
   const firstCommentsColumn = halfsComments.firstHalf.map((it) => getCommentTemplate(it));

@@ -140,6 +140,7 @@ export const storeData = {
     loadingMovies: false,
     loadingPromo: false,
     loadingError: false,
+    loadingCommentsError: false,
   },
   [NameSpace.APP]: {
     genre: `all genres`,

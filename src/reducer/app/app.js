@@ -1,4 +1,5 @@
-import {ALL_GENRES_NAME, extendObject} from "../../const";
+import {ALL_GENRES_NAME} from "../../const";
+import {extendObject} from "../../utils/common/common";
 
 const initialState = {
   genre: ALL_GENRES_NAME,

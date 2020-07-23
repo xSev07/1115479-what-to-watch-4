@@ -15,6 +15,7 @@ describe(`Check data reducer work correctly`, () => {
       loadingMovies: true,
       loadingPromo: true,
       loadingError: false,
+      loadingCommentsError: false,
     });
   });
 

@@ -1,5 +1,5 @@
-import {extendObject} from "../../const";
 import {BASE_SERVER_URL, ServerURL} from "../../api";
+import {extendObject} from "../../utils/common/common";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,

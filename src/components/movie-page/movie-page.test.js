@@ -20,6 +20,7 @@ it(`Should MoviePage render correctly`, () => {
                 comments={comments}
                 userAuthorized={true}
                 canAddMovieInList={true}
+                loadingCommentsError={false}
                 loadComments={() => {}}
                 onMovieCardClick={() => {}}
                 changeFavoriteStatus={() => {}}
