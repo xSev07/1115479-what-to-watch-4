@@ -8,6 +8,8 @@ import withActiveElement from "../../hocs/with-active-element/with-active-elemen
 import {MovieTab} from "../../const";
 import {LoadError, Spinner} from "../svg/svg.jsx";
 
+const tabs = Object.values(MovieTab);
+
 const getMovieReviewsTemplate = (loadingError, comments) => {
   if (loadingError) {
     return (
@@ -28,12 +30,12 @@ const getMovieReviewsTemplate = (loadingError, comments) => {
 };
 
 const MovieDescription = (props) => {
-  const {movie, comments, elements, activeElement, loadingCommentsError, onElementClick} = props;
+  const {movie, comments, activeElement, loadingCommentsError, onElementClick} = props;
 
   return (
     <div className="movie-card__desc">
       <MovieNav
-        tabs={elements}
+        tabs={tabs}
         activeTab={activeElement}
         onClick={onElementClick}
       />
@@ -73,7 +75,7 @@ MovieDescription.propTypes = {
     text: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date).isRequired,
   })),
-  elements: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  // elements: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   activeElement: PropTypes.string.isRequired,
   loadingCommentsError: PropTypes.bool.isRequired,
   onElementClick: PropTypes.func.isRequired,

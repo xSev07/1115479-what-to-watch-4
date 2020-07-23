@@ -13,13 +13,9 @@ import MovieHeader from "../movie-header/movie-header.jsx";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user";
 
-const tabs = Object.values(MovieTab);
-
 class MoviePage extends React.PureComponent {
   constructor(props) {
     super(props);
-
-    this._tabs = tabs;
 
     this._handlerButtonListClick = this._handlerButtonListClick.bind(this);
   }
@@ -64,7 +60,7 @@ class MoviePage extends React.PureComponent {
             <MovieDescription
               movie={this.props.movie}
               comments={this.props.comments}
-              elements={this._tabs}
+              activeTabDefault={MovieTab.OVERVIEW}
               loadingCommentsError={loadingCommentsError}
             />
           </div>

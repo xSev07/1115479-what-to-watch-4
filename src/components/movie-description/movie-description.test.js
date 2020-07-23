@@ -61,7 +61,7 @@ describe(`Should MovieDescription render correctly`, () => {
           <MovieDescription
             movie={movies[0]}
             comments={comments}
-            elements={[`Overview`, `Details`, `Reviews`]}
+            // elements={[`Overview`, `Details`, `Reviews`]}
             loadingCommentsError={true}
             activeElement={`Reviews`}
             onElementClick={() => {
