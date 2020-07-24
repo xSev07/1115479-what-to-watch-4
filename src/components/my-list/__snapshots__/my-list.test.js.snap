@@ -1,6 +1,292 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should MyList render correctly 1`] = `
+exports[`Should MyList render correctly Should render with load error 1`] = `
+<div
+  className="user-page"
+>
+  <header
+    className="page-header user-page__head"
+  >
+    <div
+      className="logo"
+    >
+      <a
+        className="logo__link"
+        href="/"
+        onClick={[Function]}
+      >
+        <span
+          className="logo__letter logo__letter--1"
+        >
+          W
+        </span>
+        <span
+          className="logo__letter logo__letter--2"
+        >
+          T
+        </span>
+        <span
+          className="logo__letter logo__letter--3"
+        >
+          W
+        </span>
+      </a>
+    </div>
+    <h1
+      className="page-title user-page__title"
+    >
+      My list
+    </h1>
+    <div
+      className="user-block"
+    >
+      <div
+        className="user-block__avatar"
+      >
+        <a
+          href="/my-list"
+          onClick={[Function]}
+        >
+          <img
+            alt="User avatar"
+            height="63"
+            src="img/avatar.jpg"
+            width="63"
+          />
+        </a>
+      </div>
+    </div>
+  </header>
+  <section
+    className="catalog"
+  >
+    <h2
+      className="catalog__title visually-hidden"
+    >
+      Catalog
+    </h2>
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "center",
+          "marginTop": "50px",
+        }
+      }
+    >
+      <h2
+        style={
+          Object {
+            "color": "#d9cd8d",
+          }
+        }
+      >
+        Извините, у нашего сервера лапки. Попробуйте позднее
+      </h2>
+      <br />
+      <svg
+        enableBackground="new 0 0 512 512"
+        height="125"
+        viewBox="0 0 512 512"
+        width="100"
+        x="0"
+        xmlns="http://www.w3.org/2000/svg"
+        y="0"
+      >
+        <path
+          d="m375.1,432.2c-14.7,0-28.8-4.5-41.8-13.2-3.4-2.3-14.4-5.7-22.9,0-29.3,19.9-66.1,16.9-93-7.4-7.8-7-19.5-7-27.3,0-15,13.5-32.7,20.7-51.2,20.7-47.4,0-86-46.5-86-103.7 0-41.6 20.6-79 52.5-95.4 8.2-4.2 12.5-13.3 10.7-22.3-1.8-8.7-2.7-17-2.7-25.2 0-57.2 38.6-103.7 86-103.7 32.1,0 60.8,21.7 76.3,56.1 6,13.5 23.9,12.5 29,9.6 11.8-6.8 24.3-10.3 37.1-10.3 46.3,0 84.9,45.5 85.9,101.4 0.1,4.9 2,9.7 5.3,13.3 17.9,19.7 28.2,47.6 28.2,76.6-5.68434e-14,56.9-38.6,103.5-86.1,103.5zm93.1-202c-4.8-75.7-59.1-133.9-126.4-133.9-13.1,0-25.9,2.3-38.2,6.7-23.6-38.7-62-62-104.3-62-70,0-126.9,64.9-126.9,144.6 0,6.2 0.4,12.5 1.1,18.9-37.7,25.8-61.5,72.9-61.5,123.9 0,79.8 56.9,144.6 126.9,144.6 23.2,0 45.3-7 64.9-20.4 19.6,13.4 41.7,20.4 64.9,20.4 18.4,0 36.6-4.6 53.2-13.4 16.7,8.8 34.8,13.4 53.2,13.4 70,0 126.9-64.9 126.9-144.6 0-36.8-12-71.4-33.8-98.2z"
+          fill="#d9cd8d"
+        />
+        <path
+          d="m285.9,288.9l56.8-56.8c8-8 8-20.9 0-28.9-8-8-20.9-8-28.9,0l-56.8,56.8-56.8-56.8c-8-8-20.9-8-28.9,0-8,8-8,20.9 0,28.9l56.8,56.8-56.8,56.8c-8,8-8,20.9 0,28.9 8,8 20.9,8 28.9,0l56.8-56.8 56.8,56.8c8,8 20.9,8 28.9,0 8-8 8-20.9 0-28.9l-56.8-56.8z"
+          fill="#d9cd8d"
+        />
+      </svg>
+    </div>
+  </section>
+  <footer
+    className="page-footer"
+  >
+    <div
+      className="logo"
+    >
+      <a
+        className="logo__link logo__link--light"
+        href="main.html"
+      >
+        <span
+          className="logo__letter logo__letter--1"
+        >
+          W
+        </span>
+        <span
+          className="logo__letter logo__letter--2"
+        >
+          T
+        </span>
+        <span
+          className="logo__letter logo__letter--3"
+        >
+          W
+        </span>
+      </a>
+    </div>
+    <div
+      className="copyright"
+    >
+      <p>
+        © 2019 What to watch Ltd.
+      </p>
+    </div>
+  </footer>
+</div>
+`;
+
+exports[`Should MyList render correctly Should render with waiting download 1`] = `
+<div
+  className="user-page"
+>
+  <header
+    className="page-header user-page__head"
+  >
+    <div
+      className="logo"
+    >
+      <a
+        className="logo__link"
+        href="/"
+        onClick={[Function]}
+      >
+        <span
+          className="logo__letter logo__letter--1"
+        >
+          W
+        </span>
+        <span
+          className="logo__letter logo__letter--2"
+        >
+          T
+        </span>
+        <span
+          className="logo__letter logo__letter--3"
+        >
+          W
+        </span>
+      </a>
+    </div>
+    <h1
+      className="page-title user-page__title"
+    >
+      My list
+    </h1>
+    <div
+      className="user-block"
+    >
+      <div
+        className="user-block__avatar"
+      >
+        <a
+          href="/my-list"
+          onClick={[Function]}
+        >
+          <img
+            alt="User avatar"
+            height="63"
+            src="img/avatar.jpg"
+            width="63"
+          />
+        </a>
+      </div>
+    </div>
+  </header>
+  <section
+    className="catalog"
+  >
+    <h2
+      className="catalog__title visually-hidden"
+    >
+      Catalog
+    </h2>
+    <div
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "justifyContent": "center",
+          "marginTop": "50px",
+        }
+      }
+    >
+      <svg
+        display="block"
+        height="200"
+        preserveAspectRatio="xMidYMid"
+        style={
+          Object {
+            "margin": "auto",
+          }
+        }
+        viewBox="0 0 100 100"
+        width="200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M85.141 70.133a40 40 0 00-71.194-36.487A42 40-62.865 0185.14 70.133"
+          fill="#d9cd8d"
+        >
+          <animateTransform
+            attributeName="transform"
+            dur="1s"
+            keyTimes="0;1"
+            repeatCount="indefinite"
+            type="rotate"
+            values="0 50 51;360 50 51"
+          />
+        </path>
+      </svg>
+    </div>
+  </section>
+  <footer
+    className="page-footer"
+  >
+    <div
+      className="logo"
+    >
+      <a
+        className="logo__link logo__link--light"
+        href="main.html"
+      >
+        <span
+          className="logo__letter logo__letter--1"
+        >
+          W
+        </span>
+        <span
+          className="logo__letter logo__letter--2"
+        >
+          T
+        </span>
+        <span
+          className="logo__letter logo__letter--3"
+        >
+          W
+        </span>
+      </a>
+    </div>
+    <div
+      className="copyright"
+    >
+      <p>
+        © 2019 What to watch Ltd.
+      </p>
+    </div>
+  </footer>
+</div>
+`;
+
+exports[`Should MyList render correctly Should render without errors 1`] = `
 <div
   className="user-page"
 >
@@ -70,219 +356,103 @@ exports[`Should MyList render correctly 1`] = `
     >
       <article
         className="small-movie-card catalog__movies-card"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
       >
-        <div
-          className="small-movie-card__image"
+        <a
+          className="small-movie-card__link"
+          href="/films/Hotel-2000"
+          onClick={[Function]}
         >
-          <img
-            alt="Fantastic Beasts: The Crimes of Grindelwald"
-            height="175"
-            src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
+          <div
+            className="small-movie-card__image"
           >
-            Fantastic Beasts: The Crimes of Grindelwald
-          </a>
-        </h3>
+            <video
+              height="175"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+          >
+            The Grand Budapest Hotel
+          </h3>
+        </a>
       </article>
       <article
         className="small-movie-card catalog__movies-card"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
       >
-        <div
-          className="small-movie-card__image"
+        <a
+          className="small-movie-card__link"
+          href="/films/Bohemian-2018"
+          onClick={[Function]}
         >
-          <img
-            alt="Bohemian Rhapsody"
-            height="175"
-            src="img/bohemian-rhapsody.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
+          <div
+            className="small-movie-card__image"
+          >
+            <video
+              height="175"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
           >
             Bohemian Rhapsody
-          </a>
-        </h3>
+          </h3>
+        </a>
       </article>
       <article
         className="small-movie-card catalog__movies-card"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
       >
-        <div
-          className="small-movie-card__image"
+        <a
+          className="small-movie-card__link"
+          href="/films/Macbeth-2015"
+          onClick={[Function]}
         >
-          <img
-            alt="Macbeth"
-            height="175"
-            src="img/macbeth.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
+          <div
+            className="small-movie-card__image"
+          >
+            <video
+              height="175"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
           >
             Macbeth
-          </a>
-        </h3>
+          </h3>
+        </a>
       </article>
       <article
         className="small-movie-card catalog__movies-card"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
       >
-        <div
-          className="small-movie-card__image"
+        <a
+          className="small-movie-card__link"
+          href="/films/Aviator-2005"
+          onClick={[Function]}
         >
-          <img
-            alt="Aviator"
-            height="175"
-            src="img/aviator.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
+          <div
+            className="small-movie-card__image"
+          >
+            <video
+              height="175"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
           >
             Aviator
-          </a>
-        </h3>
-      </article>
-      <article
-        className="small-movie-card catalog__movies-card"
-      >
-        <div
-          className="small-movie-card__image"
-        >
-          <img
-            alt="We need to talk about Kevin"
-            height="175"
-            src="img/we-need-to-talk-about-kevin.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
-          >
-            We need to talk about Kevin
-          </a>
-        </h3>
-      </article>
-      <article
-        className="small-movie-card catalog__movies-card"
-      >
-        <div
-          className="small-movie-card__image"
-        >
-          <img
-            alt="What We Do in the Shadows"
-            height="175"
-            src="img/what-we-do-in-the-shadows.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
-          >
-            What We Do in the Shadows
-          </a>
-        </h3>
-      </article>
-      <article
-        className="small-movie-card catalog__movies-card"
-      >
-        <div
-          className="small-movie-card__image"
-        >
-          <img
-            alt="Revenant"
-            height="175"
-            src="img/revenant.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
-          >
-            Revenant
-          </a>
-        </h3>
-      </article>
-      <article
-        className="small-movie-card catalog__movies-card"
-      >
-        <div
-          className="small-movie-card__image"
-        >
-          <img
-            alt="Johnny English"
-            height="175"
-            src="img/johnny-english.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
-          >
-            Johnny English
-          </a>
-        </h3>
-      </article>
-      <article
-        className="small-movie-card catalog__movies-card"
-      >
-        <div
-          className="small-movie-card__image"
-        >
-          <img
-            alt="Shutter Island"
-            height="175"
-            src="img/shutter-island.jpg"
-            width="280"
-          />
-        </div>
-        <h3
-          className="small-movie-card__title"
-        >
-          <a
-            className="small-movie-card__link"
-            href="movie-page.html"
-          >
-            Shutter Island
-          </a>
-        </h3>
+          </h3>
+        </a>
       </article>
     </div>
   </section>
