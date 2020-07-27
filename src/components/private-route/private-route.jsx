@@ -5,9 +5,14 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 import {connect} from "react-redux";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {AppRoute} from "../../const";
+import Loader from "../loader/loader.jsx";
 
 const PrivateRoute = (props) => {
   const {exact, path, render, authStatus} = props;
+  if (authStatus === AuthorizationStatus.WAIT_SERVER_RESPONSE) {
+    return <Loader/>;
+  }
+
   return (
     <Route
       path={path}
