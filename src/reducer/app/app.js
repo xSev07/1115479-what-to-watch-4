@@ -38,8 +38,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_FILTER_GENRE:
       return extendObject(state, {genre: action.payload});
     case ActionType.INCREMENT_SHOWED_MOVIES_COUNT:
-      // Вот тут я могу производить такие вычисления?
-      // Или лучше вынести в ActionCreator или вообще в mapDispatchToProps рассчитывать?
       const newCount = state.showedMoviesCount + action.payload;
       return extendObject(state, {showedMoviesCount: newCount});
     case ActionType.RESET_SHOWED_MOVIES_COUNT:

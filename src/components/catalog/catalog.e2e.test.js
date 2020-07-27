@@ -29,7 +29,7 @@ describe(`Catalog component`, () => {
             movies={movies}
             genres={genres}
             activeGenre={`all genres`}
-            showedMoviesCount={2}
+            displayShowMoreButton={true}
             onGenreClick={onGenreClick}
             onShowMoreClick={onShowMoreClick}
           />

@@ -8,7 +8,7 @@ import {getActiveGenre, getFilteredMovies, getGenres, getShowedMoviesCount} from
 import ShowMore from "../show-more/show-more.jsx";
 
 const Catalog = (props) => {
-  const {movies, genres, activeGenre, showedMoviesCount, onGenreClick, onShowMoreClick} = props;
+  const {movies, genres, activeGenre, displayShowMoreButton, onGenreClick, onShowMoreClick} = props;
 
   return (
     <section className="catalog">
@@ -21,9 +21,9 @@ const Catalog = (props) => {
       />
 
       <MovieList
-        movies={movies.slice(0, showedMoviesCount)}
+        movies={movies}
       />
-      {showedMoviesCount < movies.length &&
+      {displayShowMoreButton &&
         <ShowMore
           onClick={onShowMoreClick}
         />
@@ -33,7 +33,7 @@ const Catalog = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  movies: getFilteredMovies(state),
+  allFilteredMovies: getFilteredMovies(state),
   activeGenre: getActiveGenre(state),
   showedMoviesCount: getShowedMoviesCount(state),
   genres: getGenres(state),
@@ -48,6 +48,21 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.incrementShowedMoviesCount());
   }
 });
+
+const mergeProps = (stateProps, dispatchProps) => {
+  const {allFilteredMovies, showedMoviesCount} = stateProps;
+  const movies = allFilteredMovies.slice(0, showedMoviesCount);
+
+  return Object.assign(
+      {},
+      stateProps,
+      dispatchProps,
+      {
+        movies,
+        displayShowMoreButton: showedMoviesCount < allFilteredMovies.length
+      }
+  );
+};
 
 Catalog.propTypes = {
   movies: PropTypes.arrayOf(
@@ -64,10 +79,10 @@ Catalog.propTypes = {
   ).isRequired,
   genres: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   activeGenre: PropTypes.string.isRequired,
-  showedMoviesCount: PropTypes.number.isRequired,
+  displayShowMoreButton: PropTypes.bool.isRequired,
   onGenreClick: PropTypes.func.isRequired,
   onShowMoreClick: PropTypes.func.isRequired,
 };
 
 export {Catalog};
-export default connect(mapStateToProps, mapDispatchToProps)(Catalog);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Catalog);

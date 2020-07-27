@@ -11,16 +11,15 @@ import {
 } from "../../reducer/data/selectors";
 import {PureComponent} from "react/cjs/react.production.min";
 import {Operation as DataOperation} from "../../reducer/data/data";
-import {LoadError, Spinner} from "../svg/svg.jsx";
+import CheckLoad from "../check-load/check-load.jsx";
 
 class MyList extends PureComponent {
   constructor(props) {
     super(props);
-
-    this._getFavoriteMoviesTemplate = this._getFavoriteMoviesTemplate.bind(this);
   }
 
   render() {
+    const {movies, loadingError, isLoading} = this.props;
     return (
       <div className="user-page">
         <Header
@@ -32,34 +31,17 @@ class MyList extends PureComponent {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          {this._getFavoriteMoviesTemplate()}
+          <CheckLoad
+            component={MovieList}
+            movies={movies}
+            loadingError={loadingError}
+            isLoading={isLoading}
+          />
         </section>
 
         <Footer/>
       </div>
     );
-  }
-
-  _getFavoriteMoviesTemplate() {
-    const {movies, loadingError, isLoading} = this.props;
-
-    if (loadingError) {
-      return (
-        <div style={{marginTop: `50px`, display: `flex`, flexDirection: `column`, justifyContent: `center`, alignItems: `center`}}>
-          <h2 style={{color: `#d9cd8d`}}>Извините, у нашего сервера лапки. Попробуйте позднее</h2>
-          <br/>
-          <LoadError/>
-        </div>
-      );
-    }
-    if (isLoading) {
-      return (
-        <div style={{marginTop: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center`}}>
-          <Spinner/>
-        </div>
-      );
-    }
-    return <MovieList movies={movies}/>;
   }
 
   componentDidMount() {

@@ -10,11 +10,10 @@ describe(`Should Catalog render correctly`, () => {
       .create(
           <StaticRouter>
             <Catalog
-              // store={store}
               movies={movies}
               genres={genres}
               activeGenre={`all genres`}
-              showedMoviesCount={2}
+              displayShowMoreButton={true}
               onGenreClick={() => {}}
               onShowMoreClick={() => {}}
             />
@@ -33,11 +32,10 @@ describe(`Should Catalog render correctly`, () => {
     .create(
         <StaticRouter>
           <Catalog
-            // store={store}
             movies={movies}
             genres={genres}
             activeGenre={`all genres`}
-            showedMoviesCount={8}
+            displayShowMoreButton={false}
             onGenreClick={() => {}}
             onShowMoreClick={() => {}}
           />

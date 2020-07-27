@@ -110,6 +110,56 @@ exports[`Should Catalog render correctly Should render with show more button 1`]
         </h3>
       </a>
     </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="/films/Macbeth-2015"
+        onClick={[Function]}
+      >
+        <div
+          className="small-movie-card__image"
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          Macbeth
+        </h3>
+      </a>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="/films/Aviator-2005"
+        onClick={[Function]}
+      >
+        <div
+          className="small-movie-card__image"
+        >
+          <video
+            height="175"
+            width="280"
+          />
+        </div>
+        <h3
+          className="small-movie-card__title"
+        >
+          Aviator
+        </h3>
+      </a>
+    </article>
   </div>
   <div
     className="catalog__more"

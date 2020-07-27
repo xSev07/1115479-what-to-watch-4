@@ -54,38 +54,4 @@ describe(`Should MovieDescription render correctly`, () => {
 
     expect(tree).toMatchSnapshot();
   });
-
-  it(`Should render reviews tab with loading error`, () => {
-    const tree = renderer
-      .create(
-          <MovieDescription
-            movie={movies[0]}
-            comments={comments}
-            // elements={[`Overview`, `Details`, `Reviews`]}
-            loadingCommentsError={true}
-            activeElement={`Reviews`}
-            onElementClick={() => {
-            }}
-          />
-      ).toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`Should render reviews tab with waiting download comments`, () => {
-    const tree = renderer
-      .create(
-          <MovieDescription
-            movie={movies[0]}
-            // comments={comments}
-            elements={[`Overview`, `Details`, `Reviews`]}
-            loadingCommentsError={false}
-            activeElement={`Reviews`}
-            onElementClick={() => {
-            }}
-          />
-      ).toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
 });
