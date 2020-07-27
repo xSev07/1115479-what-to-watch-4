@@ -58,10 +58,7 @@ const withVideoPlayer = (Component) => {
 
     componentWillUnmount() {
       this._isMounted = false;
-      const video = this._videoRef.current;
-      video.src = null;
-      video.poster = null;
-      video.muted = null;
+      this._videoRef = null;
     }
 
     componentDidUpdate() {
@@ -71,7 +68,6 @@ const withVideoPlayer = (Component) => {
         video.src = videoPreview;
         video.play();
       } else {
-        video.src = null;
         video.load();
       }
     }
