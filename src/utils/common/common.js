@@ -52,6 +52,7 @@ export const isValidEmail = (email) => {
 export const isValidPassword = (password) => {
   return password.length > 2;
 };
-export const extendObject = (a, b) => {
-  return Object.assign({}, a, b);
+
+export const extendObject = (...rest) => {
+  return Object.assign({}, ...rest);
 };

@@ -6,6 +6,7 @@ import {ActionCreator} from "../../reducer/app/app";
 import PropTypes from "prop-types";
 import {getActiveGenre, getFilteredMovies, getGenres, getShowedMoviesCount} from "../../reducer/app/selectors";
 import ShowMore from "../show-more/show-more.jsx";
+import {extendObject} from "../../utils/common/common";
 
 const Catalog = (props) => {
   const {movies, genres, activeGenre, displayShowMoreButton, onGenreClick, onShowMoreClick} = props;
@@ -53,7 +54,7 @@ const mergeProps = (stateProps, dispatchProps) => {
   const {allFilteredMovies, showedMoviesCount} = stateProps;
   const movies = allFilteredMovies.slice(0, showedMoviesCount);
 
-  return Object.assign(
+  return extendObject(
       {},
       stateProps,
       dispatchProps,
