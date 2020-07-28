@@ -65,7 +65,8 @@ exports[`Should MovieHeader render correctly should render with disabled add in 
     </button>
     <a
       className="btn movie-card__button"
-      href="add-review.html"
+      href="/review/Hotel-2000"
+      onClick={[Function]}
     >
       Add review
     </a>
@@ -137,7 +138,8 @@ exports[`Should MovieHeader render correctly should render with no authorized us
     </a>
     <a
       className="btn movie-card__button"
-      href="add-review.html"
+      href="/review/Hotel-2000"
+      onClick={[Function]}
     >
       Add review
     </a>
@@ -210,7 +212,8 @@ exports[`Should MovieHeader render correctly should render with review button 1`
     </button>
     <a
       className="btn movie-card__button"
-      href="add-review.html"
+      href="/review/Hotel-2000"
+      onClick={[Function]}
     >
       Add review
     </a>

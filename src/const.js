@@ -1,3 +1,7 @@
+export const MAX_GENRES = 8;
+
+export const MAX_STARS_REVIEW = 5;
+
 export const ShowedMovies = {
   ON_START: 8,
   ON_MOVIE_PAGE: 4,
@@ -13,8 +17,6 @@ export const TextRating = {
   NOT_FOUND: `Impossible`,
 };
 
-export const MAX_GENRES = 8;
-
 export const ALL_GENRES_NAME = `all genres`;
 
 export const MovieTab = {
@@ -29,4 +31,5 @@ export const AppRoute = {
   MOVIE: `/films/:id`,
   IN_LIST: `/my-list`,
   VIDEO_PLAYER: `/video/:id`,
+  ADD_REVIEW: `/review/:id`,
 };

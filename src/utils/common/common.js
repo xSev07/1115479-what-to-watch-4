@@ -56,3 +56,7 @@ export const isValidPassword = (password) => {
 export const extendObject = (...rest) => {
   return Object.assign({}, ...rest);
 };
+
+export const replaceId = (url, id) => {
+  return url.replace(`:id`, id);
+};
