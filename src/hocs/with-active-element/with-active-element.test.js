@@ -12,7 +12,7 @@ it(`Should withActiveElement render correctly`, () => {
   const tree = renderer
     .create(
         <WrappedComponent
-          elements={[`elem1`, `elem2`, `elem3`]}
+          activeTabDefault={`elem1`}
         />
     ).toJSON();
 

@@ -4,10 +4,11 @@ import {extendObject} from "../../utils/common/common";
 const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
+  WAIT_SERVER_RESPONSE: `WAIT_SERVER_RESPONSE`
 };
 
 const initialState = {
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  authorizationStatus: AuthorizationStatus.WAIT_SERVER_RESPONSE,
   avatar: ``,
   loginError: false,
   incorrectEmail: false,
@@ -57,7 +58,9 @@ const Operation = {
       .then((response) => {
         writeUserInfo(response.data, dispatch);
       })
-      .catch(() => {});
+      .catch(() => {
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+      });
   },
   login: (authData) => (dispatch, getState, api) => {
     return api.post(ServerURL.LOGIN, {

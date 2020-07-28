@@ -31,6 +31,10 @@ export const transformRuntime = (time) => {
   return moment.duration(time, `m`).format(`h[h] mm[m]`);
 };
 
+export const transformDuration = (time) => {
+  return moment.duration(time, `s`).format(`h:mm:ss`);
+};
+
 export const transformDate = (date) => {
   return moment(date).format(`MMMM DD, YYYY`);
 };
@@ -48,6 +52,7 @@ export const isValidEmail = (email) => {
 export const isValidPassword = (password) => {
   return password.length > 2;
 };
-export const extendObject = (a, b) => {
-  return Object.assign({}, a, b);
+
+export const extendObject = (...rest) => {
+  return Object.assign({}, ...rest);
 };

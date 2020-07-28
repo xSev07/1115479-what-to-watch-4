@@ -3,13 +3,26 @@ import PropTypes from "prop-types";
 import Footer from "../footer/footer.jsx";
 import LoginForm from "../login-form/login-form.jsx";
 import {connect} from "react-redux";
-import {getIncorrectEmailStatus, getIncorrectPasswordStatus, getLoginErrorStatus} from "../../reducer/user/selectors";
-import {ActionCreator, Operation as UserOperation} from "../../reducer/user/user";
+import {
+  getAuthorizationStatus,
+  getIncorrectEmailStatus,
+  getIncorrectPasswordStatus,
+  getLoginErrorStatus
+} from "../../reducer/user/selectors";
+import {ActionCreator, AuthorizationStatus, Operation as UserOperation} from "../../reducer/user/user";
 import Header from "../header/header.jsx";
-import {isValidEmail, isValidPassword} from "../../utils/common/common";
+import {extendObject, isValidEmail, isValidPassword} from "../../utils/common/common";
+import {Redirect} from "react-router-dom";
+import {AppRoute} from "../../const";
 
 const SignIn = (props) => {
-  const {authError, incorrectEmail, incorrectPassword, handleFormSubmit} = props;
+  const {userAuthorized, authError, incorrectEmail, incorrectPassword, handleFormSubmit} = props;
+
+  if (userAuthorized) {
+    return (
+      <Redirect to={AppRoute.ROOT}/>
+    );
+  }
 
   return (
     <div className="user-page">
@@ -35,6 +48,7 @@ const SignIn = (props) => {
 };
 
 const mapStateToProps = (state) => ({
+  userAuthorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
   authError: getLoginErrorStatus(state),
   incorrectEmail: getIncorrectEmailStatus(state),
   incorrectPassword: getIncorrectPasswordStatus(state),
@@ -53,7 +67,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mergeProps = (stateProps, dispatchProps) => {
-  return Object.assign(
+  return extendObject(
       {},
       stateProps,
       {
@@ -78,6 +92,7 @@ const mergeProps = (stateProps, dispatchProps) => {
 };
 
 SignIn.propTypes = {
+  userAuthorized: PropTypes.bool.isRequired,
   authError: PropTypes.bool.isRequired,
   incorrectEmail: PropTypes.bool.isRequired,
   incorrectPassword: PropTypes.bool.isRequired,

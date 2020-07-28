@@ -41,7 +41,10 @@ Header.propTypes = {
   className: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
   needUserBlock: PropTypes.bool,
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+  ]),
 };
 
 Header.defaultProps = {

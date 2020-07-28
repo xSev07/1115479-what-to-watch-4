@@ -10,11 +10,14 @@ describe(`Check data reducer work correctly`, () => {
   it(`reducer without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({
       movies: [],
+      favoriteMovies: [],
       promo: undefined,
       comments: {},
       loadingMovies: true,
+      loadingFavoriteMovies: false,
       loadingPromo: true,
       loadingError: false,
+      loadingFavoriteError: false,
       loadingCommentsError: false,
     });
   });

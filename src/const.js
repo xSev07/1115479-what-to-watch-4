@@ -1,6 +1,7 @@
 export const ShowedMovies = {
   ON_START: 8,
   ON_MOVIE_PAGE: 4,
+  ADDITIONAL: 8,
 };
 
 export const TextRating = {
@@ -27,4 +28,5 @@ export const AppRoute = {
   ROOT: `/`,
   MOVIE: `/films/:id`,
   IN_LIST: `/my-list`,
+  VIDEO_PLAYER: `/video/:id`,
 };

@@ -8,10 +8,8 @@ const withVideoPlayer = (Component) => {
 
       this._videoRef = createRef();
 
-      const {isPlaying} = props;
-
       this.state = {
-        isPlaying,
+        isPlaying: false,
       };
 
       this._timeoutPlayingID = null;
@@ -50,24 +48,22 @@ const withVideoPlayer = (Component) => {
 
     componentDidMount() {
       this._isMounted = true;
-      const {poster, videoPreview, isMuted} = this.props;
+      const {poster, isMuted} = this.props;
       const video = this._videoRef.current;
       video.poster = poster;
-      video.src = videoPreview;
       video.muted = isMuted;
     }
 
     componentWillUnmount() {
       this._isMounted = false;
-      const video = this._videoRef.current;
-      video.src = null;
-      video.poster = null;
-      video.muted = null;
+      this._videoRef = null;
     }
 
     componentDidUpdate() {
+      const {videoPreview} = this.props;
       const video = this._videoRef.current;
       if (this.state.isPlaying) {
+        video.src = videoPreview;
         video.play();
       } else {
         video.load();

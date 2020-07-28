@@ -6,26 +6,36 @@ import {extendObject} from "../../utils/common/common";
 
 const initialState = {
   movies: [],
+  favoriteMovies: [],
   promo: undefined,
   comments: {},
   loadingMovies: true,
+  loadingFavoriteMovies: false,
   loadingPromo: true,
   loadingError: false,
+  loadingFavoriteError: false,
   loadingCommentsError: false,
 };
 
 const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
+  LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`,
   LOAD_PROMO: `LOAD_PROMO`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   UPDATE_MOVIE: `UPDATE_MOVIE`,
+  SET_LOADING_FAVORITE_MOVIES_STATUS: `SET_LOADING_FAVORITE_MOVIES_STATUS`,
   LOADING_ERROR: `LOADING_ERROR`,
+  LOADING_FAVORITE_ERROR: `LOADING_FAVORITE_ERROR`,
   LOADING_COMMENTS_ERROR: `LOADING_COMMENTS_ERROR`,
 };
 
 const ActionCreator = {
   loadMovies: (movies) => ({
     type: ActionType.LOAD_MOVIES,
+    payload: movies,
+  }),
+  loadFavoriteMovies: (movies) => ({
+    type: ActionType.LOAD_FAVORITE_MOVIES,
     payload: movies,
   }),
   loadPromo: (promo) => ({
@@ -40,9 +50,17 @@ const ActionCreator = {
     type: ActionType.UPDATE_MOVIE,
     payload: movie,
   }),
+  setLoadingFavoriteStatus: (status) => ({
+    type: ActionType.SET_LOADING_FAVORITE_MOVIES_STATUS,
+    payload: status,
+  }),
   loadingError: () => ({
     type: ActionType.LOADING_ERROR,
     payload: true,
+  }),
+  setLoadingFavoriteError: (status) => ({
+    type: ActionType.LOADING_FAVORITE_ERROR,
+    payload: status,
   }),
   loadingCommentsError: (status) => ({
     type: ActionType.LOADING_COMMENTS_ERROR,
@@ -58,6 +76,18 @@ const Operation = {
       })
       .catch(() => {
         dispatch(ActionCreator.loadingError());
+      });
+  },
+  loadFavoriteMovies: () => (dispatch, getState, api) => {
+    dispatch(ActionCreator.setLoadingFavoriteError(false));
+    dispatch(ActionCreator.setLoadingFavoriteStatus(true));
+    return api.get(ServerURL.FAVORITE)
+      .then((response) => {
+        dispatch(ActionCreator.loadFavoriteMovies(parseMovies(response.data)));
+        dispatch(ActionCreator.setLoadingFavoriteStatus(false));
+      })
+      .catch(() => {
+        dispatch(ActionCreator.setLoadingFavoriteError(true));
       });
   },
   loadPromo: () => (dispatch, getState, api) => {
@@ -106,6 +136,10 @@ const reducer = (state = initialState, action) => {
         movies: action.payload,
         loadingMovies: false,
       });
+    case ActionType.LOAD_FAVORITE_MOVIES:
+      return extendObject(state, {
+        favoriteMovies: action.payload,
+      });
     case ActionType.LOAD_PROMO:
       return extendObject(state, {
         promo: action.payload,
@@ -119,8 +153,12 @@ const reducer = (state = initialState, action) => {
       const oldMovieIndex = state.movies.findIndex((it) => it.id === newMovie.id);
       const newMovies = [...state.movies.slice(0, oldMovieIndex), newMovie, ...state.movies.slice(oldMovieIndex + 1)];
       return extendObject(state, {movies: newMovies});
+    case ActionType.SET_LOADING_FAVORITE_MOVIES_STATUS:
+      return extendObject(state, {loadingFavoriteMovies: action.payload});
     case ActionType.LOADING_ERROR:
       return extendObject(state, {loadingError: action.payload});
+    case ActionType.LOADING_FAVORITE_ERROR:
+      return extendObject(state, {loadingFavoriteError: action.payload});
     case ActionType.LOADING_COMMENTS_ERROR:
       return extendObject(state, {loadingCommentsError: action.payload});
   }

@@ -58,3 +58,7 @@ export const getActiveGenre = (state) => {
 export const getAddMovieInListStatus = (state) => {
   return state[NAME_SPACE].canAddMovieInList;
 };
+
+export const getShowedMoviesCount = (state) => {
+  return state[NAME_SPACE].showedMoviesCount;
+};

@@ -23,6 +23,7 @@ describe(`SignIn component`, () => {
         <Provider store={store}>
           <StaticRouter>
             <SignIn
+              userAuthorized={false}
               authError={false}
               incorrectEmail={false}
               incorrectPassword={false}

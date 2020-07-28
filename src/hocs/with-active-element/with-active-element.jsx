@@ -7,7 +7,7 @@ const withActiveElement = (Component) => {
       super(props);
 
       this.state = {
-        activeElement: props.elements[0],
+        activeElement: props.activeTabDefault,
       };
 
       this._tabClickHandler = this._tabClickHandler.bind(this);
@@ -29,7 +29,7 @@ const withActiveElement = (Component) => {
   }
 
   ActiveElementHoc.propTypes = {
-    elements: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    activeTabDefault: PropTypes.string.isRequired,
   };
 
   return ActiveElementHoc;
