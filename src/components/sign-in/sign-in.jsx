@@ -11,7 +11,7 @@ import {
 } from "../../reducer/user/selectors";
 import {ActionCreator, AuthorizationStatus, Operation as UserOperation} from "../../reducer/user/user";
 import Header from "../header/header.jsx";
-import {isValidEmail, isValidPassword} from "../../utils/common/common";
+import {extendObject, isValidEmail, isValidPassword} from "../../utils/common/common";
 import {Redirect} from "react-router-dom";
 import {AppRoute} from "../../const";
 
@@ -67,7 +67,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mergeProps = (stateProps, dispatchProps) => {
-  return Object.assign(
+  return extendObject(
       {},
       stateProps,
       {

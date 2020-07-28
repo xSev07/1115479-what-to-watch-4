@@ -5,10 +5,11 @@ import {AppRoute} from "../../const";
 import {connect} from "react-redux";
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user";
+import {extendObject} from "../../utils/common/common";
 
 const PrivateLink = (props) => {
   const {userAuthorized, className, children} = props;
-  const attributes = Object.assign({}, props);
+  const attributes = extendObject({}, props);
   delete attributes.userAuthorized;
   delete attributes.children;
   delete attributes.dispatch;

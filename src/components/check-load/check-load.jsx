@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {LoadError, Spinner} from "../svg/svg.jsx";
+import {extendObject} from "../../utils/common/common";
 
 const CheckLoad = (props) => {
   const {component: Component, loadingError, isLoading} = props;
@@ -21,7 +22,7 @@ const CheckLoad = (props) => {
     );
   }
 
-  const newProps = Object.assign({}, props);
+  const newProps = extendObject({}, props);
   delete newProps.component;
   delete newProps.loadingError;
   delete newProps.isLoading;
