@@ -28,4 +28,5 @@ export const AppRoute = {
   ROOT: `/`,
   MOVIE: `/films/:id`,
   IN_LIST: `/my-list`,
+  VIDEO_PLAYER: `/video/:id`,
 };

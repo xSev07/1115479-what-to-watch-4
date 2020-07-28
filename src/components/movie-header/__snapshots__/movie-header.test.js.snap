@@ -26,9 +26,10 @@ exports[`Should MovieHeader render correctly should render with disabled add in 
   <div
     className="movie-card__buttons"
   >
-    <button
+    <a
       className="btn btn--play movie-card__button"
-      type="button"
+      href="/video/Hotel-2000"
+      onClick={[Function]}
     >
       <svg
         height="19"
@@ -42,7 +43,7 @@ exports[`Should MovieHeader render correctly should render with disabled add in 
       <span>
         Play
       </span>
-    </button>
+    </a>
     <button
       className="btn btn--list movie-card__button"
       disabled={true}
@@ -98,9 +99,10 @@ exports[`Should MovieHeader render correctly should render with no authorized us
   <div
     className="movie-card__buttons"
   >
-    <button
+    <a
       className="btn btn--play movie-card__button"
-      type="button"
+      href="/video/Hotel-2000"
+      onClick={[Function]}
     >
       <svg
         height="19"
@@ -114,7 +116,7 @@ exports[`Should MovieHeader render correctly should render with no authorized us
       <span>
         Play
       </span>
-    </button>
+    </a>
     <a
       className="btn btn--list movie-card__button"
       href="/login"
@@ -169,9 +171,10 @@ exports[`Should MovieHeader render correctly should render with review button 1`
   <div
     className="movie-card__buttons"
   >
-    <button
+    <a
       className="btn btn--play movie-card__button"
-      type="button"
+      href="/video/Hotel-2000"
+      onClick={[Function]}
     >
       <svg
         height="19"
@@ -185,7 +188,7 @@ exports[`Should MovieHeader render correctly should render with review button 1`
       <span>
         Play
       </span>
-    </button>
+    </a>
     <button
       className="btn btn--list movie-card__button"
       disabled={false}
@@ -241,9 +244,10 @@ exports[`Should MovieHeader render correctly should render without review button
   <div
     className="movie-card__buttons"
   >
-    <button
+    <a
       className="btn btn--play movie-card__button"
-      type="button"
+      href="/video/Hotel-2000"
+      onClick={[Function]}
     >
       <svg
         height="19"
@@ -257,7 +261,7 @@ exports[`Should MovieHeader render correctly should render without review button
       <span>
         Play
       </span>
-    </button>
+    </a>
     <button
       className="btn btn--list movie-card__button"
       disabled={false}

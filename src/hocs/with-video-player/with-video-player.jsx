@@ -8,10 +8,8 @@ const withVideoPlayer = (Component) => {
 
       this._videoRef = createRef();
 
-      const {isPlaying} = props;
-
       this.state = {
-        isPlaying,
+        isPlaying: false,
       };
 
       this._timeoutPlayingID = null;

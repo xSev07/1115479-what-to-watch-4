@@ -15,6 +15,7 @@ export const movies = [
     producer: `Wes Andreson`,
     rating: 8.9,
     title: `The Grand Budapest Hotel`,
+    video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     videoPreview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     votes: 240,
     year: 2000,
@@ -39,6 +40,7 @@ export const movies = [
     producer: `Bryan Singer`,
     rating: 8.0,
     title: `Bohemian Rhapsody`,
+    video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     videoPreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     votes: 220,
     year: 2018,
@@ -63,6 +65,7 @@ export const movies = [
     producer: `Justin Kurzel`,
     rating: 6.6,
     title: `Macbeth`,
+    video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     videoPreview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     votes: 220,
     year: 2015,
@@ -88,6 +91,7 @@ export const movies = [
     producer: `Martin Scorsese`,
     rating: 7.5,
     title: `Aviator`,
+    video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     videoPreview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     votes: 220,
     year: 2005,
@@ -99,12 +103,14 @@ export const movies = [
 ];
 
 export const promoMovie = {
+  id: `Hotel-2014`,
   title: `The Grand Budapest Hotel`,
   genre: `Drama`,
   inList: false,
   year: 2014,
   poster: `img/the-grand-budapest-hotel-poster.jpg`,
   background: `img/bg-the-grand-budapest-hotel.jpg`,
+  video: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };
 
 export const genres = [

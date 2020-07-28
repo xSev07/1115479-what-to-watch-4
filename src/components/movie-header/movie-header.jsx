@@ -2,11 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import {transformToFirstCapitalSymbol} from "../../utils/common/common";
 import PrivateLink from "../private-link/private-link.jsx";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const";
 
 const MovieHeader = (props) => {
   const {movie, needAddReviewButton, disableAddInList, onInListButtonClick} = props;
   const {title, genre, year, inList} = movie;
   const mainGenre = transformToFirstCapitalSymbol(genre);
+  const videoURL = AppRoute.VIDEO_PLAYER.replace(`:id`, movie.id);
 
   return (
     <div className="movie-card__desc">
@@ -17,12 +20,15 @@ const MovieHeader = (props) => {
       </p>
 
       <div className="movie-card__buttons">
-        <button className="btn btn--play movie-card__button" type="button">
+        <Link
+          className="btn btn--play movie-card__button"
+          to={videoURL}
+        >
           <svg viewBox="0 0 19 19" width="19" height="19">
             <use xlinkHref="#play-s"></use>
           </svg>
           <span>Play</span>
-        </button>
+        </Link>
         <PrivateLink
           disabled={disableAddInList}
           className="btn btn--list movie-card__button"
@@ -42,6 +48,7 @@ const MovieHeader = (props) => {
 
 MovieHeader.propTypes = {
   movie: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,

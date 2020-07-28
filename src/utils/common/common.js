@@ -31,6 +31,10 @@ export const transformRuntime = (time) => {
   return moment.duration(time, `m`).format(`h[h] mm[m]`);
 };
 
+export const transformDuration = (time) => {
+  return moment.duration(time, `s`).format(`h:mm:ss`);
+};
+
 export const transformDate = (date) => {
   return moment(date).format(`MMMM DD, YYYY`);
 };

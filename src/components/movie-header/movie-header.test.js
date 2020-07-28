@@ -15,14 +15,16 @@ describe(`Should MovieHeader render correctly`, () => {
   it(`should render with review button`, () => {
     const tree = renderer
       .create(
-          <Provider store={store} >
-            <MovieHeader
-              movie={movies[0]}
-              needAddReviewButton={true}
-              disableAddInList={false}
-              onInListButtonClick={() => {}}
-            />
-          </Provider>
+          <StaticRouter>
+            <Provider store={store} >
+              <MovieHeader
+                movie={movies[0]}
+                needAddReviewButton={true}
+                disableAddInList={false}
+                onInListButtonClick={() => {}}
+              />
+            </Provider>
+          </StaticRouter>
       ).toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -31,14 +33,16 @@ describe(`Should MovieHeader render correctly`, () => {
   it(`should render without review button`, () => {
     const tree = renderer
       .create(
-          <Provider store={store} >
-            <MovieHeader
-              movie={movies[0]}
-              needAddReviewButton={false}
-              disableAddInList={false}
-              onInListButtonClick={() => {}}
-            />
-          </Provider>
+          <StaticRouter>
+            <Provider store={store} >
+              <MovieHeader
+                movie={movies[0]}
+                needAddReviewButton={false}
+                disableAddInList={false}
+                onInListButtonClick={() => {}}
+              />
+            </Provider>
+          </StaticRouter>
       ).toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -47,14 +51,16 @@ describe(`Should MovieHeader render correctly`, () => {
   it(`should render with disabled add in list button`, () => {
     const tree = renderer
       .create(
-          <Provider store={store} >
-            <MovieHeader
-              movie={movies[0]}
-              needAddReviewButton={true}
-              disableAddInList={true}
-              onInListButtonClick={() => {}}
-            />
-          </Provider>
+          <StaticRouter>
+            <Provider store={store} >
+              <MovieHeader
+                movie={movies[0]}
+                needAddReviewButton={true}
+                disableAddInList={true}
+                onInListButtonClick={() => {}}
+              />
+            </Provider>
+          </StaticRouter>
       ).toJSON();
 
     expect(tree).toMatchSnapshot();
