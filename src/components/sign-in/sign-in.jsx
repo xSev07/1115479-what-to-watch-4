@@ -55,15 +55,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  login(authData) {
-    dispatch(UserOperation.login(authData));
-  },
-  setIncorrectEmail(status) {
-    dispatch(ActionCreator.setIncorrectEmail(status));
-  },
-  setIncorrectPassword(status) {
-    dispatch(ActionCreator.setIncorrectPassword(status));
-  },
   handleFormSubmit(formData) {
     const {userLogin, userPassword} = formData;
 
