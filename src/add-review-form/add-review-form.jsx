@@ -1,4 +1,4 @@
-import React from "react";
+import React, {createRef} from "react";
 import {MAX_STARS_REVIEW} from "../const";
 
 const createStarsTemplate = (count) => {
@@ -16,8 +16,28 @@ const createStarsTemplate = (count) => {
 };
 
 const AddReviewForm = (props) => {
+  const {isSubmitDisabled, onSubmit, onChange} = props;
+  const formRef = createRef();
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const formData = {
+      rating: formRef.current.rating.value,
+      comment: formRef.current.text.value,
+    };
+    onSubmit(formData);
+  };
+
+  const handleFormChange = () => {
+    const formData = {
+      rating: formRef.current.rating.value,
+      comment: formRef.current.text.value,
+    };
+    onChange(formData);
+  };
+
   return (
-    <form action="#" className="add-review__form">
+    <form ref={formRef} action="#" className="add-review__form" onChange={handleFormChange}>
       <div className="rating">
         <div className="rating__stars">
           {
@@ -27,10 +47,18 @@ const AddReviewForm = (props) => {
       </div>
 
       <div className="add-review__text">
-        <textarea className="add-review__textarea" name="review-text" id="review-text"
-          placeholder="Review text"/>
+        <textarea className="add-review__textarea" name="text"
+          id="review-text" placeholder="Review text"/>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button
+            className="add-review__btn"
+            type="submit"
+            disabled={isSubmitDisabled}
+            onClick={handleSubmit}
+            style={{opacity: isSubmitDisabled ? 0.5 : 1}}
+          >
+            Post
+          </button>
         </div>
 
       </div>

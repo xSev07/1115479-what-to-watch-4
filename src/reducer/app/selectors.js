@@ -62,3 +62,7 @@ export const getAddMovieInListStatus = (state) => {
 export const getShowedMoviesCount = (state) => {
   return state[NAME_SPACE].showedMoviesCount;
 };
+
+export const getCanSendComment = (state) => {
+  return state[NAME_SPACE].canSendComment;
+};

@@ -22,6 +22,7 @@ const ActionType = {
   LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`,
   LOAD_PROMO: `LOAD_PROMO`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
+  ADD_COMMENT: `ADD_COMMENT`,
   UPDATE_MOVIE: `UPDATE_MOVIE`,
   SET_LOADING_FAVORITE_MOVIES_STATUS: `SET_LOADING_FAVORITE_MOVIES_STATUS`,
   LOADING_ERROR: `LOADING_ERROR`,
@@ -45,6 +46,10 @@ const ActionCreator = {
   loadComments: (comments) => ({
     type: ActionType.LOAD_COMMENTS,
     payload: comments,
+  }),
+  addComment: (comment) => ({
+    type: ActionType.ADD_COMMENT,
+    payload: comment,
   }),
   updateMovie: (movie) => ({
     type: ActionType.UPDATE_MOVIE,
@@ -112,6 +117,12 @@ const Operation = {
         dispatch(ActionCreator.loadingCommentsError(true));
       });
   },
+  addComment: (filmId, comment) => (dispatch, getState, api) => {
+    return api.post(`${ServerURL.COMMENTS}${filmId}`, comment)
+      .then((response) => {
+        dispatch(ActionCreator.addComment(response.data));
+      });
+  },
   changeFavoriteStatus: (movie) => (dispatch, getState, api) => {
     dispatch(AppActionCreator.changeAddMovieInListStatus(false));
     const {id, inList} = movie;
@@ -146,6 +157,7 @@ const reducer = (state = initialState, action) => {
         loadingPromo: false,
       });
     case ActionType.LOAD_COMMENTS:
+    case ActionType.ADD_COMMENT:
       const comments = extendObject(state.comments, action.payload);
       return extendObject(state, {comments});
     case ActionType.UPDATE_MOVIE:

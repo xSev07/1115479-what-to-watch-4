@@ -5,10 +5,16 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
 import AddReviewForm from "../../add-review-form/add-review-form.jsx";
+import {Operation as DataOperation} from "../../reducer/data/data";
+import {ActionCreator} from "../../reducer/app/app";
+import {getCanSendComment} from "../../reducer/app/selectors";
+import {checkCommentLength} from "../../utils/validation/validation";
+import {extendObject} from "../../utils/common/common";
 
 const AddReview = (props) => {
-  const {movie} = props;
+  const {movie, isSubmitDisabled, handleFormSubmit, handleFormChange} = props;
   const {title, poster, background} = movie;
+
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
@@ -38,7 +44,11 @@ const AddReview = (props) => {
       </div>
 
       <div className="add-review">
-        <AddReviewForm/>
+        <AddReviewForm
+          isSubmitDisabled={isSubmitDisabled}
+          onSubmit={handleFormSubmit}
+          onChange={handleFormChange}
+        />
       </div>
 
     </section>
@@ -47,7 +57,42 @@ const AddReview = (props) => {
 
 const mapStateToProps = (state, props) => ({
   movie: getMovieByID(state, {movieId: props.movieId}),
+  isSubmitDisabled: !getCanSendComment(state),
 });
 
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  handleFormChange(formData) {
+    const {rating, comment} = formData;
+    if (rating && checkCommentLength(comment)) {
+      dispatch(ActionCreator.canSendComment(true));
+    } else {
+      dispatch(ActionCreator.canSendComment(false));
+    }
+  },
+  addComment(formData) {
+    const {rating, comment} = formData;
+    const commentData = {
+      rating: parseInt(rating, 10),
+      comment,
+    };
+    dispatch(DataOperation.addComment(ownProps.movieId, commentData));
+  },
+});
+
+const mergeProps = (stateProps, dispatchProps) => {
+  return extendObject(
+      stateProps,
+      dispatchProps,
+      {
+        handleFormSubmit(formData) {
+          if (!stateProps.isSubmitDisabled) {
+            dispatchProps.addComment(formData);
+          }
+        }
+      }
+  );
+
+};
+
 export {AddReview};
-export default connect(mapStateToProps)(AddReview);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(AddReview);
