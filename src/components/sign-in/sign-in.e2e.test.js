@@ -47,8 +47,8 @@ describe(`SignIn component`, () => {
     expect(onFormSubmit).toHaveBeenCalledTimes(1);
     expect(onFormSubmit).toHaveBeenNthCalledWith(1,
         {
-          loginValue: `example@gmail.com`,
-          passwordValue: `qwerty`,
+          userLogin: `example@gmail.com`,
+          userPassword: `qwerty`,
         });
   });
 });

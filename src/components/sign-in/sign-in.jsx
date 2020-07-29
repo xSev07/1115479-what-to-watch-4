@@ -11,7 +11,7 @@ import {
 } from "../../reducer/user/selectors";
 import {ActionCreator, AuthorizationStatus, Operation as UserOperation} from "../../reducer/user/user";
 import Header from "../header/header.jsx";
-import {extendObject, isValidEmail, isValidPassword} from "../../utils/common/common";
+import {isValidEmail, isValidPassword} from "../../utils/common/common";
 import {Redirect} from "react-router-dom";
 import {AppRoute} from "../../const";
 
@@ -64,32 +64,22 @@ const mapDispatchToProps = (dispatch) => ({
   setIncorrectPassword(status) {
     dispatch(ActionCreator.setIncorrectPassword(status));
   },
+  handleFormSubmit(formData) {
+    const {userLogin, userPassword} = formData;
+
+    const emailValid = isValidEmail(userLogin);
+    const passwordValid = isValidPassword(userPassword);
+
+    if (emailValid && passwordValid) {
+      dispatch(UserOperation.login({
+        login: userLogin,
+        password: userPassword,
+      }));
+    }
+    dispatch(ActionCreator.setIncorrectEmail(!emailValid));
+    dispatch(ActionCreator.setIncorrectPassword(!passwordValid));
+  }
 });
-
-const mergeProps = (stateProps, dispatchProps) => {
-  return extendObject(
-      {},
-      stateProps,
-      {
-        handleFormSubmit(formData) {
-          const {login, setIncorrectEmail, setIncorrectPassword} = dispatchProps;
-          const {loginValue, passwordValue} = formData;
-
-          const emailValid = isValidEmail(loginValue);
-          const passwordValid = isValidPassword(passwordValue);
-
-          if (emailValid && passwordValid) {
-            login({
-              login: loginValue,
-              password: passwordValue,
-            });
-          }
-          setIncorrectEmail(!emailValid);
-          setIncorrectPassword(!passwordValid);
-        }
-      }
-  );
-};
 
 SignIn.propTypes = {
   userAuthorized: PropTypes.bool.isRequired,
@@ -100,4 +90,4 @@ SignIn.propTypes = {
 };
 
 export {SignIn};
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

@@ -9,8 +9,8 @@ const LoginForm = (props) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const formData = {
-      loginValue: loginRef.current.value,
-      passwordValue: passwordRef.current.value,
+      userLogin: loginRef.current.value,
+      userPassword: passwordRef.current.value,
     };
     onSubmit(formData);
   };
