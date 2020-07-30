@@ -25,7 +25,6 @@ const ActionType = {
   LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`,
   LOAD_PROMO: `LOAD_PROMO`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
-  ADD_COMMENT: `ADD_COMMENT`,
   UPDATE_MOVIE: `UPDATE_MOVIE`,
   SET_LOADING_FAVORITE_MOVIES_STATUS: `SET_LOADING_FAVORITE_MOVIES_STATUS`,
   SET_SENDING_COMMENT_STATUS: `SET_SENDING_COMMENT_STATUS`,
@@ -51,10 +50,6 @@ const ActionCreator = {
   loadComments: (comments) => ({
     type: ActionType.LOAD_COMMENTS,
     payload: comments,
-  }),
-  addComment: (comment) => ({
-    type: ActionType.ADD_COMMENT,
-    payload: comment,
   }),
   updateMovie: (movie) => ({
     type: ActionType.UPDATE_MOVIE,
@@ -84,6 +79,13 @@ const ActionCreator = {
     type: ActionType.SENDING_COMMENT_ERROR,
     payload: status,
   }),
+};
+
+const dispatchComments = (filmId, rawComments, dispatch) => {
+  const comments = {
+    [filmId]: parseComments(rawComments),
+  };
+  dispatch(ActionCreator.loadComments(comments));
 };
 
 const Operation = {
@@ -121,10 +123,7 @@ const Operation = {
     dispatch(ActionCreator.loadingCommentsError(false));
     return api.get(`${ServerURL.COMMENTS}${filmId}`)
       .then((response) => {
-        const comments = {
-          [filmId]: parseComments(response.data),
-        };
-        dispatch(ActionCreator.loadComments(comments));
+        dispatchComments(filmId, response.data, dispatch);
       })
       .catch(() => {
         dispatch(ActionCreator.loadingCommentsError(true));
@@ -134,9 +133,10 @@ const Operation = {
     dispatch(ActionCreator.setSendingComment(true));
     return api.post(`${ServerURL.COMMENTS}${filmId}`, comment)
       .then((response) => {
-        dispatch(ActionCreator.addComment(response.data));
+        dispatchComments(filmId, response.data, dispatch);
         dispatch(ActionCreator.setSendingComment(false));
-        // Есть смысл так делать проверку статусов ошибок во всех операциях или это излишне?
+        // Есть смысл так делать проверку статусов ошибок во всех операциях,
+        // что бы не диспатчить каждый раз или это излишне?
         if (getSendingCommentError(getState())) {
           dispatch(ActionCreator.sendingCommentError(false));
         }
@@ -180,8 +180,6 @@ const reducer = (state = initialState, action) => {
         loadingPromo: false,
       });
     case ActionType.LOAD_COMMENTS:
-    case ActionType.ADD_COMMENT:
-      debugger
       const comments = extendObject(state.comments, action.payload);
       return extendObject(state, {comments});
     case ActionType.UPDATE_MOVIE:
