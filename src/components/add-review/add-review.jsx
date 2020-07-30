@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../header/header.jsx";
-import {getMovieByID} from "../../reducer/data/selectors";
+import {getMovieByID, getSendingCommentError, getSendingCommentStatus} from "../../reducer/data/selectors";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
@@ -12,7 +12,8 @@ import {checkCommentLength} from "../../utils/validation/validation";
 import {extendObject} from "../../utils/common/common";
 
 const AddReview = (props) => {
-  const {movie, isSubmitDisabled, handleFormSubmit, handleFormChange} = props;
+  const {movie, isSubmitDisabled, isCommentSending, commentSendingError,
+    handleFormSubmit, handleFormChange} = props;
   const {title, poster, background} = movie;
 
   return (
@@ -46,11 +47,12 @@ const AddReview = (props) => {
       <div className="add-review">
         <AddReviewForm
           isSubmitDisabled={isSubmitDisabled}
+          isCommentSending={isCommentSending}
+          commentSendingError={commentSendingError}
           onSubmit={handleFormSubmit}
           onChange={handleFormChange}
         />
       </div>
-
     </section>
   );
 };
@@ -58,6 +60,8 @@ const AddReview = (props) => {
 const mapStateToProps = (state, props) => ({
   movie: getMovieByID(state, {movieId: props.movieId}),
   isSubmitDisabled: !getCanSendComment(state),
+  isCommentSending: getSendingCommentStatus(state),
+  commentSendingError: getSendingCommentError(state),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -75,7 +79,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       rating: parseInt(rating, 10),
       comment,
     };
-    dispatch(DataOperation.addComment(ownProps.movieId, commentData));
+    dispatch(DataOperation.sendComment(ownProps.movieId, commentData));
   },
 });
 

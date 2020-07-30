@@ -16,7 +16,7 @@ const createStarsTemplate = (count) => {
 };
 
 const AddReviewForm = (props) => {
-  const {isSubmitDisabled, onSubmit, onChange} = props;
+  const {isSubmitDisabled, isCommentSending, commentSendingError, onSubmit, onChange} = props;
   const formRef = createRef();
 
   const handleSubmit = (evt) => {
@@ -37,7 +37,19 @@ const AddReviewForm = (props) => {
   };
 
   return (
-    <form ref={formRef} action="#" className="add-review__form" onChange={handleFormChange}>
+    <form
+      ref={formRef}
+      action="#"
+      className="add-review__form"
+      disabled={isCommentSending}
+      onChange={handleFormChange}
+      style={{opacity: isSubmitDisabled ? 0.5 : 1}}
+    >
+      {commentSendingError && (
+        <div>
+          <p>Error sending comment</p>
+        </div>
+      )}
       <div className="rating">
         <div className="rating__stars">
           {

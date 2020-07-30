@@ -60,3 +60,11 @@ export const getFavoriteMoviesLoadingError = (state) => {
 export const getLoadingCommentsError = (state) => {
   return state[NAME_SPACE].loadingCommentsError;
 };
+
+export const getSendingCommentStatus = (state) => {
+  return state[NAME_SPACE].sendingComment;
+};
+
+export const getSendingCommentError = (state) => {
+  return state[NAME_SPACE].sendingCommentError;
+};

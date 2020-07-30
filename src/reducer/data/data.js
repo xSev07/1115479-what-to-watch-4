@@ -3,6 +3,7 @@ import {parseComments} from "../../adapters/comments";
 import {ServerURL} from "../../api";
 import {ActionCreator as AppActionCreator} from "../app/app";
 import {extendObject} from "../../utils/common/common";
+import {getSendingCommentError} from "./selectors";
 
 const initialState = {
   movies: [],
@@ -13,8 +14,10 @@ const initialState = {
   loadingFavoriteMovies: false,
   loadingPromo: true,
   loadingError: false,
+  sendingComment: false,
   loadingFavoriteError: false,
   loadingCommentsError: false,
+  sendingCommentError: false,
 };
 
 const ActionType = {
@@ -25,9 +28,11 @@ const ActionType = {
   ADD_COMMENT: `ADD_COMMENT`,
   UPDATE_MOVIE: `UPDATE_MOVIE`,
   SET_LOADING_FAVORITE_MOVIES_STATUS: `SET_LOADING_FAVORITE_MOVIES_STATUS`,
+  SET_SENDING_COMMENT_STATUS: `SET_SENDING_COMMENT_STATUS`,
   LOADING_ERROR: `LOADING_ERROR`,
   LOADING_FAVORITE_ERROR: `LOADING_FAVORITE_ERROR`,
   LOADING_COMMENTS_ERROR: `LOADING_COMMENTS_ERROR`,
+  SENDING_COMMENT_ERROR: `SENDING_COMMENT_ERROR`,
 };
 
 const ActionCreator = {
@@ -59,6 +64,10 @@ const ActionCreator = {
     type: ActionType.SET_LOADING_FAVORITE_MOVIES_STATUS,
     payload: status,
   }),
+  setSendingComment: (status) => ({
+    type: ActionType.SET_SENDING_COMMENT_STATUS,
+    payload: status,
+  }),
   loadingError: () => ({
     type: ActionType.LOADING_ERROR,
     payload: true,
@@ -69,6 +78,10 @@ const ActionCreator = {
   }),
   loadingCommentsError: (status) => ({
     type: ActionType.LOADING_COMMENTS_ERROR,
+    payload: status,
+  }),
+  sendingCommentError: (status) => ({
+    type: ActionType.SENDING_COMMENT_ERROR,
     payload: status,
   }),
 };
@@ -117,10 +130,20 @@ const Operation = {
         dispatch(ActionCreator.loadingCommentsError(true));
       });
   },
-  addComment: (filmId, comment) => (dispatch, getState, api) => {
+  sendComment: (filmId, comment) => (dispatch, getState, api) => {
+    dispatch(ActionCreator.setSendingComment(true));
     return api.post(`${ServerURL.COMMENTS}${filmId}`, comment)
       .then((response) => {
         dispatch(ActionCreator.addComment(response.data));
+        dispatch(ActionCreator.setSendingComment(false));
+        // Есть смысл так делать проверку статусов ошибок во всех операциях или это излишне?
+        if (getSendingCommentError(getState())) {
+          dispatch(ActionCreator.sendingCommentError(false));
+        }
+        window.history.back();
+      })
+      .catch(() => {
+        dispatch(ActionCreator.sendingCommentError(true));
       });
   },
   changeFavoriteStatus: (movie) => (dispatch, getState, api) => {
@@ -158,6 +181,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.LOAD_COMMENTS:
     case ActionType.ADD_COMMENT:
+      debugger
       const comments = extendObject(state.comments, action.payload);
       return extendObject(state, {comments});
     case ActionType.UPDATE_MOVIE:
@@ -167,12 +191,16 @@ const reducer = (state = initialState, action) => {
       return extendObject(state, {movies: newMovies});
     case ActionType.SET_LOADING_FAVORITE_MOVIES_STATUS:
       return extendObject(state, {loadingFavoriteMovies: action.payload});
+    case ActionType.SET_SENDING_COMMENT_STATUS:
+      return extendObject(state, {sendingComment: action.payload});
     case ActionType.LOADING_ERROR:
       return extendObject(state, {loadingError: action.payload});
     case ActionType.LOADING_FAVORITE_ERROR:
       return extendObject(state, {loadingFavoriteError: action.payload});
     case ActionType.LOADING_COMMENTS_ERROR:
       return extendObject(state, {loadingCommentsError: action.payload});
+    case ActionType.SENDING_COMMENT_ERROR:
+      return extendObject(state, {sendingCommentError: action.payload});
   }
 
   return state;
