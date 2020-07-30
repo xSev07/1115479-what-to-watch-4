@@ -1,5 +1,6 @@
 import React, {createRef} from "react";
-import {MAX_STARS_REVIEW} from "../const";
+import PropTypes from "prop-types";
+import {MAX_STARS_REVIEW} from "../../const";
 
 const createStarsTemplate = (count) => {
   let res = [];
@@ -16,7 +17,8 @@ const createStarsTemplate = (count) => {
 };
 
 const AddReviewForm = (props) => {
-  const {isSubmitDisabled, isCommentSending, commentSendingError, onSubmit, onChange} = props;
+  const {isSubmitDisabled, isCommentSending, commentSendingError,
+    onSubmit, onChange} = props;
   const formRef = createRef();
 
   const handleSubmit = (evt) => {
@@ -76,6 +78,14 @@ const AddReviewForm = (props) => {
       </div>
     </form>
   );
+};
+
+AddReviewForm.propTypes = {
+  isSubmitDisabled: PropTypes.bool.isRequired,
+  isCommentSending: PropTypes.bool.isRequired,
+  commentSendingError: PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default AddReviewForm;

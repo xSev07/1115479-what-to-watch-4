@@ -16,9 +16,11 @@ describe(`Check data reducer work correctly`, () => {
       loadingMovies: true,
       loadingFavoriteMovies: false,
       loadingPromo: true,
+      sendingComment: false,
       loadingError: false,
       loadingFavoriteError: false,
       loadingCommentsError: false,
+      sendingCommentError: false,
     });
   });
 

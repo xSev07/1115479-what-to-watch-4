@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 import {getMovieByID, getSendingCommentError, getSendingCommentStatus} from "../../reducer/data/selectors";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
-import AddReviewForm from "../../add-review-form/add-review-form.jsx";
+import AddReviewForm from "../add-review-form/add-review-form.jsx";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {ActionCreator} from "../../reducer/app/app";
 import {getCanSendComment} from "../../reducer/app/selectors";
@@ -96,6 +97,19 @@ const mergeProps = (stateProps, dispatchProps) => {
       }
   );
 
+};
+
+AddReview.propTypes = {
+  movie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
+  }).isRequired,
+  isSubmitDisabled: PropTypes.bool.isRequired,
+  isCommentSending: PropTypes.bool.isRequired,
+  commentSendingError: PropTypes.bool.isRequired,
+  handleFormSubmit: PropTypes.func.isRequired,
+  handleFormChange: PropTypes.func.isRequired,
 };
 
 export {AddReview};
