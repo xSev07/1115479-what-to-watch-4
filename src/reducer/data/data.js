@@ -3,7 +3,7 @@ import {parseComments} from "../../adapters/comments";
 import {ServerURL} from "../../api";
 import {ActionCreator as AppActionCreator} from "../app/app";
 import {extendObject} from "../../utils/common/common";
-import {getSendingCommentError} from "./selectors";
+import history from "../../history";
 
 const initialState = {
   movies: [],
@@ -135,12 +135,8 @@ const Operation = {
       .then((response) => {
         dispatchComments(filmId, response.data, dispatch);
         dispatch(ActionCreator.setSendingComment(false));
-        // Есть смысл так делать проверку статусов ошибок во всех операциях,
-        // что бы не диспатчить каждый раз или это излишне?
-        if (getSendingCommentError(getState())) {
-          dispatch(ActionCreator.sendingCommentError(false));
-        }
-        window.history.back();
+        dispatch(ActionCreator.sendingCommentError(false));
+        history.back();
       })
       .catch(() => {
         dispatch(ActionCreator.sendingCommentError(true));

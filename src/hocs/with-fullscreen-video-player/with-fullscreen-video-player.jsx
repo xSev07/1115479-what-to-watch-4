@@ -4,6 +4,7 @@ import {transformDuration} from "../../utils/common/common";
 import {getMovieByID} from "../../reducer/data/selectors";
 import {connect} from "react-redux";
 import {compose} from "redux";
+import history from "../../history";
 
 const withFullscreenVideoPlayer = (Component) => {
   class FullscreenVideoPlayerHoc extends PureComponent {
@@ -59,7 +60,7 @@ const withFullscreenVideoPlayer = (Component) => {
     }
 
     _handleExitButtonClick() {
-      window.history.back();
+      history.back();
     }
 
     componentDidMount() {
