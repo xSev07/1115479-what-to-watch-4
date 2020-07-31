@@ -14,7 +14,7 @@ exports[`Should LoginForm render correctly should render basic form 1`] = `
       <input
         className="sign-in__input"
         id="user-email"
-        name="user-email"
+        name="email"
         placeholder="Email address"
         type="email"
       />
@@ -31,7 +31,7 @@ exports[`Should LoginForm render correctly should render basic form 1`] = `
       <input
         className="sign-in__input"
         id="user-password"
-        name="user-password"
+        name="password"
         placeholder="Password"
         type="password"
       />
@@ -80,7 +80,7 @@ exports[`Should LoginForm render correctly should render form with auth error 1`
       <input
         className="sign-in__input"
         id="user-email"
-        name="user-email"
+        name="email"
         placeholder="Email address"
         type="email"
       />
@@ -97,7 +97,7 @@ exports[`Should LoginForm render correctly should render form with auth error 1`
       <input
         className="sign-in__input"
         id="user-password"
-        name="user-password"
+        name="password"
         placeholder="Password"
         type="password"
       />
@@ -144,7 +144,7 @@ exports[`Should LoginForm render correctly should render form with incorrect ema
       <input
         className="sign-in__input"
         id="user-email"
-        name="user-email"
+        name="email"
         placeholder="Email address"
         type="email"
       />
@@ -161,7 +161,7 @@ exports[`Should LoginForm render correctly should render form with incorrect ema
       <input
         className="sign-in__input"
         id="user-password"
-        name="user-password"
+        name="password"
         placeholder="Password"
         type="password"
       />
@@ -208,7 +208,7 @@ exports[`Should LoginForm render correctly should render form with incorrect pas
       <input
         className="sign-in__input"
         id="user-email"
-        name="user-email"
+        name="email"
         placeholder="Email address"
         type="email"
       />
@@ -225,7 +225,7 @@ exports[`Should LoginForm render correctly should render form with incorrect pas
       <input
         className="sign-in__input"
         id="user-password"
-        name="user-password"
+        name="password"
         placeholder="Password"
         type="password"
       />

@@ -1,4 +1,4 @@
-import React, {createRef} from "react";
+import React, {createRef, PureComponent} from "react";
 import PropTypes from "prop-types";
 import {MAX_STARS_REVIEW} from "../../const";
 
@@ -16,69 +16,79 @@ const createStarsTemplate = (count) => {
   return res;
 };
 
-const AddReviewForm = (props) => {
-  const {isSubmitDisabled, isCommentSending, commentSendingError,
-    onSubmit, onChange} = props;
-  const formRef = createRef();
+class AddReviewForm extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  const handleSubmit = (evt) => {
+    this.formRef = createRef();
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFormChange = this.handleFormChange.bind(this);
+    this.getFormData = this.getFormData.bind(this);
+  }
+
+  getFormData() {
+    const form = this.formRef.current;
+    const formData = {
+      rating: form.rating.value,
+      comment: form.text.value,
+    };
+    return formData;
+  }
+
+  handleSubmit(evt) {
     evt.preventDefault();
-    const formData = {
-      rating: formRef.current.rating.value,
-      comment: formRef.current.text.value,
-    };
-    onSubmit(formData);
-  };
+    this.props.onSubmit(this.getFormData());
+  }
 
-  const handleFormChange = () => {
-    const formData = {
-      rating: formRef.current.rating.value,
-      comment: formRef.current.text.value,
-    };
-    onChange(formData);
-  };
+  handleFormChange() {
+    this.props.onChange(this.getFormData());
+  }
 
-  return (
-    <form
-      ref={formRef}
-      action="#"
-      className="add-review__form"
-      disabled={isCommentSending}
-      onChange={handleFormChange}
-      style={{opacity: isSubmitDisabled ? 0.5 : 1}}
-    >
-      {commentSendingError && (
-        <div>
-          <p>Error sending comment</p>
+  render() {
+    const {isSubmitDisabled, isCommentSending, commentSendingError} = this.props;
+    return (
+      <form
+        ref={this.formRef}
+        action="#"
+        className="add-review__form"
+        disabled={isCommentSending}
+        onChange={this.handleFormChange}
+        style={{opacity: isSubmitDisabled ? 0.5 : 1}}
+      >
+        {commentSendingError && (
+          <div>
+            <p>Error sending comment</p>
+          </div>
+        )}
+        <div className="rating">
+          <div className="rating__stars">
+            {
+              createStarsTemplate(MAX_STARS_REVIEW)
+            }
+          </div>
         </div>
-      )}
-      <div className="rating">
-        <div className="rating__stars">
-          {
-            createStarsTemplate(MAX_STARS_REVIEW)
-          }
-        </div>
-      </div>
 
-      <div className="add-review__text">
-        <textarea className="add-review__textarea" name="text"
-          id="review-text" placeholder="Review text"/>
-        <div className="add-review__submit">
-          <button
-            className="add-review__btn"
-            type="submit"
-            disabled={isSubmitDisabled}
-            onClick={handleSubmit}
-            style={{opacity: isSubmitDisabled ? 0.5 : 1}}
-          >
+        <div className="add-review__text">
+          <textarea className="add-review__textarea" name="text"
+            id="review-text" placeholder="Review text"/>
+          <div className="add-review__submit">
+            <button
+              className="add-review__btn"
+              type="submit"
+              disabled={isSubmitDisabled}
+              onClick={this.handleSubmit}
+              style={{opacity: isSubmitDisabled ? 0.5 : 1}}
+            >
             Post
-          </button>
-        </div>
+            </button>
+          </div>
 
-      </div>
-    </form>
-  );
-};
+        </div>
+      </form>
+    );
+  }
+}
 
 AddReviewForm.propTypes = {
   isSubmitDisabled: PropTypes.bool.isRequired,
