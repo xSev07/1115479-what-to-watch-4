@@ -25,11 +25,13 @@ export const MovieTab = {
   REVIEWS: `Reviews`,
 };
 
+export const ROUTE_ID = `:id`;
+
 export const AppRoute = {
   LOGIN: `/login`,
   ROOT: `/`,
-  MOVIE: `/films/:id`,
+  MOVIE: `/films/${ROUTE_ID}`,
   IN_LIST: `/my-list`,
-  VIDEO_PLAYER: `/video/:id`,
-  ADD_REVIEW: `/review/:id`,
+  VIDEO_PLAYER: `/video/${ROUTE_ID}`,
+  ADD_REVIEW: `/review/${ROUTE_ID}`,
 };

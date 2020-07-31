@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
+import {replaceId} from "../../utils/common/common";
 
 const MovieCard = (props) => {
   const {id, title, onPlay, onPause} = props;
-  const url = AppRoute.MOVIE.replace(`:id`, id);
+  const url = replaceId(AppRoute.MOVIE, id);
 
   return (
     <article

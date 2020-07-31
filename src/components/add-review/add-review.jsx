@@ -10,12 +10,13 @@ import {Operation as DataOperation} from "../../reducer/data/data";
 import {ActionCreator} from "../../reducer/app/app";
 import {getCanSendComment} from "../../reducer/app/selectors";
 import {checkCommentLength} from "../../utils/validation/validation";
-import {extendObject} from "../../utils/common/common";
+import {extendObject, replaceId} from "../../utils/common/common";
 
 const AddReview = (props) => {
   const {movie, isSubmitDisabled, isCommentSending, commentSendingError,
     handleFormSubmit, handleFormChange} = props;
   const {title, poster, background} = movie;
+  const movieLink = replaceId(AppRoute.MOVIE, movie.id);
 
   return (
     <section className="movie-card movie-card--full">
@@ -30,7 +31,7 @@ const AddReview = (props) => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={AppRoute.ROOT} className="breadcrumbs__link">{title}</Link>
+                <Link to={movieLink} className="breadcrumbs__link">{title}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
@@ -101,6 +102,7 @@ const mergeProps = (stateProps, dispatchProps) => {
 
 AddReview.propTypes = {
   movie: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     background: PropTypes.string.isRequired,

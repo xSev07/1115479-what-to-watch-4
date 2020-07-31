@@ -1,4 +1,4 @@
-import {TextRating} from "../../const";
+import {ROUTE_ID, TextRating} from "../../const";
 import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
 
@@ -58,5 +58,5 @@ export const extendObject = (...rest) => {
 };
 
 export const replaceId = (url, id) => {
-  return url.replace(`:id`, id);
+  return url.replace(ROUTE_ID, id);
 };

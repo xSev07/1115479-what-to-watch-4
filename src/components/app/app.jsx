@@ -9,11 +9,10 @@ import MyList from "../my-list/my-list.jsx";
 import CheckLoadRoute from "../check-load-route/check-load-route.jsx";
 import VideoPlayer from "../video-player/video-player.jsx";
 import AddReview from "../add-review/add-review.jsx";
-import history from "../../history";
 
 const App = () => {
   return (
-    <BrowserRouter history={history}>
+    <BrowserRouter>
       <Switch>
         <CheckLoadRoute
           exact
