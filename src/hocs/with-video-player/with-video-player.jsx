@@ -6,26 +6,26 @@ const withVideoPlayer = (Component) => {
     constructor(props) {
       super(props);
 
-      this._videoRef = createRef();
+      this.videoRef = createRef();
 
       this.state = {
         isPlaying: false,
       };
 
-      this._timeoutPlayingID = null;
-      this._handleVideoPlay = this._handleVideoPlay.bind(this);
-      this._handleVideoPause = this._handleVideoPause.bind(this);
+      this.timeoutPlayingID = null;
+      this.handleVideoPlay = this.handleVideoPlay.bind(this);
+      this.handleVideoPause = this.handleVideoPause.bind(this);
     }
 
     render() {
       return (
         <Component
-          onPlay={this._handleVideoPlay}
-          onPause={this._handleVideoPause}
+          onPlay={this.handleVideoPlay}
+          onPause={this.handleVideoPause}
           {...this.props}
         >
           <video
-            ref={this._videoRef}
+            ref={this.videoRef}
             width="280"
             height="175"
           />
@@ -33,38 +33,39 @@ const withVideoPlayer = (Component) => {
       );
     }
 
-    _handleVideoPlay() {
-      this._timeoutPlayingID = setTimeout(() => {
+    handleVideoPlay() {
+      this.timeoutPlayingID = setTimeout(() => {
         if (this._isMounted) {
           this.setState({isPlaying: true});
         }
       }, 1000);
     }
 
-    _handleVideoPause() {
-      clearTimeout(this._timeoutPlayingID);
+    handleVideoPause() {
+      clearTimeout(this.timeoutPlayingID);
       this.setState({isPlaying: false});
     }
 
     componentDidMount() {
       this._isMounted = true;
       const {poster, isMuted} = this.props;
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
       video.poster = poster;
       video.muted = isMuted;
     }
 
     componentWillUnmount() {
       this._isMounted = false;
-      this._videoRef = null;
+      this.videoRef = null;
     }
 
     componentDidUpdate() {
       const {videoPreview} = this.props;
-      const video = this._videoRef.current;
+      const video = this.videoRef.current;
       if (this.state.isPlaying) {
         video.src = videoPreview;
-        video.play();
+        video.play()
+          .catch(() => {});
       } else {
         video.load();
       }
