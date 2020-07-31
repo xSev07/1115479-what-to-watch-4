@@ -36,13 +36,15 @@ it(`Should playing and stopping video`, () => {
       />
   );
 
-  const play = jest.spyOn(window.HTMLMediaElement.prototype, `play`).mockImplementation(() => {});
+  const play = jest.spyOn(window.HTMLMediaElement.prototype, `play`).mockImplementation(() => {
+    return new Promise(() => {});
+  });
   const load = jest.spyOn(window.HTMLMediaElement.prototype, `load`).mockImplementation(() => {});
 
   element.setState({isPlaying: true});
-  element.instance()._handleVideoPause();
+  element.instance().handleVideoPause();
   expect(element.state(`isPlaying`)).toBe(false);
-  element.instance()._handleVideoPlay();
+  element.instance().handleVideoPlay();
   setTimeout(() => expect(element.state(`isPlaying`)).toBe(true), 1000);
   jest.runAllTimers();
 
