@@ -1,20 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
-import {getMovieByID, getSendingCommentError, getSendingCommentStatus} from "../../reducer/data/selectors";
+import {
+  getCommentSendedStatus,
+  getMovieByID,
+  getSendingCommentError,
+  getSendingCommentStatus
+} from "../../reducer/data/selectors";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import {AppRoute} from "../../const";
 import AddReviewForm from "../add-review-form/add-review-form.jsx";
 import {Operation as DataOperation} from "../../reducer/data/data";
-import {ActionCreator} from "../../reducer/app/app";
+import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
+import {ActionCreator as DataActionCreator} from "../../reducer/data/data";
 import {getCanSendComment} from "../../reducer/app/selectors";
 import {checkCommentLength} from "../../utils/validation/validation";
 import {extendObject, replaceId} from "../../utils/common/common";
 
 const AddReview = (props) => {
-  const {movie, isSubmitDisabled, isCommentSending, commentSendingError,
-    handleFormSubmit, handleFormChange} = props;
+  const {movie, isSubmitDisabled, isCommentSending, commentSendingError, isCommentSended,
+    history, historyGoBack, handleFormSubmit, handleFormChange} = props;
+  if (isCommentSended) {
+    // в таком варианте не работает(писал в телеге)
+    historyGoBack(history);
+  }
+
   const {title, poster, background} = movie;
   const movieLink = replaceId(AppRoute.MOVIE, movie.id);
 
@@ -63,6 +74,7 @@ const mapStateToProps = (state, props) => ({
   movie: getMovieByID(state, {movieId: props.movieId}),
   isSubmitDisabled: !getCanSendComment(state),
   isCommentSending: getSendingCommentStatus(state),
+  isCommentSended: getCommentSendedStatus(state),
   commentSendingError: getSendingCommentError(state),
 });
 
@@ -70,9 +82,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   handleFormChange(formData) {
     const {rating, comment} = formData;
     if (rating && checkCommentLength(comment)) {
-      dispatch(ActionCreator.canSendComment(true));
+      dispatch(AppActionCreator.canSendComment(true));
     } else {
-      dispatch(ActionCreator.canSendComment(false));
+      dispatch(AppActionCreator.canSendComment(false));
     }
   },
   addComment(formData) {
@@ -83,6 +95,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     };
     dispatch(DataOperation.sendComment(ownProps.movieId, commentData));
   },
+  historyGoBack(history) {
+    dispatch(DataActionCreator.setCommentSended(false));
+    history.goBack();
+  }
 });
 
 const mergeProps = (stateProps, dispatchProps) => {
@@ -109,10 +125,13 @@ AddReview.propTypes = {
   }).isRequired,
   isSubmitDisabled: PropTypes.bool.isRequired,
   isCommentSending: PropTypes.bool.isRequired,
+  isCommentSended: PropTypes.bool.isRequired,
   commentSendingError: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired,
+  historyGoBack: PropTypes.func.isRequired,
   handleFormSubmit: PropTypes.func.isRequired,
   handleFormChange: PropTypes.func.isRequired,
 };
 
 export {AddReview};
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(AddReview);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(withRouter(AddReview));

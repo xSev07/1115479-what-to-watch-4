@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import withFullscreenVideoPlayer from "../../hocs/with-fullscreen-video-player/with-fullscreen-video-player.jsx";
+import {withRouter} from "react-router-dom";
 
 const VideoPlayer = (props) => {
   const {
@@ -57,4 +58,4 @@ VideoPlayer.propTypes = {
 };
 
 export {VideoPlayer};
-export default withFullscreenVideoPlayer(VideoPlayer);
+export default withRouter(withFullscreenVideoPlayer(VideoPlayer));
