@@ -11,10 +11,7 @@ import {Link, withRouter} from "react-router-dom";
 import {AppRoute} from "../../const";
 import AddReviewForm from "../add-review-form/add-review-form.jsx";
 import {Operation as DataOperation} from "../../reducer/data/data";
-import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
-import {getCanSendComment} from "../../reducer/app/selectors";
-import {checkCommentLength} from "../../utils/validation/validation";
-import {extendObject, replaceId} from "../../utils/common/common";
+import {replaceId} from "../../utils/common/common";
 
 class AddReview extends PureComponent {
   constructor(props) {
@@ -30,8 +27,8 @@ class AddReview extends PureComponent {
   }
 
   render() {
-    const {movie, isSubmitDisabled, isCommentSending, commentSendingError,
-      handleFormSubmit, handleFormChange} = this.props;
+    const {movie, isCommentSending, commentSendingError,
+      handleFormSubmit} = this.props;
 
     const {title, poster, background} = movie;
     const movieLink = replaceId(AppRoute.MOVIE, movie.id);
@@ -65,11 +62,9 @@ class AddReview extends PureComponent {
 
         <div className="add-review">
           <AddReviewForm
-            isSubmitDisabled={isSubmitDisabled}
             isCommentSending={isCommentSending}
             commentSendingError={commentSendingError}
             onSubmit={handleFormSubmit}
-            onChange={handleFormChange}
           />
         </div>
       </section>
@@ -79,21 +74,12 @@ class AddReview extends PureComponent {
 
 const mapStateToProps = (state, props) => ({
   movie: getMovieByID(state, {movieId: props.movieId}),
-  isSubmitDisabled: !getCanSendComment(state),
   isCommentSending: getSendingCommentStatus(state),
   commentSendingError: getSendingCommentError(state),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  handleFormChange(formData) {
-    const {rating, comment} = formData;
-    if (rating && checkCommentLength(comment)) {
-      dispatch(AppActionCreator.canSendComment(true));
-    } else {
-      dispatch(AppActionCreator.canSendComment(false));
-    }
-  },
-  addComment(formData) {
+  handleFormSubmit(formData) {
     const {rating, comment} = formData;
     const commentData = {
       rating: parseInt(rating, 10),
@@ -103,21 +89,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-const mergeProps = (stateProps, dispatchProps) => {
-  return extendObject(
-      stateProps,
-      dispatchProps,
-      {
-        handleFormSubmit(formData) {
-          if (!stateProps.isSubmitDisabled) {
-            dispatchProps.addComment(formData);
-          }
-        }
-      }
-  );
-
-};
-
 AddReview.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.string.isRequired,
@@ -125,13 +96,11 @@ AddReview.propTypes = {
     poster: PropTypes.string.isRequired,
     background: PropTypes.string.isRequired,
   }).isRequired,
-  isSubmitDisabled: PropTypes.bool.isRequired,
   isCommentSending: PropTypes.bool.isRequired,
   commentSendingError: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
   handleFormSubmit: PropTypes.func.isRequired,
-  handleFormChange: PropTypes.func.isRequired,
 };
 
 export {AddReview};
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(withRouter(AddReview));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddReview));

@@ -5,7 +5,6 @@ const initialState = {
   genre: ALL_GENRES_NAME,
   showedMoviesCount: ShowedMovies.ON_START,
   canAddMovieInList: true,
-  canSendComment: false,
 };
 
 const ActionType = {
@@ -13,7 +12,6 @@ const ActionType = {
   INCREMENT_SHOWED_MOVIES_COUNT: `INCREMENT_SHOWED_MOVIES_COUNT`,
   RESET_SHOWED_MOVIES_COUNT: `RESET_SHOWED_MOVIES_COUNT`,
   SET_CAN_ADD_MOVIE_IN_LIST: `SET_CAN_ADD_MOVIE_IN_LIST`,
-  SET_CAN_SEND_COMMENT: `SET_CAN_SEND_COMMENT`,
 };
 
 const ActionCreator = {
@@ -33,10 +31,6 @@ const ActionCreator = {
     type: ActionType.SET_CAN_ADD_MOVIE_IN_LIST,
     payload: status,
   }),
-  canSendComment: (status) => ({
-    type: ActionType.SET_CAN_SEND_COMMENT,
-    payload: status,
-  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,8 +44,6 @@ const reducer = (state = initialState, action) => {
       return extendObject(state, {showedMoviesCount: action.payload});
     case ActionType.SET_CAN_ADD_MOVIE_IN_LIST:
       return extendObject(state, {canAddMovieInList: action.payload});
-    case ActionType.SET_CAN_SEND_COMMENT:
-      return extendObject(state, {canSendComment: action.payload});
   }
 
   return state;

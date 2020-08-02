@@ -1,6 +1,9 @@
 export const MAX_GENRES = 8;
 
-export const MAX_STARS_REVIEW = 5;
+export const StarsReview = {
+  MAX: 5,
+  DEFAULT: 3,
+};
 
 export const ShowedMovies = {
   ON_START: 8,
