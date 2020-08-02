@@ -125,7 +125,7 @@ describe(`Operation in user reducer work correctly`, () => {
 
     return logining(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenCalledTimes(5);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.SET_LOGIN_ERROR_STATUS,
           payload: false,

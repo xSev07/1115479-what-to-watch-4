@@ -1,5 +1,6 @@
 import {BASE_SERVER_URL, ServerURL} from "../../api";
 import {extendObject} from "../../utils/common/common";
+import {Operation as DataOperation} from "../../reducer/data/data";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -70,6 +71,8 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.setLoginErrorStatus(false));
         writeUserInfo(response.data, dispatch);
+        dispatch(DataOperation.loadMovies());
+        dispatch(DataOperation.loadPromo());
       })
       .catch(() => {});
   }
