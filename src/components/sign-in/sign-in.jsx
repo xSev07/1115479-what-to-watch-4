@@ -5,8 +5,6 @@ import LoginForm from "../login-form/login-form.jsx";
 import {connect} from "react-redux";
 import {
   getAuthorizationStatus,
-  getIncorrectEmailStatus,
-  getIncorrectPasswordStatus,
   getLoginErrorStatus
 } from "../../reducer/user/selectors";
 import {AuthorizationStatus, Operation as UserOperation} from "../../reducer/user/user";
@@ -47,8 +45,6 @@ const SignIn = (props) => {
 const mapStateToProps = (state) => ({
   userAuthorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
   authError: getLoginErrorStatus(state),
-  incorrectEmail: getIncorrectEmailStatus(state),
-  incorrectPassword: getIncorrectPasswordStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

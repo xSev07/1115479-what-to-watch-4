@@ -1,6 +1,6 @@
 import React, {createRef, PureComponent} from "react";
 import PropTypes from "prop-types";
-import {isValidEmail, isValidPassword} from "../../utils/common/common";
+import withLoginValidation from "../../hocs/with-login-validation/with-login-validation.jsx";
 
 class LoginForm extends PureComponent {
   constructor(props) {
@@ -9,30 +9,17 @@ class LoginForm extends PureComponent {
     this.emailRef = createRef();
     this.passwordRef = createRef();
 
-    this.state = {
-      incorrectEmail: false,
-      incorrectPassword: false,
-    };
-
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 
   handleSubmit(evt) {
     evt.preventDefault();
+    const {checkValidity} = this.props;
     const email = this.emailRef.current.value;
     const password = this.passwordRef.current.value;
 
-    const emailValid = isValidEmail(email);
-    const passwordValid = isValidPassword(password);
-    const formValid = emailValid && passwordValid;
-
-    this.setState({
-      incorrectEmail: !emailValid,
-      incorrectPassword: !passwordValid,
-    });
-
-    if (formValid) {
+    if (checkValidity({email, password})) {
       const formData = {
         email,
         password,
@@ -42,8 +29,7 @@ class LoginForm extends PureComponent {
   }
 
   render() {
-    const {incorrectEmail, incorrectPassword} = this.state;
-    const {authError} = this.props;
+    const {authError, incorrectEmail, incorrectPassword} = this.props;
     return (
       <form action="#" className="sign-in__form">
         {authError && (
@@ -82,7 +68,11 @@ class LoginForm extends PureComponent {
 
 LoginForm.propTypes = {
   authError: PropTypes.bool.isRequired,
+  incorrectEmail: PropTypes.bool.isRequired,
+  incorrectPassword: PropTypes.bool.isRequired,
+  checkValidity: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 
-export default LoginForm;
+export {LoginForm};
+export default withLoginValidation(LoginForm);
