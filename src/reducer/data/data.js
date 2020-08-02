@@ -14,7 +14,6 @@ const initialState = {
   loadingPromo: true,
   loadingError: false,
   sendingComment: false,
-  commentSended: false,
   loadingFavoriteError: false,
   loadingCommentsError: false,
   sendingCommentError: false,
@@ -28,7 +27,6 @@ const ActionType = {
   UPDATE_MOVIE: `UPDATE_MOVIE`,
   SET_LOADING_FAVORITE_MOVIES_STATUS: `SET_LOADING_FAVORITE_MOVIES_STATUS`,
   SET_SENDING_COMMENT_STATUS: `SET_SENDING_COMMENT_STATUS`,
-  SET_COMMENT_SENDED_STATUS: `SET_COMMENT_SENDED_STATUS`,
   LOADING_ERROR: `LOADING_ERROR`,
   LOADING_FAVORITE_ERROR: `LOADING_FAVORITE_ERROR`,
   LOADING_COMMENTS_ERROR: `LOADING_COMMENTS_ERROR`,
@@ -62,10 +60,6 @@ const ActionCreator = {
   }),
   setSendingComment: (status) => ({
     type: ActionType.SET_SENDING_COMMENT_STATUS,
-    payload: status,
-  }),
-  setCommentSended: (status) => ({
-    type: ActionType.SET_COMMENT_SENDED_STATUS,
     payload: status,
   }),
   loadingError: () => ({
@@ -140,7 +134,6 @@ const Operation = {
       .then((response) => {
         dispatchComments(filmId, response.data, dispatch);
         dispatch(ActionCreator.setSendingComment(false));
-        dispatch(ActionCreator.setCommentSended(true));
         dispatch(ActionCreator.sendingCommentError(false));
       })
       .catch(() => {
@@ -192,8 +185,6 @@ const reducer = (state = initialState, action) => {
       return extendObject(state, {loadingFavoriteMovies: action.payload});
     case ActionType.SET_SENDING_COMMENT_STATUS:
       return extendObject(state, {sendingComment: action.payload});
-    case ActionType.SET_COMMENT_SENDED_STATUS:
-      return extendObject(state, {commentSended: action.payload});
     case ActionType.LOADING_ERROR:
       return extendObject(state, {loadingError: action.payload});
     case ActionType.LOADING_FAVORITE_ERROR:

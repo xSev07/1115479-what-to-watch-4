@@ -1,8 +1,7 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 import {
-  getCommentSendedStatus,
   getMovieByID,
   getSendingCommentError,
   getSendingCommentStatus
@@ -13,68 +12,75 @@ import {AppRoute} from "../../const";
 import AddReviewForm from "../add-review-form/add-review-form.jsx";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
-import {ActionCreator as DataActionCreator} from "../../reducer/data/data";
 import {getCanSendComment} from "../../reducer/app/selectors";
 import {checkCommentLength} from "../../utils/validation/validation";
 import {extendObject, replaceId} from "../../utils/common/common";
 
-const AddReview = (props) => {
-  const {movie, isSubmitDisabled, isCommentSending, commentSendingError, isCommentSended,
-    history, historyGoBack, handleFormSubmit, handleFormChange} = props;
-  if (isCommentSended) {
-    // в таком варианте не работает(писал в телеге)
-    historyGoBack(history);
+class AddReview extends PureComponent {
+  constructor(props) {
+    super(props);
   }
 
-  const {title, poster, background} = movie;
-  const movieLink = replaceId(AppRoute.MOVIE, movie.id);
+  componentDidUpdate(prevProps) {
+    if (prevProps.isCommentSending === true
+      && this.props.isCommentSending === false
+      && !this.props.commentSendingError) {
+      this.props.history.goBack();
+    }
+  }
 
-  return (
-    <section className="movie-card movie-card--full">
-      <div className="movie-card__header">
-        <div className="movie-card__bg">
-          <img src={background} alt={title}/>
+  render() {
+    const {movie, isSubmitDisabled, isCommentSending, commentSendingError,
+      handleFormSubmit, handleFormChange} = this.props;
+
+    const {title, poster, background} = movie;
+    const movieLink = replaceId(AppRoute.MOVIE, movie.id);
+
+    return (
+      <section className="movie-card movie-card--full">
+        <div className="movie-card__header">
+          <div className="movie-card__bg">
+            <img src={background} alt={title}/>
+          </div>
+
+          <h1 className="visually-hidden">WTW</h1>
+
+          <Header>
+            <nav className="breadcrumbs">
+              <ul className="breadcrumbs__list">
+                <li className="breadcrumbs__item">
+                  <Link to={movieLink} className="breadcrumbs__link">{title}</Link>
+                </li>
+                <li className="breadcrumbs__item">
+                  <a className="breadcrumbs__link">Add review</a>
+                </li>
+              </ul>
+            </nav>
+          </Header>
+
+          <div className="movie-card__poster movie-card__poster--small">
+            <img src={poster} alt={`${title} poster`} width="218" height="327"/>
+          </div>
         </div>
 
-        <h1 className="visually-hidden">WTW</h1>
-
-        <Header>
-          <nav className="breadcrumbs">
-            <ul className="breadcrumbs__list">
-              <li className="breadcrumbs__item">
-                <Link to={movieLink} className="breadcrumbs__link">{title}</Link>
-              </li>
-              <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
-              </li>
-            </ul>
-          </nav>
-        </Header>
-
-        <div className="movie-card__poster movie-card__poster--small">
-          <img src={poster} alt={`${title} poster`} width="218"
-            height="327"/>
+        <div className="add-review">
+          <AddReviewForm
+            isSubmitDisabled={isSubmitDisabled}
+            isCommentSending={isCommentSending}
+            commentSendingError={commentSendingError}
+            onSubmit={handleFormSubmit}
+            onChange={handleFormChange}
+          />
         </div>
-      </div>
-
-      <div className="add-review">
-        <AddReviewForm
-          isSubmitDisabled={isSubmitDisabled}
-          isCommentSending={isCommentSending}
-          commentSendingError={commentSendingError}
-          onSubmit={handleFormSubmit}
-          onChange={handleFormChange}
-        />
-      </div>
-    </section>
-  );
-};
+      </section>
+    );
+  }
+}
 
 const mapStateToProps = (state, props) => ({
   movie: getMovieByID(state, {movieId: props.movieId}),
   isSubmitDisabled: !getCanSendComment(state),
   isCommentSending: getSendingCommentStatus(state),
-  isCommentSended: getCommentSendedStatus(state),
   commentSendingError: getSendingCommentError(state),
 });
 
@@ -95,10 +101,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     };
     dispatch(DataOperation.sendComment(ownProps.movieId, commentData));
   },
-  historyGoBack(history) {
-    dispatch(DataActionCreator.setCommentSended(false));
-    history.goBack();
-  }
 });
 
 const mergeProps = (stateProps, dispatchProps) => {
@@ -125,10 +127,8 @@ AddReview.propTypes = {
   }).isRequired,
   isSubmitDisabled: PropTypes.bool.isRequired,
   isCommentSending: PropTypes.bool.isRequired,
-  isCommentSended: PropTypes.bool.isRequired,
   commentSendingError: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
-  historyGoBack: PropTypes.func.isRequired,
   handleFormSubmit: PropTypes.func.isRequired,
   handleFormChange: PropTypes.func.isRequired,
 };

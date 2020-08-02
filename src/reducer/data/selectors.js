@@ -65,10 +65,6 @@ export const getSendingCommentStatus = (state) => {
   return state[NAME_SPACE].sendingComment;
 };
 
-export const getCommentSendedStatus = (state) => {
-  return state[NAME_SPACE].commentSended;
-};
-
 export const getSendingCommentError = (state) => {
   return state[NAME_SPACE].sendingCommentError;
 };

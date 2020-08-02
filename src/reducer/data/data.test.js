@@ -17,7 +17,6 @@ describe(`Check data reducer work correctly`, () => {
       loadingFavoriteMovies: false,
       loadingPromo: true,
       sendingComment: false,
-      commentSended: false,
       loadingError: false,
       loadingFavoriteError: false,
       loadingCommentsError: false,
