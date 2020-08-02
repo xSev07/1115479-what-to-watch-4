@@ -1,7 +1,7 @@
-import React, {createRef, PureComponent} from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {StarsReview} from "../../const";
-import {checkCommentLength} from "../../utils/validation/validation";
+import withCommentValidation from "../../hocs/with-comment-validation/with-comment-validation.jsx";
 
 const starsArray = [...Array(StarsReview.MAX).keys()].map((it) => it + 1);
 
@@ -9,51 +9,30 @@ class AddReviewForm extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.commentRef = createRef();
-
-    this.state = {
-      rating: StarsReview.DEFAULT,
-      formValid: false,
-    };
-
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleFormChange = this.handleFormChange.bind(this);
-    this.handleRatingChange = this.handleRatingChange.bind(this);
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
-    if (this.state.formValid) {
+    const {rating, comment, formValid, onSubmit} = this.props;
+    if (formValid) {
       const formData = {
-        rating: this.state.rating,
-        comment: this.commentRef.current.value,
+        rating,
+        comment,
       };
-      this.props.onSubmit(formData);
+      onSubmit(formData);
     }
   }
 
-  handleFormChange() {
-    this.setState((state) => {
-      return {
-        formValid: state.rating && checkCommentLength(this.commentRef.current.value),
-      };
-    });
-  }
-
-  handleRatingChange(evt) {
-    this.setState({rating: parseInt(evt.target.value, 10)});
-  }
-
   render() {
-    const {formValid} = this.state;
-    const {isCommentSending, commentSendingError} = this.props;
+    const {rating, comment, formValid, isCommentSending, commentSendingError,
+      onRatingChange, onCommentChange} = this.props;
 
     return (
       <form
         action="#"
         className="add-review__form"
         disabled={isCommentSending}
-        onChange={this.handleFormChange}
         style={{opacity: isCommentSending ? 0.5 : 1}}
       >
         {commentSendingError && (
@@ -67,8 +46,8 @@ class AddReviewForm extends PureComponent {
               starsArray.map((it) =>
                 <React.Fragment key={it}>
                   <input className="rating__input" id={`star-${it}`} type="radio" name="rating"
-                    value={it} checked={it === StarsReview.DEFAULT}
-                    onChange={this.handleRatingChange}
+                    value={it} checked={it === rating}
+                    onChange={onRatingChange}
                   />
                   <label className="rating__label" htmlFor={`star-${it}`}>Rating {it}</label>
                 </React.Fragment>
@@ -78,8 +57,8 @@ class AddReviewForm extends PureComponent {
         </div>
 
         <div className="add-review__text">
-          <textarea ref={this.commentRef} className="add-review__textarea" name="text"
-            id="review-text" placeholder="Review text"/>
+          <textarea value={comment} className="add-review__textarea" name="text"
+            id="review-text" placeholder="Review text" onChange={onCommentChange}/>
           <div className="add-review__submit">
             <button
               className="add-review__btn"
@@ -99,9 +78,15 @@ class AddReviewForm extends PureComponent {
 }
 
 AddReviewForm.propTypes = {
+  rating: PropTypes.number.isRequired,
+  comment: PropTypes.string.isRequired,
+  formValid: PropTypes.bool.isRequired,
   isCommentSending: PropTypes.bool.isRequired,
   commentSendingError: PropTypes.bool.isRequired,
+  onRatingChange: PropTypes.func.isRequired,
+  onCommentChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 
-export default AddReviewForm;
+export {AddReviewForm};
+export default withCommentValidation(AddReviewForm);
