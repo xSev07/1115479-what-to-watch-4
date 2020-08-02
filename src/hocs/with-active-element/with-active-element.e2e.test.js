@@ -21,6 +21,6 @@ it(`Should set active element`, () => {
   );
 
   expect(element.state(`activeElement`)).toBe(`elem1`);
-  element.instance()._tabClickHandler(`elem2`);
+  element.instance().tabClickHandler(`elem2`);
   expect(element.state(`activeElement`)).toBe(`elem2`);
 });

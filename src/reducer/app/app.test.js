@@ -31,7 +31,6 @@ describe(`Check app reducer work correctly`, () => {
       genre: ALL_GENRES_NAME,
       showedMoviesCount: 8,
       canAddMovieInList: true,
-      canSendComment: false,
     });
   });
 
