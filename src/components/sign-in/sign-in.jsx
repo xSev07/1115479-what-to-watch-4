@@ -9,14 +9,13 @@ import {
   getIncorrectPasswordStatus,
   getLoginErrorStatus
 } from "../../reducer/user/selectors";
-import {ActionCreator, AuthorizationStatus, Operation as UserOperation} from "../../reducer/user/user";
+import {AuthorizationStatus, Operation as UserOperation} from "../../reducer/user/user";
 import Header from "../header/header.jsx";
-import {isValidEmail, isValidPassword} from "../../utils/common/common";
 import {Redirect} from "react-router-dom";
 import {AppRoute} from "../../const";
 
 const SignIn = (props) => {
-  const {userAuthorized, authError, incorrectEmail, incorrectPassword, handleFormSubmit} = props;
+  const {userAuthorized, authError, handleFormSubmit} = props;
 
   if (userAuthorized) {
     return (
@@ -36,8 +35,6 @@ const SignIn = (props) => {
       <div className="sign-in user-page__content">
         <LoginForm
           authError={authError}
-          incorrectEmail={incorrectEmail}
-          incorrectPassword={incorrectPassword}
           onSubmit={handleFormSubmit}
         />
       </div>
@@ -56,19 +53,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   handleFormSubmit(formData) {
-    const {userLogin, userPassword} = formData;
-
-    const emailValid = isValidEmail(userLogin);
-    const passwordValid = isValidPassword(userPassword);
-
-    if (emailValid && passwordValid) {
-      dispatch(UserOperation.login({
-        login: userLogin,
-        password: userPassword,
-      }));
-    }
-    dispatch(ActionCreator.setIncorrectEmail(!emailValid));
-    dispatch(ActionCreator.setIncorrectPassword(!passwordValid));
+    dispatch(UserOperation.login(formData));
   }
 });
 

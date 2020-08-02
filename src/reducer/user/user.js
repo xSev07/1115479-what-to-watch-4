@@ -12,16 +12,12 @@ const initialState = {
   authorizationStatus: AuthorizationStatus.WAIT_SERVER_RESPONSE,
   avatar: ``,
   loginError: false,
-  incorrectEmail: false,
-  incorrectPassword: false,
 };
 
 const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   ADD_AVATAR: `ADD_AVATAR`,
   SET_LOGIN_ERROR_STATUS: `SET_LOGIN_ERROR_STATUS`,
-  SET_INCORRECT_EMAIL: `SET_INCORRECT_EMAIL`,
-  SET_INCORRECT_PASSWORD: `SET_INCORRECT_PASSWORD`,
 };
 
 const ActionCreator = {
@@ -35,14 +31,6 @@ const ActionCreator = {
   }),
   setLoginErrorStatus: (status) => ({
     type: ActionType.SET_LOGIN_ERROR_STATUS,
-    payload: status,
-  }),
-  setIncorrectEmail: (status) => ({
-    type: ActionType.SET_INCORRECT_EMAIL,
-    payload: status,
-  }),
-  setIncorrectPassword: (status) => ({
-    type: ActionType.SET_INCORRECT_PASSWORD,
     payload: status,
   }),
 };
@@ -64,10 +52,7 @@ const Operation = {
       });
   },
   login: (authData) => (dispatch, getState, api) => {
-    return api.post(ServerURL.LOGIN, {
-      email: authData.login,
-      password: authData.password,
-    })
+    return api.post(ServerURL.LOGIN, authData)
       .then((response) => {
         dispatch(ActionCreator.setLoginErrorStatus(false));
         writeUserInfo(response.data, dispatch);
@@ -86,10 +71,6 @@ const reducer = (state = initialState, action) => {
       return extendObject(state, {avatar: action.payload});
     case ActionType.SET_LOGIN_ERROR_STATUS:
       return extendObject(state, {loginError: action.payload});
-    case ActionType.SET_INCORRECT_EMAIL:
-      return extendObject(state, {incorrectEmail: action.payload});
-    case ActionType.SET_INCORRECT_PASSWORD:
-      return extendObject(state, {incorrectPassword: action.payload});
   }
 
   return state;
