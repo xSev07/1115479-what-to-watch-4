@@ -13,7 +13,7 @@ const Component = () => {
 
 const WrappedComponent = withActiveElement(Component);
 
-it(`Should set active element`, () => {
+it(`Should set withActiveElements active element`, () => {
   const element = shallow(
       <WrappedComponent
         activeTabDefault={`elem1`}

@@ -17,14 +17,10 @@ it(`Should AddReview render correctly`, () => {
           <StaticRouter>
             <AddReview
               movie={movies[0]}
-              isSubmitDisabled={false}
               isCommentSending={false}
-              isCommentSended={false}
               commentSendingError={false}
               history={{}}
-              historyGoBack={() => {}}
               handleFormSubmit={() => {}}
-              handleFormChange={() => {}}
             />
           </StaticRouter>
         </Provider>, {

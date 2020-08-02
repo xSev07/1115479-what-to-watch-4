@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {isValidEmail, isValidPassword} from "../../utils/common/common";
+import {isValidEmail, isValidPassword} from "../../utils/validation/validation";
 
 const withLoginValidation = (Component) => {
   class LoginValidationHoc extends PureComponent {

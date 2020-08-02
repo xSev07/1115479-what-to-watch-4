@@ -56,8 +56,6 @@ const mapDispatchToProps = (dispatch) => ({
 SignIn.propTypes = {
   userAuthorized: PropTypes.bool.isRequired,
   authError: PropTypes.bool.isRequired,
-  incorrectEmail: PropTypes.bool.isRequired,
-  incorrectPassword: PropTypes.bool.isRequired,
   handleFormSubmit: PropTypes.func.isRequired,
 };
 
