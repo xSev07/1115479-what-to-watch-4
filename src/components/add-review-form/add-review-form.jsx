@@ -2,19 +2,7 @@ import React, {createRef, PureComponent} from "react";
 import PropTypes from "prop-types";
 import {MAX_STARS_REVIEW} from "../../const";
 
-const createStarsTemplate = (count) => {
-  let res = [];
-
-  for (let i = 1; i <= count; i++) {
-    res.push(
-        <React.Fragment key={i}>
-          <input className="rating__input" id={`star-${i}`} type="radio" name="rating" value={i}/>
-          <label className="rating__label" htmlFor={`star-${i}`}>Rating {i}</label>
-        </React.Fragment>
-    );
-  }
-  return res;
-};
+const starsArray = [...Array(MAX_STARS_REVIEW).keys()].map((it) => it + 1);
 
 class AddReviewForm extends PureComponent {
   constructor(props) {
@@ -64,7 +52,12 @@ class AddReviewForm extends PureComponent {
         <div className="rating">
           <div className="rating__stars">
             {
-              createStarsTemplate(MAX_STARS_REVIEW)
+              starsArray.map((it) =>
+                <React.Fragment key={it}>
+                  <input className="rating__input" id={`star-${it}`} type="radio" name="rating" value={it}/>
+                  <label className="rating__label" htmlFor={`star-${it}`}>Rating {it}</label>
+                </React.Fragment>
+              )
             }
           </div>
         </div>
