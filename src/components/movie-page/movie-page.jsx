@@ -1,4 +1,4 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
@@ -11,14 +11,26 @@ import MovieList from "../movie-list/movie-list.jsx";
 import {getAddMovieInListStatus, getFilteredMovies} from "../../reducer/app/selectors";
 import MovieHeader from "../movie-header/movie-header.jsx";
 
-class MoviePage extends React.PureComponent {
+class MoviePage extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._handlerButtonListClick = this._handlerButtonListClick.bind(this);
+    this.handlerButtonListClick = this.handlerButtonListClick.bind(this);
   }
 
-  _handlerButtonListClick() {
+  componentDidMount() {
+    if (!this.props.comments) {
+      this.props.loadComments(this.props.movie.id);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.movie.id !== this.props.movie.id) {
+      this.props.loadComments(this.props.movie.id);
+    }
+  }
+
+  handlerButtonListClick() {
     this.props.changeFavoriteStatus(this.props.movie);
   }
 
@@ -42,7 +54,7 @@ class MoviePage extends React.PureComponent {
               movie={movie}
               needAddReviewButton={true}
               disableAddInList={!canAddMovieInList}
-              onInListButtonClick={this._handlerButtonListClick}
+              onInListButtonClick={this.handlerButtonListClick}
             />
           </div>
         </div>
@@ -77,18 +89,6 @@ class MoviePage extends React.PureComponent {
       </div>
     </>
     );
-  }
-
-  componentDidMount() {
-    if (!this.props.comments) {
-      this.props.loadComments(this.props.movie.id);
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.movie.id !== this.props.movie.id) {
-      this.props.loadComments(this.props.movie.id);
-    }
   }
 }
 

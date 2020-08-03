@@ -18,6 +18,10 @@ class MyList extends PureComponent {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.loadFavoriteMovies();
+  }
+
   render() {
     const {movies, loadingError, isLoading} = this.props;
     return (
@@ -42,10 +46,6 @@ class MyList extends PureComponent {
         <Footer/>
       </div>
     );
-  }
-
-  componentDidMount() {
-    this.props.loadFavoriteMovies();
   }
 }
 

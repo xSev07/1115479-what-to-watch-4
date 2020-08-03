@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import withFullscreenVideoPlayer from "../../hocs/with-fullscreen-video-player/with-fullscreen-video-player.jsx";
 import {withRouter} from "react-router-dom";
+import {compose} from "redux";
 
 const VideoPlayer = (props) => {
   const {
@@ -57,5 +58,10 @@ VideoPlayer.propTypes = {
   onExitButtonClick: PropTypes.func.isRequired,
 };
 
+const composedComponent = compose(
+    withRouter,
+    withFullscreenVideoPlayer
+)(VideoPlayer);
+
 export {VideoPlayer};
-export default withRouter(withFullscreenVideoPlayer(VideoPlayer));
+export default composedComponent;

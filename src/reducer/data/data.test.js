@@ -5,7 +5,7 @@ import {ActionCreator} from "./data";
 import MockAdapter from "axios-mock-adapter";
 
 const api = createAPI(() => {});
-// TODO: Написать тесты на получение комментариев
+
 describe(`Check data reducer work correctly`, () => {
   it(`reducer without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual({

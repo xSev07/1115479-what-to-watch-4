@@ -38,3 +38,12 @@ export const AppRoute = {
   VIDEO_PLAYER: `/video/${ROUTE_ID}`,
   ADD_REVIEW: `/review/${ROUTE_ID}`,
 };
+
+export const CommentLength = {
+  MIN: 50,
+  MAX: 400,
+};
+
+export const PASSWORD_MIN_LENGTH = 2;
+
+export const EMAIL_REG_EXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

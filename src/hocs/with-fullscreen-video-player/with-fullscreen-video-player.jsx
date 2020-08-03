@@ -55,7 +55,7 @@ const withFullscreenVideoPlayer = (Component) => {
     }
 
     handleFullScreenButtonClick() {
-      this._videoRef.current.requestFullscreen();
+      this.videoRef.current.requestFullscreen();
     }
 
     handleExitButtonClick() {
@@ -109,8 +109,7 @@ const withFullscreenVideoPlayer = (Component) => {
       video: PropTypes.string.isRequired,
       preview: PropTypes.string.isRequired,
     }).isRequired,
-    history: PropTypes.object.isRequired,
-    goBack: PropTypes.func.isRequired,
+    history: PropTypes.object,
   };
 
   return FullscreenVideoPlayerHoc;

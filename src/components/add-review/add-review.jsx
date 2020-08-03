@@ -12,6 +12,7 @@ import {AppRoute} from "../../const";
 import AddReviewForm from "../add-review-form/add-review-form.jsx";
 import {Operation as DataOperation} from "../../reducer/data/data";
 import {replaceId} from "../../utils/common/common";
+import {compose} from "redux";
 
 class AddReview extends PureComponent {
   constructor(props) {
@@ -102,5 +103,10 @@ AddReview.propTypes = {
   handleFormSubmit: PropTypes.func.isRequired,
 };
 
+const composedComponent = compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter
+)(AddReview);
+
 export {AddReview};
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddReview));
+export default composedComponent;
