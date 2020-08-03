@@ -90,7 +90,7 @@ describe(`Check app reducer work correctly`, () => {
     expect(reducer({
       canAddMovieInList: true,
     }, {
-      type: ActionType.CHANGE_ADD_MOVIE_IN_LIST_STATUS,
+      type: ActionType.SET_CAN_ADD_MOVIE_IN_LIST,
       payload: false,
     })).toEqual({
       canAddMovieInList: false
@@ -128,7 +128,7 @@ describe(`Check app reducer work correctly`, () => {
 
     it(`Action creator for chande add movie in list status returns correct action`, () => {
       expect(ActionCreator.changeAddMovieInListStatus(true)).toEqual({
-        type: ActionType.CHANGE_ADD_MOVIE_IN_LIST_STATUS,
+        type: ActionType.SET_CAN_ADD_MOVIE_IN_LIST,
         payload: true,
       });
     });

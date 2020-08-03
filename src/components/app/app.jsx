@@ -8,6 +8,7 @@ import PrivateRoute from "../private-route/private-route.jsx";
 import MyList from "../my-list/my-list.jsx";
 import CheckLoadRoute from "../check-load-route/check-load-route.jsx";
 import VideoPlayer from "../video-player/video-player.jsx";
+import AddReview from "../add-review/add-review.jsx";
 
 const App = () => {
   return (
@@ -24,6 +25,14 @@ const App = () => {
           path={AppRoute.IN_LIST}
           render={() => {
             return <MyList/>;
+          }}
+        />
+        <PrivateRoute
+          exact
+          path={AppRoute.ADD_REVIEW}
+          render={(renderProps) => {
+            const movieId = renderProps.computedMatch.params.id;
+            return <AddReview movieId={movieId}/>;
           }}
         />
         <CheckLoadRoute

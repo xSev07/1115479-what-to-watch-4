@@ -10,20 +10,20 @@ const withActiveElement = (Component) => {
         activeElement: props.activeTabDefault,
       };
 
-      this._tabClickHandler = this._tabClickHandler.bind(this);
+      this.tabClickHandler = this.tabClickHandler.bind(this);
     }
 
     render() {
       return (
         <Component
           activeElement={this.state.activeElement}
-          onElementClick={this._tabClickHandler}
+          onElementClick={this.tabClickHandler}
           {...this.props}
         />
       );
     }
 
-    _tabClickHandler(tab) {
+    tabClickHandler(tab) {
       this.setState({activeElement: tab});
     }
   }

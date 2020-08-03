@@ -11,7 +11,7 @@ const ActionType = {
   SET_FILTER_GENRE: `CHANGE_FILTER_GENRE`,
   INCREMENT_SHOWED_MOVIES_COUNT: `INCREMENT_SHOWED_MOVIES_COUNT`,
   RESET_SHOWED_MOVIES_COUNT: `RESET_SHOWED_MOVIES_COUNT`,
-  CHANGE_ADD_MOVIE_IN_LIST_STATUS: `CHANGE_ADD_MOVIE_IN_LIST_STATUS`,
+  SET_CAN_ADD_MOVIE_IN_LIST: `SET_CAN_ADD_MOVIE_IN_LIST`,
 };
 
 const ActionCreator = {
@@ -28,7 +28,7 @@ const ActionCreator = {
     payload: ShowedMovies.ON_START,
   }),
   changeAddMovieInListStatus: (status) => ({
-    type: ActionType.CHANGE_ADD_MOVIE_IN_LIST_STATUS,
+    type: ActionType.SET_CAN_ADD_MOVIE_IN_LIST,
     payload: status,
   }),
 };
@@ -42,7 +42,7 @@ const reducer = (state = initialState, action) => {
       return extendObject(state, {showedMoviesCount: newCount});
     case ActionType.RESET_SHOWED_MOVIES_COUNT:
       return extendObject(state, {showedMoviesCount: action.payload});
-    case ActionType.CHANGE_ADD_MOVIE_IN_LIST_STATUS:
+    case ActionType.SET_CAN_ADD_MOVIE_IN_LIST:
       return extendObject(state, {canAddMovieInList: action.payload});
   }
 

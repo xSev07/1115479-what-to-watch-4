@@ -1,15 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {transformToFirstCapitalSymbol} from "../../utils/common/common";
+import {replaceId, transformToFirstCapitalSymbol} from "../../utils/common/common";
 import PrivateLink from "../private-link/private-link.jsx";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
 
 const MovieHeader = (props) => {
   const {movie, needAddReviewButton, disableAddInList, onInListButtonClick} = props;
-  const {title, genre, year, inList} = movie;
+  const {id, title, genre, year, inList} = movie;
   const mainGenre = transformToFirstCapitalSymbol(genre);
-  const videoURL = AppRoute.VIDEO_PLAYER.replace(`:id`, movie.id);
+  const videoURL = replaceId(AppRoute.VIDEO_PLAYER, id);
+  const reviewURL = replaceId(AppRoute.ADD_REVIEW, id);
 
   return (
     <div className="movie-card__desc">
@@ -40,7 +41,7 @@ const MovieHeader = (props) => {
           </svg>
           <span>My list</span>
         </PrivateLink>
-        {needAddReviewButton && <a href="add-review.html" className="btn movie-card__button">Add review</a>}
+        {needAddReviewButton && <Link to={reviewURL} className="btn movie-card__button">Add review</Link>}
       </div>
     </div>
   );

@@ -35,10 +35,10 @@ describe(`SignIn component`, () => {
         }
     );
 
-    const emailInput = signIn.find(`input#user-email.sign-in__input`);
+    const emailInput = signIn.find(`#user-email`);
     emailInput.instance().value = `example@gmail.com`;
 
-    const passwordInput = signIn.find(`input#user-password.sign-in__input`);
+    const passwordInput = signIn.find(`#user-password`);
     passwordInput.instance().value = `qwerty`;
 
     const submitButton = signIn.find(`button.sign-in__btn`);
@@ -47,8 +47,8 @@ describe(`SignIn component`, () => {
     expect(onFormSubmit).toHaveBeenCalledTimes(1);
     expect(onFormSubmit).toHaveBeenNthCalledWith(1,
         {
-          loginValue: `example@gmail.com`,
-          passwordValue: `qwerty`,
+          email: `example@gmail.com`,
+          password: `qwerty`,
         });
   });
 });

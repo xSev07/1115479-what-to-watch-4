@@ -20,6 +20,6 @@ it(`Should switch active element in MovieDescription`, () => {
   );
 
   expect(element.state(`activeElement`)).toBe(`Reviews`);
-  element.instance()._tabClickHandler(`Overview`);
+  element.instance().tabClickHandler(`Overview`);
   expect(element.state(`activeElement`)).toBe(`Overview`);
 });

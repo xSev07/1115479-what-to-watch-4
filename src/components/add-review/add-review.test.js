@@ -1,28 +1,32 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {SignIn} from "./sign-in";
+import {AddReview} from "./add-review";
+import {movies, storeData} from "../../tests-data/tests-data";
 import configureStore from "redux-mock-store";
-import {storeData} from "../../tests-data/tests-data";
 import {Provider} from "react-redux";
 import {StaticRouter} from "react-router-dom";
 
 const mockStore = configureStore([]);
 
-const store = mockStore(storeData);
+it(`Should AddReview render correctly`, () => {
+  const store = mockStore(storeData);
 
-it(`Should SignIn render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
           <StaticRouter>
-            <SignIn
-              userAuthorized={false}
-              authError={false}
+            <AddReview
+              movie={movies[0]}
+              isCommentSending={false}
+              commentSendingError={false}
+              history={{}}
               handleFormSubmit={() => {}}
             />
           </StaticRouter>
         </Provider>, {
-          createNodeMock: () => {}
+          createNodeMock: () => {
+            return {};
+          }
         }
     ).toJSON();
 
