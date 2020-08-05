@@ -31,10 +31,6 @@ const PrivateLink = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  userAuthorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
-});
-
 PrivateLink.propTypes = {
   userAuthorized: PropTypes.bool.isRequired,
   className: PropTypes.string.isRequired,
@@ -43,6 +39,10 @@ PrivateLink.propTypes = {
     PropTypes.element,
   ]),
 };
+
+const mapStateToProps = (state) => ({
+  userAuthorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
+});
 
 export {PrivateLink};
 export default connect(mapStateToProps)(PrivateLink);

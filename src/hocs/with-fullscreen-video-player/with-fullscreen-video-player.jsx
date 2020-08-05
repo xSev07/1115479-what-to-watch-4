@@ -24,44 +24,6 @@ const withFullscreenVideoPlayer = (Component) => {
       this.handleExitButtonClick = this.handleExitButtonClick.bind(this);
     }
 
-    render() {
-      const {isPlaying, currentTime, duration} = this.state;
-      const togglerPosition = (currentTime / duration * 100) || 0;
-      const elapsedTime = transformDuration(duration - currentTime);
-
-      return (
-        <Component
-          isPlaying={isPlaying}
-          togglerPosition={togglerPosition}
-          elapsedTime={elapsedTime}
-          onPlayButtonClick={this.handlePlayButtonClick}
-          onFullscreenButtonClick={this.handleFullScreenButtonClick}
-          onExitButtonClick={this.handleExitButtonClick}
-        >
-          <video
-            ref={this.videoRef}
-            className="player__video"
-            preload="metadata"
-            onClick={this.handlePlayButtonClick}
-          />
-        </Component>
-      );
-    }
-
-    handlePlayButtonClick() {
-      this.setState((state) => {
-        return {isPlaying: !state.isPlaying};
-      });
-    }
-
-    handleFullScreenButtonClick() {
-      this.videoRef.current.requestFullscreen();
-    }
-
-    handleExitButtonClick() {
-      this.props.history.goBack();
-    }
-
     componentDidMount() {
       this._isMounted = true;
       const {movie} = this.props;
@@ -88,11 +50,6 @@ const withFullscreenVideoPlayer = (Component) => {
       };
     }
 
-    componentWillUnmount() {
-      this._isMounted = false;
-      this.videoRef = null;
-    }
-
     componentDidUpdate() {
       const video = this.videoRef.current;
       if (this.state.isPlaying) {
@@ -100,6 +57,49 @@ const withFullscreenVideoPlayer = (Component) => {
       } else {
         video.pause();
       }
+    }
+
+    componentWillUnmount() {
+      this._isMounted = false;
+      this.videoRef = null;
+    }
+
+    handlePlayButtonClick() {
+      this.setState((state) => {
+        return {isPlaying: !state.isPlaying};
+      });
+    }
+
+    handleFullScreenButtonClick() {
+      this.videoRef.current.requestFullscreen();
+    }
+
+    handleExitButtonClick() {
+      this.props.history.goBack();
+    }
+
+    render() {
+      const {isPlaying, currentTime, duration} = this.state;
+      const togglerPosition = (currentTime / duration * 100) || 0;
+      const elapsedTime = transformDuration(duration - currentTime);
+
+      return (
+        <Component
+          isPlaying={isPlaying}
+          togglerPosition={togglerPosition}
+          elapsedTime={elapsedTime}
+          onPlayButtonClick={this.handlePlayButtonClick}
+          onFullscreenButtonClick={this.handleFullScreenButtonClick}
+          onExitButtonClick={this.handleExitButtonClick}
+        >
+          <video
+            ref={this.videoRef}
+            className="player__video"
+            preload="metadata"
+            onClick={this.handlePlayButtonClick}
+          />
+        </Component>
+      );
     }
   }
 

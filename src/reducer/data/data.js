@@ -3,6 +3,7 @@ import {parseComments} from "../../adapters/comments";
 import {ServerURL} from "../../api";
 import {ActionCreator as AppActionCreator} from "../app/app";
 import {extendObject} from "../../utils/common/common";
+import {getAllMovies} from "./selectors";
 
 const initialState = {
   movies: [],
@@ -24,7 +25,7 @@ const ActionType = {
   LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`,
   LOAD_PROMO: `LOAD_PROMO`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
-  UPDATE_MOVIE: `UPDATE_MOVIE`,
+  UPDATE_MOVIES: `UPDATE_MOVIES`,
   SET_LOADING_FAVORITE_MOVIES_STATUS: `SET_LOADING_FAVORITE_MOVIES_STATUS`,
   SET_SENDING_COMMENT_STATUS: `SET_SENDING_COMMENT_STATUS`,
   LOADING_ERROR: `LOADING_ERROR`,
@@ -50,9 +51,9 @@ const ActionCreator = {
     type: ActionType.LOAD_COMMENTS,
     payload: comments,
   }),
-  updateMovie: (movie) => ({
-    type: ActionType.UPDATE_MOVIE,
-    payload: movie,
+  updateMovies: (movies) => ({
+    type: ActionType.UPDATE_MOVIES,
+    payload: movies,
   }),
   setLoadingFavoriteStatus: (status) => ({
     type: ActionType.SET_LOADING_FAVORITE_MOVIES_STATUS,
@@ -145,7 +146,12 @@ const Operation = {
     const {id, inList} = movie;
     return api.post(`${ServerURL.FAVORITE}${parseInt(id, 10)}/${inList ? 0 : 1}`)
       .then((response) => {
-        dispatch(ActionCreator.updateMovie(parseMovie(response.data)));
+        const newMovie = parseMovie(response.data);
+        const currentMovies = getAllMovies(getState());
+        const oldMovieIndex = currentMovies.findIndex((it) => it.id === newMovie.id);
+        const updatedMovies = [...currentMovies.slice(0, oldMovieIndex), newMovie, ...currentMovies.slice(oldMovieIndex + 1)];
+
+        dispatch(ActionCreator.updateMovies(updatedMovies));
         dispatch(AppActionCreator.changeAddMovieInListStatus(true));
         if (movie.isPromo) {
           dispatch(Operation.loadPromo());
@@ -176,11 +182,8 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_COMMENTS:
       const comments = extendObject(state.comments, action.payload);
       return extendObject(state, {comments});
-    case ActionType.UPDATE_MOVIE:
-      const newMovie = action.payload;
-      const oldMovieIndex = state.movies.findIndex((it) => it.id === newMovie.id);
-      const newMovies = [...state.movies.slice(0, oldMovieIndex), newMovie, ...state.movies.slice(oldMovieIndex + 1)];
-      return extendObject(state, {movies: newMovies});
+    case ActionType.UPDATE_MOVIES:
+      return extendObject(state, {movies: action.payload});
     case ActionType.SET_LOADING_FAVORITE_MOVIES_STATUS:
       return extendObject(state, {loadingFavoriteMovies: action.payload});
     case ActionType.SET_SENDING_COMMENT_STATUS:

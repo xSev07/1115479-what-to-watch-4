@@ -26,12 +26,6 @@ const CheckLoadRoute = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  loadingMovies: getMoviesLoadingStatus(state),
-  loadingPromo: getPromoLoadingStatus(state),
-  loadingError: getLoadingError(state),
-});
-
 CheckLoadRoute.propTypes = {
   exact: PropTypes.bool,
   path: PropTypes.string.isRequired,
@@ -40,6 +34,12 @@ CheckLoadRoute.propTypes = {
   loadingPromo: PropTypes.bool.isRequired,
   loadingError: PropTypes.bool.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  loadingMovies: getMoviesLoadingStatus(state),
+  loadingPromo: getPromoLoadingStatus(state),
+  loadingError: getLoadingError(state),
+});
 
 export {CheckLoadRoute};
 export default connect(mapStateToProps)(CheckLoadRoute);

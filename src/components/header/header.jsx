@@ -33,10 +33,6 @@ const Header = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  avatar: getUserAvatar(state),
-});
-
 Header.propTypes = {
   className: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
@@ -50,6 +46,10 @@ Header.propTypes = {
 Header.defaultProps = {
   className: `movie-card__head`,
 };
+
+const mapStateToProps = (state) => ({
+  avatar: getUserAvatar(state),
+});
 
 export {Header};
 export default connect(mapStateToProps)(Header);

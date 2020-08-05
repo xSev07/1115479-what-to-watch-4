@@ -53,17 +53,6 @@ const Main = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  promo: getPromoMovie(state),
-  canAddMovieInList: getAddMovieInListStatus(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  changeFavoriteStatus(movie) {
-    dispatch(DataOperation.changeFavoriteStatus(movie));
-  },
-});
-
 Main.propTypes = {
   promo: PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -75,6 +64,17 @@ Main.propTypes = {
   canAddMovieInList: PropTypes.bool.isRequired,
   changeFavoriteStatus: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  promo: getPromoMovie(state),
+  canAddMovieInList: getAddMovieInListStatus(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeFavoriteStatus(movie) {
+    dispatch(DataOperation.changeFavoriteStatus(movie));
+  },
+});
 
 export {Main};
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

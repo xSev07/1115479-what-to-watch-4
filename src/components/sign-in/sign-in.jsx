@@ -42,6 +42,12 @@ const SignIn = (props) => {
   );
 };
 
+SignIn.propTypes = {
+  userAuthorized: PropTypes.bool.isRequired,
+  authError: PropTypes.bool.isRequired,
+  handleFormSubmit: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   userAuthorized: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
   authError: getLoginErrorStatus(state),
@@ -52,12 +58,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(UserOperation.login(formData));
   }
 });
-
-SignIn.propTypes = {
-  userAuthorized: PropTypes.bool.isRequired,
-  authError: PropTypes.bool.isRequired,
-  handleFormSubmit: PropTypes.func.isRequired,
-};
 
 export {SignIn};
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

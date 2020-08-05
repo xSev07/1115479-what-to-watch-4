@@ -92,23 +92,6 @@ class MoviePage extends PureComponent {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  movie: getMovieByID(state, {movieId: props.movieId}),
-  movies: getFilteredMovies(state, {movieId: props.movieId}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
-  comments: getCommentsByMovie(state, {movieId: props.movieId}),
-  canAddMovieInList: getAddMovieInListStatus(state),
-  loadingCommentsError: getLoadingCommentsError(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  loadComments(filmId) {
-    dispatch(DataOperation.loadComments(filmId));
-  },
-  changeFavoriteStatus(movie) {
-    dispatch(DataOperation.changeFavoriteStatus(movie));
-  },
-});
-
 MoviePage.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
@@ -152,6 +135,23 @@ MoviePage.propTypes = {
   loadComments: PropTypes.func.isRequired,
   changeFavoriteStatus: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state, props) => ({
+  movie: getMovieByID(state, {movieId: props.movieId}),
+  movies: getFilteredMovies(state, {movieId: props.movieId}).slice(0, ShowedMovies.ON_MOVIE_PAGE),
+  comments: getCommentsByMovie(state, {movieId: props.movieId}),
+  canAddMovieInList: getAddMovieInListStatus(state),
+  loadingCommentsError: getLoadingCommentsError(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadComments(filmId) {
+    dispatch(DataOperation.loadComments(filmId));
+  },
+  changeFavoriteStatus(movie) {
+    dispatch(DataOperation.changeFavoriteStatus(movie));
+  },
+});
 
 export {MoviePage};
 export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

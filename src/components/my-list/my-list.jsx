@@ -49,6 +49,17 @@ class MyList extends PureComponent {
   }
 }
 
+MyList.propTypes = {
+  movies: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+      })
+  ).isRequired,
+  loadingError: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  loadFavoriteMovies: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   movies: getFavoriteMovies(state),
   loadingError: getFavoriteMoviesLoadingError(state),
@@ -60,17 +71,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataOperation.loadFavoriteMovies());
   }
 });
-
-MyList.propTypes = {
-  movies: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-      })
-  ).isRequired,
-  loadingError: PropTypes.bool.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  loadFavoriteMovies: PropTypes.func.isRequired,
-};
 
 export {MyList};
 export default connect(mapStateToProps, mapDispatchToProps)(MyList);

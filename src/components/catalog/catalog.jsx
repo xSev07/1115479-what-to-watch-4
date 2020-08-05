@@ -33,6 +33,26 @@ const Catalog = (props) => {
   );
 };
 
+Catalog.propTypes = {
+  movies: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        genre: PropTypes.string.isRequired,
+        year: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        votes: PropTypes.number.isRequired,
+        producer: PropTypes.string.isRequired,
+        actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      })
+  ).isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  activeGenre: PropTypes.string.isRequired,
+  displayShowMoreButton: PropTypes.bool.isRequired,
+  onGenreClick: PropTypes.func.isRequired,
+  onShowMoreClick: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   allFilteredMovies: getFilteredMovies(state),
   activeGenre: getActiveGenre(state),
@@ -63,26 +83,6 @@ const mergeProps = (stateProps, dispatchProps) => {
         displayShowMoreButton: showedMoviesCount < allFilteredMovies.length
       }
   );
-};
-
-Catalog.propTypes = {
-  movies: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        genre: PropTypes.string.isRequired,
-        year: PropTypes.number.isRequired,
-        rating: PropTypes.number.isRequired,
-        votes: PropTypes.number.isRequired,
-        producer: PropTypes.string.isRequired,
-        actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        description: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-      })
-  ).isRequired,
-  genres: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  activeGenre: PropTypes.string.isRequired,
-  displayShowMoreButton: PropTypes.bool.isRequired,
-  onGenreClick: PropTypes.func.isRequired,
-  onShowMoreClick: PropTypes.func.isRequired,
 };
 
 export {Catalog};

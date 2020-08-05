@@ -73,6 +73,19 @@ class AddReview extends PureComponent {
   }
 }
 
+AddReview.propTypes = {
+  movie: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    background: PropTypes.string.isRequired,
+  }).isRequired,
+  isCommentSending: PropTypes.bool.isRequired,
+  commentSendingError: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired,
+  handleFormSubmit: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state, props) => ({
   movie: getMovieByID(state, {movieId: props.movieId}),
   isCommentSending: getSendingCommentStatus(state),
@@ -89,19 +102,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(DataOperation.sendComment(ownProps.movieId, commentData));
   },
 });
-
-AddReview.propTypes = {
-  movie: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    background: PropTypes.string.isRequired,
-  }).isRequired,
-  isCommentSending: PropTypes.bool.isRequired,
-  commentSendingError: PropTypes.bool.isRequired,
-  history: PropTypes.object.isRequired,
-  handleFormSubmit: PropTypes.func.isRequired,
-};
 
 const composedComponent = compose(
     connect(mapStateToProps, mapDispatchToProps),
