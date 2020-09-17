@@ -1,6 +1,6 @@
 import React from "react";
 import Main from "../main/main.jsx";
-import {Switch, BrowserRouter, Route} from "react-router-dom";
+import {Switch, HashRouter, Route} from "react-router-dom";
 import MoviePage from "../movie-page/movie-page.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import {AppRoute} from "../../const";
@@ -12,7 +12,7 @@ import AddReview from "../add-review/add-review.jsx";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         <CheckLoadRoute
           exact
@@ -52,7 +52,7 @@ const App = () => {
           }}
         />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
